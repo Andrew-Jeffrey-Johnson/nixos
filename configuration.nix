@@ -206,20 +206,20 @@
     # Development packages
     cmake
     git
-    poppler_gi
-    poppler
+    #poppler_gi
+    #poppler
     kdePackages.poppler
-    poppler_utils
+    #poppler_utils
     kdePackages.qt5compat
     kdePackages.qtbase
     kdePackages.qtsvg
     kdePackages.qttools
     kdePackages.quazip
     kdePackages.sonnet
-    gtk2
+    #gtk2
     gtk3
     gtk4
-    cargo
+    #cargo
     rustup
     tree
     dos2unix
@@ -229,9 +229,9 @@
     wget
     lshw
     gnupg
-    jdk8
-    jdk17
-    jdk21
+    #jdk8
+    #jdk17
+    #jdk21
     jdk23
     vlc
 
@@ -274,8 +274,6 @@
     # Diagnostics
     traceroute # Network
     iotop # Disk activity
-
-    # Debugging Wayland
     wlcs
     wev
     (import ./wayland-debug.nix)
@@ -302,7 +300,7 @@
 
     # qBittorrent
     libtorrent-rasterbar
-    boost
+    #boost
     kdePackages.ktorrent
     #(import ./my-qBittorrent.nix)
 
