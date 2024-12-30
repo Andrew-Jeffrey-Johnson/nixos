@@ -28,6 +28,9 @@
       ./hardware-configuration.nix
     ];
 
+  # Trusted users
+  nix.settings.trusted-users = [ "root" "@wheel" ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -95,7 +98,8 @@
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
+  services.xserver.enable = false;
+  services.displayManager.sddm.wayland.enable = true;
 
   # Me trying to get desktop environment to work
   #services.xserver.videoDrivers = [ "nouveau" "nvidia" "nvidia_drm" ];
@@ -131,7 +135,9 @@
   
 
   # Enable the KDE Plasma Desktop Environment.
+  services.xserver.enable = true; # optional
   services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
   
   # My fix to start plasma desktop environment upon startup
@@ -180,8 +186,8 @@
   users.extraUsers.andrewj.extraGroups = [ "wheel" ];
 
   # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "andrewj";
+  #services.displayManager.autoLogin.enable = true;
+  #services.displayManager.autoLogin.user = "andrewj";
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -204,6 +210,7 @@
     kdePackages.qtsvg
     kdePackages.qttools
     kdePackages.quazip
+    kdePackages.sonnet
     gtk2
     gtk3
     gtk4
@@ -211,6 +218,7 @@
     rustup
     tree
     dos2unix
+    ninja
 
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
@@ -241,8 +249,13 @@
     # Chromium
     chromium
 
+    # Art
+    krita
+    gimp-with-plugins
+
     # Organization
     kdePackages.korganizer
+    #(import ./korganizer.nix)
 
     # Obs
     obs-studio
@@ -274,6 +287,10 @@
 
     # Calculator
     qalculate-qt
+
+    # Wireshark
+    # (import ./wireshark.nix)
+    wireshark
 
     # Timer app
     kdePackages.ktimer
