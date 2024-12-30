@@ -32,8 +32,19 @@
   nix.settings.trusted-users = [ "root" "@wheel" ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  #boot.loader.systemd-boot.enable = true;
+  #boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/"; # ← use the same mount point here.
+    };
+    grub = {
+      efiSupport = true;
+      #efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
+      device = "nodev";
+    };
+  };
 
   networking.hostName = "nixos"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -108,13 +119,12 @@
 
 
   hardware.nvidia = {
-
     # Modesetting is required.
     modesetting.enable = true;
 
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    open = false;
+    open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
@@ -143,10 +153,10 @@
   #services.displayManager.sddm.settings.General.DisplayServer = "x11-user";
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  #services.xserver.xkb = {
+  #  layout = "us";
+  #  variant = "";
+  #};
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -254,6 +264,9 @@
 
     # Organization
     kdePackages.korganizer
+    kdePackages.kmail
+    kdePackages.kmail-account-wizard
+    kdePackages.kweather
     #(import ./korganizer.nix)
 
     # Obs
@@ -270,6 +283,17 @@
     wlcs
     wev
     (import ./wayland-debug.nix)
+    xorg.xwininfo #Can be used to determine if a particular program uses XWayland
+    xorg.xprop #Can be used to determine if a particular program uses XWayland
+    xorg.xlsclients #Lists XWayland programs
+    clinfo
+    virtualglLib
+    vulkan-tools
+    gpu-viewer
+    wayland-utils
+    kdePackages.libksysguard
+    kdePackages.plasma-workspace
+    kdePackages.plasma-sdk
 
     # For latex
     texstudio
