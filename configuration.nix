@@ -99,7 +99,6 @@
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = false;
-  services.displayManager.sddm.wayland.enable = true;
 
   # Me trying to get desktop environment to work
   #services.xserver.videoDrivers = [ "nouveau" "nvidia" "nvidia_drm" ];
@@ -135,13 +134,13 @@
   
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.enable = true; # optional
+  #services.xserver.enable = true; # optional
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
   
   # My fix to start plasma desktop environment upon startup
-  services.displayManager.sddm.settings.General.DisplayServer = "x11-user";
+  #services.displayManager.sddm.settings.General.DisplayServer = "x11-user";
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -183,7 +182,7 @@
     ];
   };
 
-  users.extraUsers.andrewj.extraGroups = [ "wheel" ];
+  #users.extraUsers.andrewj.extraGroups = [ "wheel" ];
 
   # Enable automatic login for the user.
   #services.displayManager.autoLogin.enable = true;
