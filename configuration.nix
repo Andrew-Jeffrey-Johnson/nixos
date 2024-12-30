@@ -287,7 +287,7 @@
     aha
     busybox
     fwupd
-    nvtopPackages.intel
+    nvtopPackages.full
 
     # For latex
     texstudio
