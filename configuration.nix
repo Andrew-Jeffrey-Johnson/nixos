@@ -91,11 +91,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-    #package = config.boot.kernelPackages.nvidiaPackages.stable;
-    driSupport = true;
-  };
+  hardware.graphics.enable = true;
 
   # Bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
@@ -236,7 +232,7 @@
     jdk8
     jdk17
     jdk21
-    jdk22
+    jdk23
     vlc
 
     # For color management
@@ -260,7 +256,7 @@
 
     # Art
     krita
-    gimp-with-plugins
+    gimp
 
     # Organization
     kdePackages.korganizer
@@ -294,6 +290,10 @@
     kdePackages.libksysguard
     kdePackages.plasma-workspace
     kdePackages.plasma-sdk
+    aha
+    busybox
+    fwupd
+    nvtopPackages.intel
 
     # For latex
     texstudio
@@ -303,7 +303,8 @@
     # qBittorrent
     libtorrent-rasterbar
     boost
-    (import ./my-qBittorrent.nix)
+    kdePackages.ktorrent
+    #(import ./my-qBittorrent.nix)
 
     # Clockify
     #clockify
@@ -396,5 +397,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
