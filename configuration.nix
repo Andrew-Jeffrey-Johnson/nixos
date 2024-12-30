@@ -32,8 +32,6 @@
   nix.settings.trusted-users = [ "root" "@wheel" ];
 
   # Bootloader.
-  #boot.loader.systemd-boot.enable = true;
-  #boot.loader.efi.canTouchEfiVariables = true;
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
@@ -108,9 +106,7 @@
   services.xserver.enable = false;
 
   # Me trying to get desktop environment to work
-  #services.xserver.videoDrivers = [ "nouveau" "nvidia" "nvidia_drm" ];
   services.xserver.videoDrivers = [ "nouveau" ];
-  #services.xserver.videoDrivers = [ "nouveau" "nvidia" ];
   #boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
 
@@ -145,14 +141,6 @@
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
   
-  # My fix to start plasma desktop environment upon startup
-  #services.displayManager.sddm.settings.General.DisplayServer = "x11-user";
-
-  # Configure keymap in X11
-  #services.xserver.xkb = {
-  #  layout = "us";
-  #  variant = "";
-  #};
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -172,9 +160,6 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.andrewj = {
@@ -206,20 +191,15 @@
     # Development packages
     cmake
     git
-    #poppler_gi
-    #poppler
     kdePackages.poppler
-    #poppler_utils
     kdePackages.qt5compat
     kdePackages.qtbase
     kdePackages.qtsvg
     kdePackages.qttools
     kdePackages.quazip
     kdePackages.sonnet
-    #gtk2
     gtk3
     gtk4
-    #cargo
     rustup
     tree
     dos2unix
@@ -229,9 +209,6 @@
     wget
     lshw
     gnupg
-    #jdk8
-    #jdk17
-    #jdk21
     jdk23
     vlc
 
@@ -247,9 +224,6 @@
     hunspell
     hunspellDicts.en_US
     kdePackages.qt6gtk2
-
-    # Testing compilation programs
-    #(import ./my-hello.nix)
 
     # Chromium
     chromium
@@ -298,20 +272,14 @@
     texlive.combined.scheme-full
     #(import ./texstudio.nix) #Maybe one day I'll get it to use poppler :(
 
-    # qBittorrent
+    # Torrenting
     libtorrent-rasterbar
-    #boost
     kdePackages.ktorrent
-    #(import ./my-qBittorrent.nix)
-
-    # Clockify
-    #clockify
 
     # Calculator
     qalculate-qt
 
     # Wireshark
-    # (import ./wireshark.nix)
     wireshark
 
     # Timer app
@@ -323,24 +291,6 @@
 
     # Epic games launcher
     lutris
-
-    # support both 32- and 64-bit applications
-    #wineWowPackages.stable
-
-    # support 32-bit only
-    #wine
-
-    # support 64-bit only
-    #(wine.override { wineBuild = "wine64"; })
-
-    # support 64-bit only
-    #wine64
-
-    # wine-staging (version with experimental features)
-    #wineWowPackages.staging
-
-    # winetricks (all versions)
-    #winetricks
 
     # native wayland support (unstable)
     wineWowPackages.waylandFull
