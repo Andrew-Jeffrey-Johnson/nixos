@@ -220,6 +220,7 @@
     kdePackages.qttools
     kdePackages.quazip
     kdePackages.sonnet
+    kdePackages.isoimagewriter
     gtk3
     gtk4
     rustup
@@ -245,20 +246,25 @@
     libreoffice-qt6-fresh
     hunspell
     hunspellDicts.en_US
-    kdePackages.qt6gtk2
+    #kdePackages.qt6gtk2
 
-    # Chromium
+    # Alternate web browsers
     chromium
+    kdePackages.falkon
 
     # Art
     krita
     gimp
+    kdePackages.kdenlive
 
     # Organization
     kdePackages.korganizer
     kdePackages.kmail
     kdePackages.kmail-account-wizard
     kdePackages.kweather
+    kdePackages.kclock
+    kdePackages.marble
+    kdePackages.kdeconnect-kde
     #(import ./korganizer.nix)
 
     # Obs
@@ -288,6 +294,9 @@
     busybox
     fwupd
     nvtopPackages.full
+    kdePackages.kdebugsettings
+    kdePackages.ksystemlog
+    kdePackages.filelight
 
     # For latex
     texstudio
