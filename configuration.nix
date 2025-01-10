@@ -21,15 +21,35 @@
   liblo,
   ...
 }:
-
+let
+    home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      "${home-manager}/nixos"
     ];
 
   # Trusted users
   nix.settings.trusted-users = [ "root" "@wheel" ];
+
+  home-manager.users.andrewj = { pkgs, ... }: {
+    home.packages = [ pkgs.cowsay ];
+    home.username = "andrewj";
+    home.homeDirectory = "/home/andrewj";
+    /* The home.stateVersion option does not have a default and must be set */
+    home.stateVersion = "25.05";
+    /* Here goes the restf your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
+    programs.bash.enable = true;
+    programs.git = {
+      enable = true;
+      userEmail = "andrew.jeffrey.johnson@gmail.com";
+      userName = "Andrew-Jeffrey-Johnson";
+    };
+    # Let Home Manager install and manage itself.
+    programs.home-manager.enable = true;
+  };
 
   # Bootloader.
   boot.loader = {
@@ -221,6 +241,16 @@
     kdePackages.quazip
     kdePackages.sonnet
     kdePackages.isoimagewriter
+    kdePackages.kirigami
+    kdePackages.kirigami-addons
+    kdePackages.kirigami-gallery
+    kdePackages.plasma-nm
+    kdePackages.kdeconnect-kde
+    kdePackages.knetwalk
+    kdePackages.qtconnectivity
+    kdePackages.messagelib
+    kdePackages.kcachegrind
+    kdePackages.sweeper
     gtk3
     gtk4
     rustup
@@ -251,6 +281,7 @@
     # Alternate web browsers
     chromium
     kdePackages.falkon
+    #(import ./yacy.nix) # requires read/write permissions. NixOS doesn't do that :(
 
     # Art
     krita
@@ -264,7 +295,6 @@
     kdePackages.kweather
     kdePackages.kclock
     kdePackages.marble
-    kdePackages.kdeconnect-kde
     #(import ./korganizer.nix)
 
     # Obs
@@ -297,6 +327,8 @@
     kdePackages.kdebugsettings
     kdePackages.ksystemlog
     kdePackages.filelight
+    arp-scan # Find all devices on local network: sudo arp-scan --interface=wlp4s0 --localnet
+    netcat-gnu # Check ports on other devices: netcat -z -v 192.168.5.2 1714-1764
 
     # For latex
     texstudio
