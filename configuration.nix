@@ -7,18 +7,18 @@
 #{ config, pkgs, lib, qtbase, wrapQtAppsHook, ... }:
 { config,
   pkgs,
-  mkDerivation,
+  #mkDerivation,
   lib,
-  stdenv,
-  fetchFromGitHub,
-  fetchGit,
-  jack2,
-  which,
-  python3,
-  qtbase,
-  qttools,
-  wrapQtAppsHook,
-  liblo,
+  #stdenv,
+  #fetchFromGitHub,
+  #fetchGit,
+  #jack2,
+  #which,
+  #python3,
+  #qtbase,
+  #qttools,
+  #wrapQtAppsHook,
+  #liblo,
   ...
 }:
 let
@@ -33,6 +33,19 @@ in
 
   # Trusted users
   nix.settings.trusted-users = [ "root" "@wheel" ];
+  users = {
+    # Define a user account. Don't forget to set a password with ‘passwd’.
+    users.andrewj = {
+      isNormalUser = true;
+      description = "Andrew Johnson";
+      extraGroups = [ "networkmanager" "wheel" ];
+      packages = with pkgs; [
+        kdePackages.kate
+        prismlauncher
+      #  thunderbird
+      ];
+    };
+  };
 
   home-manager.users.andrewj = { pkgs, ... }: {
     home.packages = [ pkgs.cowsay ];
@@ -64,15 +77,55 @@ in
     };
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
-  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking = {
+    nat = {
+      enable = true;
+      internalInterfaces = ["ve-+"]; #ve-+ is a wildcard that matches all container interfaces
+      externalInterface = "ens3";
+      # Lazy IPv6 connectivity for the container
+      enableIPv6 = true;
+    };
+    hostName = "nixos"; # Define your hostname.
+    #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+    # Configure network proxy if necessary
+    # networking.proxy.default = "http://user:password@proxy:port/";
+    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+    # Enable networking
+    networkmanager = {
+      enable = true;
+      unmanaged = [ "interface-name:ve-*" ]; #If you are using Network Manager, you need to explicitly prevent it from managing container interfaces
+    };
+  };
+
+  containers.webserver = {
+    autoStart = true;
+    privateNetwork = true;
+    hostAddress = "192.168.100.10";
+    localAddress = "192.168.100.11";
+    hostAddress6 = "fc00::1";
+    localAddress6 = "fc00::2";
+    config = { config, pkgs, lib, ... }: {
+
+      services.httpd = {
+        enable = true;
+        adminAddr = "admin@example.org";
+      };
+
+      networking = {
+        firewall.allowedTCPPorts = [ 80 ];
+
+        # Use systemd-resolved inside the container
+        # Workaround for bug https://github.com/NixOS/nixpkgs/issues/162686
+        useHostResolvConf = lib.mkForce false;
+      };
+
+      services.resolved.enable = true;
+
+      system.stateVersion = "24.11";
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -202,20 +255,6 @@ in
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.andrewj = {
-    isNormalUser = true;
-    description = "Andrew Johnson";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-      prismlauncher
-    #  thunderbird
-    ];
-  };
-
-  #users.extraUsers.andrewj.extraGroups = [ "wheel" ];
 
   # Enable automatic login for the user.
   #services.displayManager.autoLogin.enable = true;
