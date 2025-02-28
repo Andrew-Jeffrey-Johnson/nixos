@@ -24,22 +24,12 @@
 let
     home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
     lib = import <nixpkgs/lib>;
-    buildNodeJs = pkgs.callPackage "${<nixpkgs>}/pkgs/development/web/nodejs/nodejs.nix" {
-      python = pkgs.python3;
-    };
-
-    #nodejsVersion = lib.fileContents /home/andrewj/Documents/blog-website/.nvmrc;
-
-    #nodejs = buildNodeJs {
-    #  enableNpm = false;
-    #  #version = nodejsVersion;
-    #  version = "23.2.0";
-    #  #sha256 = "1a0zj505nhpfcj19qvjy2hvc5a7gadykv51y0rc6032qhzzsgca2";
-    #  sha256 = "sha256-PPeoo2aCd1aTaR8d6QG7WXOtPAriqoexrdneUV57L8c=";
+    #buildNodeJs = pkgs.callPackage "${<nixpkgs>}/pkgs/development/web/nodejs/nodejs.nix" {
+    #  python = pkgs.python3;
     #};
 
-    NPM_CONFIG_PREFIX = toString ./npm_config_prefix;
-    nodeDependencies = (pkgs.callPackage /home/andrewj/Documents/blog-website/default.nix {}).nodeDependencies; #node2nix from https://github.com/svanderburg/node2nix
+    #NPM_CONFIG_PREFIX = toString ./npm_config_prefix;
+    #nodeDependencies = (pkgs.callPackage /home/andrewj/Documents/blog-website/default.nix {}).nodeDependencies; #node2nix from https://github.com/svanderburg/node2nix
 in
 {
 
@@ -121,37 +111,9 @@ in
       unmanaged = [ "interface-name:ve-*" ]; #If you are using Network Manager, you need to explicitly prevent it from managing container interfaces
     };
   };
-
-  # Test container
-  containers.webserver = {
-    autoStart = true;
-    privateNetwork = true;
-    hostAddress = "192.168.100.10";
-    localAddress = "192.168.100.11"; # Go to http://192.168.100.11 to view the website
-    hostAddress6 = "fc00::1";
-    localAddress6 = "fc00::2";
-    config = { config, pkgs, lib, ... }: {
-
-      services.httpd = {
-        enable = true;
-        adminAddr = "admin@example.org";
-      };
-
-      networking = {
-        firewall.allowedTCPPorts = [ 80 ];
-
-        # Use systemd-resolved inside the container
-        # Workaround for bug https://github.com/NixOS/nixpkgs/issues/162686
-        useHostResolvConf = lib.mkForce false;
-      };
-
-      services.resolved.enable = true;
-
-      system.stateVersion = "24.11";
-    };
-  };
 #------------------------------------------------------------------------------
   # Personal Blog
+  /*
   containers.blog = {
     autoStart = true;
     privateNetwork = true;
@@ -225,68 +187,7 @@ in
       system.stateVersion = "25.05";
     };
   };
-#------------------------------------------------------------------------------
-  # Thalion's Compass OpenProject
-  containers.tc = {
-    autoStart = true;
-    privateNetwork = true;
-    hostAddress = "192.168.100.10";
-    localAddress = "192.168.100.14"; # Go to http://192.168.100.13 to view the website
-    hostAddress6 = "fc00::1";
-    localAddress6 = "fc00::5";
-
-    #bindMounts = {
-    #  "/home/tc/openproject" = { #/path/in/container
-    #    hostPath = "/home/andrewj/Documents/blog-website/"; #/path/on/host
-    #    isReadOnly = false;
-    #  };
-    #  "/home/blogger/blog/node_modules" = {
-    ##    hostPath = "${nodeDependencies}/lib/node_modules";
-    #    isReadOnly = false;
-    #  };
-    #};
-
-    config = { config, pkgs, lib, ... }: {
-      users = {
-        # Define a user account. Don't forget to set a password with ‘passwd’.
-        users.blogger = {
-          password = "welcome";
-          isNormalUser = true;
-          description = "Blogger";
-          #extraGroups = [ "networkmanager" "wheel" ];
-          packages = with pkgs; [
-            pkgs.nodejs_23
-            #pkgs.nodejs_14
-            nodePackages.npm
-          ];
-        };
-      };
-
-
-      services.httpd = {
-        enable = true;
-        adminAddr = "admin@example.org";
-      };
-
-      environment.systemPackages = with pkgs; [
-        cowsay
-      ];
-
-      networking = {
-        firewall.allowedTCPPorts = [ 80 ];
-
-        # Use systemd-resolved inside the container
-        # Workaround for bug https://github.com/NixOS/nixpkgs/issues/162686
-        useHostResolvConf = lib.mkForce false;
-      };
-
-      services.resolved.enable = true;
-
-      system.stateVersion = "25.05";
-    };
-  };
-
-#------------------------------------------------------------------------------
+  */
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -322,6 +223,9 @@ in
       experimental-features = [ "nix-command" "flakes" ];
     };
   };
+
+  # Turn off kwallet
+  security.pam.services.plasma.kwallet.enable = false;
 
   # Automatically upgrade nixOS itself
   system.autoUpgrade.enable  = true;
@@ -437,6 +341,66 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # Development packages
+    #vscode
+    #vscodium # vscode without Microsoft telemetry, license, and branding
+    tabby # Self-hosted AI coding assistant
+    #(import ./tabby.nix)
+    (pkgs.python313.withPackages (python-pkgs: with python-pkgs; [
+      # select Python packages here
+      pandas
+      numpy
+      nptyping
+      requests
+      jupyter
+      jupyter-core
+      pyngo
+      jupyterlab
+      ipykernel
+      matplotlib
+      django
+      django-types
+      ipywidgets
+      ipython
+      ipympl
+    ]))
+    (vscode-with-extensions.override {
+    vscode = vscodium;
+    vscodeExtensions = with vscode-extensions; [
+      bbenoist.nix
+      ms-python.python
+      ms-azuretools.vscode-docker
+      ms-vscode-remote.remote-ssh
+      streetsidesoftware.code-spell-checker
+      ms-toolsai.jupyter
+      ms-toolsai.jupyter-renderers
+      ms-toolsai.jupyter-keymap
+      ms-toolsai.vscode-jupyter-cell-tags
+      ms-toolsai.vscode-jupyter-slideshow
+      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "remote-ssh-edit";
+          publisher = "ms-vscode-remote";
+          version = "0.47.2";
+          #sha256 = "";
+          sha256 = "sha256-LxFOxkcQNCLotgZe2GKc2aGWeP9Ny1BpD1XcTqB85sI=";
+        }
+        {
+          name = "vscode-tabby";
+          publisher = "TabbyML";
+          version = "1.20.1";
+          #sha256 = "";
+          sha256 = "sha256-/+l7TRFtO+TKmyBZ3fmbYWcP9QZ4ClHKuwDYaXKF8W8=";
+        }
+        {
+          name = "sqlite-viewer";
+          publisher = "qwtel";
+          version = "0.10.2";
+          #sha256 = "";
+          sha256 = "sha256-5TqcxSJPSmLRBhrhVbAd1VdL2kyszezl8sSrlSynOms=";
+        }
+      ];
+    })
+
     cmake
     git
     kdePackages.poppler
@@ -466,7 +430,12 @@ in
     nodejs
     nodePackages.npm
     yarn2nix
+    crate2nix
     ninja
+    python313
+    nil # Nix language server
+    python313Packages.python-lsp-server # Python language server
+    superhtml # HTML language server
 
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
@@ -568,8 +537,6 @@ in
     # native wayland support (unstable)
     wineWowPackages.waylandFull
   ];
-
-
 
   services.pcscd.enable = true;
   programs.gnupg.agent = {
