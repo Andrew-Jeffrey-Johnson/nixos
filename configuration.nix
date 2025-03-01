@@ -340,10 +340,17 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    #ai
+    #llm
+    ollama-cuda
     # Development packages
     #vscode
     #vscodium # vscode without Microsoft telemetry, license, and branding
     tabby # Self-hosted AI coding assistant
+    texliveTeTeX
+    texliveFull
+    texlivePackages.tcolorbox
+    pandoc_3_6
     #(import ./tabby.nix)
     (pkgs.python313.withPackages (python-pkgs: with python-pkgs; [
       # select Python packages here
@@ -359,9 +366,14 @@ in
       matplotlib
       django
       django-types
+      django-extensions
       ipywidgets
       ipython
       ipympl
+      nbconvert
+      transformers
+      torch
+      ollama
     ]))
     (vscode-with-extensions.override {
     vscode = vscodium;
@@ -376,6 +388,8 @@ in
       ms-toolsai.jupyter-keymap
       ms-toolsai.vscode-jupyter-cell-tags
       ms-toolsai.vscode-jupyter-slideshow
+      batisteo.vscode-django
+      bierner.markdown-mermaid
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "remote-ssh-edit";
@@ -436,6 +450,8 @@ in
     nil # Nix language server
     python313Packages.python-lsp-server # Python language server
     superhtml # HTML language server
+    cudaPackages.cuda_nvcc # CUDA
+    cudaPackages.cudatoolkit
 
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
