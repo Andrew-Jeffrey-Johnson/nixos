@@ -214,7 +214,7 @@ in
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 14d";
     };
     settings = {
       # Automatically optimize store every build
@@ -223,9 +223,6 @@ in
       experimental-features = [ "nix-command" "flakes" ];
     };
   };
-
-  # Turn off kwallet
-  security.pam.services.plasma.kwallet.enable = false;
 
   # Automatically upgrade nixOS itself
   system.autoUpgrade.enable  = true;
@@ -347,10 +344,10 @@ in
     #vscode
     #vscodium # vscode without Microsoft telemetry, license, and branding
     tabby # Self-hosted AI coding assistant
-    texliveTeTeX
-    texliveFull
-    texlivePackages.tcolorbox
-    pandoc_3_6
+    #texliveTeTeX
+    #texliveFull
+    #texlivePackages.tcolorbox
+    #pandoc_3_6
     #(import ./tabby.nix)
     (pkgs.python313.withPackages (python-pkgs: with python-pkgs; [
       # select Python packages here
@@ -367,6 +364,7 @@ in
       django
       django-types
       django-extensions
+      django-phonenumber-field
       ipywidgets
       ipython
       ipympl
@@ -490,6 +488,10 @@ in
     kdePackages.kweather
     kdePackages.kclock
     kdePackages.marble
+    kdePackages.kwallet
+    kdePackages.kwalletmanager
+    kdePackages.kwallet-pam
+    pinentry-all
     #(import ./korganizer.nix)
 
     # Obs
@@ -555,9 +557,15 @@ in
   ];
 
   services.pcscd.enable = true;
+  # Turn off kwallet prompts
+  security.pam.services.plasma6.kwallet.enable = true;
+  security.pam.services.plasma.kwallet.enable = true;
+  security.pam.services.plasma5.kwallet.enable = true;
+  security.pam.services.qt.kwallet.enable = true;
+  security.pam.services.qt5.kwallet.enable = true;
   programs.gnupg.agent = {
     enable = true;
-    pinentryPackage = lib.mkForce pkgs.pinentry-qt;
+    #pinentryPackage = lib.mkForce pkgs.pinentry-qt;
     enableSSHSupport = true;
   };
   services.dbus.packages = [ pkgs.gcr ];
