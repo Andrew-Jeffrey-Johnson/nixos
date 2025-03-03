@@ -349,6 +349,8 @@ in
     #texlivePackages.tcolorbox
     #pandoc_3_6
     #(import ./tabby.nix)
+    #quarto
+    mermaid-filter
     (pkgs.python313.withPackages (python-pkgs: with python-pkgs; [
       # select Python packages here
       pandas
@@ -389,6 +391,27 @@ in
       batisteo.vscode-django
       bierner.markdown-mermaid
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "vscode-mermaid-editor";
+          publisher = "tomoyukim";
+          version = "0.19.1";
+          #sha256 = "";
+          sha256 = "sha256-MZkR9wPTj+TwhQP0kbH4XqlTvQwfkbiZdfzA10Q9z5A=";
+        }
+        {
+          name = "mermaid-markdown-syntax-highlighting";
+          publisher = "bpruitt-goddard";
+          version = "1.7.0";
+          #sha256 = "";
+          sha256 = "sha256-Vjmc9tlHSFdhhcSopUG3MnyBSi//B6cpnavqFLhVRho=";
+        }
+        #{
+        #  name = "quarto";
+        #  publisher = "quarto";
+        #  version = "1.118.0";
+        #  #sha256 = "";
+        #  sha256 = "sha256-fQMORF2LJKhkKbinex+c5I+kM5YM93W2XzOL8PMVZS0=";
+        #}
         {
           name = "remote-ssh-edit";
           publisher = "ms-vscode-remote";
@@ -474,6 +497,7 @@ in
     # Alternate web browsers
     chromium
     kdePackages.falkon
+    librewolf
     #(import ./yacy.nix) # requires read/write permissions. NixOS doesn't do that :(
 
     # Art
@@ -557,7 +581,7 @@ in
   ];
 
   services.pcscd.enable = true;
-  # Turn off kwallet prompts
+  # Turn off kwallet prompts (doesn't work)
   security.pam.services.plasma6.kwallet.enable = true;
   security.pam.services.plasma.kwallet.enable = true;
   security.pam.services.plasma5.kwallet.enable = true;
