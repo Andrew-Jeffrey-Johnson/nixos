@@ -30,6 +30,7 @@ in
   home-manager.useGlobalPkgs = true;
   home-manager.users.andrewj = {
     home.packages = [
+      pkgs.jdk23
       pkgs.libreoffice-fresh
       pkgs.hunspell
       pkgs.hunspellDicts.en_US-large
