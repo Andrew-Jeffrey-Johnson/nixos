@@ -5,6 +5,7 @@
 # sudo nixos-rebuild switch --upgrade
 
 #{ config, pkgs, lib, qtbase, wrapQtAppsHook, ... }:
+{ config, ... }:
 let
     # We pin to a specific nixpkgs commit for reproducibility.
     # Last updated: 2025-03-05. Check for new commits at https://status.nixos.org.
@@ -282,8 +283,6 @@ in
   };
 
   nix = {
-    # Trusted users
-    settings.trusted-users = [ "root" "@wheel" ];
     # Automatic garbage collection
     gc = {
       automatic = true;
@@ -291,6 +290,8 @@ in
       options = "--delete-older-than 14d";
     };
     settings = {
+      trusted-users = [ "root" "@wheel" ];
+      download-buffer-size = 500000000; # 500 MB
       # Automatically optimize store every build
       auto-optimise-store = true;
       # Enable nix flakes
@@ -354,8 +355,8 @@ in
       nvidiaSettings = true;
 
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      #package = config.boot.kernelPackages.nvidiaPackages.stable;
-      package = pkgs.linuxPackages.nvidiaPackages.stable;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      #package = pkgs.linuxPackages.nvidiaPackages.stable;
     };
     nvidia.prime = {
       # Option A
