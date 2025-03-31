@@ -72,6 +72,7 @@ in
         batisteo.vscode-django
         bierner.markdown-mermaid
         james-yu.latex-workshop
+        mkhl.direnv
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "vscode-mermaid-editor";
@@ -422,6 +423,7 @@ in
 
     # native wayland support (unstable)
     pkgs.wineWowPackages.waylandFull
+    pkgs.kdePackages.kdeconnect-kde
   ];
 
   services.pcscd.enable = true;
