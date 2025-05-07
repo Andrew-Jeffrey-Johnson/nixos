@@ -55,11 +55,9 @@ in
       pkgs.quarto
       pkgs.mermaid-filter
       pkgs.pandoc
-      pkgs.neovim
       pkgs.kitty-img
       pkgs.kitty-themes
       pkgs.kitty
-      pkgs.yazi
       (pkgs.vscode-with-extensions.override {
       vscode = pkgs.vscodium;
       vscodeExtensions = with pkgs.vscode-extensions; [
@@ -153,6 +151,16 @@ in
     };
     programs.gh = {
       enable = true;
+    };
+    programs.yazi = {
+      enable = true;
+      settings.manager = {
+        show_hidden = true;
+      };
+    };
+    programs.neovim = { 
+      enable = true;
+      defaultEditor = true;
     };
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
@@ -415,6 +423,9 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # Remove nano
+  programs.nano.enable = false;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
