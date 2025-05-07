@@ -8,9 +8,9 @@
 { config, ... }:
 let
     # We pin to a specific nixpkgs commit for reproducibility.
-    # Last updated: 2025-03-05. Check for new commits at https://status.nixos.org.
-    pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/02032da4af073d0f6110540c8677f16d4be0117f.tar.gz") { config.allowUnfree = true; };
-    home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/486b066025dccd8af7fbe5dd2cc79e46b88c80da.tar.gz";
+    # Last updated: 06 May 2025. Check for new commits at https://status.nixos.org.
+    pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/ed30f8aba41605e3ab46421e3dcb4510ec560ff8.tar.gz") { config.allowUnfree = true; };
+    home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/35535345be0be7dbae2e9b787c6cf790f8c893d5.tar.gz";
     lib = import <nixpkgs/lib>;
 in
 {
@@ -37,11 +37,9 @@ in
       pkgs.hunspellDicts.en_US-large
       pkgs.prismlauncher
       pkgs.lutris
-      pkgs.kdePackages.kate
       pkgs.qalculate-qt
       pkgs.qbittorrent
       pkgs.chromium
-      pkgs.kdePackages.falkon
       pkgs.librewolf
       pkgs.gimp
       pkgs.audacity
@@ -57,6 +55,10 @@ in
       pkgs.quarto
       pkgs.mermaid-filter
       pkgs.pandoc
+      pkgs.neovim
+      pkgs.kitty-img
+      pkgs.kitty-themes
+      pkgs.kitty
       (pkgs.vscode-with-extensions.override {
       vscode = pkgs.vscodium;
       vscodeExtensions = with pkgs.vscode-extensions; [
@@ -221,7 +223,6 @@ in
       users = {
         # Define a user account. Don't forget to set a password with ‘passwd’.
         users.blogger = {
-          password = "welcome";
           isNormalUser = true;
           description = "Blogger";
           #createHome = true;
@@ -417,7 +418,7 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = [
-    pkgs.git
+    #pkgs.git
     pkgs.cudaPackages.cuda_nvcc # CUDA
     pkgs.cudaPackages.cudatoolkit
 
@@ -431,11 +432,11 @@ in
 
   services.pcscd.enable = true;
   # Turn off kwallet prompts (doesn't work)
-  security.pam.services.plasma6.kwallet.enable = true;
-  security.pam.services.plasma.kwallet.enable = true;
-  security.pam.services.plasma5.kwallet.enable = true;
-  security.pam.services.qt.kwallet.enable = true;
-  security.pam.services.qt5.kwallet.enable = true;
+  #security.pam.services.plasma6.kwallet.enable = true;
+  #security.pam.services.plasma.kwallet.enable = true;
+  #security.pam.services.plasma5.kwallet.enable = true;
+  #security.pam.services.qt.kwallet.enable = true;
+  #security.pam.services.qt5.kwallet.enable = true;
   programs.gnupg.agent = {
     enable = true;
     #pinentryPackage = lib.mkForce pkgs.pinentry-qt;
