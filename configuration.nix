@@ -59,6 +59,7 @@ in
       pkgs.kitty-img
       pkgs.kitty-themes
       pkgs.kitty
+      pkgs.yazi
       (pkgs.vscode-with-extensions.override {
       vscode = pkgs.vscodium;
       vscodeExtensions = with pkgs.vscode-extensions; [
