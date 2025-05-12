@@ -224,12 +224,8 @@ in
       pkgs.cudaPackages.cuda_nvcc # CUDA
       pkgs.cudaPackages.cudatoolkit
 
-      pkgs.wget
-      pkgs.gnupg
-
       # native wayland support (unstable)
       pkgs.wineWowPackages.waylandFull
-      pkgs.kitty # Required as a system package for Hyprland
     ];
   };
 

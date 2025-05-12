@@ -1,11 +1,22 @@
 { config, pkgs, ... }:
+let
+  nixvim = import (builtins.fetchGit {
+    url = "https://github.com/nix-community/nixvim";
+    ref = "main";
+  });
+in {
+  imports = [
+    nixvim.homeManagerModules.nixvim
+    ./options.nix
+  ];
 
-{
+  nixpkgs.config.allowUnfree = true;
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "andrewj";
   home.homeDirectory = "/home/andrewj";
-
+  
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -41,6 +52,7 @@
       pkgs.calcurse
       pkgs.tmux
       pkgs.termpdfpy
+      pkgs.wget
 
       pkgs.jdk23
       pkgs.libreoffice-fresh
@@ -163,12 +175,22 @@
         show_hidden = true;
       };
     };
-    programs.neovim = { 
+    
+    programs.nixvim = {
       enable = true;
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
+
+      luaLoader.enable = true;
     };
+
+    programs.kitty = {
+      enable = true;
+      shellIntegration.enableBashIntegration = true;
+      enableGitIntegration = true;
+    };
+
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -203,6 +225,9 @@
   #
   home.sessionVariables = {
     EDITOR = "nvim";
+    VISUAL = "nvim";
+    TERMINAL = "kitty";
+    LANG = "en_US.UTF-8";
   };
 
   # Let Home Manager install and manage itself.
