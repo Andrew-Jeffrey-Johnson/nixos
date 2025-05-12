@@ -10,20 +10,12 @@ let
     # We pin to a specific nixpkgs commit for reproducibility.
     # Last updated: 06 May 2025. Check for new commits at https://status.nixos.org.
     pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/ed30f8aba41605e3ab46421e3dcb4510ec560ff8.tar.gz") { config.allowUnfree = true; };
-    home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/35535345be0be7dbae2e9b787c6cf790f8c893d5.tar.gz";
     lib = import <nixpkgs/lib>;
-    nixvim = pkgs.fetchFromGitHub {
-      owner = "nix-community";
-      repo = "nixvim";
-      rev = "02a85bd29333ce9fbde0d2c57a2378f47205bb21";
-      sha256 = "sha256-6+Cn5aMDSWvsk4nOXmea3whAI4v+PjYaEpcDkTEAlXc=";
-    };
 in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      "${home-manager}/nixos"
     ];
 
   users = {
@@ -33,151 +25,6 @@ in
       description = "Andrew Johnson";
       extraGroups = [ "networkmanager" "wheel" ];
     };
-  };
-  home-manager.useGlobalPkgs = true;
-  home-manager.users.andrewj = {
-    home.packages = [
-      # Preparation for Hyprland
-      pkgs.wofi
-      pkgs.waybar
-      pkgs.calcurse
-      pkgs.tmux
-      pkgs.termpdfpy
-      nixvim
-
-      pkgs.jdk23
-      pkgs.libreoffice-fresh
-      pkgs.hunspell
-      pkgs.hunspellDicts.en_US-large
-      pkgs.prismlauncher
-      pkgs.lutris
-      pkgs.qalculate-qt
-      pkgs.qbittorrent
-      pkgs.chromium
-      pkgs.librewolf
-      pkgs.gimp
-      pkgs.audacity
-      pkgs.inkscape
-      pkgs.texstudio
-      pkgs.texlive.combined.scheme-full
-      pkgs.vlc
-      pkgs.kdePackages.korganizer
-      pkgs.poppler
-      pkgs.kdePackages.marble
-      pkgs.ollama-cuda
-      pkgs.tabby # Self-hosted AI coding assistant
-      pkgs.quarto
-      pkgs.mermaid-filter
-      pkgs.pandoc
-      pkgs.mpv
-      (pkgs.vscode-with-extensions.override {
-      vscode = pkgs.vscodium;
-      vscodeExtensions = with pkgs.vscode-extensions; [
-        bbenoist.nix
-        ms-python.python
-        ms-azuretools.vscode-docker
-        ms-vscode-remote.remote-ssh
-        ms-toolsai.jupyter
-        ms-toolsai.jupyter-renderers
-        ms-toolsai.jupyter-keymap
-        ms-toolsai.vscode-jupyter-cell-tags
-        ms-toolsai.vscode-jupyter-slideshow
-        batisteo.vscode-django
-        bierner.markdown-mermaid
-        james-yu.latex-workshop
-        mkhl.direnv
-        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            name = "vscode-mermaid-editor";
-            publisher = "tomoyukim";
-            version = "0.19.1";
-            #sha256 = "";
-            sha256 = "sha256-MZkR9wPTj+TwhQP0kbH4XqlTvQwfkbiZdfzA10Q9z5A=";
-          }
-          {
-            name = "mermaid-markdown-syntax-highlighting";
-            publisher = "bpruitt-goddard";
-            version = "1.7.0";
-            #sha256 = "";
-            sha256 = "sha256-Vjmc9tlHSFdhhcSopUG3MnyBSi//B6cpnavqFLhVRho=";
-          }
-          {
-            name = "quarto";
-            publisher = "quarto";
-            version = "1.118.0";
-            #sha256 = "";
-            sha256 = "sha256-fQMORF2LJKhkKbinex+c5I+kM5YM93W2XzOL8PMVZS0=";
-          }
-          {
-            name = "remote-ssh-edit";
-            publisher = "ms-vscode-remote";
-            version = "0.47.2";
-            #sha256 = "";
-            sha256 = "sha256-LxFOxkcQNCLotgZe2GKc2aGWeP9Ny1BpD1XcTqB85sI=";
-          }
-          {
-            name = "vscode-tabby";
-            publisher = "TabbyML";
-            version = "1.20.1";
-            #sha256 = "";
-            sha256 = "sha256-/+l7TRFtO+TKmyBZ3fmbYWcP9QZ4ClHKuwDYaXKF8W8=";
-          }
-          {
-            name = "sqlite-viewer";
-            publisher = "qwtel";
-            version = "0.10.2";
-            #sha256 = "";
-            sha256 = "sha256-5TqcxSJPSmLRBhrhVbAd1VdL2kyszezl8sSrlSynOms=";
-          }
-          {
-            name = "latex-workshop";
-            publisher = "james-yu";
-            version = "10.8.0";
-            #sha256 = "";
-            sha256 = "sha256-tdQ3Z/OfNH0UgpHcn8Zq5rQxoetD61dossEh8hRygew=";
-          }
-        ];
-      })
-    ];
-    home.username = "andrewj";
-    home.homeDirectory = "/home/andrewj";
-    # The home.stateVersion option does not have a default and must be set
-    home.stateVersion = "25.05";
-    # Here goes the restf your home-manager config, e.g. home.packages = [ pkgs.foo ];
-    programs.direnv = {
-      enable = true;
-      enableBashIntegration = true; # see note on other shells below
-      nix-direnv.enable = true;
-    };
-    programs.bash = {
-      enable = true;
-      initExtra = "eval \"$(direnv hook bash)\"\n"; # hook direnv
-    };
-    programs.git = {
-      enable = true;
-      userEmail = "andrew.jeffrey.johnson@gmail.com";
-      userName = "Andrew-Jeffrey-Johnson";
-      extraConfig = {
-        init.defaultBranch = "main";
-      };
-    };
-    programs.gh = {
-      enable = true;
-    };
-    programs.yazi = {
-      enable = true;
-      settings.manager = {
-        show_hidden = true;
-      };
-    };
-    #programs.neovim = { 
-    #  enable = true;
-    #  defaultEditor = true;
-    #  viAlias = true;
-    #  vimAlias = true;
-    #};
-    # Let Home Manager install and manage itself.
-    programs.home-manager.enable = true;
   };
 
   # Bootloader.
@@ -390,12 +237,6 @@ in
   fonts.packages = [ pkgs.dejavu_fonts ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   services.pcscd.enable = true;
-  # Turn off kwallet prompts (doesn't work)
-  #security.pam.services.plasma6.kwallet.enable = true;
-  #security.pam.services.plasma.kwallet.enable = true;
-  #security.pam.services.plasma5.kwallet.enable = true;
-  #security.pam.services.qt.kwallet.enable = true;
-  #security.pam.services.qt5.kwallet.enable = true;
   programs.gnupg.agent = {
     enable = true;
     #pinentryPackage = lib.mkForce pkgs.pinentry-qt;
