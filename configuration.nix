@@ -12,6 +12,12 @@ let
     pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/ed30f8aba41605e3ab46421e3dcb4510ec560ff8.tar.gz") { config.allowUnfree = true; };
     home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/35535345be0be7dbae2e9b787c6cf790f8c893d5.tar.gz";
     lib = import <nixpkgs/lib>;
+    nixvim = pkgs.fetchFromGitHub {
+      owner = "nix-community";
+      repo = "nixvim";
+      rev = "02a85bd29333ce9fbde0d2c57a2378f47205bb21";
+      sha256 = "sha256-6+Cn5aMDSWvsk4nOXmea3whAI4v+PjYaEpcDkTEAlXc=";
+    };
 in
 {
   imports =
@@ -31,6 +37,14 @@ in
   home-manager.useGlobalPkgs = true;
   home-manager.users.andrewj = {
     home.packages = [
+      # Preparation for Hyprland
+      pkgs.wofi
+      pkgs.waybar
+      pkgs.calcurse
+      pkgs.tmux
+      pkgs.termpdfpy
+      nixvim
+
       pkgs.jdk23
       pkgs.libreoffice-fresh
       pkgs.hunspell
@@ -55,9 +69,7 @@ in
       pkgs.quarto
       pkgs.mermaid-filter
       pkgs.pandoc
-      pkgs.kitty-img
-      pkgs.kitty-themes
-      pkgs.kitty
+      pkgs.mpv
       (pkgs.vscode-with-extensions.override {
       vscode = pkgs.vscodium;
       vscodeExtensions = with pkgs.vscode-extensions; [
@@ -158,10 +170,12 @@ in
         show_hidden = true;
       };
     };
-    programs.neovim = { 
-      enable = true;
-      defaultEditor = true;
-    };
+    #programs.neovim = { 
+    #  enable = true;
+    #  defaultEditor = true;
+    #  viAlias = true;
+    #  vimAlias = true;
+    #};
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
   };
@@ -200,83 +214,6 @@ in
       unmanaged = [ "interface-name:ve-*" ]; #If you are using Network Manager, you need to explicitly prevent it from managing container interfaces
     };
   };
-#------------------------------------------------------------------------------
-  # Personal Blog
-  /*
-  containers.blog = {
-    autoStart = true;
-    privateNetwork = true;
-    hostAddress = "192.168.100.10";
-    localAddress = "192.168.100.13"; # Go to http://192.168.100.13 to view the website
-    hostAddress6 = "fc00::1";
-    localAddress6 = "fc00::4";
-
-    bindMounts = {
-      "/home/blogger/blog" = { #/path/in/container
-        hostPath = "/home/andrewj/Documents/blog-website/"; #/path/on/host
-        isReadOnly = false;
-      };
-      "/home/blogger/blog/node_modules" = {
-        hostPath = "${nodeDependencies}/lib/node_modules";
-        isReadOnly = false;
-      };
-    };
-
-    config = { config, pkgs, lib, ... }: {
-      environment.systemPackages = with pkgs; [
-        cowsay
-        nodejs_23
-        nodePackages.npm
-      ];
-
-      users = {
-        # Define a user account. Don't forget to set a password with ‘passwd’.
-        users.blogger = {
-          isNormalUser = true;
-          description = "Blogger";
-          #createHome = true;
-
-          #extraGroups = [ "networkmanager" "wheel" ];
-          packages = with pkgs; [
-            #pkgs.nodejs_23
-            #pkgs.nodejs_14
-            #nodePackages.npm
-          ];
-        };
-      };
-
-      services.httpd = {
-        enable = true;
-        adminAddr = "admin@example.org";
-      };
-
-      systemd.services.foo = {
-        serviceConfig = {
-          #ExecStart="";
-        };
-        script = ''
-          touch /home/blogger/blog/log.txt
-          /run/current-system/sw/bin/node /home/blogger/blog/index.js &>> /home/blogger/blog/log.txt
-        '';
-        #wantedBy = ["default.target"];
-        wantedBy = ["multi-user.target"];
-      };
-
-      networking = {
-        firewall.allowedTCPPorts = [ 80 3000 ];
-
-        # Use systemd-resolved inside the container
-        # Workaround for bug https://github.com/NixOS/nixpkgs/issues/162686
-        useHostResolvConf = lib.mkForce false;
-      };
-
-      services.resolved.enable = true;
-
-      system.stateVersion = "25.05";
-    };
-  };
-  */
-  #------------------------------------------------------------------------------
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -331,7 +268,6 @@ in
   #services.xserver.enable = false;
 
   # Me trying to get desktop environment to work
-  services.xserver.videoDrivers = ["nvidia"];
   #boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
 
@@ -390,6 +326,7 @@ in
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.enable = false; # optional
+  services.xserver.videoDrivers = ["nvidia"];
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
@@ -424,23 +361,33 @@ in
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Remove nano
-  programs.nano.enable = false;
+  programs.hyprland.enable = true; # enable Hyprland
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = [
-    #pkgs.git
-    pkgs.cudaPackages.cuda_nvcc # CUDA
-    pkgs.cudaPackages.cudatoolkit
+  # Set environment variables
+  environment = {
+    shells = [ pkgs.bash ];
+    variables = {
+      EDITOR = "nvim";
+      SYSTEMD_EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+    # List packages installed in system profile. To search, run:
+    # $ nix search wget
+    systemPackages = [
+      pkgs.cudaPackages.cuda_nvcc # CUDA
+      pkgs.cudaPackages.cudatoolkit
 
-    pkgs.wget
-    pkgs.gnupg
+      pkgs.wget
+      pkgs.gnupg
 
-    # native wayland support (unstable)
-    pkgs.wineWowPackages.waylandFull
-    pkgs.kdePackages.kdeconnect-kde
-  ];
+      # native wayland support (unstable)
+      pkgs.wineWowPackages.waylandFull
+      pkgs.kitty # Required as a system package for Hyprland
+    ];
+  };
+
+  # Get all the nerfonts fonts
+  fonts.packages = [ pkgs.dejavu_fonts ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   services.pcscd.enable = true;
   # Turn off kwallet prompts (doesn't work)
