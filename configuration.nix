@@ -23,7 +23,7 @@ in
     users.andrewj = {
       isNormalUser = true;
       description = "Andrew Johnson";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" "input" ];
     };
   };
 
@@ -230,7 +230,7 @@ in
   };
 
   # Get all the nerfonts fonts
-  fonts.packages = [ pkgs.dejavu_fonts ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  fonts.packages = [ pkgs.dejavu_fonts pkgs.font-awesome ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   services.pcscd.enable = true;
   programs.gnupg.agent = {
@@ -264,7 +264,11 @@ in
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh = { 
+    enable = true;
+    allowSFTP = true;
+  };
+  
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
