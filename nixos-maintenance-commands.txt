@@ -1,0 +1,15 @@
+# Removes missing store entries and re-installs damanged store entries.
+sudo nix-store --repair --verify --check-contents
+
+# Deletes all unreachable or >14-day-old store objects, profiles, and configurations.
+sudo nix-collect-garbage --delete-older-than 14d
+
+# Optimize Nix Store:
+sudo nix store optimise
+
+# List and delete old generations
+nix-env --list-generations
+nix-env --delete-generations old
+
+# Monitor system health
+journalctl -xe
