@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ... }: 
 let
   nixvim = import (builtins.fetchGit {
     url = "https://github.com/nix-community/nixvim";
     ref = "main";
   });
+  utfCli = pkgs.callPackage ./utf-cli.nix { inherit pkgs; };
 in {
   imports = [
     nixvim.homeManagerModules.nixvim
@@ -54,6 +55,8 @@ in {
       pkgs.wget
       pkgs.nix-index
       pkgs.manix
+      utfCli
+      pkgs.wl-clipboard
 
       pkgs.jdk23
       pkgs.libreoffice-fresh
