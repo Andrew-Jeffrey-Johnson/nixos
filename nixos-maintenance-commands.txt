@@ -13,3 +13,7 @@ nix-env --delete-generations old
 
 # Monitor system health
 journalctl -xe
+
+# Update home-manager
+nix-channel --update
+home-manager switch

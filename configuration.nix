@@ -9,8 +9,8 @@
 let
     # We pin to a specific nixpkgs commit for reproducibility.
     # Last updated: 06 May 2025. Check for new commits at https://status.nixos.org.
-    pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/ed30f8aba41605e3ab46421e3dcb4510ec560ff8.tar.gz") { config.allowUnfree = true; };
-    lib = import <nixpkgs/lib>;
+    pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/f0d925b947cca0bbe7f2d25115cbaf021844aba7.tar.gz") { config.allowUnfree = true; };
+    lib = import (pkgs) lib;
 in
 {
   imports =
