@@ -101,6 +101,10 @@ in {
       extraConfig = {
         init.defaultBranch = "main";
       };
+      signing = {
+        signByDefault = true;
+        key = "ED4D0E25B7FBFAEA62DE63BD71576CF0B1AF61F6";
+      };
     };
     gh = {
       enable = true;
