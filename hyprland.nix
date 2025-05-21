@@ -114,7 +114,7 @@
     # https://wiki.hyprland.org/Configuring/Variables/#misc
     misc = {
       force_default_wallpaper = -1; # Set to 0 or 1 to disable the anime mascot wallpapers
-      disable_hyprland_logo = false; # If true disables the random hyprland logo / anime girl background. :(
+      disable_hyprland_logo = true; # If true disables the random hyprland logo / anime girl background. :(
     };
 
     # https://wiki.hyprland.org/Configuring/Variables/#input
@@ -219,5 +219,16 @@
       # Fix some dragging issues with XWayland
       "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
     ];
+  };
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = [ 
+        "/home/andrewj/Pictures/wallpapers/forest-wallpaper.jpg"
+      ];
+      wallpaper = [
+        ", /home/andrewj/Pictures/wallpapers/forest-wallpaper.jpg"
+      ];
+    };
   };
 }

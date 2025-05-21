@@ -58,7 +58,8 @@ in {
       pkgs.manix
       utfCli
       pkgs.wl-clipboard
-      pkgs.vimPlugins.vimtex
+      pkgs.catppuccin
+      pkgs.wordbook
 
       pkgs.jdk23
       pkgs.libreoffice-fresh
@@ -113,6 +114,7 @@ in {
     nixvim = {
       enable = true;
       defaultEditor = true;
+      colorschemes.catppuccin.enable = true;
       viAlias = true;
       vimAlias = true;
       luaLoader.enable = true;
@@ -121,6 +123,7 @@ in {
       enable = true;
       shellIntegration.enableBashIntegration = true;
       enableGitIntegration = true;
+      themeFile = "Catppuccin-Latte";
     };
     waybar = {
       enable = true;
@@ -141,6 +144,7 @@ in {
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    #".dictrc".text = "server dict.org";
   };
 
   # Home Manager can also manage your environment variables through

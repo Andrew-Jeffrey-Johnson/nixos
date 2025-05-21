@@ -221,6 +221,10 @@ in
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     systemPackages = [
+      pkgs.dict
+      pkgs.dictdDBs.wordnet
+      pkgs.dictdDBs.wiktionary
+
       pkgs.cudaPackages.cuda_nvcc # CUDA
       pkgs.cudaPackages.cudatoolkit
 
@@ -269,6 +273,13 @@ in
     allowSFTP = true;
   };
   
+  services.dictd = {
+    enable = true;
+    DBs = [
+      pkgs.dictdDBs.wiktionary 
+      pkgs.dictdDBs.wordnet
+    ];
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
