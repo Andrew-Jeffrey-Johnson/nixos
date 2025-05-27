@@ -60,6 +60,7 @@ in {
       pkgs.wl-clipboard
       pkgs.catppuccin
       pkgs.wordbook
+      pkgs.epy
 
       pkgs.jdk23
       pkgs.libreoffice-fresh
@@ -100,6 +101,7 @@ in {
       userName = "Andrew-Jeffrey-Johnson";
       extraConfig = {
         init.defaultBranch = "main";
+        core.excludesFile = "~/.gitignore";
       };
       signing = {
         signByDefault = true;
@@ -111,8 +113,21 @@ in {
     };
     yazi = {
       enable = true;
-      settings.manager = {
-        show_hidden = true;
+      settings = {
+        manager = {
+          show_hidden = true;
+          ratio = [1 3 4];
+        };
+        opener = {
+          openBook = [
+            { run = pkgs.epy + /bin/epy + " \"$@\""; block = true; }
+          ];
+        };
+        open = {
+          prepend_rules = [
+            { name = "*.epub"; use = "openBook"; }
+          ];
+        };
       };
     };
     nixvim = {
@@ -135,6 +150,10 @@ in {
     };
   };
 
+  services.udiskie = {
+    enable = true;
+  };
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
@@ -148,7 +167,9 @@ in {
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    #".dictrc".text = "server dict.org";
+    gitignore.text = ''
+      
+    '';
   };
 
   # Home Manager can also manage your environment variables through

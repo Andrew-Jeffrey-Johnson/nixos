@@ -10,7 +10,7 @@ let
     # We pin to a specific nixpkgs commit for reproducibility.
     # Last updated: 06 May 2025. Check for new commits at https://status.nixos.org.
     pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/f0d925b947cca0bbe7f2d25115cbaf021844aba7.tar.gz") { config.allowUnfree = true; };
-    lib = import (pkgs) lib;
+    lib = import <nixpkgs/lib>;
 in
 {
   imports =
@@ -280,6 +280,8 @@ in
       pkgs.dictdDBs.wordnet
     ];
   };
+
+  services.udisks2.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
