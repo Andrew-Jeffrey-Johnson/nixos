@@ -82,7 +82,6 @@ in {
       pkgs.mermaid-filter
       pkgs.pandoc
       pkgs.mpv
-      pkgs.calibre
   ];
 
   programs = {
@@ -167,7 +166,7 @@ in {
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-    gitignore.text = ''
+    ".gitignore".text = ''
       
     '';
   };
