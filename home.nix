@@ -61,6 +61,9 @@ in {
       pkgs.catppuccin
       pkgs.wordbook
       pkgs.epy
+      pkgs.trash-cli
+      pkgs.yaziPlugins.restore
+      pkgs.kiwix
 
       pkgs.jdk23
       pkgs.libreoffice-fresh
@@ -128,6 +131,17 @@ in {
           ];
         };
       };
+      keymap = {
+        manager = {
+          prepend_keymap = [
+            { on = "u"; run = "plugin restore"; desc = "Restore last deleted files/folders"; }
+            # ... Other keymaps
+          ];
+        };
+      };
+      plugins = {
+        restore = pkgs.yaziPlugins.restore;
+      };
     };
     nixvim = {
       enable = true;
@@ -167,7 +181,7 @@ in {
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".gitignore".text = ''
-      
+      debug.txt 
     '';
   };
 

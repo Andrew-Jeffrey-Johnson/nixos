@@ -16,6 +16,8 @@
     env = [
       "XCURSOR_SIZE,24"
       "HYPRCURSOR_SIZE,24"
+      "LIBVA_DRIVER_NAME,nvidia"
+      "__GLX_VENDOR_LIBRARY_NAME,nvidia"
     ];
     # Refer to https://wiki.hyprland.org/Configuring/Variables/
     # https://wiki.hyprland.org/Configuring/Variables/#general
