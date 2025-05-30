@@ -64,6 +64,8 @@ in {
       pkgs.trash-cli
       pkgs.yaziPlugins.restore
       pkgs.kiwix
+      pkgs.duckdb
+      pkgs.sqlite
 
       pkgs.jdk23
       pkgs.libreoffice-fresh
@@ -141,6 +143,7 @@ in {
       };
       plugins = {
         restore = pkgs.yaziPlugins.restore;
+        duckdb = pkgs.yaziPlugins.duckdb;
       };
     };
     nixvim = {
