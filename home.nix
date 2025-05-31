@@ -66,6 +66,7 @@ in {
       pkgs.kiwix
       pkgs.duckdb
       pkgs.sqlite
+      pkgs.gamescope # For steam games
 
       pkgs.jdk23
       pkgs.libreoffice-fresh
