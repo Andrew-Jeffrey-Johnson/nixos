@@ -161,9 +161,10 @@ in {
       enableGitIntegration = true;
       themeFile = "Catppuccin-Latte";
     };
-    waybar = {
+    eww = {
       enable = true;
-      systemd.enable = true;
+      configDir = ./eww;
+      enableBashIntegration = true;
     };
   };
 
