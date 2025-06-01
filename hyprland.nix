@@ -22,7 +22,7 @@
       "LIBVA_DRIVER_NAME,nvidia"
       "__GLX_VENDOR_LIBRARY_NAME,nvidia"
       # Put cards in order
-      "AQ_DRM_DEVICES,/dev/dri/card1:/dev/dri/card2" 
+      "AQ_DRM_DEVICES,/dev/dri/card1:/dev/dri/card0" 
       # List devices:
       # lspci -d ::03xx
       # Figure out which card is for which device: 
