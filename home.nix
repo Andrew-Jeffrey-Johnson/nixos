@@ -66,6 +66,7 @@ in {
       pkgs.duckdb
       pkgs.sqlite
       pkgs.gamescope # For steam games
+      pkgs.gcc # For Neorg
 
       pkgs.jdk23
       pkgs.libreoffice-fresh
@@ -153,8 +154,31 @@ in {
       viAlias = true;
       vimAlias = true;
       luaLoader.enable = true;
+      plugins = {
+        neorg = {
+          enable = true;
+          settings.load = {
+            "core.concealer" = {
+              config = {
+                icon_preset = "varied";
+              };
+            };
+            "core.defaults" = {
+              __empty = null;
+            };
+            "core.dirman" = {
+              config = {
+                workspaces = {
+                  home = "~/notes/home";
+                  work = "~/notes/work";
+                };
+              };
+            };
+          };
+        };
+        treesitter.enable = true;
+      };
       extraPlugins = [
-        pkgs.vimPlugins.neorg
       ];
     };
     kitty = {
