@@ -62,7 +62,6 @@ in {
       pkgs.wordbook
       pkgs.epy
       pkgs.trash-cli
-      pkgs.yaziPlugins.restore
       pkgs.kiwix
       pkgs.duckdb
       pkgs.sqlite
@@ -154,6 +153,9 @@ in {
       viAlias = true;
       vimAlias = true;
       luaLoader.enable = true;
+      extraPlugins = [
+        pkgs.vimPlugins.neorg
+      ];
     };
     kitty = {
       enable = true;
