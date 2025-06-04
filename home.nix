@@ -169,8 +169,7 @@ in {
             "core.dirman" = {
               config = {
                 workspaces = {
-                  home = "~/notes/home";
-                  work = "~/notes/work";
+                  home = "~/Documents/notes";
                 };
               };
             };
