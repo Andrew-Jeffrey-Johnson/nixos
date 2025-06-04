@@ -154,6 +154,21 @@ in {
       viAlias = true;
       vimAlias = true;
       luaLoader.enable = true;
+      lsp.servers = {
+        rust_analyzer = {
+          enable = true; 
+          activate = true;
+          settings = {
+            cmd = [
+              "rust-analyzer"
+            ];
+            filetypes = [
+              "rs"
+            ];
+            checkOnSave = true;
+          };
+        };
+      };
       plugins = {
         neorg = {
           enable = true;
@@ -179,6 +194,10 @@ in {
       };
       extraPlugins = [
       ];
+      dependencies = {
+        tree-sitter.enable = true;
+        nodejs.enable = true;
+      };
     };
     kitty = {
       enable = true;
