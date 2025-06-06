@@ -1,5 +1,5 @@
 {
-  config,
+  #config,
   pkgs,
   lib,
   ...
@@ -224,7 +224,7 @@ in {
 
           formatters_by_ft = {
             sh = ["shellcheck" "shfmt"];
-            python = ["isort" "black"];
+            python = ["isort" "black" "flake8"];
             docker = ["hadolint"];
             css = ["prettier"];
             html = ["prettier"];
@@ -322,7 +322,51 @@ in {
           terraformls.enable = true; # Terraform
           ansiblels.enable = true; #Ansible
           nginx_language_server.enable = true; #Nginx
+          ltex = { # English and grammar
+            enable = true;
+            autostart = true;
+            settings = {
+              additionalRules = {
+                languageModel = "en";
+              };
+            };
+          };
         };
+      };
+
+      plugins.actions-preview = {
+        enable = true;
+        #autoLoad = true;
+        settings = {
+          highlight_command = [
+            "require('actions-preview.highlight').delta 'delta --side-by-side'"
+            "require('actions-preview.highlight').diff_so_fancy()"
+            "require('actions-preview.highlight').diff_highlight()"
+          ];
+          telescope = {
+            layout_config = {
+              height = 0.9;
+              preview_cutoff = 20;
+              preview_height = ''
+          function(_, _, max_lines)
+            return max_lines - 15
+          end
+        '';
+              prompt_position = "top";
+              width = 0.8;
+            };
+            layout_strategy = "vertical";
+            sorting_strategy = "ascending";
+          };
+        };
+      };
+
+      plugins.telescope = {
+        enable = true;
+      };
+
+      plugins.mini = {
+        enable = true;
       };
 
       plugins.cmp = {
@@ -371,7 +415,7 @@ in {
             "<Down>" = "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
 
             "<C-p>" = "cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})";
-            "<C-n>" = "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
+            "rC-n>" = "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
 
             "<C-u>" = "cmp.mapping.scroll_docs(-4)";
             "<C-d>" = "cmp.mapping.scroll_docs(4)";
@@ -469,7 +513,7 @@ in {
         enable = true;
         sources.formatting = {
           black.enable = true;
-          alejandra.enable = true;
+          #alejandra.enable = true;
           hclfmt.enable = true;
           opentofu_fmt.enable = true;
           prettier.enable = true;
@@ -572,7 +616,7 @@ in {
 
       plugins.markdown-preview = {
         enable = true;
-        settings.theme = "dark";
+        settings.theme = "light";
       };
       plugins.render-markdown.enable = true;
       #----------End-Plugins----------------
