@@ -325,9 +325,18 @@ in {
           ltex = { # English and grammar
             enable = true;
             autostart = true;
+            filetypes = [ 
+              "norg"
+              "text"
+              "txt"
+              "latex"
+              "tex"
+              "html"
+              "xhtml"
+            ];
             settings = {
               additionalRules = {
-                languageModel = "en";
+                languageModel = "~/nixos/ngrams/en";
               };
             };
           };
@@ -366,6 +375,10 @@ in {
       };
 
       plugins.mini = {
+        enable = true;
+      };
+
+      plugins.web-devicons = {
         enable = true;
       };
 
