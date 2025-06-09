@@ -123,10 +123,14 @@ in {
     gh = {
       enable = true;
     };
+    waybar = {
+      enable = true;
+      systemd.enable = true;
+    };
     yazi = {
       enable = true;
       settings = {
-        manager = {
+        mgr = {
           show_hidden = true;
           ratio = [1 3 4];
         };
@@ -148,7 +152,7 @@ in {
         };
       };
       keymap = {
-        manager = {
+        mgr = {
           prepend_keymap = [
             {
               on = "u";
