@@ -74,7 +74,7 @@ in {
     # For nixvim
     pkgs.alejandra
     pkgs.gcc # For Neorg
-    pkgs.flake8
+    pkgs.python313Packages.flake8
 
     pkgs.jdk23
     pkgs.libreoffice-fresh
@@ -433,7 +433,7 @@ in {
             "<Down>" = "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
 
             "<C-p>" = "cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})";
-            "rC-n>" = "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
+            "<C-n>" = "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
 
             "<C-u>" = "cmp.mapping.scroll_docs(-4)";
             "<C-d>" = "cmp.mapping.scroll_docs(4)";
