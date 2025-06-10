@@ -74,6 +74,7 @@ in {
     # For nixvim
     pkgs.alejandra
     pkgs.gcc # For Neorg
+    pkgs.flake8
 
     pkgs.jdk23
     pkgs.libreoffice-fresh
