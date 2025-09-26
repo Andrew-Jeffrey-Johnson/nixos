@@ -2,8 +2,11 @@
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
     monitor = [
+      #"eDP-1, 1920x1080@60.00Hz, 0x0, 1" # Built-in monitor 
+      #"HDMI-A-2, 1920x1080@59.79Hz, 1920x0, 1" # External TV monitor
       "eDP-1, 1920x1080@60.00Hz, 0x0, 1" # Built-in monitor 
-      "HDMI-A-2, 1920x1080@59.79Hz, 1920x0, 1" # External TV monitor
+      #"HDMI-A-2, disable" # External TV monitor
+      "HDMI-A-2, 1920x1080@60.00Hz, 1920x0, 1" # External TV monitor
     ];
     opengl = {
       nvidia_anti_flicker = false;
@@ -17,12 +20,12 @@
       
     ];
     env = [
-      "XCURSOR_SIZE,24"
-      "HYPRCURSOR_SIZE,24"
-      "LIBVA_DRIVER_NAME,nvidia"
-      "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+      #"XCURSOR_SIZE,24"
+      #"HYPRCURSOR_SIZE,24"
+      #"LIBVA_DRIVER_NAME,nvidia"
+      #"__GLX_VENDOR_LIBRARY_NAME,nvidia"
       # Put cards in order
-      "AQ_DRM_DEVICES,/dev/dri/card1:/dev/dri/card2:/dev/dri/card0" 
+      #"AQ_DRM_DEVICES,/dev/dri/card1:/dev/dri/card2:/dev/dri/card0" 
       # List devices:
       # lspci -d ::03xx
       # Figure out which card is for which device: 

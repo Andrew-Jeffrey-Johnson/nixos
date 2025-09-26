@@ -11,7 +11,7 @@
   utfCli = pkgs.callPackage ./utf-cli.nix {inherit pkgs;};
 in {
   imports = [
-    nixvim.homeManagerModules.nixvim
+    nixvim.homeModules.nixvim
     ./nixvim.nix
     ./hyprland.nix
     #./lsp.nix
@@ -70,9 +70,10 @@ in {
     pkgs.duckdb
     pkgs.sqlite
     pkgs.gamescope # For steam games
+    pkgs.wf-recorder
 
     # For nixvim
-    pkgs.alejandra
+    #pkgs.alejandra
     pkgs.gcc # For Neorg
     pkgs.python313Packages.flake8
 
@@ -96,6 +97,7 @@ in {
     pkgs.mermaid-filter
     pkgs.pandoc
     pkgs.mpv
+    pkgs.kicad
   ];
 
   programs = {
@@ -127,6 +129,14 @@ in {
     waybar = {
       enable = true;
       systemd.enable = true;
+      settings.main = {
+        modules-right = [
+          "clock"
+        ];
+        "clock" = {
+          format = "{:%I:%M %p}";
+        };
+      };
     };
     yazi = {
       enable = true;
@@ -236,7 +246,7 @@ in {
             json = ["prettier"];
             lua = ["stylua"];
             markdown = ["prettier"];
-            nix = ["alejandra"];
+            #nix = ["alejandra"];
             #ruby = ["rubyfmt"];
             terraform = ["tofu_fmt"];
             tf = ["tofu_fmt"];
@@ -325,12 +335,13 @@ in {
           bashls.enable = true; # Bash
           yamlls.enable = true; # YAML
           terraformls.enable = true; # Terraform
-          ansiblels.enable = true; #Ansible
+          #ansiblels.enable = true; #Ansible
           nginx_language_server.enable = true; #Nginx
-          ltex = { # English and grammar
+          ltex = {
+            # English and grammar
             enable = true;
             autostart = true;
-            filetypes = [ 
+            filetypes = [
               "norg"
               "text"
               "txt"
@@ -362,10 +373,10 @@ in {
               height = 0.9;
               preview_cutoff = 20;
               preview_height = ''
-          function(_, _, max_lines)
-            return max_lines - 15
-          end
-        '';
+                function(_, _, max_lines)
+                  return max_lines - 15
+                end
+              '';
               prompt_position = "top";
               width = 0.8;
             };
@@ -531,7 +542,7 @@ in {
         enable = true;
         sources.formatting = {
           black.enable = true;
-          #alejandra.enable = true;
+          alejandra.enable = true;
           hclfmt.enable = true;
           opentofu_fmt.enable = true;
           prettier.enable = true;
@@ -557,7 +568,7 @@ in {
           tf = ["tofu_fmt"];
           bash = ["shellcheck"];
           yaml = ["yamlfmt"];
-          nix = ["alejandra"];
+          #nix = ["alejandra"];
           go = ["golangci-lint"];
           python = ["flake8"];
           haskell = ["hlint"];
@@ -567,9 +578,9 @@ in {
           hadolint = {
             cmd = "${pkgs.hadolint}/bin/hadolint";
           };
-          alejandra = {
-            cmd = "${pkgs.alejandra}/bin/alejandra";
-          };
+          #alejandra = {
+          #  cmd = "${pkgs.alejandra}/bin/alejandra";
+          #};
           flake8 = {
             cmd = "${pkgs.python313Packages.flake8}/bin/flake8";
           };
