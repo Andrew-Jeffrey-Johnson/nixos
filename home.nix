@@ -3,13 +3,17 @@
   pkgs,
   lib,
   ...
-}: let
-  nixvim = import (builtins.fetchGit {
-    url = "https://github.com/nix-community/nixvim";
-    ref = "main";
-  });
-  utfCli = pkgs.callPackage ./utf-cli.nix {inherit pkgs;};
-in {
+}:
+let
+  nixvim = import (
+    builtins.fetchGit {
+      url = "https://github.com/nix-community/nixvim";
+      ref = "main";
+    }
+  );
+  utfCli = pkgs.callPackage ./utf-cli.nix { inherit pkgs; };
+in
+{
   imports = [
     nixvim.homeModules.nixvim
     ./nixvim.nix
@@ -77,7 +81,7 @@ in {
     pkgs.gcc # For Neorg
     pkgs.python313Packages.flake8
 
-    pkgs.jdk23
+    pkgs.jdk25
     pkgs.libreoffice-fresh
     pkgs.hunspell
     pkgs.hunspellDicts.en_US-large
@@ -112,9 +116,9 @@ in {
     };
     git = {
       enable = true;
-      userEmail = "andrew.jeffrey.johnson@gmail.com";
-      userName = "Andrew-Jeffrey-Johnson";
-      extraConfig = {
+      settings = {
+        user.email = "andrew.jeffrey.johnson@gmail.com";
+        user.name = "Andrew-Jeffrey-Johnson";
         init.defaultBranch = "main";
         core.excludesFile = "~/.gitignore";
       };
@@ -143,7 +147,11 @@ in {
       settings = {
         mgr = {
           show_hidden = true;
-          ratio = [1 3 4];
+          ratio = [
+            1
+            3
+            4
+          ];
         };
         opener = {
           openBook = [
@@ -187,21 +195,21 @@ in {
       vimAlias = true;
       luaLoader.enable = true;
       /*
-      lsp.servers = {
-        rust_analyzer = {
-          enable = true;
-          activate = true;
-          settings = {
-            cmd = [
-              "rust-analyzer"
-            ];
-            filetypes = [
-              "rs"
-            ];
-            checkOnSave = true;
+        lsp.servers = {
+          rust_analyzer = {
+            enable = true;
+            activate = true;
+            settings = {
+              cmd = [
+                "rust-analyzer"
+              ];
+              filetypes = [
+                "rs"
+              ];
+              checkOnSave = true;
+            };
           };
         };
-      };
       */
       #plugins = {
       plugins.neorg = {
@@ -238,20 +246,27 @@ in {
           notify_on_error = true;
 
           formatters_by_ft = {
-            sh = ["shellcheck" "shfmt"];
-            python = ["isort" "black" "flake8"];
-            docker = ["hadolint"];
-            css = ["prettier"];
-            html = ["prettier"];
-            json = ["prettier"];
-            lua = ["stylua"];
-            markdown = ["prettier"];
+            sh = [
+              "shellcheck"
+              "shfmt"
+            ];
+            python = [
+              "isort"
+              "black"
+              "flake8"
+            ];
+            docker = [ "hadolint" ];
+            css = [ "prettier" ];
+            html = [ "prettier" ];
+            json = [ "prettier" ];
+            lua = [ "stylua" ];
+            markdown = [ "prettier" ];
             #nix = ["alejandra"];
             #ruby = ["rubyfmt"];
-            terraform = ["tofu_fmt"];
-            tf = ["tofu_fmt"];
+            terraform = [ "tofu_fmt" ];
+            tf = [ "tofu_fmt" ];
             #yaml = ["yamlfmt"]; # NOTE: Does not accept empty lines after keys
-            yaml = ["prettier"];
+            yaml = [ "prettier" ];
           };
         };
       };
@@ -324,7 +339,7 @@ in {
               yapf.enabled = true;
             };
           };
-          lua_ls.enable = true; #Lua
+          lua_ls.enable = true; # Lua
           cssls.enable = true; # CSS
           html.enable = true; # HTML
           pyright.enable = true; # Python
@@ -336,7 +351,7 @@ in {
           yamlls.enable = true; # YAML
           terraformls.enable = true; # Terraform
           #ansiblels.enable = true; #Ansible
-          nginx_language_server.enable = true; #Nginx
+          nginx_language_server.enable = true; # Nginx
           ltex = {
             # English and grammar
             enable = true;
@@ -406,7 +421,7 @@ in {
             debounce = 150;
           };
           sources = [
-            {name = "path";}
+            { name = "path"; }
             {
               name = "nvim_lsp";
               keywordLength = 1;
@@ -536,7 +551,7 @@ in {
       plugins.dap.enable = true;
       plugins.trouble = {
         enable = true;
-        settings = {};
+        settings = { };
       };
       plugins.none-ls = {
         enable = true;
@@ -559,20 +574,20 @@ in {
       plugins.lint = {
         enable = true;
         lintersByFt = {
-          text = ["vale"];
-          json = ["jsonlint"];
-          markdown = ["prettier"];
+          text = [ "vale" ];
+          json = [ "jsonlint" ];
+          markdown = [ "prettier" ];
           #ruby = ["rubyfmt"];
-          dockerfile = ["hadolint"];
-          terraform = ["tofu_fmt"];
-          tf = ["tofu_fmt"];
-          bash = ["shellcheck"];
-          yaml = ["yamlfmt"];
+          dockerfile = [ "hadolint" ];
+          terraform = [ "tofu_fmt" ];
+          tf = [ "tofu_fmt" ];
+          bash = [ "shellcheck" ];
+          yaml = [ "yamlfmt" ];
           #nix = ["alejandra"];
-          go = ["golangci-lint"];
-          python = ["flake8"];
-          haskell = ["hlint"];
-          lua = ["selene"];
+          go = [ "golangci-lint" ];
+          python = [ "flake8" ];
+          haskell = [ "hlint" ];
+          lua = [ "selene" ];
         };
         linters = {
           hadolint = {

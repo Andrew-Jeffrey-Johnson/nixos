@@ -3,27 +3,35 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 # Apply changes via:
 # sudo nixos-rebuild switch --upgrade
-
 #{ config, pkgs, lib, qtbase, wrapQtAppsHook, ... }:
 { config, ... }:
 let
-    # We pin to a specific nixpkgs commit for reproducibility.
-    # Last updated: 06 May 2025. Check for new commits at https://status.nixos.org.
-    pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/f0d925b947cca0bbe7f2d25115cbaf021844aba7.tar.gz") { config.allowUnfree = true; };
-    lib = import <nixpkgs/lib>;
+  # We pin to a specific nixpkgs commit for reproducibility.
+  # Last updated: 15 November 2025. Check for new commits at https://status.nixos.org.
+  pkgs =
+    import
+      (fetchTarball "https://github.com/NixOS/nixpkgs/archive/1d4c88323ac36805d09657d13a5273aea1b34f0c.tar.gz")
+      { config.allowUnfree = true; };
+  lib = import <nixpkgs/lib>;
 in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   users = {
+    groups.docker = { };
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.andrewj = {
       isNormalUser = true;
       description = "Andrew Johnson";
-      extraGroups = [ "networkmanager" "wheel" "input" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "input"
+        "docker"
+      ];
     };
   };
 
@@ -43,7 +51,7 @@ in
   networking = {
     nat = {
       enable = true;
-      internalInterfaces = ["ve-+"]; #ve-+ is a wildcard that matches all container interfaces
+      internalInterfaces = [ "ve-+" ]; # ve-+ is a wildcard that matches all container interfaces
       externalInterface = "ens3";
       # Lazy IPv6 connectivity for the container
       enableIPv6 = true;
@@ -58,7 +66,7 @@ in
     # Enable networking
     networkmanager = {
       enable = true;
-      unmanaged = [ "interface-name:ve-*" ]; #If you are using Network Manager, you need to explicitly prevent it from managing container interfaces
+      unmanaged = [ "interface-name:ve-*" ]; # If you are using Network Manager, you need to explicitly prevent it from managing container interfaces
     };
   };
 
@@ -88,12 +96,18 @@ in
       options = "--delete-older-than 14d";
     };
     settings = {
-      trusted-users = [ "root" "@wheel" ];
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
       download-buffer-size = 500000000; # 500 MB
       # Automatically optimize store every build
       auto-optimise-store = true;
       # Enable nix flakes
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
 
@@ -117,14 +131,12 @@ in
   # Me trying to get desktop environment to work
   #boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
-
   hardware = {
     # Enable OpenGL
     graphics = {
       enable = true;
     };
     nvidia = {
-
       # Modesetting is required.
       modesetting.enable = true;
 
@@ -173,11 +185,10 @@ in
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.enable = false; # optional
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
-  
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -210,6 +221,12 @@ in
 
   programs.hyprland.enable = true; # enable Hyprland
 
+  # Install docker rootless
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
+
   # Set environment variables
   environment = {
     shells = [ pkgs.bash ];
@@ -234,7 +251,11 @@ in
   };
 
   # Get all the nerfonts fonts
-  fonts.packages = [ pkgs.dejavu_fonts pkgs.font-awesome ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  fonts.packages = [
+    pkgs.dejavu_fonts
+    pkgs.font-awesome
+  ]
+  ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   services.pcscd.enable = true;
   programs.gnupg.agent = {
@@ -251,11 +272,13 @@ in
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "steam"
-    "steam-original"
-    "steam-run"
-  ];
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "steam"
+      "steam-original"
+      "steam-run"
+    ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -268,15 +291,15 @@ in
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh = { 
+  services.openssh = {
     enable = true;
     allowSFTP = true;
   };
-  
+
   services.dictd = {
     enable = true;
     DBs = [
-      pkgs.dictdDBs.wiktionary 
+      pkgs.dictdDBs.wiktionary
       pkgs.dictdDBs.wordnet
     ];
   };
