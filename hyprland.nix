@@ -2,22 +2,21 @@
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.settings = {
     monitor = [
-      #"eDP-1, 1920x1080@60.00Hz, 0x0, 1" # Built-in monitor 
+      #"eDP-1, 1920x1080@60.00Hz, 0x0, 1" # Built-in monitor
       #"HDMI-A-2, 1920x1080@59.79Hz, 1920x0, 1" # External TV monitor
-      "eDP-1, 1920x1080@60.00Hz, 0x0, 1" # Built-in monitor 
+      "eDP-1, 1920x1080@60.00Hz, 0x0, 1" # Built-in monitor
       #"HDMI-A-2, disable" # External TV monitor
       "HDMI-A-2, 1920x1080@60.00Hz, 1920x0, 1" # External TV monitor
     ];
     opengl = {
       nvidia_anti_flicker = false;
     };
-    "$mod" = "SUPER";# Sets "Windows" key as main modifier
+    "$mod" = "SUPER"; # Sets "Windows" key as main modifier
     # See https://wiki.hyprland.org/Configuring/Keywords/
     "$terminal" = "kitty";
     "$fileManager" = "yazi";
     "$menu" = "wofi --show drun";
     exec-once = [
-      
     ];
     env = [
       #"XCURSOR_SIZE,24"
@@ -25,10 +24,10 @@
       #"LIBVA_DRIVER_NAME,nvidia"
       #"__GLX_VENDOR_LIBRARY_NAME,nvidia"
       # Put cards in order
-      #"AQ_DRM_DEVICES,/dev/dri/card1:/dev/dri/card2:/dev/dri/card0" 
+      #"AQ_DRM_DEVICES,/dev/dri/card1:/dev/dri/card2:/dev/dri/card0"
       # List devices:
       # lspci -d ::03xx
-      # Figure out which card is for which device: 
+      # Figure out which card is for which device:
       # ls -l /dev/dri/by-path
     ];
     # Refer to https://wiki.hyprland.org/Configuring/Variables/
@@ -51,27 +50,27 @@
     };
     # https://wiki.hyprland.org/Configuring/Variables/#decoration
     #decoration = {
-        #"rounding" = 0; # Default = 10
-        #"rounding_power" = 0; # Default = 0
+    #"rounding" = 0; # Default = 10
+    #"rounding_power" = 0; # Default = 0
 
-        # Change transparency of focused and unfocused windows
-        #"active_opacity" = 1.0;
-        #"inactive_opacity" = 1.0;
+    # Change transparency of focused and unfocused windows
+    #"active_opacity" = 1.0;
+    #"inactive_opacity" = 1.0;
 
-        #shadow = {
-        #    "enabled" = false; # Changed to false
-        #    "range" = 4;
-        #    "render_power" = 3;
-        #    "color" = "rgba(1a1a1aee)";
-        #};
+    #shadow = {
+    #    "enabled" = false; # Changed to false
+    #    "range" = 4;
+    #    "render_power" = 3;
+    #    "color" = "rgba(1a1a1aee)";
+    #};
 
-        # https://wiki.hyprland.org/Configuring/Variables/#blur
-        #blur = {
-        #    "enabled" = false; # Changed to false
-        #    "size" = 3;
-        #    "passes" = 1;#
-        #    "vibrancy" = 0.1696;
-        #};
+    # https://wiki.hyprland.org/Configuring/Variables/#blur
+    #blur = {
+    #    "enabled" = false; # Changed to false
+    #    "size" = 3;
+    #    "passes" = 1;#
+    #    "vibrancy" = 0.1696;
+    #};
     #};
     # https://wiki.hyprland.org/Configuring/Variables/#animations
     animations = {
@@ -144,13 +143,13 @@
       sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
 
       touchpad = {
-          natural_scroll = false;
+        natural_scroll = false;
       };
     };
 
     # https://wiki.hyprland.org/Configuring/Variables/#gestures
     gestures = {
-      workspace_swipe = false;
+      workspace_swipe_touch = false;
     };
 
     # Example per-device config
@@ -183,21 +182,26 @@
       # Scroll through existing workspaces with mod + scroll
       "$mod, mouse_down, workspace, e+1"
       "$mod, mouse_up, workspace, e-1"
-    ] ++ (
+    ]
+    ++ (
       # workspaces
       # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-      builtins.concatLists (builtins.genList (
-          x: let
-            ws = let
-              c = (x + 1) / 10;
-            in
+      builtins.concatLists (
+        builtins.genList (
+          x:
+          let
+            ws =
+              let
+                c = (x + 1) / 10;
+              in
               builtins.toString (x + 1 - (c * 10));
-          in [
+          in
+          [
             "$mod, ${ws}, workspace, ${toString (x + 1)}"
             "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
           ]
-        )
-        10)
+        ) 10
+      )
     );
     bindm = [
       # Move/resize windows with mainMod + LMB/RMB and dragging
@@ -226,7 +230,6 @@
     # Example windowrule
     # windowrule = float,class:^(kitty)$,title:^(kitty)$
 
-    
     windowrule = [
       # Ignore maximize requests from apps. You'll probably like this.
       "suppressevent maximize, class:.*"
@@ -237,7 +240,7 @@
   services.hyprpaper = {
     enable = true;
     settings = {
-      preload = [ 
+      preload = [
         "/home/andrewj/Pictures/wallpapers/forest-wallpaper.jpg"
       ];
       wallpaper = [

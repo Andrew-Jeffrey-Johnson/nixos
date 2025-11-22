@@ -11,7 +11,7 @@ let
       ref = "main";
     }
   );
-  utfCli = pkgs.callPackage ./utf-cli.nix { inherit pkgs; };
+  #utfCli = pkgs.callPackage ./utf-cli.nix;
 in
 {
   imports = [
@@ -60,11 +60,11 @@ in
     pkgs.wofi
     pkgs.calcurse
     pkgs.tmux
-    pkgs.termpdfpy
+    #pkgs.termpdfpy
     pkgs.wget
     pkgs.nix-index
     pkgs.manix
-    utfCli
+    #utfCli
     pkgs.wl-clipboard
     pkgs.catppuccin
     pkgs.wordbook

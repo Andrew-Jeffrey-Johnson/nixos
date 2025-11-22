@@ -1,6 +1,9 @@
-{
-  pkgs
-}:
+let
+  pkgs =
+    import
+      (fetchTarball "https://github.com/NixOS/nixpkgs/archive/f0d925b947cca0bbe7f2d25115cbaf021844aba7.tar.gz")
+      { config.allowUnfree = true; };
+in
 pkgs.python3Packages.buildPythonApplication {
   pname = "utf-cli";
   version = "2024-07-11";
