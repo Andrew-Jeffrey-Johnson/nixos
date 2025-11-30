@@ -227,6 +227,9 @@ in
     setSocketVariable = true;
   };
 
+  # Install waydroid for running Android apps in containers
+  virtualisation.waydroid.enable = true;
+
   # Set environment variables
   environment = {
     shells = [ pkgs.bash ];
@@ -289,6 +292,10 @@ in
   # };
 
   # List services that you want to enable:
+
+  security.sudo-rs = {
+    enable = true;
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh = {

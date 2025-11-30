@@ -160,7 +160,7 @@
     };
 
     bind = [
-      "$mod, F, exec, firefox"
+      "$mod, F, exec, librewolf"
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       "$mod, Q, exec, $terminal"
       "$mod, C, killactive,"
