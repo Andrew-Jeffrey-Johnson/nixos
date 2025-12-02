@@ -32,6 +32,7 @@ in
         "input"
         "docker"
         "libvirtd"
+        "adbusers"
       ];
     };
   };
@@ -230,6 +231,9 @@ in
 
   # Install waydroid for running Android apps in containers
   virtualisation.waydroid.enable = true;
+
+  # Android emulation
+  programs.adb.enable = true; # Android Debugger
 
   # Emulation and virtualization
   programs.virt-manager.enable = true;
