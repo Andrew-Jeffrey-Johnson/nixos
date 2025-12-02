@@ -248,4 +248,6 @@
       ];
     };
   };
+  # Authentication agent. One of many wayland agents
+  services.polkit-gnome.enable = true;
 }

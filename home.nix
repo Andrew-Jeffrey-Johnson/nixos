@@ -101,7 +101,9 @@ in
     pkgs.mermaid-filter
     pkgs.pandoc
     pkgs.mpv
-    pkgs.kicad
+
+    # Emulation
+    pkgs.virt-manager
   ];
 
   programs = {
