@@ -31,6 +31,7 @@ in
         "wheel"
         "input"
         "docker"
+        "libvirtd"
       ];
     };
   };
@@ -228,7 +229,13 @@ in
   };
 
   # Install waydroid for running Android apps in containers
-  virtualisation.waydroid.enable = true;
+  virtualisation.waydroid.enable = nixpkgs.virt-manager.enable = true;
+  users.groups.libvirtd.members = ["andrewj"];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;true;
+
+  # Emulation and virtualization
+
 
   # Set environment variables
   environment = {

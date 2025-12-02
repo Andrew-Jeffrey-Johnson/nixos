@@ -101,9 +101,6 @@ in
     pkgs.mermaid-filter
     pkgs.pandoc
     pkgs.mpv
-
-    # Emulation
-    pkgs.virt-manager
   ];
 
   programs = {
@@ -683,6 +680,14 @@ in
       enable = true;
       configDir = ./eww;
       enableBashIntegration = true;
+    };
+  };
+
+  # To get virt-manager to find vms
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
   };
 
