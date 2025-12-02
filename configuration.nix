@@ -229,13 +229,13 @@ in
   };
 
   # Install waydroid for running Android apps in containers
-  virtualisation.waydroid.enable = nixpkgs.virt-manager.enable = true;
-  users.groups.libvirtd.members = ["andrewj"];
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;true;
+  virtualisation.waydroid.enable = true;
 
   # Emulation and virtualization
-
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = [ "andrewj" ];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   # Set environment variables
   environment = {
