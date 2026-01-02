@@ -1,6 +1,6 @@
 {
   wayland.windowManager.hyprland.enable = true;
-  wayland.windowManager.hyprland.systemd.enable = false;
+  wayland.windowManager.hyprland.systemd.enable = true;
   wayland.windowManager.hyprland.settings = {
     monitor = [
       #"eDP-1, 1920x1080@60.00Hz, 0x0, 1" # Built-in monitor

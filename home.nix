@@ -187,12 +187,36 @@ in
       enable = true;
       systemd.enable = true;
       settings.main = {
-        modules-right = [
+        modules-left = [
+          "cpu"
+          "hyprland/workspaces"
+        ];
+        modules-center = [
           "clock"
         ];
+        modules-right = [
+          "tray"
+          "network"
+          "pulseaudio"
+        ];
         "clock" = {
+          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
           format = "{:%I:%M %p}";
         };
+        /*
+          "network" = {
+            interface = "*";
+            format = "{ifname}";
+            format-wifi = "{essid} ({signalStrength}%) ";
+            format-ethernet = "{ipaddr}/{cidr} 󰊗";
+            format-disconnected = ""; # An empty format will hide the module.
+            tooltip-format = "{ifname} via {gwaddr} 󰊗";
+            tooltip-format-wifi = "{essid} ({signalStrength}%) ";
+            tooltip-format-ethernet = "{ifname} ";
+            tooltip-format-disconnected = "Disconnected";
+            max-length = 50;
+          };
+        */
       };
     };
     yazi = {
