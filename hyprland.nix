@@ -1,16 +1,15 @@
 {
   wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland.systemd.enable = false;
   wayland.windowManager.hyprland.settings = {
     monitor = [
       #"eDP-1, 1920x1080@60.00Hz, 0x0, 1" # Built-in monitor
       #"HDMI-A-2, 1920x1080@59.79Hz, 1920x0, 1" # External TV monitor
-      "eDP-1, 1920x1080@60.00Hz, 0x0, 1" # Built-in monitor
+      #"eDP-1, 1920x1080@60.00Hz, 0x0, 1" # Built-in monitor
       #"HDMI-A-2, disable" # External TV monitor
-      "HDMI-A-2, 1920x1080@60.00Hz, 1920x0, 1" # External TV monitor
+      #"HDMI-A-2, 1920x1080@60.00Hz, 1920x0, 1" # External TV monitor
+      "DP-2, 2560x1440@180.00Hz, 0x0, 1"
     ];
-    opengl = {
-      nvidia_anti_flicker = false;
-    };
     "$mod" = "SUPER"; # Sets "Windows" key as main modifier
     # See https://wiki.hyprland.org/Configuring/Keywords/
     "$terminal" = "kitty";
@@ -125,8 +124,8 @@
 
     # https://wiki.hyprland.org/Configuring/Variables/#misc
     misc = {
-      force_default_wallpaper = -1; # Set to 0 or 1 to disable the anime mascot wallpapers
-      disable_hyprland_logo = true; # If true disables the random hyprland logo / anime girl background. :(
+      force_default_wallpaper = 2; # Set to 0 or 1 to disable the anime mascot wallpapers
+      disable_hyprland_logo = false; # If true disables the random hyprland logo / anime girl background. :(
       vfr = true; # Added by me
     };
 
@@ -238,13 +237,11 @@
     ];
   };
   services.hyprpaper = {
-    enable = true;
+    enable = false;
     settings = {
       preload = [
-        "/home/andrewj/Pictures/wallpapers/forest-wallpaper.jpg"
       ];
       wallpaper = [
-        ", /home/andrewj/Pictures/wallpapers/forest-wallpaper.jpg"
       ];
     };
   };

@@ -18,3 +18,8 @@
   nix-channel --update
   home-manager switch
 
+* Update boot loader:
+  sudo nixos-rebuild --install-bootloader boot
+
+* Update configuration.nix:
+  sudo nixos-rebuild switch --upgrade

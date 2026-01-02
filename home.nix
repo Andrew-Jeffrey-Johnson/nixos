@@ -11,6 +11,9 @@ let
       ref = "main";
     }
   );
+  nur-no-pkgs =
+    import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/main.tar.gz")
+      { };
   #utfCli = pkgs.callPackage ./utf-cli.nix;
 in
 {
@@ -24,8 +27,8 @@ in
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "andrewj";
-  home.homeDirectory = "/home/andrewj";
+  home.username = "andrew";
+  home.homeDirectory = "/home/andrew";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -89,7 +92,6 @@ in
     pkgs.qalculate-qt
     pkgs.qbittorrent
     pkgs.chromium
-    pkgs.librewolf
     pkgs.gimp
     pkgs.audacity
     pkgs.inkscape
@@ -101,9 +103,56 @@ in
     pkgs.mermaid-filter
     pkgs.pandoc
     pkgs.mpv
+    pkgs.sshfs
   ];
 
   programs = {
+    librewolf = {
+      enable = true;
+      # Enable WebGL, cookies and history
+      settings = {
+        "webgl.disabled" = false;
+        "privacy.clearOnShutdown.history" = false;
+        "privacy.clearOnShutdown.cookies" = false;
+        "network.cookie.lifetimePolicy" = 0;
+      };
+      profiles.default = {
+        isDefault = true;
+        name = "default";
+        bookmarks = {
+          force = true;
+          settings = [
+            {
+              toolbar = true;
+              bookmarks = [
+                {
+                  name = "YouTube";
+                  url = "https://www.youtube.com/";
+                }
+              ];
+            }
+          ];
+        };
+        extensions = {
+          packages = with nur-no-pkgs.repos.rycee.firefox-addons; [
+            noscript
+          ];
+        };
+      };
+    };
+    sftpman = {
+      enable = true;
+      mounts = {
+        luminlapid = {
+          authType = "keyboard-interactive";
+          host = "10.0.0.183";
+          port = 22;
+          user = "nixos";
+          mountPoint = "/";
+          sshKey = "/home/andrewj/.ssh/id_ed25519.pud";
+        };
+      };
+    };
     direnv = {
       enable = true;
       enableBashIntegration = true; # see note on other shells below
@@ -123,7 +172,12 @@ in
       };
       signing = {
         signByDefault = true;
-        key = "ED4D0E25B7FBFAEA62DE63BD71576CF0B1AF61F6";
+      };
+      settings = {
+        # Sign all commits using ssh key
+        commit.gpgsign = true;
+        gpg.format = "ssh";
+        user.signingkey = "~/.ssh/id_ed25519.pub";
       };
     };
     gh = {
