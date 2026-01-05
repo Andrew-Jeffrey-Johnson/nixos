@@ -144,12 +144,12 @@ in
       enable = true;
       mounts = {
         luminlapid = {
-          authType = "keyboard-interactive";
+          authType = "publickey";
           host = "10.0.0.183";
           port = 22;
           user = "nixos";
           mountPoint = "/";
-          sshKey = "/home/andrewj/.ssh/id_ed25519.pud";
+          sshKey = "/home/andrewj/.ssh/id_ed25519";
         };
       };
     };

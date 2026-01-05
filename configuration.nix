@@ -32,6 +32,7 @@ in
         "docker"
         "libvirtd"
         "adbusers"
+        "fuse"
       ];
     };
   };
@@ -41,13 +42,6 @@ in
     efi = {
       canTouchEfiVariables = true;
       efiSysMountPoint = "/boot"; # ← use the same mount point here.
-    };
-    grub = {
-      enable = false;
-      efiSupport = true;
-      #efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
-      device = "nodev";
-      useOSProber = true;
     };
     systemd-boot = {
       enable = true;
@@ -130,15 +124,10 @@ in
     };
   };
 
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  # services.xserver.enable = true;
-
-  # Me trying to get desktop environment to work
-  #boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.initrd.kernelModules = [ "amdgpu" ]; # Video drivers
 
   hardware = {
-    # Enable OpenGL
     graphics = {
       enable = true;
       enable32Bit = true;
