@@ -11,7 +11,7 @@ let
   pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {
     config.allowUnfree = true;
   };
-  lib = import <nixpkgs/lib>;
+  lib = pkgs.lib;
 in
 {
   imports = [
@@ -170,7 +170,12 @@ in
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  programs.hyprland.enable = true; # enable Hyprland
+  # Hyprland
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true; # recommended for most users
+    xwayland.enable = true; # Xwayland can be disabled.
+  };
 
   # Install docker rootless
   virtualisation.docker.rootless = {
@@ -180,9 +185,6 @@ in
 
   # Install waydroid for running Android apps in containers
   virtualisation.waydroid.enable = true;
-
-  # Android emulation
-  programs.adb.enable = true; # Android Debugger
 
   # Emulation and virtualization
   programs.virt-manager.enable = true;
@@ -207,6 +209,9 @@ in
 
       # native wayland support (unstable)
       pkgs.wineWowPackages.waylandFull
+
+      # Android emulator
+      pkgs.android-tools
     ];
   };
 
@@ -267,6 +272,17 @@ in
       pkgs.dictdDBs.wordnet
     ];
   };
+
+  # AI chatbot as a systemd service
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-rocm; # AMD GPU acceleration
+    # Optional: preload models, see https://ollama.com/library
+    loadModels = [
+      "nemotron-3-nano:30b"
+    ];
+  };
+  services.open-webui.enable = true;
 
   services.udisks2.enable = true;
 

@@ -23,7 +23,14 @@ in
     ./hyprland.nix
     #./lsp.nix
   ];
-  nixpkgs.config.allowUnfree = true;
+
+  nixpkgs = {
+    overlays = [
+    ];
+    config = {
+      allowUnfree = true;
+    };
+  };
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -104,6 +111,10 @@ in
     pkgs.pandoc
     pkgs.mpv
     pkgs.sshfs
+    pkgs.prevo-tools
+    pkgs.prevo-data
+
+    pkgs.tor-browser
   ];
 
   programs = {
@@ -126,8 +137,12 @@ in
               toolbar = true;
               bookmarks = [
                 {
-                  name = "YouTube";
-                  url = "https://www.youtube.com/";
+                  name = "YaCy";
+                  url = "http://localhost:8090";
+                }
+                {
+                  name = "Open WebUI";
+                  url = "http://localhost:8080";
                 }
               ];
             }
@@ -136,6 +151,7 @@ in
         extensions = {
           packages = with nur-no-pkgs.repos.rycee.firefox-addons; [
             noscript
+            keepassxc-browser
           ];
         };
       };
@@ -231,6 +247,18 @@ in
           ];
         };
         opener = {
+          play = [
+            {
+              run = "mpv %s";
+              orphan = true;
+            }
+          ];
+          edit = [
+            {
+              run = "$EDITOR %s";
+              block = true;
+            }
+          ];
           openBook = [
             {
               run = pkgs.epy + /bin/epy + " \"$@\"";
@@ -239,10 +267,22 @@ in
           ];
         };
         open = {
-          prepend_rules = [
+          rules = [
+            {
+              mime = "text/*";
+              use = "edit";
+            }
+            {
+              mime = "video/*";
+              use = "play";
+            }
             {
               name = "*.epub";
               use = "openBook";
+            }
+            {
+              url = "*";
+              use = "librewolf";
             }
           ];
         };
@@ -263,6 +303,9 @@ in
         restore = pkgs.yaziPlugins.restore;
         duckdb = pkgs.yaziPlugins.duckdb;
       };
+    };
+    keepassxc = {
+      enable = true;
     };
     nixvim = {
       enable = true;

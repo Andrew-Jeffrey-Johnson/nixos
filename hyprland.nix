@@ -1,6 +1,6 @@
 {
   wayland.windowManager.hyprland.enable = true;
-  wayland.windowManager.hyprland.systemd.enable = true;
+  wayland.windowManager.hyprland.systemd.enable = false;
   wayland.windowManager.hyprland.settings = {
     monitor = [
       #"eDP-1, 1920x1080@60.00Hz, 0x0, 1" # Built-in monitor
@@ -230,10 +230,11 @@
     # windowrule = float,class:^(kitty)$,title:^(kitty)$
 
     windowrule = [
+      # Broken
       # Ignore maximize requests from apps. You'll probably like this.
-      "suppressevent maximize, class:.*"
+      #"suppressevent maximize, class:.*"
       # Fix some dragging issues with XWayland
-      "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+      #"nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
     ];
   };
   services.hyprpaper = {
