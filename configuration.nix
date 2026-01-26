@@ -276,7 +276,7 @@ in
   # AI chatbot as a systemd service
   services.ollama = {
     enable = true;
-    package = pkgs.ollama-rocm; # AMD GPU acceleration
+    package = pkgs.ollama-vulkan; # Generic GPU acceleration
     # Optional: preload models, see https://ollama.com/library
     loadModels = [
       "nemotron-3-nano:30b"

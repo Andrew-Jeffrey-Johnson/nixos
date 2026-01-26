@@ -115,6 +115,7 @@ in
     pkgs.prevo-data
 
     pkgs.tor-browser
+    pkgs.youtube-tui
   ];
 
   programs = {
