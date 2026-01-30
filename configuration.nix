@@ -188,9 +188,10 @@ in
 
   # Emulation and virtualization
   programs.virt-manager.enable = true;
-  users.groups.libvirtd.members = [ "andrew" ];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
+  services.qemuGuest.enable = true;
+  services.spice-vdagentd.enable = true; # enable copy and paste between host and guest
 
   # Set environment variables
   environment = {
