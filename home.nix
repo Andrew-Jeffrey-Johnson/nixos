@@ -118,13 +118,6 @@ in
     pkgs.youtube-tui
   ];
 
-  # Set a GDK cursor to get virt-manager to work
-  home.pointerCursor = {
-    gtk.enable = true;
-    package = pkgs.vanilla-dmz;
-    name = "Vanilla-DMZ";
-  };
-
   programs = {
     librewolf = {
       enable = true;
