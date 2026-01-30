@@ -140,6 +140,7 @@ in
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
+  programs.xwayland.enable = true; # Support for X11 apps
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -171,11 +172,11 @@ in
   nixpkgs.config.allowUnfree = true;
 
   # Hyprland
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true; # recommended for most users
-    xwayland.enable = true; # Xwayland can be disabled.
-  };
+  #programs.hyprland = {
+  #  enable = true;
+  #  withUWSM = true; # recommended for most users
+  #  xwayland.enable = true; # Xwayland can be disabled.
+  #};
 
   # Install docker rootless
   virtualisation.docker.rootless = {
