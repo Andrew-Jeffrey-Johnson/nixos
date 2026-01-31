@@ -4,7 +4,6 @@
 # Apply changes via:
 # sudo nixos-rebuild switch --upgrade
 #{ config, pkgs, lib, qtbase, wrapQtAppsHook, ... }:
-{ config, ... }:
 let
   # We pin to a specific nixpkgs commit for reproducibility.
   # Last updated: 15 November 2025. Check for new commits at https://status.nixos.org.
@@ -141,7 +140,6 @@ in
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  #hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -220,14 +218,6 @@ in
       "steam-original"
       "steam-run"
     ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
   # List services that you want to enable:
 
