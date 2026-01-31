@@ -123,7 +123,7 @@ in
       enable = true;
       # Enable WebGL, cookies and history
       settings = {
-        "webgl.disabled" = false;
+        "webgl.disabled" = true;
         "privacy.clearOnShutdown.history" = false;
         "privacy.clearOnShutdown.cookies" = false;
         "network.cookie.lifetimePolicy" = 0;
@@ -144,6 +144,10 @@ in
                 {
                   name = "Open WebUI";
                   url = "http://localhost:8080";
+                }
+                {
+                  name = "NixOS Search";
+                  url = "https://search.nixos.org";
                 }
               ];
             }
