@@ -111,13 +111,10 @@ in
     };
   };
 
-  # Automatically upgrade nixOS itself
-  #system.autoUpgrade.enable  = true;
-
   # Bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-  services.blueman.enable = true;
+  services.blueman.enable = false;
   hardware.bluetooth.settings = {
     General = {
       Enable = "Source,Sink,Media,Socket";
@@ -135,8 +132,6 @@ in
   };
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.enable = false; # optional
-  services.xserver.videoDrivers = [ "amdgpu" ];
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
@@ -153,30 +148,10 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
-
-  # Enable automatic login for the user.
-  #services.displayManager.autoLogin.enable = true;
-  #services.displayManager.autoLogin.user = "andrew";
-
-  # Install firefox.
-  #programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # Hyprland
-  #programs.hyprland = {
-  #  enable = true;
-  #  withUWSM = true; # recommended for most users
-  #  xwayland.enable = true; # Xwayland can be disabled.
-  #};
 
   # Install docker rootless
   virtualisation.docker.rootless = {
@@ -227,7 +202,6 @@ in
   services.pcscd.enable = true;
   programs.gnupg.agent = {
     enable = true;
-    #pinentryPackage = lib.mkForce pkgs.pinentry-qt;
     enableSSHSupport = true;
   };
   services.dbus.packages = [ pkgs.gcr ];

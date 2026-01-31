@@ -113,6 +113,7 @@ in
     pkgs.sshfs
     pkgs.prevo-tools
     pkgs.prevo-data
+    pkgs.kdePackages.ksystemlog
 
     pkgs.tor-browser
     pkgs.youtube-tui
