@@ -1,10 +1,7 @@
-builtins.derivation {
+{ pkgs, ... }:
+pkgs.stdenv.mkDerivation {
   # A name for the derivation (whatever you choose)
   name = "NaK";
-  # The system realising the derivation
-  system = "x86_64-linux";
-  # The program realising the derivation
-  builder = "bash";
   src = pkgs.fetchFromGitHub {
     owner = "SulfurNitride";
     repo = "NaK";
