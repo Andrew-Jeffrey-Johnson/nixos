@@ -23,3 +23,6 @@
 
 * Update configuration.nix:
   sudo nixos-rebuild switch --upgrade
+
+* Update configuration.nix with Flakes:
+  sudo nixos-rebuild switch --flake /home/andrew/nixos/

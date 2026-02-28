@@ -11,6 +11,13 @@ let
       ref = "main";
     }
   );
+  #nak = pkgs.stdenv.mkDerivation {
+  #  name = "SulfurNitride";
+  #  src = builtins.fetchTarball {
+  #    url = "https://github.com/SulfurNitride/NaK/archive/refs/tags/4.4.1.tar.gz";
+  #    hash = "ssha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+  #  };
+  #};
   nur-no-pkgs =
     import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/main.tar.gz")
       { };
@@ -26,6 +33,7 @@ in
 
   nixpkgs = {
     overlays = [
+      nak
     ];
     config = {
       allowUnfree = true;
@@ -114,6 +122,19 @@ in
     pkgs.prevo-tools
     pkgs.prevo-data
     pkgs.kdePackages.ksystemlog
+    pkgs.pgadmin4
+
+    # For Lutris games
+    pkgs.winetricks
+    #pkgs.wine
+    pkgs.protonplus
+    pkgs.wineWow64Packages.stable
+    #pkgs.wine64Packages.stableFull
+    #pkgs.wineWow64Packages.unstableFull
+    pkgs.protontricks
+    pkgs.lutris
+    pkgs.xdg-utils
+    pkgs.findutils
 
     pkgs.tor-browser
     pkgs.youtube-tui
