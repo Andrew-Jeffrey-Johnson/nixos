@@ -33,7 +33,6 @@ in
 
   nixpkgs = {
     overlays = [
-      nak
     ];
     config = {
       allowUnfree = true;

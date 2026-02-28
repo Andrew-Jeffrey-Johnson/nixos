@@ -55,6 +55,15 @@
     };
   };
 
+  fileSystems."/boot" = {
+    options = [
+      "uid=0"
+      "gid=0"
+      "fmask=0077"
+      "dmask=0077"
+    ];
+  };
+
   networking = {
     nat = {
       enable = true;
