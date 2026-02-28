@@ -55,16 +55,6 @@
     };
   };
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/6d2dfe6e-a76d-4c40-be36-a20570e9c661";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/C5C7-0234";
-    fsType = "vfat";
-  };
-
   networking = {
     nat = {
       enable = true;
