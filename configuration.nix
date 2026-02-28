@@ -3,19 +3,27 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 # Apply changes via:
 # sudo nixos-rebuild switch --upgrade
-{ pkgs, ... }:
-let
-  # We pin to a specific nixpkgs commit for reproducibility.
-  # Last updated: 15 November 2025. Check for new commits at https://status.nixos.org.
-  #pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {
-  #  config.allowUnfree = true;
-  #};
-  lib = pkgs.lib;
-in
+{
+  pkgs,
+  lib,
+  ...
+}:
+#let
+# We pin to a specific nixpkgs commit for reproducibility.
+# Last updated: 15 November 2025. Check for new commits at https://status.nixos.org.
+#pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {
+#  config.allowUnfree = true;
+#};
+#pkgs = import nixpkgs {
+#  system = "x86_64-linux";
+#  config.allowUnfree = true;
+#};
+#lib = pkgs.lib;
+#in
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    #./hardware-configuration.nix
   ];
 
   users = {
@@ -45,6 +53,16 @@ in
     systemd-boot = {
       enable = true;
     };
+  };
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/6d2dfe6e-a76d-4c40-be36-a20570e9c661";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/C5C7-0234";
+    fsType = "vfat";
   };
 
   networking = {
