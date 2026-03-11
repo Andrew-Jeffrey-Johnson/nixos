@@ -1,7 +1,6 @@
 # ~/nixos/home-manager/programs/default.nix
 {
   pkgs,
-  nur-no-pkgs,
   inputs,
   ...
 }:
@@ -11,12 +10,14 @@ let
     inherit pkgs;
     module = neovimconfig;
   };
+  mo2 = inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.mo2installer; # installs a package
 in
 {
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
     nvim
+    mo2
 
     # Preparation for Hyprland
     pkgs.wofi
@@ -70,15 +71,22 @@ in
 
     # For Lutris games
     pkgs.winetricks
+    pkgs.bottles
     #pkgs.wine
     pkgs.protonplus
-    pkgs.wineWow64Packages.stable
+    pkgs.wineWow64Packages.full
+    pkgs.wineWow64Packages.fonts
     #pkgs.wine64Packages.stableFull
     #pkgs.wineWow64Packages.unstableFull
-    pkgs.protontricks
     pkgs.lutris
     pkgs.xdg-utils
     pkgs.findutils
+    pkgs.flatpak
+    pkgs._7zz
+    pkgs.rar
+    pkgs.zenity
+    pkgs.websocat
+    pkgs.jq
 
     pkgs.tor-browser
     pkgs.youtube-tui
@@ -121,12 +129,12 @@ in
             }
           ];
         };
-        extensions = {
-          packages = with nur-no-pkgs.repos.rycee.firefox-addons; [
-            noscript
-            keepassxc-browser
-          ];
-        };
+        # extensions = {
+        #   packages = with nur-no-pkgs.repos.rycee.firefox-addons; [
+        #     noscript
+        #     keepassxc-browser
+        #   ];
+        # };
       };
     };
     sftpman = {
@@ -249,6 +257,9 @@ in
       shellIntegration.enableBashIntegration = true;
       enableGitIntegration = true;
       themeFile = "Catppuccin-Latte";
+      keybindings = {
+        "ctrl+shift+t" = "new_tab_with_cwd";
+      };
     };
   };
 

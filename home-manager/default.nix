@@ -1,29 +1,10 @@
 # ~/home-manager/default.nix
-{
-  #config,
-  pkgs,
-  lib,
-  nixvim,
-  nur-no-pkgs,
-  inputs,
-  ...
-}:
+{ inputs, ... }:
 {
   imports = [
-    #nixvim.homeModules.nixvim
-    inputs.nixvim.homeManagerModuels.nixvim
+    inputs.nixvim.homeModules.nixvim
     ./programs
-    #./hyprland.nix
-    #./lsp.nix
   ];
-
-  nixpkgs = {
-    overlays = [
-    ];
-    config = {
-      allowUnfree = true;
-    };
-  };
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -78,5 +59,6 @@
     VISUAL = "nvim";
     TERMINAL = "kitty";
     LANG = "en_US.UTF-8";
+    XDG_DATA_DIRS = "$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share";
   };
 }

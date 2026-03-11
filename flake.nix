@@ -16,7 +16,10 @@
       url = "github:nix-community/nixvim/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur-no-pkgs.url = "github:nix-community/NUR/main";
+    nix-gaming = {
+      url = "github:fufexan/nix-gaming/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -24,7 +27,7 @@
       nixpkgs,
       home-manager,
       nixvim,
-      nur-no-pkgs,
+      nix-gaming,
     }@inputs:
     {
       # NOTE: 'nixos' is the default hostname set by the installer

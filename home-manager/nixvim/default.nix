@@ -63,8 +63,8 @@
     # Folding
     foldlevel = 300; # Folds with a level higher than this number will be closed
   };
-  enable = true;
-  defaultEditor = true;
+  #enable = true;
+  #defaultEditor = true;
   colorschemes.catppuccin.enable = true;
   viAlias = true;
   vimAlias = true;
