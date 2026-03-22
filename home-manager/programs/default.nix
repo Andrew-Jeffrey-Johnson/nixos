@@ -81,7 +81,6 @@ in
     pkgs.lutris
     pkgs.xdg-utils
     pkgs.findutils
-    pkgs.flatpak
     pkgs._7zz
     pkgs.rar
     pkgs.zenity
@@ -90,53 +89,53 @@ in
 
     pkgs.tor-browser
     pkgs.youtube-tui
+    pkgs.freetube
   ];
-
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
-    librewolf = {
-      enable = true;
-      # Enable WebGL, cookies and history
-      settings = {
-        "webgl.disabled" = true;
-        "privacy.clearOnShutdown.history" = false;
-        "privacy.clearOnShutdown.cookies" = false;
-        "network.cookie.lifetimePolicy" = 0;
-      };
-      profiles.default = {
-        isDefault = true;
-        name = "default";
-        bookmarks = {
-          force = true;
-          settings = [
-            {
-              toolbar = true;
-              bookmarks = [
-                {
-                  name = "YaCy";
-                  url = "http://localhost:8090";
-                }
-                {
-                  name = "Open WebUI";
-                  url = "http://localhost:8080";
-                }
-                {
-                  name = "NixOS Search";
-                  url = "https://search.nixos.org";
-                }
-              ];
-            }
-          ];
-        };
-        # extensions = {
-        #   packages = with nur-no-pkgs.repos.rycee.firefox-addons; [
-        #     noscript
-        #     keepassxc-browser
-        #   ];
-        # };
-      };
-    };
+    # librewolf = {
+    #   enable = true;
+    #   # Enable WebGL, cookies and history
+    #   settings = {
+    #     "webgl.disabled" = true;
+    #     "privacy.clearOnShutdown.history" = false;
+    #     "privacy.clearOnShutdown.cookies" = false;
+    #     "network.cookie.lifetimePolicy" = 0;
+    #   };
+    #   profiles.default = {
+    #     isDefault = true;
+    #     name = "default";
+    #     bookmarks = {
+    #       force = true;
+    #       settings = [
+    #         {
+    #           toolbar = true;
+    #           bookmarks = [
+    #             {
+    #               name = "YaCy";
+    #               url = "http://localhost:8090";
+    #             }
+    #             {
+    #               name = "Open WebUI";
+    #               url = "http://localhost:8080";
+    #             }
+    #             {
+    #               name = "NixOS Search";
+    #               url = "https://search.nixos.org";
+    #             }
+    #           ];
+    #         }
+    #       ];
+    #     };
+    #     # extensions = {
+    #     #   packages = with nur-no-pkgs.repos.rycee.firefox-addons; [
+    #     #     noscript
+    #     #     keepassxc-browser
+    #     #   ];
+    #     # };
+    #   };
+    # };
     sftpman = {
       enable = true;
       mounts = {
