@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   programs.firefox = {
     enable = true;
     package = pkgs.librewolf;
@@ -20,6 +21,9 @@
       };
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
+      # Go to "about:memory" in FireFox, click measure. It will do a memory report.
+      # The memory report will show the id of all currently-installed extensions.
+      # Emphemerally install the desired extension. Measure memory. Find id in report.
       ExtensionSettings = {
         # Catpuccin Mocha - Lavender
         "{8446b178-c865-4f5c-8ccc-1d7887811ae3}" = {
@@ -31,9 +35,9 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/libredirect/latest.xpi";
           installation_mode = "force_installed";
         };
-        # Tridactyl
-        "tridactyl.vim@cmcaine.co.uk" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/tridactyl-vim/latest.xpi";
+        # keepassxc-browser
+        "keepassxc-browser@keepassxc.org" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi";
           installation_mode = "force_installed";
         };
         # uBlock Origin
