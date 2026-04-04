@@ -10,12 +10,8 @@
     policies = {
       Cookies = {
         "Allow" = [
-          "https://addy.io"
-          "https://element.io"
           "https://discord.com"
           "https://github.com"
-          "https://lemmy.cafe"
-          "https://proton.me"
         ];
         "Locked" = true;
       };
@@ -25,16 +21,6 @@
       # The memory report will show the id of all currently-installed extensions.
       # Emphemerally install the desired extension. Measure memory. Find id in report.
       ExtensionSettings = {
-        # Catpuccin Mocha - Lavender
-        "{8446b178-c865-4f5c-8ccc-1d7887811ae3}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/catppuccin-mocha-lavender-git/latest.xpi";
-          installation_mode = "force_installed";
-        };
-        # LibRedirect
-        "7esoorv3@alefvanoon.anonaddy.me" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/libredirect/latest.xpi";
-          installation_mode = "force_installed";
-        };
         # keepassxc-browser
         "keepassxc-browser@keepassxc.org" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi";
