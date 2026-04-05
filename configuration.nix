@@ -202,9 +202,6 @@
       pkgs.dictdDBs.wordnet
       pkgs.dictdDBs.wiktionary
 
-      # native wayland support (unstable)
-      pkgs.wineWowPackages.waylandFull
-
       # Android emulator
       pkgs.android-tools
     ];

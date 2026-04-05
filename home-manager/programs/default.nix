@@ -177,6 +177,7 @@ in
       };
       signing = {
         signByDefault = true;
+        format = null;
       };
       settings = {
         # Sign all commits using ssh key
@@ -252,6 +253,7 @@ in
           ];
         };
       };
+      shellWrapperName = "y";
       plugins = {
         restore = pkgs.yaziPlugins.restore;
         duckdb = pkgs.yaziPlugins.duckdb;

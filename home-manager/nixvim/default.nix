@@ -131,17 +131,17 @@
           "flake8"
         ];
         docker = [ "hadolint" ];
-        css = [ "prettier" ];
-        html = [ "prettier" ];
-        json = [ "prettier" ];
+        # css = [ "prettier" ];
+        # html = [ "prettier" ];
+        # json = [ "prettier" ];
         lua = [ "stylua" ];
-        markdown = [ "prettier" ];
+        # markdown = [ "prettier" ];
         #nix = ["alejandra"];
         #ruby = ["rubyfmt"];
         terraform = [ "tofu_fmt" ];
         tf = [ "tofu_fmt" ];
         #yaml = ["yamlfmt"]; # NOTE: Does not accept empty lines after keys
-        yaml = [ "prettier" ];
+        # yaml = [ "prettier" ];
       };
     };
   };
@@ -435,7 +435,7 @@
       alejandra.enable = true;
       hclfmt.enable = true;
       opentofu_fmt.enable = true;
-      prettier.enable = true;
+      # prettier.enable = true;
       sqlformat.enable = true;
       stylua.enable = true;
       yamlfmt.enable = true;
@@ -451,7 +451,7 @@
     lintersByFt = {
       text = [ "vale" ];
       json = [ "jsonlint" ];
-      markdown = [ "prettier" ];
+      # markdown = [ "prettier" ];
       #ruby = ["rubyfmt"];
       dockerfile = [ "hadolint" ];
       terraform = [ "tofu_fmt" ];
