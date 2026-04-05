@@ -267,6 +267,7 @@
     # Optional: preload models, see https://ollama.com/library
     loadModels = [
       "nemotron-3-nano:30b"
+      "tinyllama:1.1b"
     ];
   };
   services.open-webui.enable = true;
