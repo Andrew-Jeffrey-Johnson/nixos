@@ -46,6 +46,7 @@
                 useGlobalPkgs = true;
                 extraSpecialArgs = { inherit inputs; };
                 users.andrew = import ./home-manager;
+                backupFileExtension = "backup";
               };
             }
           ];
