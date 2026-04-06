@@ -68,6 +68,7 @@ in
     pkgs.prevo-data
     pkgs.kdePackages.ksystemlog
     pkgs.pgadmin4
+    pkgs.bibletime
 
     # For Lutris games
     pkgs.winetricks
