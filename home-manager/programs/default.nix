@@ -156,16 +156,16 @@ in
     };
     bash = {
       enable = true;
-      # initExtra = "
-      # eval \"$(direnv hook bash)\"\n
-      # function y() {
-      #   local tmp=\"$(mktemp -t \"yazi-cwd.XXXXXX\")\" cwd
-      #   command yazi \"$@\" --cwd-file=\"$tmp\"
-      #   IFS= read -r -d '' cwd < \"$tmp\"
-      #   [ \"$cwd\" != \"$PWD\" ] && [ -d \"$cwd\" ] && builtin cd -- \"$cwd\"
-      #   rm -f -- \"$tmp\"
-      # }
-      # "; # hook direnv
+      bashrcExtra = ''
+        function y() {
+         local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+         command yazi "$@" --cwd-file="$tmp"
+         IFS= read -r -d ''' cwd < "$tmp"
+         [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+         rm -f -- "$tmp"
+        }
+      '';
+      initExtra = "eval \"$(direnv hook bash)\"\n"; # hook direnv
     };
     git = {
       enable = true;
