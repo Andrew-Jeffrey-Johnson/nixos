@@ -5,6 +5,7 @@
     inputs.nixvim.homeModules.nixvim
     ./programs
     ./librewolf.nix
+    ./thunderbird.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
