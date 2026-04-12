@@ -86,7 +86,7 @@
       };
     };
   */
-  #plugins = {
+  #----------Plugins---------------
   plugins.neorg = {
     enable = true;
     settings.load = {
@@ -107,9 +107,9 @@
       };
     };
   };
+
   plugins.treesitter.enable = true;
-  #};
-  #----------Plugins---------------
+
   plugins.conform-nvim = {
     enable = true;
     settings = {
@@ -476,30 +476,13 @@
       };
     };
   };
-  plugins.copilot-chat = {
-    enable = false;
+
+  # AI IDE
+  plugins.avante.enable = true;
+  plugins.avante.settings = {
+    # setup options here
   };
 
-  plugins.copilot-cmp = {
-    enable = false;
-  };
-  plugins.copilot-lua = {
-    enable = false;
-    settings = {
-      suggestion = {
-        enabled = false;
-      };
-      panel = {
-        enabled = false;
-      };
-    };
-  };
-  # extraConfigLua = ''
-  #   require("copilot").setup({
-  #     suggestion = { enabled = false },
-  #     panel = { enabled = false },
-  #   })
-  # '';
   keymaps = [
     {
       key = "<leader>ct";
