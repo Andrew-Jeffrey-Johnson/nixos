@@ -3,7 +3,7 @@
     enable = true;
     #policies = { };
     #Preferences = { };
-    preferencesStatus = "default";
+    #preferencesStatus = "default";
     # "default": Preferences appear as default.
     # "locked": Preferences appear as default and can’t be changed.
     # "user": Preferences appear as changed.
