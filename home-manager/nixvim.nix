@@ -10,6 +10,7 @@
     loaded_ruby_provider = 0; # Ruby
     loaded_perl_provider = 0; # Perl
     loaded_python_provider = 0; # Python 2
+    globals.mapleader = ","; # Sets the leader key to comma
   };
 
   clipboard = {
@@ -108,7 +109,15 @@
     };
   };
 
-  plugins.treesitter.enable = true;
+  plugins.treesitter = {
+    enable = true;
+    folding.enable = true;
+    highlight.enable = true;
+    indent.enable = true;
+    languageRegister = {
+      markdown = "Avante";
+    };
+  };
 
   plugins.conform-nvim = {
     enable = true;
@@ -478,54 +487,112 @@
   };
 
   # AI IDE
-  plugins.avante.enable = true;
-  plugins.avante.settings = {
-    # setup options here
-  };
+  #plugins.aider = {
+  #  enable = true;
+  #}
+  # plugins.avante.enable = true;
+  # plugins.avante.settings = {
+  #   diff = {
+  #     autojump = true;
+  #     debug = false;
+  #     list_opener = "copen";
+  #   };
+  #   highlights = {
+  #     diff = {
+  #       current = "DiffText";
+  #       incoming = "DiffAdd";
+  #     };
+  #   };
+  #   hints = {
+  #     enabled = true;
+  #   };
+  #   mappings = {
+  #     diff = {
+  #       both = "cb";
+  #       next = "]x";
+  #       none = "c0";
+  #       ours = "co";
+  #       prev = "[x";
+  #       theirs = "ct";
+  #     };
+  #   };
+  #   provider = "ollama";
+  #   auto_suggestions_provider = "ollama";
+  #   providers = {
+  #     ollama = {
+  #       endpoint = "http://127.0.0.1:11434";
+  #       model = "qwen2.5-coder:1.5b";
+  #       # Nixvim's raw type allows lua where another type would be required
+  #       # parse_curl_args.__raw = "function(opts, code_opts)
+  #       #   local headers = {
+  #       #     [\"Content-Type\"] = \"application/json\",
+  #       #     [\"Authorization\"] = \"authorization_token\",
+  #       #   }
 
-  keymaps = [
-    {
-      key = "<leader>ct";
-      action = "<CMD>CopilotChatToggle<CR>";
-      options.desc = "Toggle Copilot Chat Window";
-    }
-    {
-      key = "<leader>cs";
-      action = "<CMD>CopilotChatStop<CR>";
-      options.desc = "Stop current Copilot output";
-    }
-    {
-      key = "<leader>cr";
-      action = "<CMD>CopilotChatReview<CR>";
-      options.desc = "Review the selected code";
-    }
-    {
-      key = "<leader>ce";
-      action = "<CMD>CopilotChatExplain<CR>";
-      options.desc = "Give an explanation for the selected code";
-    }
-    {
-      key = "<leader>cd";
-      action = "<CMD>CopilotChatDocs<CR>";
-      options.desc = "Add documentation for the selection";
-    }
-    {
-      key = "<leader>cp";
-      action = "<CMD>CopilotChatTests<CR>";
-      options.desc = "Add tests for my code";
-    }
-  ];
+  #       #   return {
+  #       #     url = opts.endpoint,
+  #       #     timeout = base.timeout,
+  #       #     insecure = true,
+  #       #     headers = headers,
+  #       #     body = vim.tbl_deep_extend(\"force\", {
+  #       #       model = opts.model,
+  #       #       temperature = 0,
+  #       #       topK = -1,
+  #       #       topP = -1,
+  #       #       maxTokensToSample = 4000,
+  #       #       stream = true,
+  #       #       messages = M.parse_messages(code_opts),
+  #       #     }, {})
+  #       #   }
+  #       #   end";
+  #       # parse_response.__raw = "parse_response,";
+  #     };
+  #   };
+  #   windows = {
+  #     sidebar_header = {
+  #       align = "center";
+  #       rounded = true;
+  #     };
+  #     width = 30;
+  #     wrap = true;
+  #   };
+  # };
 
-  plugins.markdown-preview = {
+  plugins.render-markdown = {
     enable = true;
-    settings.theme = "light";
+    settings = {
+      enabled = true;
+      file_types = [
+        "markdown"
+        "Avante"
+      ];
+    };
   };
-  plugins.render-markdown.enable = true;
+  plugins.snacks = {
+    enable = true;
+    settings = {
+      bigfile.enable = true;
+      input.enable = true;
+      notifier.enable = true;
+      quickfile.enable = true;
+      statuscolumn.enable = true;
+      words.enable = true;
+      scroll.enable = true;
+      scope.enable = true;
+    };
+  };
+  plugins.nui.enable = true;
+  plugins.neotest.enable = true;
+  plugins.neotest.adapters.plenary.enable = true;
+  plugins.copilot-cmp.enable = true;
+  plugins.img-clip.enable = true;
+  #plugins.fzf-lua.enable = true;
   #----------End-Plugins----------------
   extraPlugins = [
   ];
   dependencies = {
-    tree-sitter.enable = true;
-    nodejs.enable = true;
+    #tree-sitter.enable = true;
+    #nodejs.enable = true;
+    copilot.enable = true;
   };
 }

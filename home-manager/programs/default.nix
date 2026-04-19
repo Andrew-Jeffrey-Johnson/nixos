@@ -5,12 +5,13 @@
   ...
 }:
 let
-  neovimconfig = import ../nixvim;
+  neovimconfig = import ./../nixvim.nix;
   nvim = inputs.nixvim.legacyPackages.x86_64-linux.makeNixvimWithModule {
     inherit pkgs;
     module = neovimconfig;
   };
   mo2 = inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.mo2installer; # installs a package
+  tree-sitter = inputs.ts.packages.${pkgs.stdenv.hostPlatform.system}.cli;
 in
 {
   # The home.packages option allows you to install Nix packages into your
@@ -42,7 +43,20 @@ in
     # For nixvim
     #pkgs.alejandra
     pkgs.gcc # For Neorg
-    pkgs.python313Packages.flake8
+    pkgs.python314Packages.flake8
+    pkgs.vimPlugins.flake8-vim
+    pkgs.python314Packages.pylatexenc
+    pkgs.ghostscript
+    pkgs.sqlite
+    pkgs.shellcheck
+    pkgs.isort
+    pkgs.mermaid-cli
+    tree-sitter
+    pkgs.ripgrep
+    pkgs.fd
+    pkgs.lazygit
+    pkgs.shfmt
+    pkgs.hadolint
 
     pkgs.jdk25
     pkgs.libreoffice-fresh
@@ -68,6 +82,7 @@ in
     pkgs.prevo-data
     pkgs.kdePackages.ksystemlog
     pkgs.pgadmin4
+    pkgs.aider-chat
 
     # For Lutris games
     pkgs.winetricks
@@ -226,6 +241,7 @@ in
       themeFile = "Catppuccin-Latte";
       keybindings = {
         "ctrl+shift+t" = "new_tab_with_cwd";
+        "ctrl+shift+enter" = "new_window_with_cwd";
       };
     };
   };

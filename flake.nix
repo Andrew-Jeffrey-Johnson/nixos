@@ -20,6 +20,10 @@
       url = "github:fufexan/nix-gaming/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ts = {
+      url = "github:tree-sitter/tree-sitter/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -28,6 +32,7 @@
       home-manager,
       nixvim,
       nix-gaming,
+      ts,
     }@inputs:
     {
       # NOTE: 'nixos' is the default hostname set by the installer
@@ -51,19 +56,6 @@
             }
           ];
         };
-        # homeConfigurations."andrew" = home-manager.lib.homeManagerConfiguration {
-        #   pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        #   home-manager.useGlobalPkgs = true;
-        #   home-manager.useUserPackages = true;
-        #   home-manager.sharedModules = [
-        #     nixvim.homeManagerModules.nixvim
-        #   ];
-        #   extraSpecialArgs = { inherit inputs; };
-        #   modules = [
-        #     ./home.nix
-        #     ./nak.nix
-        #   ];
-        # };
       };
     };
 }
