@@ -258,13 +258,30 @@
   };
 
   # AI chatbot as a systemd service
-  services.ollama = {
+  # services.ollama = {
+  #   enable = true;
+  #   package = pkgs.ollama-vulkan; # Generic GPU acceleration
+  #   # Optional: preload models, see https://ollama.com/library
+  #   loadModels = [
+  #     "nemotron-3-nano:30b"
+  #     "nemotron-3-nano:4b"
+  #     "tinyllama:1.1b"
+  #   ];
+  #   environmentVariables = {
+  #     OLLAMA_CONTEXT_LENGTH = "32768";
+  #   };
+  # };
+  services.llama-cpp = {
     enable = true;
-    package = pkgs.ollama-vulkan; # Generic GPU acceleration
-    # Optional: preload models, see https://ollama.com/library
-    loadModels = [
-      "nemotron-3-nano:30b"
-      "tinyllama:1.1b"
+    package = pkgs.llama-cpp-rocm;
+    modelsDir = /models;
+    model = /models/gemma-4-26B-A4B-it-GGUF/gemma-4-26B-A4B-it-UD-Q4_K_M.gguf;
+    extraFlags = [
+      "--ctx-size"
+      "0"
+      "--temp"
+      "0.7"
+      "-cnv"
     ];
   };
   services.open-webui.enable = true;
