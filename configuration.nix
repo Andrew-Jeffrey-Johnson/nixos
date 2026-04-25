@@ -274,15 +274,6 @@
   services.llama-cpp = {
     enable = true;
     package = pkgs.llama-cpp-rocm;
-    modelsDir = /models;
-    model = /models/gemma-4-26B-A4B-it-GGUF/gemma-4-26B-A4B-it-UD-Q4_K_M.gguf;
-    extraFlags = [
-      "--ctx-size"
-      "0"
-      "--temp"
-      "0.7"
-      "-cnv"
-    ];
   };
   services.open-webui.enable = true;
 
