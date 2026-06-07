@@ -249,12 +249,41 @@
     allowSFTP = true;
   };
 
+  # For terminal-based dictionar
   services.dictd = {
     enable = true;
     DBs = [
       pkgs.dictdDBs.wiktionary
       pkgs.dictdDBs.wordnet
     ];
+  };
+
+  # For local wiki
+  services.mediawiki = {
+    enable = true;
+    name = "Sample MediaWiki";
+    httpd.virtualHost = {
+      hostName = "localhost";
+      adminAddr = "andrew.jeffrey.johnson@gmail.com";
+    };
+    # Administrator account username is admin.
+    # Set initial password to "cardbotnine" for the account admin.
+    passwordFile = pkgs.writeText "password" "cardbotnine";
+    extraConfig = ''
+      # Disable anonymous editing
+      $wgGroupPermissions['*']['edit'] = false;
+    '';
+
+    extensions = {
+      # some extensions are included and can enabled by passing null
+      VisualEditor = null;
+
+      # https://www.mediawiki.org/wiki/Extension:TemplateStyles
+      TemplateStyles = pkgs.fetchzip {
+        url = "https://extdist.wmflabs.org/dist/extensions/TemplateStyles-REL1_40-5c3234a.tar.gz";
+        hash = "sha256-IygCDgwJ+hZ1d39OXuJMrkaxPhVuxSkHy9bWU5NeM/E=";
+      };
+    };
   };
 
   # AI chatbot as a systemd service
@@ -271,10 +300,6 @@
   #     OLLAMA_CONTEXT_LENGTH = "32768";
   #   };
   # };
-  services.llama-cpp = {
-    enable = true;
-    package = pkgs.llama-cpp-rocm;
-  };
   services.open-webui.enable = true;
 
   services.udisks2.enable = true;

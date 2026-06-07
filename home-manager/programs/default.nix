@@ -39,6 +39,11 @@ in
     pkgs.sqlite
     pkgs.gamescope # For steam games
     pkgs.wf-recorder
+    pkgs.blender
+    pkgs.obs-studio
+    pkgs.obs-do
+    pkgs.obs-cmd
+    pkgs.obs-cli
 
     # For nixvim
     #pkgs.alejandra
@@ -82,7 +87,15 @@ in
     pkgs.prevo-data
     pkgs.kdePackages.ksystemlog
     pkgs.pgadmin4
+
+    # For AI
     pkgs.aider-chat
+    pkgs.llama-cpp-rocm
+    pkgs.rocmPackages.rocm-smi
+    pkgs.rocmPackages.tensile
+    pkgs.rocmPackages.rocprim
+    pkgs.rocmPackages.clr
+    pkgs.rocmPackages.rocblas
 
     # For Lutris games
     pkgs.winetricks
