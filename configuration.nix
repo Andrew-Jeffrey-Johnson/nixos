@@ -283,6 +283,10 @@
         url = "https://extdist.wmflabs.org/dist/extensions/TemplateStyles-REL1_40-5c3234a.tar.gz";
         hash = "sha256-IygCDgwJ+hZ1d39OXuJMrkaxPhVuxSkHy9bWU5NeM/E=";
       };
+      SyntaxHighlight = pkgs.fetchzip {
+        url = "https://extdist.wmflabs.org/dist/extensions/SyntaxHighlight_GeSHi-REL1_45-15d5b9b.tar.gz";
+        hash = "sha256-ghIS1hn0ZQjwXL8Zb+2sjdNwROzdZZpeSnO7xQtKCXo=";
+      };
     };
   };
 
