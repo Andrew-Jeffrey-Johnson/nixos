@@ -59,14 +59,20 @@
   };
 
   # Define a user account.
-  users.users.nixos = {
-    isNormalUser = true;
-    description = "nixos";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-    packages = [ ];
+  users.users = {
+    nixos = {
+      isNormalUser = true;
+      description = "Generic work account";
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
+      packages = [ ];
+    };
+    calibre-server = {
+      isNormalUser = false; # Don't set group to users or create home
+      description = "User that the calibre server runs under";
+    };
   };
 
   # Allow unfree packages
@@ -88,6 +94,16 @@
   };
 
   # List services that you want to enable:
+  services.calibre-server = {
+    enable = true;
+    port = 88816;
+    host = "::1";
+    user = "calibre-server";
+    libraries = [
+      "/var/lib/calibre-server"
+    ];
+  };
+
   #------------------------------------------------------------------------------
   # Personal blog through luminlapid.com
   containers.blog = {
@@ -221,6 +237,11 @@
         #root = "/home/nginx";
         #extraConfig = "autoindex on";
         tryFiles = "$uri =404";
+      };
+      "/calibre-server" = {
+        # EPUB content server
+        proxyPass = "http://[::1]:88816";
+        proxyWebsockets = true;
       };
     };
   };
