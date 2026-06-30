@@ -96,7 +96,7 @@
   # List services that you want to enable:
   services.calibre-server = {
     enable = true;
-    port = 88816;
+    port = 58816;
     host = "::1";
     user = "calibre-server";
     libraries = [
@@ -240,7 +240,7 @@
       };
       "/calibre-server" = {
         # EPUB content server
-        proxyPass = "http://[::1]:88816";
+        proxyPass = "http://[::1]:58816";
         proxyWebsockets = true;
       };
     };
