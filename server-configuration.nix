@@ -58,7 +58,7 @@
     variant = "";
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account.
   users.users.nixos = {
     isNormalUser = true;
     description = "nixos";
@@ -66,7 +66,7 @@
       "networkmanager"
       "wheel"
     ];
-    packages = with pkgs; [ ];
+    packages = [ ];
   };
 
   # Allow unfree packages
@@ -74,9 +74,9 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    git
+  environment.systemPackages = [
+    pkgs.neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    pkgs.git
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
