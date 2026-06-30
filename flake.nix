@@ -42,8 +42,8 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
-            ./configuration.nix
-            ./hardware-configuration.nix
+            ./desktop-configuration.nix
+            ./desktop-hardware-configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -61,7 +61,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./server-configuration.nix
-            ./hardware-configuration.nix
+            ./server-hardware-configuration.nix
           ];
         };
       };
