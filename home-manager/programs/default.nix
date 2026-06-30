@@ -116,6 +116,8 @@ in
 
     pkgs.tor-browser
     pkgs.freetube
+    pkgs.discord
+    pkgs.calibre
   ];
   programs = {
     # Let Home Manager install and manage itself.
