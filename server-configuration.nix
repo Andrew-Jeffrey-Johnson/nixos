@@ -58,6 +58,16 @@
     variant = "";
   };
 
+  nix = {
+    settings = {
+      # Enable nix flakes
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
+  };
+
   # Define a user account.
   users.users = {
     nixos = {
@@ -97,10 +107,10 @@
   services.calibre-server = {
     enable = true;
     port = 58816;
-    host = "::1";
+    host = "127.0.0.1";
     user = "calibre-server";
     libraries = [
-      "/var/lib/calibre-server"
+      "/var/lib/calibre-server/calibrelibrary"
     ];
   };
 
@@ -240,7 +250,7 @@
       };
       "/calibre-server" = {
         # EPUB content server
-        proxyPass = "http://[::1]:58816";
+        proxyPass = "http://127.0.0.1:58816";
         proxyWebsockets = true;
       };
     };
