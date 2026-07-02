@@ -249,7 +249,7 @@
         proxyPass = "http://192.168.100.13:8000";
         proxyWebsockets = true;
       };
-      "/calibre-server" = {
+      "/calibre" = {
         # EPUB content server
         # The slash on the end ensure url passed to calibre-server starts
         # with / instead of /calibre-server
