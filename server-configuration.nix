@@ -106,11 +106,19 @@
   # List services that you want to enable:
   services.calibre-server = {
     enable = true;
-    port = 58816;
-    host = "127.0.0.1";
+    port = 8383;
+    host = "127.0.0.4";
     user = "calibre-server";
     libraries = [
       "/var/lib/calibre-server/calibrelibrary"
+    ];
+    auth = {
+      enable = true;
+      mode = "basic";
+    };
+    extraFlags = [
+      "--userdb"
+      "/var/lib/calibre-server/users.sqlite"
     ];
   };
 
@@ -241,17 +249,19 @@
         proxyPass = "http://192.168.100.13:8000";
         proxyWebsockets = true;
       };
+      "/calibre-server" = {
+        # EPUB content server
+        # The slash on the end ensure url passed to calibre-server starts
+        # with / instead of /calibre-server
+        proxyPass = "http://127.0.0.4:8383/";
+        #proxyWebsockets = true;
+      };
       "/static/" = {
         #defaultType = "text/plain";
         #return =  "200 $request_uri";
         #root = "/home/nginx";
         #extraConfig = "autoindex on";
         tryFiles = "$uri =404";
-      };
-      "/calibre-server" = {
-        # EPUB content server
-        proxyPass = "http://127.0.0.1:58816";
-        proxyWebsockets = true;
       };
     };
   };
