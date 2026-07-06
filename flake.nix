@@ -44,6 +44,7 @@
           modules = [
             ./desktop-configuration.nix
             ./desktop-hardware-configuration.nix
+            ./users.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
