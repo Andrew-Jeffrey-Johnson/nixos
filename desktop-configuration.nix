@@ -167,7 +167,7 @@
       # Android emulator
       pkgs.android-tools
     ]
-    + import ./shared-programs.nix { inherit pkgs; };
+    ++ import ./shared-programs.nix { inherit pkgs; };
   };
 
   # Get all the nerfonts fonts
