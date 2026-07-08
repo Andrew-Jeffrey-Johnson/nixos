@@ -8,24 +8,7 @@
   lib,
   ...
 }:
-#let
-# We pin to a specific nixpkgs commit for reproducibility.
-# Last updated: 15 November 2025. Check for new commits at https://status.nixos.org.
-#pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {
-#  config.allowUnfree = true;
-#};
-#pkgs = import nixpkgs {
-#  system = "x86_64-linux";
-#  config.allowUnfree = true;
-#};
-#lib = pkgs.lib;
-#in
 {
-  imports = [
-    # Include the results of the hardware scan.
-    #./hardware-configuration.nix
-  ];
-
   # Bootloader.
   boot.loader = {
     efi = {
