@@ -1,3 +1,4 @@
 ngrams/
 result
 .aider*
+hardware-configuration.nix
