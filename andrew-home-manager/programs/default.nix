@@ -20,31 +20,6 @@ in
     nvim
     mo2
 
-    # Preparation for Hyprland
-    pkgs.wofi
-    pkgs.calcurse
-    pkgs.tmux
-    #pkgs.termpdfpy
-    pkgs.wget
-    pkgs.nix-index
-    pkgs.manix
-    #utfCli
-    pkgs.wl-clipboard
-    pkgs.catppuccin
-    pkgs.wordbook
-    pkgs.epy
-    pkgs.trash-cli
-    pkgs.kiwix
-    pkgs.duckdb
-    pkgs.sqlite
-    pkgs.gamescope # For steam games
-    pkgs.wf-recorder
-    pkgs.blender
-    pkgs.obs-studio
-    pkgs.obs-do
-    pkgs.obs-cmd
-    pkgs.obs-cli
-
     # For nixvim
     #pkgs.alejandra
     pkgs.gcc # For Neorg
@@ -63,29 +38,6 @@ in
     pkgs.shfmt
     pkgs.hadolint
 
-    pkgs.jdk25
-    pkgs.libreoffice-fresh
-    pkgs.hunspell
-    pkgs.hunspellDicts.en_US-large
-    pkgs.prismlauncher
-    pkgs.qalculate-qt
-    pkgs.qbittorrent
-    pkgs.chromium
-    pkgs.gimp
-    pkgs.audacity
-    pkgs.inkscape
-    pkgs.texstudio
-    pkgs.texlive.combined.scheme-full
-    pkgs.vlc
-    pkgs.poppler
-    pkgs.quarto
-    pkgs.mermaid-filter
-    pkgs.pandoc
-    pkgs.mpv
-    pkgs.sshfs
-    pkgs.prevo-tools
-    pkgs.prevo-data
-    pkgs.kdePackages.ksystemlog
     pkgs.pgadmin4
 
     # For AI
@@ -107,21 +59,14 @@ in
     pkgs.lutris
     pkgs.xdg-utils
     pkgs.findutils
-    pkgs._7zz
-    pkgs.rar
     pkgs.zenity
     pkgs.websocat
     pkgs.jq
-    pkgs.unzip
 
-    pkgs.tor-browser
     pkgs.freetube
-    pkgs.discord
     pkgs.calibre
   ];
   programs = {
-    # Let Home Manager install and manage itself.
-    home-manager.enable = true;
     sftpman = {
       enable = true;
       mounts = {

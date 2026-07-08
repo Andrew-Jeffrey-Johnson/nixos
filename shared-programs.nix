@@ -1,0 +1,49 @@
+{ pkgs }:
+[
+  pkgs.wget
+  pkgs.nix-index
+  pkgs.manix
+  pkgs.wl-clipboard
+  pkgs.catppuccin
+  pkgs.wordbook
+  pkgs.epy
+  pkgs.trash-cli
+  pkgs.kiwix
+  pkgs.duckdb
+  pkgs.sqlite
+  pkgs.gamescope # For steam games
+  pkgs.wf-recorder
+  pkgs.blender
+  pkgs.obs-studio
+  pkgs.obs-do
+  pkgs.obs-cmd
+  pkgs.obs-cli
+  pkgs.jdk25
+  pkgs.libreoffice-fresh
+  pkgs.hunspell
+  pkgs.hunspellDicts.en_US-large
+  pkgs.prismlauncher
+  pkgs.qalculate-qt
+  pkgs.qbittorrent
+  pkgs.chromium
+  pkgs.gimp
+  pkgs.audacity
+  pkgs.inkscape
+  pkgs.texstudio
+  pkgs.texlive.combined.scheme-full
+  pkgs.vlc
+  pkgs.poppler
+  pkgs.quarto
+  pkgs.mermaid-filter
+  pkgs.pandoc
+  pkgs.mpv
+  pkgs.sshfs
+  pkgs.prevo-tools
+  pkgs.prevo-data
+  pkgs.kdePackages.ksystemlog
+  pkgs.tor-browser
+  pkgs.discord
+  pkgs._7zz
+  pkgs.rar
+  pkgs.unzip
+]

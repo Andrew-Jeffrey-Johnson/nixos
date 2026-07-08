@@ -156,9 +156,6 @@
     setSocketVariable = true;
   };
 
-  # Install flatpak globally
-  services.flatpak.enable = true;
-
   # Install waydroid for running Android apps in containers
   virtualisation.waydroid.enable = true;
 
@@ -186,7 +183,8 @@
 
       # Android emulator
       pkgs.android-tools
-    ];
+    ]
+    + import ./shared-programs.nix { inherit pkgs; };
   };
 
   # Get all the nerfonts fonts

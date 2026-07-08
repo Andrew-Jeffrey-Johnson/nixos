@@ -37,24 +37,34 @@
     {
       nixosConfigurations = {
         # NOTE: 'nixos' is the default hostname set by the installer
-        desktop = nixpkgs.lib.nixosSystem {
+        andrew = nixpkgs.lib.nixosSystem {
           # NOTE: Change this to aarch64-linux if you are on ARM
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
             ./desktop-configuration.nix
-            ./desktop-hardware-configuration.nix
-            ./users.nix
+            ./hardware-configuration.nix
+            ./andrew.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
                 useUserPackages = true;
                 useGlobalPkgs = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.andrew = import ./home-manager;
+                users.andrew = import ./andrew-home-manager;
                 backupFileExtension = "backup";
               };
             }
+          ];
+        };
+        avery = nixpkgs.lib.nixosSystem {
+          # NOTE: Change this to aarch64-linux if you are on ARM
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./desktop-configuration.nix
+            ./hardware-configuration.nix
+            ./avery.nix
           ];
         };
         server = nixpkgs.lib.nixosSystem {
@@ -62,7 +72,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./server-configuration.nix
-            ./server-hardware-configuration.nix
+            ./hardware-configuration.nix
           ];
         };
       };
