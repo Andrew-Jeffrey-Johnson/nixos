@@ -20,6 +20,7 @@
 
 * Update boot loader:
   sudo nixos-rebuild --install-bootloader boot
+  sudo nixos-rebuild boot --flake /home/andrew/nixos/#andrew
 
 * Update configuration.nix:
   sudo nixos-rebuild switch --upgrade
