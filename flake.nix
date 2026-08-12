@@ -14,7 +14,7 @@
     };
     nixvim = {
       url = "github:nix-community/nixvim/main";
-      #inputs.nixpkgs.follows = "nixpkgs"; # Devs don't test on latest
+      inputs.nixpkgs.follows = "nixpkgs"; # Devs don't test on latest
     };
     nix-gaming = {
       url = "github:fufexan/nix-gaming/master";

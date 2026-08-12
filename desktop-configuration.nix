@@ -283,9 +283,9 @@
   #     OLLAMA_CONTEXT_LENGTH = "32768";
   #   };
   # };
-  services.open-webui.enable = true;
+  #services.open-webui.enable = true;
 
-  services.udisks2.enable = true;
+  #services.udisks2.enable = true;
 
   # Databases
   # database with a default user and password

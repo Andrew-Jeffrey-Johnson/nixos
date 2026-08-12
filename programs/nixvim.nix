@@ -585,7 +585,6 @@
     plugins.nui.enable = true;
     plugins.neotest.enable = true;
     plugins.neotest.adapters.plenary.enable = true;
-    plugins.copilot-cmp.enable = true;
     plugins.img-clip.enable = true;
     #plugins.fzf-lua.enable = true;
     #----------End-Plugins----------------
@@ -594,7 +593,6 @@
     dependencies = {
       #tree-sitter.enable = true;
       #nodejs.enable = true;
-      copilot.enable = true;
     };
   };
 }

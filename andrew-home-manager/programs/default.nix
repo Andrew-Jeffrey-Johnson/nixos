@@ -5,11 +5,6 @@
   ...
 }:
 let
-  neovimconfig = import ./../nixvim.nix;
-  nvim = inputs.nixvim.legacyPackages.x86_64-linux.makeNixvimWithModule {
-    inherit pkgs;
-    module = neovimconfig;
-  };
   mo2 = inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.mo2installer; # installs a package
   tree-sitter = inputs.ts.packages.${pkgs.stdenv.hostPlatform.system}.cli;
 in
@@ -17,7 +12,6 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    nvim
     mo2
 
     # For nixvim
@@ -30,7 +24,6 @@ in
     pkgs.sqlite
     pkgs.shellcheck
     pkgs.isort
-    pkgs.mermaid-cli
     tree-sitter
     pkgs.ripgrep
     pkgs.fd
@@ -60,8 +53,6 @@ in
     pkgs.zenity
     pkgs.websocat
     pkgs.jq
-
-    pkgs.zoom-us
   ];
   programs = {
     sftpman = {

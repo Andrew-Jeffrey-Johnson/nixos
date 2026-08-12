@@ -3,7 +3,7 @@
 {
   imports = [
     #inputs.nixvim.homeModules.nixvim
-    #./programs
+    ./programs
     #./librewolf.nix
     #./thunderbird.nix
     ./kitty.nix

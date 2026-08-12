@@ -30,6 +30,7 @@
   pkgs.mpv # Media player
   pkgs.sshfs # Mount
   pkgs.pgadmin4 # Server that hosts a website to view PostgreSQL database
+  pkgs.zoom-us
 
   # Screen recording
   pkgs.obs-studio
