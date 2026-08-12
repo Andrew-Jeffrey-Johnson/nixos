@@ -45,6 +45,7 @@
             ./desktop-configuration.nix
             ./hardware-configuration.nix
             ./andrew.nix
+            ./programs
             home-manager.nixosModules.home-manager
             {
               home-manager = {

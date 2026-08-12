@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
   programs.firefox = {
     enable = true;
@@ -12,6 +8,7 @@
         "Allow" = [
           "https://discord.com"
           "https://github.com"
+          "https://youtube.com"
         ];
         "Locked" = true;
       };

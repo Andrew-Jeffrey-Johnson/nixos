@@ -212,6 +212,22 @@
     allowSFTP = true;
   };
 
+  # Remote desktop with RDP (XRDP)
+  services.xrdp = {
+    enable = true;
+    defaultWindowManager = "startplasma-wayland";
+    openFirewall = true;
+    audio.enable = true;
+  };
+
+  # Sunshine is the remote desktop for Moonshine
+  services.sunshine = {
+    enable = true;
+    autoStart = true; # optional: starts Sunshine automatically on login
+    capSysAdmin = true;
+    openFirewall = true;
+  };
+
   # For terminal-based dictionar
   services.dictd = {
     enable = true;

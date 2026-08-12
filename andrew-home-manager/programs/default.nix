@@ -38,8 +38,6 @@ in
     pkgs.shfmt
     pkgs.hadolint
 
-    pkgs.pgadmin4
-
     # For AI
     pkgs.aider-chat
     pkgs.llama-cpp-rocm
@@ -63,8 +61,7 @@ in
     pkgs.websocat
     pkgs.jq
 
-    pkgs.freetube
-    pkgs.calibre
+    pkgs.zoom-us
   ];
   programs = {
     sftpman = {
@@ -121,88 +118,8 @@ in
     gh = {
       enable = true;
     };
-    yazi = {
-      enable = true;
-      settings = {
-        mgr = {
-          show_hidden = true;
-          ratio = [
-            1
-            3
-            4
-          ];
-        };
-        opener = {
-          play = [
-            {
-              run = "mpv %s";
-              orphan = true;
-            }
-          ];
-          edit = [
-            {
-              run = "$EDITOR %s";
-              block = true;
-            }
-          ];
-          openBook = [
-            {
-              run = pkgs.epy + /bin/epy + " \"$@\"";
-              block = true;
-            }
-          ];
-        };
-        open = {
-          rules = [
-            {
-              mime = "text/*";
-              use = "edit";
-            }
-            {
-              mime = "video/*";
-              use = "play";
-            }
-            {
-              name = "*.epub";
-              use = "openBook";
-            }
-            {
-              url = "*";
-              use = "librewolf";
-            }
-          ];
-        };
-      };
-      keymap = {
-        mgr = {
-          prepend_keymap = [
-            {
-              on = "u";
-              run = "plugin restore";
-              desc = "Restore last deleted files/folders";
-            }
-            # ... Other keymaps
-          ];
-        };
-      };
-      shellWrapperName = "y";
-      plugins = {
-        restore = pkgs.yaziPlugins.restore;
-        duckdb = pkgs.yaziPlugins.duckdb;
-      };
-    };
     keepassxc = {
       enable = true;
-    };
-    kitty = {
-      enable = true;
-      shellIntegration.enableBashIntegration = true;
-      enableGitIntegration = true;
-      themeFile = "Catppuccin-Latte";
-      keybindings = {
-        "ctrl+shift+t" = "new_tab_with_cwd";
-        "ctrl+shift+enter" = "new_window_with_cwd";
-      };
     };
   };
 
