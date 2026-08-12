@@ -1,6 +1,6 @@
 {
-  progams.kitty = {
-    enable = true;
+  programs.kitty = {
+    #enable = true;
     shellIntegration.enableBashIntegration = true;
     enableGitIntegration = true;
     themeFile = "Catppuccin-Latte";

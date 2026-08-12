@@ -2,10 +2,11 @@
 { inputs, ... }:
 {
   imports = [
-    inputs.nixvim.homeModules.nixvim
-    ./programs
+    #inputs.nixvim.homeModules.nixvim
+    #./programs
     #./librewolf.nix
     #./thunderbird.nix
+    ./kitty.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

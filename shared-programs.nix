@@ -1,5 +1,6 @@
 { pkgs }:
 [
+  pkgs.kitty # Terminal
   pkgs.wget # Get web pages
   pkgs.nix-index # Search for nix packages
   pkgs.manix # Nix documentation
