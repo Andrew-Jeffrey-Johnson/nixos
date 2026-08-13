@@ -13,6 +13,7 @@
     if allowUnfree && discordDesired then
       [
         "discord"
+        "discord-unwrapped"
       ]
     else
       [ ]; # Purposefully empty

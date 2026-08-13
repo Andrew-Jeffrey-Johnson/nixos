@@ -34,6 +34,7 @@ in
     ./programs/thunderbird.nix
     ./programs/librewolf.nix
   ];
+  programs.steam = games.steam;
 
   # Bootloader.
   boot.loader = {

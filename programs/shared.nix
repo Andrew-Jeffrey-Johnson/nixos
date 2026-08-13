@@ -10,7 +10,7 @@
   pkgs.sqlite # Database as a file
   pkgs.blender
   pkgs.luanti # FOSS Minecraft
-  pkgs.waypipe # Enables application forwarding on Wayland similar to ssh -X
+  #pkgs.waypipe # Enables application forwarding on Wayland similar to ssh -X
   pkgs.godot # Game development
   pkgs.kdePackages.ksystemlog # Desktop environment event viewer
   pkgs.tor-browser
@@ -25,7 +25,6 @@
   pkgs.mpv # Media player
   pkgs.sshfs # Mount
   pkgs.pgadmin4 # Server that hosts a website to view PostgreSQL database
-  pkgs.zoom-us
 
   # Android emulator
   pkgs.android-tools
