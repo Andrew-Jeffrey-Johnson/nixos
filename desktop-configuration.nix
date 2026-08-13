@@ -151,7 +151,10 @@
 
   # Set environment variables
   environment = {
-    shells = [ pkgs.bash ];
+    shells = [
+      pkgs.bash
+      pkgs.zsh
+    ];
     variables = {
       EDITOR = "nvim";
       SYSTEMD_EDITOR = "nvim";
@@ -160,12 +163,6 @@
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     systemPackages = [
-      pkgs.dict
-      pkgs.dictdDBs.wordnet
-      pkgs.dictdDBs.wiktionary
-
-      # Android emulator
-      pkgs.android-tools
     ]
     ++ import ./shared-programs.nix { inherit pkgs; };
   };
@@ -226,15 +223,6 @@
     autoStart = true; # optional: starts Sunshine automatically on login
     capSysAdmin = true;
     openFirewall = true;
-  };
-
-  # For terminal-based dictionar
-  services.dictd = {
-    enable = true;
-    DBs = [
-      pkgs.dictdDBs.wiktionary
-      pkgs.dictdDBs.wordnet
-    ];
   };
 
   # For local wiki

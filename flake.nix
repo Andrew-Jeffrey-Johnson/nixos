@@ -51,7 +51,6 @@
               ./andrew.nix
               ./programs/zsh.nix
               ./programs/yazi.nix
-              ./programs/kitty.nix
               ./programs/librewolf.nix
               ./programs/thunderbird.nix
               home-manager.nixosModules.home-manager

@@ -1,12 +1,10 @@
 { pkgs }: [
   pkgs.kitty # Terminal
   pkgs.wget # Get web pages
-  pkgs.nix-index # Search for nix packages
-  pkgs.manix # Nix documentation
   pkgs.wl-clipboard-rs # Terminal clipboard
   pkgs.catppuccin # Many color themes
   pkgs.jdk25 # Java
-  pkgs.wordbook # English Dictionary
+  pkgs.goldendict-ng # Multi-language dictionary app
   pkgs.trash-cli # Command-line trash
   pkgs.duckdb # Stores commands from cli
   pkgs.sqlite # Database as a file
@@ -30,6 +28,9 @@
   pkgs.sshfs # Mount
   pkgs.pgadmin4 # Server that hosts a website to view PostgreSQL database
   pkgs.zoom-us
+
+  # Android emulator
+  pkgs.android-tools
 
   # Screen recording
   pkgs.obs-studio

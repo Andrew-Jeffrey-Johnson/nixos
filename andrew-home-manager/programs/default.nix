@@ -5,14 +5,14 @@
   ...
 }:
 let
-  mo2 = inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.mo2installer; # installs a package
+  #mo2 = inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.mo2installer; # installs a package
   tree-sitter = inputs.ts.packages.${pkgs.stdenv.hostPlatform.system}.cli;
 in
 {
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    mo2
+    #mo2
 
     # For nixvim
     #pkgs.alejandra
@@ -41,18 +41,18 @@ in
     pkgs.rocmPackages.rocblas
 
     # For Lutris games
-    pkgs.winetricks
-    pkgs.bottles
-    pkgs.protonplus
-    pkgs.wineWow64Packages.full
-    pkgs.wineWow64Packages.fonts
-    pkgs.nvtopPackages.amd
-    pkgs.lutris
-    pkgs.xdg-utils
-    pkgs.findutils
-    pkgs.zenity
-    pkgs.websocat
-    pkgs.jq
+    #pkgs.winetricks
+    #pkgs.bottles
+    #pkgs.protonplus
+    #pkgs.wineWow64Packages.full
+    #pkgs.wineWow64Packages.fonts
+    #pkgs.nvtopPackages.amd
+    #pkgs.lutris
+    #pkgs.xdg-utils
+    #pkgs.findutils
+    #pkgs.zenity
+    #pkgs.websocat
+    #pkgs.jq
   ];
   programs = {
     sftpman = {
