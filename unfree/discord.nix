@@ -1,4 +1,9 @@
-{ lib, ... }: {
+{
+  pkgs,
+  lib,
+  ...
+}:
+{
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -7,11 +12,17 @@
     protontricks.enable = true;
   };
 
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "steam"
-      "steam-original"
-      "steam-run"
-    ];
+  nixpkgs.config.allowUnfreePredicate = [
+    pkgs.steam
+    pkgs.steam-original
+    pkgs.steam-run
+  ];
+
+  #nixpkgs.config.allowUnfreePredicate =
+  #  pkg:
+  #  builtins.elem (lib.getName pkg) [
+  #    "steam"
+  #    "steam-original"
+  #    "steam-run"
+  #  ];
 }

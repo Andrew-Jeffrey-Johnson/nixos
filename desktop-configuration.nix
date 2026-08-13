@@ -6,8 +6,15 @@
 {
   pkgs,
   lib,
+  gamesDesired,
   ...
 }:
+let
+  shared = import ./shared-programs.nix { inherit pkgs; };
+  games = import ./unfree/games.nix { inherit pkgs gamesDesired; };
+  software = shared.packages ++ games.packages;
+  allowUnfreePredicate = shared.allowUnfreePredicate ++ games.allowUnfreePredicate;
+in
 {
   # Bootloader.
   boot.loader = {
@@ -131,7 +138,8 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  #nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = allowUnfreePredicate;
 
   # Install docker rootless
   virtualisation.docker.rootless = {
@@ -162,9 +170,7 @@
     };
     # List packages installed in system profile. To search, run:
     # $ nix search wget
-    systemPackages = [
-    ]
-    ++ import ./shared-programs.nix { inherit pkgs; };
+    systemPackages = software;
   };
 
   # Get all the nerfonts fonts
@@ -180,22 +186,6 @@
     enableSSHSupport = true;
   };
   services.dbus.packages = [ pkgs.gcr ];
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-    protontricks.enable = true;
-  };
-
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "steam"
-      "steam-original"
-      "steam-run"
-    ];
 
   # List services that you want to enable:
 

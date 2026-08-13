@@ -40,9 +40,10 @@
         andrew =
           let
             system = "x86_64-linux";
+            gamesDesired = true;
           in
           nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system; };
+            specialArgs = { inherit inputs system gamesDesired; };
             modules = [
               nixvim.nixosModules.nixvim
               ./programs/nixvim.nix
@@ -53,7 +54,6 @@
               ./programs/yazi.nix
               ./programs/librewolf.nix
               ./programs/thunderbird.nix
-              ./programs/games.nix
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
