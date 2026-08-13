@@ -14,7 +14,6 @@
   pkgs.godot # Game development
   pkgs.kdePackages.ksystemlog # Desktop environment event viewer
   pkgs.tor-browser
-  pkgs.discord
   pkgs.prismlauncher # Minecraft
   pkgs.qalculate-qt # Calculator
   pkgs.qbittorrent # Torret
@@ -46,10 +45,6 @@
   pkgs.texstudio
   pkgs.texliveFull
   pkgs.poppler # PDF viwer used by texstudio
-
-  # Command-line Esperanto dictionary
-  pkgs.prevo-tools
-  pkgs.prevo-data
 
   # Compression programs
   pkgs._7zz

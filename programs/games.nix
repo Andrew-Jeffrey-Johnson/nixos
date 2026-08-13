@@ -1,11 +1,12 @@
 {
   pkgs,
+  allowUnfree,
   gamesDesired,
   ...
 }:
 {
   programs.steam = {
-    enable = if gamesDesired then true else false;
+    enable = if gamesDesired && allowUnfree then true else false;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
@@ -13,11 +14,11 @@
   };
 
   # Packages to install
-  packages = if gamesDesired then [ ] else [ ]; # Purposefully empty
+  packages = if gamesDesired && allowUnfree then [ ] else [ ]; # Purposefully empty
 
   # Steam has a restrictive license. Allow it just for Steam.
   allowUnfreePredicate =
-    if gamesDesired then
+    if gamesDesired && allowUnfree then
       [
         pkgs.steam
         pkgs.steam-original

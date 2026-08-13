@@ -6,16 +6,33 @@
 {
   pkgs,
   lib,
+  allowUnfree,
   gamesDesired,
+  discordDesired,
+  zoom-usDesired,
   ...
 }:
 let
-  shared = import ./shared-programs.nix { inherit pkgs; };
-  games = import ./unfree/games.nix { inherit pkgs gamesDesired; };
-  software = shared.packages ++ games.packages;
-  allowUnfreePredicate = shared.allowUnfreePredicate ++ games.allowUnfreePredicate;
+  shared = import ./programs/shared-programs.nix { inherit pkgs; };
+  games = import ./programs/games.nix { inherit pkgs allowUnfree gamesDesired; };
+  discord = import ./programs/discord.nix { inherit pkgs allowUnfree discordDesired; };
+  zoom-us = import ./programs/zoom-us.nix { inherit pkgs allowUnfree zoom-usDesired; };
+  software = shared.packages ++ games.packages ++ discord.packages ++ zoom-us.packages;
+  allowUnfreePredicate =
+    shared.allowUnfreePredicate
+    ++ games.allowUnfreePredicate
+    ++ discord.allowUnfreePredicate
+    ++ zoom-us.allowUnfreePredicate;
 in
 {
+  imports = [
+    ./programs/zsh.nix
+    ./programs/yazi.nix
+    ./programs/nixvim.nix
+    ./programs/thunderbird.nix
+    ./programs/librewolf.nix
+  ];
+
   # Bootloader.
   boot.loader = {
     efi = {

@@ -36,24 +36,28 @@
     }@inputs:
     {
       nixosConfigurations = {
-        # NOTE: 'nixos' is the default hostname set by the installer
         andrew =
           let
             system = "x86_64-linux";
+            allowUnfree = true;
             gamesDesired = true;
+            zoom-usDesired = true;
           in
           nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system gamesDesired; };
+            specialArgs = {
+              inherit
+                inputs
+                system
+                allowUnfree
+                gamesDesired
+                zoom-usDesired
+                ;
+            };
             modules = [
               nixvim.nixosModules.nixvim
-              ./programs/nixvim.nix
               ./desktop-configuration.nix
               ./hardware-configuration.nix
               ./andrew.nix
-              ./programs/zsh.nix
-              ./programs/yazi.nix
-              ./programs/librewolf.nix
-              ./programs/thunderbird.nix
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
