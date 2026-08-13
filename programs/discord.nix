@@ -12,7 +12,7 @@
   allowUnfreePredicate =
     if allowUnfree && discordDesired then
       [
-        pkgs.discord
+        "discord"
       ]
     else
       [ ]; # Purposefully empty

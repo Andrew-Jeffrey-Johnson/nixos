@@ -41,7 +41,9 @@
             system = "x86_64-linux";
             allowUnfree = true;
             gamesDesired = true;
+            discordDesired = true;
             zoom-usDesired = true;
+            rarDesired = true;
           in
           nixpkgs.lib.nixosSystem {
             specialArgs = {
@@ -50,7 +52,9 @@
                 system
                 allowUnfree
                 gamesDesired
+                discordDesired
                 zoom-usDesired
+                rarDesired
                 ;
             };
             modules = [

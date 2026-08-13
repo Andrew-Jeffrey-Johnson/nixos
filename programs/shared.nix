@@ -48,6 +48,5 @@
 
   # Compression programs
   pkgs._7zz
-  pkgs.rar
   pkgs.unzip
 ]

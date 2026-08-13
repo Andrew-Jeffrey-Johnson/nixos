@@ -138,7 +138,6 @@
           python = [
             "isort"
             "black"
-            "flake8"
           ];
           docker = [ "hadolint" ];
           # css = [ "prettier" ];
@@ -213,12 +212,10 @@
           enable = false;
           settings.plugins = {
             black.enabled = true;
-            flake8.enabled = true;
             isort.enabled = true;
             jedi.enabled = true;
             pycodestyle.enabled = true;
             pydocstyle.enabled = true;
-            pyflakes.enabled = true;
             mccabe.enabled = true;
             rope.enabled = true;
             yapf.enabled = true;
@@ -470,7 +467,6 @@
         yaml = [ "yamlfmt" ];
         #nix = ["alejandra"];
         go = [ "golangci-lint" ];
-        python = [ "flake8" ];
         haskell = [ "hlint" ];
         lua = [ "selene" ];
       };
@@ -481,9 +477,6 @@
         #alejandra = {
         #  cmd = "${pkgs.alejandra}/bin/alejandra";
         #};
-        flake8 = {
-          cmd = "${pkgs.python313Packages.flake8}/bin/flake8";
-        };
       };
     };
 

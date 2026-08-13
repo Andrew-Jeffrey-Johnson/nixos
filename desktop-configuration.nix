@@ -10,19 +10,21 @@
   gamesDesired,
   discordDesired,
   zoom-usDesired,
+  rarDesired,
   ...
 }:
 let
-  shared = import ./programs/shared-programs.nix { inherit pkgs; };
+  shared = import ./programs/shared.nix { inherit pkgs; };
   games = import ./programs/games.nix { inherit pkgs allowUnfree gamesDesired; };
   discord = import ./programs/discord.nix { inherit pkgs allowUnfree discordDesired; };
   zoom-us = import ./programs/zoom-us.nix { inherit pkgs allowUnfree zoom-usDesired; };
-  software = shared.packages ++ games.packages ++ discord.packages ++ zoom-us.packages;
+  rar = import ./programs/rar.nix { inherit pkgs allowUnfree rarDesired; };
+  software = shared ++ games.packages ++ discord.packages ++ zoom-us.packages ++ rar.packages;
   allowUnfreePredicate =
-    shared.allowUnfreePredicate
-    ++ games.allowUnfreePredicate
+    games.allowUnfreePredicate
     ++ discord.allowUnfreePredicate
-    ++ zoom-us.allowUnfreePredicate;
+    ++ zoom-us.allowUnfreePredicate
+    ++ rar.allowUnfreePredicate;
 in
 {
   imports = [
@@ -156,7 +158,7 @@ in
 
   # Allow unfree packages
   #nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate = allowUnfreePredicate;
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) allowUnfreePredicate;
 
   # Install docker rootless
   virtualisation.docker.rootless = {

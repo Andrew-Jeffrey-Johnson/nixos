@@ -20,9 +20,10 @@
   allowUnfreePredicate =
     if gamesDesired && allowUnfree then
       [
-        pkgs.steam
-        pkgs.steam-original
-        pkgs.steam-run
+        "steam"
+        "steam-unwrapped"
+        "steam-original"
+        "steam-run"
       ]
     else
       [ ]; # Purposefully empty

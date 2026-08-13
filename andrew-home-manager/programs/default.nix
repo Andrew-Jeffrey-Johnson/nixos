@@ -17,8 +17,6 @@ in
     # For nixvim
     #pkgs.alejandra
     pkgs.gcc # For Neorg
-    pkgs.python314Packages.flake8
-    pkgs.vimPlugins.flake8-vim
     pkgs.python314Packages.pylatexenc
     pkgs.ghostscript
     pkgs.sqlite

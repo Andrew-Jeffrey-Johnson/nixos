@@ -1,18 +1,18 @@
 {
   pkgs,
   allowUnfree,
-  zoom-usDesired,
+  rarDesired,
   ...
 }:
 {
   # Packages to install
-  packages = if allowUnfree && zoom-usDesired then [ pkgs.zoom-us ] else [ ]; # Purposefully empty
+  packages = if allowUnfree && rarDesired then [ pkgs.rar ] else [ ]; # Purposefully empty
 
   # Steam has a restrictive license. Allow it just for Steam.
   allowUnfreePredicate =
-    if allowUnfree && zoom-usDesired then
+    if allowUnfree && rarDesired then
       [
-        "zoom"
+        "rar"
       ]
     else
       [ ]; # Purposefully empty
