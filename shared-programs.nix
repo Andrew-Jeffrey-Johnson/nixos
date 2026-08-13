@@ -8,7 +8,6 @@
   pkgs.trash-cli # Command-line trash
   pkgs.duckdb # Stores commands from cli
   pkgs.sqlite # Database as a file
-  pkgs.gamescope # For steam games
   pkgs.blender
   pkgs.luanti # FOSS Minecraft
   pkgs.waypipe # Enables application forwarding on Wayland similar to ssh -X

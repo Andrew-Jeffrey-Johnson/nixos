@@ -53,6 +53,7 @@
               ./programs/yazi.nix
               ./programs/librewolf.nix
               ./programs/thunderbird.nix
+              ./programs/games.nix
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
