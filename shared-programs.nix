@@ -1,5 +1,4 @@
-{ pkgs }:
-[
+{ pkgs }: [
   pkgs.kitty # Terminal
   pkgs.wget # Get web pages
   pkgs.nix-index # Search for nix packages
@@ -45,7 +44,7 @@
 
   # LaTeX Editor
   pkgs.texstudio
-  pkgs.texlive.combined.scheme-full
+  pkgs.texliveFull
   pkgs.poppler # PDF viwer used by texstudio
 
   # Command-line Esperanto dictionary

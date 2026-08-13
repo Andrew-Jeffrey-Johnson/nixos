@@ -15,12 +15,5 @@
         "fuse"
       ];
     };
-    users.ave = {
-      isNormalUser = true;
-      description = "Avery Littman";
-      extraGroups = [
-        "wheel"
-      ];
-    };
   };
 }

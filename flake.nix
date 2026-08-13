@@ -13,8 +13,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
-      url = "github:nix-community/nixvim/main";
-      inputs.nixpkgs.follows = "nixpkgs"; # Devs don't test on latest
+      url = "github:nix-community/nixvim";
+      #inputs.nixpkgs.follows = "nixpkgs"; # Devs don't test on latest
     };
     nix-gaming = {
       url = "github:fufexan/nix-gaming/master";
@@ -42,16 +42,16 @@
             system = "x86_64-linux";
           in
           nixpkgs.lib.nixosSystem {
-            # NOTE: Change this to aarch64-linux if you are on ARM
             specialArgs = { inherit inputs system; };
             modules = [
+              nixvim.nixosModules.nixvim
+              ./programs/nixvim.nix
               ./desktop-configuration.nix
               ./hardware-configuration.nix
               ./andrew.nix
               ./programs/zsh.nix
               ./programs/yazi.nix
-              nixvim.nixosModules.nixvim
-              ./programs/nixvim.nix
+              ./programs/kitty.nix
               ./programs/librewolf.nix
               ./programs/thunderbird.nix
               home-manager.nixosModules.home-manager
@@ -66,24 +66,29 @@
               }
             ];
           };
-        avery = nixpkgs.lib.nixosSystem rec {
-          # NOTE: Change this to aarch64-linux if you are on ARM
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs system; };
-          modules = [
-            ./desktop-configuration.nix
-            ./hardware-configuration.nix
-            ./avery.nix
-          ];
-        };
-        server = nixpkgs.lib.nixosSystem rec {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs system; };
-          modules = [
-            ./server-configuration.nix
-            ./hardware-configuration.nix
-          ];
-        };
+        avery =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs system; };
+            modules = [
+              ./desktop-configuration.nix
+              ./hardware-configuration.nix
+              ./avery.nix
+            ];
+          };
+        server =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs system; };
+            modules = [
+              ./server-configuration.nix
+              ./hardware-configuration.nix
+            ];
+          };
       };
     };
 }

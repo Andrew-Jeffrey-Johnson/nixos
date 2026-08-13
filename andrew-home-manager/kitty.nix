@@ -1,7 +1,7 @@
 {
   programs.kitty = {
-    #enable = true;
-    shellIntegration.enableBashIntegration = true;
+    enable = true;
+    shellIntegration.enableZshIntegration = true;
     enableGitIntegration = true;
     themeFile = "Catppuccin-Latte";
     keybindings = {

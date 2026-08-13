@@ -1,6 +1,5 @@
 # ~/home-manager/default.nix
-{ inputs, ... }:
-{
+{ inputs, ... }: {
   imports = [
     #inputs.nixvim.homeModules.nixvim
     ./programs
