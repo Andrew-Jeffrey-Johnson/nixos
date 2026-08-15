@@ -2,7 +2,8 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    autosuggestions.enable = true;
+    autosuggestion.enable = true;
+    autocd = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
       ll = "ls -l";
@@ -21,5 +22,6 @@
       ];
     };
   };
-  environment.pathsToLink = [ "/share/zsh" ];
+  #environment.pathsToLink = [ "/share/zsh" ];
+  home.file.".p10k.zsh".text = builtins.readFile ./.p10k.zsh;
 }
