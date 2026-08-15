@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
   users = {
     groups.docker = { };
     # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -14,6 +14,7 @@
         "adbusers"
         "fuse"
       ];
+      shell = pkgs.zsh;
     };
   };
 }

@@ -28,7 +28,6 @@ let
 in
 {
   imports = [
-    ./programs/zsh.nix
     ./programs/yazi.nix
     ./programs/nixvim.nix
     ./programs/thunderbird.nix
