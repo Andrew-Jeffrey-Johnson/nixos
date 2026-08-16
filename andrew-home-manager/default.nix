@@ -1,8 +1,7 @@
 # ~/home-manager/default.nix
-{ inputs, ... }: {
+{
   imports = [
-    #inputs.nixvim.homeModules.nixvim
-    ./programs
+    ./programs.nix
     ./kitty.nix
     ./lutris.nix
     ./zsh.nix

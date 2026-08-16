@@ -1,56 +1,23 @@
 # ~/nixos/home-manager/programs/default.nix
 {
-  pkgs,
-  inputs,
-  ...
-}:
-let
-  #mo2 = inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.mo2installer; # installs a package
-  tree-sitter = inputs.ts.packages.${pkgs.stdenv.hostPlatform.system}.cli;
-in
-{
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    #mo2
-
-    # For nixvim
-    #pkgs.alejandra
-    pkgs.gcc # For Neorg
-    pkgs.python314Packages.pylatexenc
-    pkgs.ghostscript
-    pkgs.sqlite
-    pkgs.shellcheck
-    pkgs.isort
-    tree-sitter
-    pkgs.ripgrep
-    pkgs.fd
-    pkgs.lazygit
-    pkgs.shfmt
-    pkgs.hadolint
-
     # For AI
-    pkgs.aider-chat
-    pkgs.llama-cpp-rocm
-    pkgs.rocmPackages.rocm-smi
-    pkgs.rocmPackages.tensile
-    pkgs.rocmPackages.rocprim
-    pkgs.rocmPackages.clr
-    pkgs.rocmPackages.rocblas
+    #pkgs.aider-chat
+    #pkgs.llama-cpp-rocm
+    #pkgs.rocmPackages.rocm-smi
+    #pkgs.rocmPackages.tensile
+    #pkgs.rocmPackages.rocprim
+    #pkgs.rocmPackages.clr
+    #pkgs.rocmPackages.rocblas
 
-    # For Lutris games
-    #pkgs.winetricks
-    #pkgs.bottles
-    #pkgs.protonplus
-    #pkgs.wineWow64Packages.full
-    #pkgs.wineWow64Packages.fonts
-    #pkgs.nvtopPackages.amd
-    #pkgs.lutris
     #pkgs.xdg-utils
     #pkgs.findutils
     #pkgs.zenity
     #pkgs.websocat
     #pkgs.jq
+    #pkgs.nvtopPackages.amd
   ];
   programs = {
     sftpman = {

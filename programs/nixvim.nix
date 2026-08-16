@@ -1,17 +1,67 @@
 {
+  inputs,
   pkgs,
   lib,
+  system,
   ...
 }:
+let
+  tree-sitter = inputs.ts.packages.${system}.cli;
+in
 {
-  programs.nixvim = {
+  packages = [
+    # For nixvim
+    #pkgs.alejandra
+    pkgs.gcc # For Neorg
+    pkgs.python314Packages.pylatexenc
+    pkgs.ghostscript
+    pkgs.sqlite
+    pkgs.shellcheck
+    pkgs.isort
+    tree-sitter
+    pkgs.ripgrep
+    pkgs.fd
+    pkgs.lazygit
+    pkgs.shfmt
+    pkgs.hadolint
+  ];
+  nixvim = {
     enable = true;
+
+    # All keyboard shortcuts
+    #keymaps = [
+    #  {
+    #    action = {
+    #      __raw = ''
+    #        function(_)
+    #            vim.diagnostic.open_float()
+    #        end
+    #      '';
+    #    };
+    #    key = "<leader>do";
+    #    mode = [
+    #      "n"
+    #      "v"
+    #    ];
+    #    options = {
+    #      #silent = true;
+    #      desc = "Opens a floating diagnostic";
+    #    };
+    #  }
+    #];
+    diagnostic.settings = {
+      virtual_lines = {
+        current_line = true;
+      };
+      virtual_text = false;
+    };
+
     globals = {
       # Disable useless providers
       loaded_ruby_provider = 0; # Ruby
       loaded_perl_provider = 0; # Perl
       loaded_python_provider = 0; # Python 2
-      globals.mapleader = ","; # Sets the leader key to comma
+      globals.mapleader = "<Space>"; # Sets the leader key to comma
     };
 
     clipboard = {

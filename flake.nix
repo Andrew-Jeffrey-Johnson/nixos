@@ -38,25 +38,18 @@
       nixosConfigurations = {
         andrew =
           let
-            system = "x86_64-linux";
-            allowUnfree = true;
-            gamesDesired = true;
-            discordDesired = true;
-            zoom-usDesired = true;
-            rarDesired = true;
+            args = {
+              inherit inputs;
+              system = "x86_64-linux";
+              allowUnfree = true;
+              gamesDesired = true;
+              discordDesired = true;
+              zoom-usDesired = true;
+              rarDesired = true;
+            };
           in
           nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              inherit
-                inputs
-                system
-                allowUnfree
-                gamesDesired
-                discordDesired
-                zoom-usDesired
-                rarDesired
-                ;
-            };
+            specialArgs = args;
             modules = [
               nixvim.nixosModules.nixvim
               ./desktop-configuration.nix
@@ -67,7 +60,7 @@
                 home-manager = {
                   useUserPackages = true;
                   useGlobalPkgs = true;
-                  extraSpecialArgs = { inherit inputs; };
+                  extraSpecialArgs = args;
                   users.andrew = import ./andrew-home-manager;
                   backupFileExtension = "backup";
                 };

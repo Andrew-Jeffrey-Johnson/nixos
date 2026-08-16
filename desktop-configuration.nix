@@ -4,8 +4,10 @@
 # Apply changes via:
 # sudo nixos-rebuild switch --upgrade
 {
+  inputs,
   pkgs,
   lib,
+  system,
   allowUnfree,
   gamesDesired,
   discordDesired,
@@ -14,12 +16,27 @@
   ...
 }:
 let
+  args = {
+    inherit
+      inputs
+      pkgs
+      lib
+      system
+      allowUnfree
+      gamesDesired
+      discordDesired
+      zoom-usDesired
+      rarDesired
+      ;
+  };
   shared = import ./programs/shared.nix { inherit pkgs; };
-  games = import ./programs/games.nix { inherit pkgs allowUnfree gamesDesired; };
-  discord = import ./programs/discord.nix { inherit pkgs allowUnfree discordDesired; };
-  zoom-us = import ./programs/zoom-us.nix { inherit pkgs allowUnfree zoom-usDesired; };
-  rar = import ./programs/rar.nix { inherit pkgs allowUnfree rarDesired; };
-  software = shared ++ games.packages ++ discord.packages ++ zoom-us.packages ++ rar.packages;
+  nixvim = import ./programs/nixvim.nix args;
+  games = import ./programs/games.nix args;
+  discord = import ./programs/discord.nix args;
+  zoom-us = import ./programs/zoom-us.nix args;
+  rar = import ./programs/rar.nix args;
+  software =
+    shared ++ nixvim.packages ++ games.packages ++ discord.packages ++ zoom-us.packages ++ rar.packages;
   allowUnfreePredicate =
     games.allowUnfreePredicate
     ++ discord.allowUnfreePredicate
@@ -29,10 +46,10 @@ in
 {
   imports = [
     ./programs/yazi.nix
-    ./programs/nixvim.nix
     ./programs/thunderbird.nix
     ./programs/librewolf.nix
   ];
+  programs.nixvim = nixvim.nixvim;
   programs.steam = games.steam;
 
   # Bootloader.
