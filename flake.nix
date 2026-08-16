@@ -41,6 +41,8 @@
             args = {
               inherit inputs;
               system = "x86_64-linux";
+              andrewEnabled = true;
+              aveEnabled = false;
               allowUnfree = true;
               gamesDesired = true;
               discordDesired = true;
@@ -54,7 +56,6 @@
               nixvim.nixosModules.nixvim
               ./desktop-configuration.nix
               ./hardware-configuration.nix
-              ./andrew.nix
               home-manager.nixosModules.home-manager
               {
                 home-manager = {

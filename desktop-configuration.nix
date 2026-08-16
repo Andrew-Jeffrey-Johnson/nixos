@@ -8,6 +8,8 @@
   pkgs,
   lib,
   system,
+  andrewEnabled,
+  aveEnabled,
   allowUnfree,
   gamesDesired,
   discordDesired,
@@ -22,6 +24,8 @@ let
       pkgs
       lib
       system
+      andrewEnabled
+      aveEnabled
       allowUnfree
       gamesDesired
       discordDesired
@@ -29,6 +33,8 @@ let
       rarDesired
       ;
   };
+  andrew = import./andrew.nix { inherit pkgs andrewEnabled; };
+  ave = import./andrew.nix { inherit pkgs aveEnabled; };
   shared = import ./programs/shared.nix { inherit pkgs; };
   nixvim = import ./programs/nixvim.nix args;
   games = import ./programs/games.nix args;
@@ -49,8 +55,12 @@ in
     ./programs/thunderbird.nix
     ./programs/librewolf.nix
   ];
+  users = {
+    users = [ ] ++ andrew.andrew ++ ave.ave;
+  };
   programs.nixvim = nixvim.nixvim;
   programs.steam = games.steam;
+  programs.lutris = games.lutris;
 
   # Bootloader.
   boot.loader = {

@@ -3,7 +3,6 @@
   imports = [
     ./programs.nix
     ./kitty.nix
-    ./lutris.nix
     ./zsh.nix
   ];
 

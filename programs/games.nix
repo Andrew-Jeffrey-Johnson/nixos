@@ -2,6 +2,7 @@
   pkgs,
   allowUnfree,
   gamesDesired,
+  osConfig,
   ...
 }:
 let
@@ -12,9 +13,6 @@ let
     if gamesDesired then
       [
         # For Lutris games
-        pkgs.lutris
-        pkgs.winetricks
-        pkgs.wineWow64Packages.full
         pkgs.wineWow64Packages.fonts
       ]
     else
@@ -27,6 +25,14 @@ in
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     protontricks.enable = true;
+  };
+
+  lutris = {
+    enable = if gamesDesired then true else false;
+    winePackages = [ pkgs.wineWow64Packages.full ];
+    protonPackages = [ pkgs.proton-ge-bin ];
+    defaultWinePackage = pkgs.proton-ge-bin;
+    steamPackage = osConfig.programs.steam.package;
   };
 
   # Packages to install

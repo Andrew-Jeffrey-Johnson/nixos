@@ -1,16 +1,16 @@
 {
   pkgs,
-  andrewEnabled,
+  aveEnabled,
   ...
 }:
 {
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  andrew =
-    if andrewEnabled then
+  ave =
+    if aveEnabled then
       [
         {
           isNormalUser = true;
-          description = "Andrew Johnson";
+          description = "Avery Littman";
           extraGroups = [
             "networkmanager"
             "wheel"
