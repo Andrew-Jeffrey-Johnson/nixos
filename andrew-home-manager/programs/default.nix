@@ -84,6 +84,18 @@ in
       '';
       initExtra = "eval \"$(direnv hook bash)\"\n"; # hook direnv
     };
+    zsh = {
+      enable = true;
+      envExtra = ''
+        function y() {
+          local tmp cwd; tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+          command yazi "$@" --cwd-file="$tmp"
+          IFS= read -r -d \'\' cwd < "$tmp"
+          [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd" || builtin true
+          command rm -f -- "$tmp"
+        }
+      '';
+    };
     git = {
       enable = true;
       lfs.enable = true;

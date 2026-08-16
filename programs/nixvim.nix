@@ -71,6 +71,48 @@
     viAlias = true;
     vimAlias = true;
     luaLoader.enable = true;
+
+    # Custom groups
+    autoGroups = {
+      NeotreeOnOpen = {
+        clear = true;
+      };
+      NeotreeOnNewTab = {
+        clear = true;
+      };
+    };
+
+    # Everything that is automatically done when Neovim starts
+    autoCmd = [
+      {
+        event = [ "VimEnter" ];
+        pattern = "*";
+        group = "NeotreeOnOpen";
+        callback = {
+          __raw = ''
+            function(_)
+                text_win_id = vim.api.nvim_get_current_win()
+                vim.cmd("Neotree")
+                vim.api.nvim_set_current_win(text_win_id)
+            end
+          '';
+        };
+      }
+      {
+        event = [ "TabNew" ];
+        pattern = "*";
+        group = "NeotreeOnNewTab";
+        callback = {
+          __raw = ''
+            function(_)
+                text_win_id = vim.api.nvim_get_current_win()
+                vim.cmd("Neotree")
+                vim.api.nvim_set_current_win(text_win_id)
+            end
+          '';
+        };
+      }
+    ];
     #----------Plugins---------------
     plugins.neorg = {
       enable = true;
@@ -583,6 +625,7 @@
             enabled = true;
             leave_dirs_open = true;
           };
+          neo-tree-netrw-hijack = "disabled";
         };
         hide_dotfiles = false;
       };
@@ -619,17 +662,17 @@
           gdb = {
             command = "${pkgs.gdb}/bin/gdb";
             args = [
-              "--interpreter=dap" 
-              "--eval-command" 
-              "set print pretty on" 
+              "--interpreter=dap"
+              "--eval-command"
+              "set print pretty on"
             ];
           };
           rust-gdb = {
             command = "${pkgs.rustc}/bin/rust-gdb";
             args = [
-              "--interpreter=dap" 
-              "--eval-command" 
-              "set print pretty on" 
+              "--interpreter=dap"
+              "--eval-command"
+              "set print pretty on"
             ];
           };
         };
