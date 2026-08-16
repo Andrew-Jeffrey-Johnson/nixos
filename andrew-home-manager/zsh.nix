@@ -8,19 +8,18 @@
     shellAliases = {
       ll = "ls -l";
     };
-    zplug = {
-      enable = true;
-      plugins = [
-        { name = "zsh-users/zsh-autosuggestions"; } # Simple plugin installation
-        {
-          name = "romkatv/powerlevel10k";
-          tags = [
-            "as:theme"
-            "depth:1"
-          ];
-        } # Installations with additional options. For the list of options, please refer to Zplug README.
-      ];
-    };
+    plugins = [
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+      {
+        name = "powerlevel10k-config";
+        src = ./.;
+        file = ".p10k.zsh";
+      }
+    ];
   };
   #environment.pathsToLink = [ "/share/zsh" ];
   home.file.".p10k.zsh".text = builtins.readFile ./.p10k.zsh;

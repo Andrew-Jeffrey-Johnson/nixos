@@ -71,23 +71,6 @@
     viAlias = true;
     vimAlias = true;
     luaLoader.enable = true;
-    /*
-      lsp.servers = {
-        rust_analyzer = {
-          enable = true;
-          activate = true;
-          settings = {
-            cmd = [
-              "rust-analyzer"
-            ];
-            filetypes = [
-              "rs"
-            ];
-            checkOnSave = true;
-          };
-        };
-      };
-    */
     #----------Plugins---------------
     plugins.neorg = {
       enable = true;
@@ -220,6 +203,11 @@
             rope.enabled = true;
             yapf.enabled = true;
           };
+        };
+        rust_analyzer = {
+          enable = true; # Rust
+          installCargo = true;
+          installRustc = true;
         };
         lua_ls.enable = true; # Lua
         cssls.enable = true; # CSS
@@ -430,7 +418,6 @@
     plugins.cmp-buffer.enable = true;
     plugins.cmp-path.enable = true;
     plugins.cmp-treesitter.enable = true;
-    plugins.dap.enable = true;
     plugins.trouble = {
       enable = true;
       settings = { };
@@ -580,6 +567,143 @@
     plugins.neotest.adapters.plenary.enable = true;
     plugins.img-clip.enable = true;
     #plugins.fzf-lua.enable = true;
+    plugins.yazi = {
+      enable = true;
+      settings = {
+        enable_mouse_support = true;
+      };
+    };
+    plugins.neo-tree = {
+      enable = true;
+      autoLoad = true;
+      settings = {
+        close_if_last_window = true;
+        filesystem = {
+          follow_current_file = {
+            enabled = true;
+            leave_dirs_open = true;
+          };
+        };
+        hide_dotfiles = false;
+      };
+    };
+    plugins.dap-ui = {
+      # Debugger UI
+      enable = false;
+      autoLoad = true;
+    };
+    plugins.dap-view = {
+      # Another Debugger UI
+      enable = true;
+      autoLoad = true;
+      settings = {
+        winbar = {
+          controls = {
+            enabled = true;
+          };
+        };
+        windows = {
+          terminal = {
+            position = "right";
+          };
+        };
+      };
+    };
+    plugins.dap-lldb = {
+      enable = true;
+    };
+    plugins.dap = {
+      enable = true;
+      adapters = {
+        executables = {
+          gdb = {
+            command = "${pkgs.gdb}/bin/gdb";
+            args = [
+              "--interpreter=dap" 
+              "--eval-command" 
+              "set print pretty on" 
+            ];
+          };
+          rust-gdb = {
+            command = "${pkgs.rustc}/bin/rust-gdb";
+            args = [
+              "--interpreter=dap" 
+              "--eval-command" 
+              "set print pretty on" 
+            ];
+          };
+        };
+      };
+      configurations = rec {
+        c = [
+          {
+            type = "gdb";
+            request = "launch";
+            name = "Launch";
+            program.__raw = ''
+              function()
+                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+              end
+            '';
+            cwd = "\${workspaceFolder}";
+            stopOnEntry = false;
+          }
+          {
+            type = "gdb";
+            request = "attach";
+            name = "Attach to process";
+            pid.__raw = "require('dap.utils').pick_process";
+            cwd = "\${workspaceFolder}";
+          }
+          #{
+          #  name = "Attach to gdbserver :4711";
+          #  type = "gdb";
+          #  request = "attach";
+          #  target = "localhost:4711";
+          #  program.__raw = ''
+          #    function()
+          #      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+          #    end
+          #  '';
+          #  cwd = "\${workspaceFolder}";
+          #}
+        ];
+        cpp = c;
+        rust = [
+          {
+            type = "rust-gdb";
+            request = "launch";
+            name = "Launch";
+            program.__raw = ''
+              function()
+                return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+              end
+            '';
+            cwd = "\${workspaceFolder}";
+            stopOnEntry = false;
+          }
+          {
+            type = "rust-gdb";
+            request = "attach";
+            name = "Attach to process";
+            pid.__raw = "require('dap.utils').pick_process";
+            cwd = "\${workspaceFolder}";
+          }
+          #{
+          #  name = "Attach to gdbserver :4711";
+          #  type = "rustgdb";
+          #  request = "attach";
+          #  target = "localhost:4711";
+          #  program.__raw = ''
+          #    function()
+          #      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+          #    end
+          #  '';
+          #  cwd = "\${workspaceFolder}";
+          #}
+        ];
+      };
+    };
     #----------End-Plugins----------------
     extraPlugins = [
     ];
