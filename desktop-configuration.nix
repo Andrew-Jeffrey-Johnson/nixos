@@ -33,8 +33,8 @@ let
       rarDesired
       ;
   };
-  andrew = import./andrew.nix { inherit pkgs andrewEnabled; };
-  ave = import./andrew.nix { inherit pkgs aveEnabled; };
+  andrew = import ./andrew.nix { inherit pkgs andrewEnabled; };
+  ave = import ./ave.nix { inherit pkgs aveEnabled; };
   shared = import ./programs/shared.nix { inherit pkgs; };
   nixvim = import ./programs/nixvim.nix args;
   games = import ./programs/games.nix args;
@@ -55,12 +55,11 @@ in
     ./programs/thunderbird.nix
     ./programs/librewolf.nix
   ];
-  users = {
-    users = [ ] ++ andrew.andrew ++ ave.ave;
-  };
+  users.users.andrew = andrew.andrew;
   programs.nixvim = nixvim.nixvim;
   programs.steam = games.steam;
-  programs.lutris = games.lutris;
+  #programs.lutris = games.lutris;
+  programs.zsh.enable = true; # Required to change default shell
 
   # Bootloader.
   boot.loader = {
@@ -202,8 +201,6 @@ in
   virtualisation.spiceUSBRedirection.enable = true;
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true; # enable copy and paste between host and guest
-
-  programs.zsh.enable = true; # Required to change default shell
 
   # Set environment variables
   environment = {

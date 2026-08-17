@@ -62,7 +62,7 @@
                   useUserPackages = true;
                   useGlobalPkgs = true;
                   extraSpecialArgs = args;
-                  users.andrew = import ./andrew-home-manager;
+                  users.andrew = import ./home-manager/default.nix;
                   backupFileExtension = "backup";
                 };
               }

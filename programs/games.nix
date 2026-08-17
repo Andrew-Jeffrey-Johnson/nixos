@@ -2,7 +2,6 @@
   pkgs,
   allowUnfree,
   gamesDesired,
-  osConfig,
   ...
 }:
 let
@@ -32,7 +31,7 @@ in
     winePackages = [ pkgs.wineWow64Packages.full ];
     protonPackages = [ pkgs.proton-ge-bin ];
     defaultWinePackage = pkgs.proton-ge-bin;
-    steamPackage = osConfig.programs.steam.package;
+    steamPackage = pkgs.steam;
   };
 
   # Packages to install
