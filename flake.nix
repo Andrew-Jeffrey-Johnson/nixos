@@ -48,6 +48,8 @@
               discordDesired = true;
               zoom-usDesired = true;
               rarDesired = true;
+              lutrisDesired = true;
+              steamDesired = true;
             };
           in
           nixpkgs.lib.nixosSystem {

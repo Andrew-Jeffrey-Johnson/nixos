@@ -15,6 +15,7 @@
   discordDesired,
   zoom-usDesired,
   rarDesired,
+  steamDesired,
   ...
 }:
 let
@@ -31,20 +32,21 @@ let
       discordDesired
       zoom-usDesired
       rarDesired
+      steamDesired
       ;
   };
   andrew = import ./users/andrew.nix { inherit pkgs andrewEnabled; };
   ave = import ./users/ave.nix { inherit pkgs aveEnabled; };
   shared = import ./programs/shared.nix { inherit pkgs; };
   nixvim = import ./programs/nixvim.nix args;
-  games = import ./programs/games.nix args;
+  steam = import ./programs/steam.nix args;
   discord = import ./programs/discord.nix args;
   zoom-us = import ./programs/zoom-us.nix args;
   rar = import ./programs/rar.nix args;
   software =
-    shared ++ nixvim.packages ++ games.packages ++ discord.packages ++ zoom-us.packages ++ rar.packages;
+    shared ++ nixvim.packages ++ steam.packages ++ discord.packages ++ zoom-us.packages ++ rar.packages;
   allowUnfreePredicate =
-    games.allowUnfreePredicate
+    steam.allowUnfreePredicate
     ++ discord.allowUnfreePredicate
     ++ zoom-us.allowUnfreePredicate
     ++ rar.allowUnfreePredicate;
@@ -57,8 +59,7 @@ in
   ];
   users.users = builtins.listToAttrs ([ ] ++ andrew.andrew ++ ave.ave);
   programs.nixvim = nixvim.nixvim;
-  programs.steam = games.steam;
-  #programs.lutris = games.lutris;
+  programs.steam = steam.steam;
   programs.zsh.enable = true; # Required to change default shell
 
   # Bootloader.
