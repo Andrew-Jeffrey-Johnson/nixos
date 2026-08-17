@@ -63,8 +63,7 @@
                   useGlobalPkgs = true;
                   extraSpecialArgs = args;
                   users = {
-                    andrew = ./andrew-home-manager.nix;
-                    ave = ./ave-home-manager.nix;
+                    andrew = ./home-manager/andrew.nix;
                   };
                   backupFileExtension = "backup";
                 };
