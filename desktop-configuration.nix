@@ -33,8 +33,8 @@ let
       rarDesired
       ;
   };
-  andrew = import ./andrew.nix { inherit pkgs andrewEnabled; };
-  ave = import ./ave.nix { inherit pkgs aveEnabled; };
+  andrew = import ./users/andrew.nix { inherit pkgs andrewEnabled; };
+  ave = import ./users/ave.nix { inherit pkgs aveEnabled; };
   shared = import ./programs/shared.nix { inherit pkgs; };
   nixvim = import ./programs/nixvim.nix args;
   games = import ./programs/games.nix args;
@@ -55,7 +55,7 @@ in
     ./programs/thunderbird.nix
     ./programs/librewolf.nix
   ];
-  users.users.andrew = andrew.andrew;
+  users.users = [ ] ++ andrew.andrew ++ ave.ave;
   programs.nixvim = nixvim.nixvim;
   programs.steam = games.steam;
   #programs.lutris = games.lutris;
