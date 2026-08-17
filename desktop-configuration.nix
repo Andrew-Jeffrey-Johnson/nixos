@@ -55,7 +55,7 @@ in
     ./programs/thunderbird.nix
     ./programs/librewolf.nix
   ];
-  users.users = [ ] ++ andrew.andrew ++ ave.ave;
+  users.users = builtins.listToAttrs ([ ] ++ andrew.andrew ++ ave.ave);
   programs.nixvim = nixvim.nixvim;
   programs.steam = games.steam;
   #programs.lutris = games.lutris;
