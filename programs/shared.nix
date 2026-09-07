@@ -9,7 +9,7 @@
   pkgs.duckdb # Stores commands from cli
   pkgs.sqlite # Database as a file
   pkgs.blender
-  pkgs.luanti # FOSS Minecraft
+  #pkgs.luanti # FOSS Minecraft
   #pkgs.waypipe # Enables application forwarding on Wayland similar to ssh -X
   pkgs.godot # Game development
   pkgs.kdePackages.ksystemlog # Desktop environment event viewer

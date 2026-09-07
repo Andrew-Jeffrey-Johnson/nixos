@@ -1,11 +1,14 @@
 # ~/home-manager/default.nix
-{
+{ lib, ... }: {
   imports = [
     ./programs.nix
     ./kitty.nix
     ./zsh.nix
-    ./lutris.nix
+    #    ./lutris.nix
+    ./gamingApps.nix
   ];
+
+  gamingApps.enable = true;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.

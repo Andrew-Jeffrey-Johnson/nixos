@@ -50,7 +50,6 @@
               aveEnabled = false;
               allowUnfree = true;
               gamesDesired = true;
-              discordDesired = true;
               zoom-usDesired = true;
               rarDesired = true;
               lutrisDesired = true;

@@ -1,12 +1,10 @@
-{
-  pkgs,
-  lutrisDesired,
-  gamesDesired,
-  ...
-}:
-{
-  programs.lutris = {
-    enable = if lutrisDesired && gamesDesired then true else false;
+{ pkgs }: {
+  name = "lutris";
+  game = true;
+  free = true;
+  #systemSettings = { };
+  homeSettings = {
+    enable = true;
     winePackages = [ pkgs.wineWow64Packages.full ];
     protonPackages = [ pkgs.proton-ge-bin ];
     defaultWinePackage = pkgs.proton-ge-bin;
