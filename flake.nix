@@ -16,6 +16,10 @@
       url = "github:nix-community/nixvim";
       #inputs.nixpkgs.follows = "nixpkgs"; # Devs don't test on latest
     };
+    libtexprintf = {
+      url = "github:bartp5/libtexprintf";
+      flake = false;
+    };
     nix-gaming = {
       url = "github:fufexan/nix-gaming/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,6 +37,7 @@
       nixvim,
       nix-gaming,
       ts,
+      libtexprintf,
     }@inputs:
     {
       nixosConfigurations = {

@@ -81,6 +81,22 @@ in
       "dmask=0077"
     ];
   };
+  fileSystems."/mnt/sshfs/luminlapid" = {
+    device = "nixos@10.0.0.183:/";
+    fsType = "sshfs";
+    options = [
+      # Filesystem options
+      "allow_other" # for non-root access
+      "_netdev" # this is a network fs
+      "x-systemd.automount" # mount on demand
+
+      # SSH options
+      "reconnect" # handle connection drops
+      "ServerAliveInterval=15" # keep connections alive
+      "IdentityFile=/var/secrets/id_ed25519"
+      "debug"
+    ];
+  };
 
   networking = {
     nat = {

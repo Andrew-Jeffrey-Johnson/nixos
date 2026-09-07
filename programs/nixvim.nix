@@ -7,6 +7,7 @@
 }:
 let
   tree-sitter = inputs.ts.packages.${system}.cli;
+  libtexprintf = inputs.libtexprintf;
 in
 {
   packages = [
@@ -19,6 +20,7 @@ in
     pkgs.shellcheck
     pkgs.isort
     tree-sitter
+    libtexprintf
     pkgs.ripgrep
     pkgs.fd
     pkgs.lazygit
@@ -101,15 +103,16 @@ in
       fileencoding = "utf-8"; # File-content encoding for the current buffer
       termguicolors = true; # Enables 24-bit RGB color in the |TUI|
       spell = false; # Highlight spelling mistakes (local to window)
-      wrap = false; # Prevent text from wrapping
+      wrap = true; # Prevent text from wrapping
+      linebreak = true; # Wrap by word, not character
+      textwidth = 0; # Maximum width of text that is being inserted.  A longer line will be
+      wrapmargin = 0;
 
       # Tab options
       tabstop = 2; # Number of spaces a <Tab> in the text stands for (local to buffer)
       shiftwidth = 2; # Number of spaces used for each step of (auto)indent (local to buffer)
       expandtab = true; # Expand <Tab> to spaces in Insert mode (local to buffer)
       autoindent = true; # Do clever autoindenting
-
-      textwidth = 0; # Maximum width of text that is being inserted.  A longer line will be
       #   broken after white space to get this width.
 
       # Folding
@@ -133,36 +136,36 @@ in
     };
 
     # Everything that is automatically done when Neovim starts
-    autoCmd = [
-      {
-        event = [ "VimEnter" ];
-        pattern = "*";
-        group = "NeotreeOnOpen";
-        callback = {
-          __raw = ''
-            function(_)
-                text_win_id = vim.api.nvim_get_current_win()
-                vim.cmd("Neotree")
-                vim.api.nvim_set_current_win(text_win_id)
-            end
-          '';
-        };
-      }
-      {
-        event = [ "TabNew" ];
-        pattern = "*";
-        group = "NeotreeOnNewTab";
-        callback = {
-          __raw = ''
-            function(_)
-                text_win_id = vim.api.nvim_get_current_win()
-                vim.cmd("Neotree")
-                vim.api.nvim_set_current_win(text_win_id)
-            end
-          '';
-        };
-      }
-    ];
+    # autoCmd = [
+    #   {
+    #     event = [ "VimEnter" ];
+    #     pattern = "*";
+    #     group = "NeotreeOnOpen";
+    #  callback = {
+    #  __raw = ''
+    #        function(_)
+    #            text_win_id = vim.api.nvim_get_current_win()
+    #            vim.cmd("Neotree")
+    #            vim.api.nvim_set_current_win(text_win_id)
+    #        end
+    #      '';
+    #    };
+    #  }
+    #{
+    #        event = [ "TabNew" ];
+    #        pattern = "*";
+    #        group = "NeotreeOnNewTab";
+    #        callback = {
+    #      __raw = ''
+    #        function(_)
+    #            text_win_id = vim.api.nvim_get_current_win()
+    #            vim.cmd("Neotree")
+    #            vim.api.nvim_set_current_win(text_win_id)
+    #        end
+    #      '';
+    #    };
+    #  }
+    # ];
     #----------Plugins---------------
     plugins.neorg = {
       enable = true;
@@ -191,7 +194,7 @@ in
       highlight.enable = true;
       indent.enable = true;
       languageRegister = {
-        markdown = "Avante";
+        #markdown = "Avante";
       };
     };
 
@@ -315,6 +318,7 @@ in
         #ansiblels.enable = true; #Ansible
         nginx_language_server.enable = true; # Nginx
         ltex = {
+          #LaTeX
           # English and grammar
           enable = true;
           autostart = true;
@@ -639,6 +643,17 @@ in
           "markdown"
           "Avante"
         ];
+        code = {
+          above = " ";
+          below = " ";
+          border = "thick";
+          language_pad = 2;
+          left_pad = 2;
+          position = "right";
+          right_pad = 2;
+          sign = false;
+          width = "block";
+        };
       };
     };
     plugins.snacks = {
