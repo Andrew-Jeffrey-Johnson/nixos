@@ -23,9 +23,13 @@ in
     # Options for modules imported in "imports" can be set here.
     home.packages = [
       pkgs.discord
-      pkgs.lutris
       pkgs.luanti
     ];
+    home.programs = {
+      lutris = {
+        enable = true;
+      };
+    };
   };
 
   meta = {

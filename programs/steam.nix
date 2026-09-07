@@ -28,17 +28,5 @@ in
   };
 
   # Packages to install
-  packages = restrictive ++ permissive; # Purposefully empty
-
-  # Steam has a restrictive license. Allow it just for Steam.
-  allowUnfreePredicate =
-    if gamesDesired && allowUnfree then
-      [
-        "steam"
-        "steam-unwrapped"
-        "steam-original"
-        "steam-run"
-      ]
-    else
-      [ ]; # Purposefully empty
+  packages = restrictive ++ permissive;
 }

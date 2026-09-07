@@ -12,7 +12,6 @@
   aveEnabled,
   allowUnfree,
   gamesDesired,
-  discordDesired,
   zoom-usDesired,
   rarDesired,
   steamDesired,
@@ -29,7 +28,6 @@ let
       aveEnabled
       allowUnfree
       gamesDesired
-      discordDesired
       zoom-usDesired
       rarDesired
       steamDesired
@@ -40,16 +38,9 @@ let
   shared = import ./programs/shared.nix { inherit pkgs; };
   nixvim = import ./programs/nixvim.nix args;
   steam = import ./programs/steam.nix args;
-  discord = import ./programs/discord.nix args;
   zoom-us = import ./programs/zoom-us.nix args;
   rar = import ./programs/rar.nix args;
-  software =
-    shared ++ nixvim.packages ++ steam.packages ++ discord.packages ++ zoom-us.packages ++ rar.packages;
-  allowUnfreePredicate =
-    steam.allowUnfreePredicate
-    ++ discord.allowUnfreePredicate
-    ++ zoom-us.allowUnfreePredicate
-    ++ rar.allowUnfreePredicate;
+  software = shared ++ nixvim.packages ++ steam.packages ++ zoom-us.packages ++ rar.packages;
 in
 {
   imports = [
@@ -201,7 +192,18 @@ in
 
   # Allow unfree packages
   #nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) allowUnfreePredicate;
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "steam"
+      "steam-unwrapped"
+      "steam-original"
+      "steam-run"
+      "zoom"
+      "rar"
+      "discord"
+      "discord-unwrapped"
+    ];
 
   # Install docker rootless
   virtualisation.docker.rootless = {
