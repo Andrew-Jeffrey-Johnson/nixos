@@ -2,6 +2,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -37,8 +38,83 @@ in
       #pkgs.websocat
       #pkgs.jq
       #pkgs.nvtopPackages.amd
+      pkgs.trash-cli # Command-line trash
+      pkgs.duckdb # Stores commands from cli
+      pkgs.sqlite # Database as a file
+      pkgs.wget # Get web pages
+      pkgs.wl-clipboard-rs # Terminal clipboard
+      # Compression programs
+      pkgs._7zz
+      pkgs.unzip
+      pkgs.vlc # Media player
+      pkgs.mpv # Media player
     ];
-    home.programs = {
+    programs = {
+      yazi = {
+        enable = true;
+        settings = {
+          yazi = {
+            mgr = {
+              show_hidden = true;
+              ratio = [
+                1
+                3
+                4
+              ];
+              opener = {
+                play = [
+                  {
+                    run = "mpv %s";
+                    orphan = true;
+                  }
+                ];
+                edit = [
+                  {
+                    run = "$EDITOR %s";
+                    block = true;
+                  }
+                ];
+                openBook = [
+                  {
+                    run = pkgs.epy + /bin/epy + " \"$@\"";
+                    block = true;
+                  }
+                ];
+              };
+              open = {
+                rules = [
+                  {
+                    mime = "text/*";
+                    use = "edit";
+                  }
+                  {
+                    mime = "video/*";
+                    use = "play";
+                  }
+                  {
+                    name = "*.epub";
+                    use = "openBook";
+                  }
+                  {
+                    url = "*";
+                    use = "librewolf";
+                  }
+                ];
+              };
+            };
+          };
+        };
+      };
+      kitty = {
+        enable = true;
+        shellIntegration.enableZshIntegration = true;
+        enableGitIntegration = true;
+        themeFile = "Catppuccin-Latte";
+        keybindings = {
+          "ctrl+shift+t" = "new_tab_with_cwd";
+          "ctrl+shift+enter" = "new_window_with_cwd";
+        };
+      };
       sftpman = {
         enable = true;
         mounts = {
@@ -81,6 +157,25 @@ in
             command rm -f -- "$tmp"
           }
         '';
+        enableCompletion = true;
+        autosuggestion.enable = true;
+        autocd = true;
+        syntaxHighlighting.enable = true;
+        shellAliases = {
+          ll = "ls -l";
+        };
+        plugins = [
+          {
+            name = "powerlevel10k";
+            src = pkgs.zsh-powerlevel10k;
+            file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+          }
+          {
+            name = "powerlevel10k-config";
+            src = ./.;
+            file = ".p10k.zsh";
+          }
+        ];
       };
       git = {
         enable = true;
@@ -109,22 +204,25 @@ in
         enable = true;
       };
     };
+
+    #environment.pathsToLink = [ "/share/zsh" ];
+    home.file.".p10k.zsh".text = builtins.readFile ./.p10k.zsh;
+
+    # To get virt-manager to find vms
+    dconf.settings = {
+      "org/virt-manager/virt-manager/connections" = {
+        autoconnect = [ "qemu:///system" ];
+        uris = [ "qemu:///system" ];
+      };
+    };
+
+    # Automount disks
+    services.udiskie = {
+      enable = true;
+    };
   };
 
   meta = {
     # Meta-attributes to provide extra information like documentation or maintainers.
-  };
-
-  # To get virt-manager to find vms
-  dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = [ "qemu:///system" ];
-      uris = [ "qemu:///system" ];
-    };
-  };
-
-  # Automount disks
-  services.udiskie = {
-    enable = true;
   };
 }

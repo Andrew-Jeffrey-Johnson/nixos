@@ -5,14 +5,14 @@
   ...
 }:
 let
-  cfg = config.gamingApps;
+  cfg = config.officeApps;
 in
 {
   options = {
     # Option declarations.
     # Declare what settings a user of this module can set.
     # Usually this includes a global "enable" option which defaults to false.
-    gamingApps.enable = lib.mkEnableOption "Gaming applications and support packages";
+    officeApps.enable = lib.mkEnableOption "Office applications and support packages";
   };
 
   config = lib.mkIf cfg.enable {
@@ -22,14 +22,20 @@ in
     # using the "option" above.
     # Options for modules imported in "imports" can be set here.
     home.packages = [
-      pkgs.discord
-      pkgs.luanti
-      pkgs.prismlauncher # Minecraft
+      # Office Programs
+      pkgs.libreoffice-fresh # Office suite
+      pkgs.hunspell # Spell-checker for libreoffice
+      pkgs.hunspellDicts.en_US-large # English dictionary for hunspell
+
+      # LaTeX Editor
+      pkgs.texstudio
+      pkgs.texliveFull
+      pkgs.poppler # PDF viwer used by texstudio
+
+      # Dictionary
+      pkgs.goldendict-ng # Multi-language dictionary app
     ];
     programs = {
-      lutris = {
-        enable = true;
-      };
     };
   };
 

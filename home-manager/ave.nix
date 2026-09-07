@@ -60,6 +60,5 @@
     VISUAL = "nvim";
     TERMINAL = "kitty";
     LANG = "en_US.UTF-8";
-    XDG_DATA_DIRS = "$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share";
   };
 }

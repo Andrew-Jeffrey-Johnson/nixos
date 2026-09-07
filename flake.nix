@@ -65,7 +65,7 @@
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
-                  useUserPackages = true;
+                  useUserPackages = false; # Only allow home.packages
                   useGlobalPkgs = true;
                   extraSpecialArgs = args;
                   users = {

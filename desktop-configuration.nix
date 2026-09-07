@@ -44,7 +44,6 @@ let
 in
 {
   imports = [
-    ./programs/yazi.nix
     ./programs/thunderbird.nix
     ./programs/librewolf.nix
   ];

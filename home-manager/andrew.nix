@@ -1,15 +1,14 @@
 # ~/home-manager/default.nix
 { lib, ... }: {
   imports = [
-    ./kitty.nix
-    ./zsh.nix
-    #    ./lutris.nix
     ./gamingApps.nix
     ./coreApps.nix
+    ./officeApps.nix
   ];
 
   gamingApps.enable = true;
   coreApps.enable = true;
+  officeApps.enable = true;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -64,6 +63,5 @@
     VISUAL = "nvim";
     TERMINAL = "kitty";
     LANG = "en_US.UTF-8";
-    XDG_DATA_DIRS = "$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share";
   };
 }
