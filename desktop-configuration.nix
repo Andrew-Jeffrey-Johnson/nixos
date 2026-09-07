@@ -45,7 +45,6 @@ in
 {
   imports = [
     ./programs/thunderbird.nix
-    ./programs/librewolf.nix
   ];
   users.users = builtins.listToAttrs ([ ] ++ andrew.andrew ++ ave.ave);
   programs.nixvim = nixvim.nixvim;

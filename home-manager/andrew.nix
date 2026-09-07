@@ -4,11 +4,15 @@
     ./gamingApps.nix
     ./coreApps.nix
     ./officeApps.nix
+    ./mediaCreationApps.nix
+    ./browserApps.nix
   ];
 
   gamingApps.enable = true;
   coreApps.enable = true;
   officeApps.enable = true;
+  mediaCreationApps.enable = true;
+  browserApps.enable = true;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
