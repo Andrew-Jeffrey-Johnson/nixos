@@ -101,22 +101,6 @@
         "type": "github"
       }
     },
-    "libtexprintf": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1772817400,
-        "narHash": "sha256-OXDcohfSfik0H1MpoznN267OVTYkW75N+TIF6lRRvZ0=",
-        "owner": "bartp5",
-        "repo": "libtexprintf",
-        "rev": "18977837b20649d56a651eb6bf846f1c914db77a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "bartp5",
-        "repo": "libtexprintf",
-        "type": "github"
-      }
-    },
     "nix-gaming": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -211,11 +195,9 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "libtexprintf": "libtexprintf",
         "nix-gaming": "nix-gaming",
         "nixpkgs": "nixpkgs",
-        "nixvim": "nixvim",
-        "ts": "ts"
+        "nixvim": "nixvim"
       }
     },
     "systems": {
@@ -231,27 +213,6 @@
         "owner": "nix-systems",
         "ref": "future-26.11",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "ts": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1786592432,
-        "narHash": "sha256-gFC9Z07Jq4WU91ZzwevyLLW82PaBRYTOuVuz1RvhJSU=",
-        "owner": "tree-sitter",
-        "repo": "tree-sitter",
-        "rev": "2b15649f93945469f563fee78967c7cbe3628e19",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tree-sitter",
-        "ref": "master",
-        "repo": "tree-sitter",
         "type": "github"
       }
     }

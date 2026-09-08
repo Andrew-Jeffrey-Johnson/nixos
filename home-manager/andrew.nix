@@ -7,7 +7,7 @@
     ./mediaCreationApps.nix
     ./browserApps.nix
     ./qualityOfLifeApps.nix
-    ./nixvim
+    ./nixvimApp.nix
   ];
 
   gamingApps.enable = true;
@@ -19,6 +19,7 @@
   mediaCreationApps.enable = true;
   browserApps.enable = true;
   qualityOfLifeApps.enable = true;
+  nixvimApp.enable = true;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.

@@ -16,10 +16,10 @@
       url = "github:nix-community/nixvim";
       #inputs.nixpkgs.follows = "nixpkgs"; # Devs don't test on latest
     };
-    libtexprintf = {
-      url = "github:bartp5/libtexprintf";
-      flake = false;
-    };
+    #libtexprintf = {
+    #  url = "github:bartp5/libtexprintf";
+    #  flake = false;
+    #};
     nix-gaming = {
       url = "github:fufexan/nix-gaming/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,7 +32,7 @@
       home-manager,
       nixvim,
       nix-gaming,
-      libtexprintf,
+      #libtexprintf,
     }@inputs:
     {
       nixosConfigurations = {
