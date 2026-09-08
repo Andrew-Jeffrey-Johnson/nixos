@@ -54,15 +54,18 @@
           nixpkgs.lib.nixosSystem {
             specialArgs = args;
             modules = [
-              nixvim.homeModules.nixvim
+              #nixvim.homeModules.nixvim
               ./desktop-configuration.nix
               ./hardware-configuration.nix
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
-                  useUserPackages = false; # Only allow home.packages
+                  useUserPackages = true; # Only allow home.packages
                   useGlobalPkgs = true;
-                  extraSpecialArgs = args;
+                  #extraSpecialArgs = [ inputs ];
+                  sharedModules = [
+                    nixvim.homeModules.nixvim
+                  ];
                   users = {
                     andrew = ./home-manager/andrew.nix;
                   };
