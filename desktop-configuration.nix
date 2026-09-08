@@ -35,19 +35,14 @@ let
   };
   andrew = import ./users/andrew.nix { inherit pkgs andrewEnabled; };
   ave = import ./users/ave.nix { inherit pkgs aveEnabled; };
-  shared = import ./programs/shared.nix { inherit pkgs; };
-  nixvim = import ./programs/nixvim.nix args;
   steam = import ./programs/steam.nix args;
   zoom-us = import ./programs/zoom-us.nix args;
-  rar = import ./programs/rar.nix args;
-  software = shared ++ nixvim.packages ++ steam.packages ++ zoom-us.packages ++ rar.packages;
+  software = steam.packages ++ zoom-us.packages ++ [ pkgs.kdePackages.ksystemlog ];
 in
 {
   imports = [
-    ./programs/thunderbird.nix
   ];
   users.users = builtins.listToAttrs ([ ] ++ andrew.andrew ++ ave.ave);
-  programs.nixvim = nixvim.nixvim;
   programs.steam = steam.steam;
   programs.zsh.enable = true; # Required to change default shell
 

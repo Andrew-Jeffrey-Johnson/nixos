@@ -5,14 +5,14 @@
   ...
 }:
 let
-  cfg = config.browseApps;
+  cfg = config.browserApps;
 in
 {
   options = {
     # Option declarations.
     # Declare what settings a user of this module can set.
     # Usually this includes a global "enable" option which defaults to false.
-    browseApps.enable = lib.mkEnableOption "Internet browsers and applications to support them";
+    browserApps.enable = lib.mkEnableOption "Internet browsers and applications to support them";
   };
 
   config = lib.mkIf cfg.enable {

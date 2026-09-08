@@ -14,6 +14,7 @@ in
     # Declare what settings a user of this module can set.
     # Usually this includes a global "enable" option which defaults to false.
     coreApps.enable = lib.mkEnableOption "Core packages for basic functionality";
+    coreApps.allowUnfree = lib.mkEnableOption "Add optional unfree software";
   };
 
   config = lib.mkIf cfg.enable {
@@ -46,8 +47,10 @@ in
       # Compression programs
       pkgs._7zz
       pkgs.unzip
+      (lib.mkIf cfg.allowUnfree pkgs.rar)
       pkgs.vlc # Media player
       pkgs.mpv # Media player
+      pkgs.pgadmin4 # Server that hosts a website to view PostgreSQL database
     ];
     programs = {
       yazi = {

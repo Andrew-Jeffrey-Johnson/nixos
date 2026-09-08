@@ -6,13 +6,19 @@
     ./officeApps.nix
     ./mediaCreationApps.nix
     ./browserApps.nix
+    ./qualityOfLifeApps.nix
+    ./nixvim
   ];
 
   gamingApps.enable = true;
-  coreApps.enable = true;
+  coreApps = {
+    enable = true;
+    allowUnfree = true;
+  };
   officeApps.enable = true;
   mediaCreationApps.enable = true;
   browserApps.enable = true;
+  qualityOfLifeApps.enable = true;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.

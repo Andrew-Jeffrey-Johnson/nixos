@@ -24,10 +24,6 @@
       url = "github:fufexan/nix-gaming/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ts = {
-      url = "github:tree-sitter/tree-sitter/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
   outputs =
     {
@@ -36,7 +32,6 @@
       home-manager,
       nixvim,
       nix-gaming,
-      ts,
       libtexprintf,
     }@inputs:
     {
@@ -59,7 +54,7 @@
           nixpkgs.lib.nixosSystem {
             specialArgs = args;
             modules = [
-              nixvim.nixosModules.nixvim
+              nixvim.homeModules.nixvim
               ./desktop-configuration.nix
               ./hardware-configuration.nix
               home-manager.nixosModules.home-manager

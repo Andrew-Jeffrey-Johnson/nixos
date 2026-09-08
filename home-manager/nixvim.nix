@@ -6,7 +6,6 @@
   ...
 }:
 let
-  tree-sitter = inputs.ts.packages.${system}.cli;
   libtexprintf = inputs.libtexprintf;
 in
 {
@@ -19,7 +18,6 @@ in
     pkgs.sqlite
     pkgs.shellcheck
     pkgs.isort
-    tree-sitter
     libtexprintf
     pkgs.ripgrep
     pkgs.fd
