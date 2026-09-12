@@ -12,6 +12,9 @@
   imports = [
     ./configuration-modules/bluetooth.nix
     ./configuration-modules/steam.nix
+    ./configuration-modules/virtualization.nix
+    ./configuration-modules/networking.nix
+    ./configuration-modules/localWiki.nix
   ];
   users.users = {
     andrew = {
@@ -35,6 +38,9 @@
   programs.zsh.enable = true; # Required to change default shell
   steam.enable = true;
   bluetooth.enable = true;
+  virtualization.enable = true;
+  networking.enable = true;
+  localWiki.enable = true;
 
   # Bootloader.
   boot.loader = {
@@ -74,29 +80,6 @@
   #    "debug"
   #  ];
   #};
-
-  networking = {
-    nat = {
-      enable = true;
-      internalInterfaces = [ "ve-+" ]; # ve-+ is a wildcard that matches all container interfaces
-      externalInterface = "ens3";
-      # Lazy IPv6 connectivity for the container
-      enableIPv6 = true;
-    };
-    hostName = "nixos"; # Define your hostname.
-    #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-    # Configure network proxy if necessary
-    # networking.proxy.default = "http://user:password@proxy:port/";
-    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-    # Enable networking
-    networkmanager = {
-      enable = true;
-      # If you are using Network Manager, you need to explicitly prevent it from managing container interfaces
-      unmanaged = [ "interface-name:ve-*" ];
-    };
-  };
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -228,38 +211,6 @@
     autoStart = true; # optional: starts Sunshine automatically on login
     capSysAdmin = true;
     openFirewall = true;
-  };
-
-  # For local wiki
-  services.mediawiki = {
-    enable = true;
-    name = "Sample MediaWiki";
-    httpd.virtualHost = {
-      hostName = "localhost";
-      adminAddr = "andrew.jeffrey.johnson@gmail.com";
-    };
-    # Administrator account username is admin.
-    # Set initial password to "cardbotnine" for the account admin.
-    passwordFile = pkgs.writeText "password" "cardbotnine";
-    extraConfig = ''
-      # Disable anonymous editing
-      $wgGroupPermissions['*']['edit'] = false;
-    '';
-
-    extensions = {
-      # some extensions are included and can enabled by passing null
-      VisualEditor = null;
-
-      # https://www.mediawiki.org/wiki/Extension:TemplateStyles
-      TemplateStyles = pkgs.fetchzip {
-        url = "https://extdist.wmflabs.org/dist/extensions/TemplateStyles-REL1_40-5c3234a.tar.gz";
-        hash = "sha256-IygCDgwJ+hZ1d39OXuJMrkaxPhVuxSkHy9bWU5NeM/E=";
-      };
-      SyntaxHighlight = pkgs.fetchzip {
-        url = "https://extdist.wmflabs.org/dist/extensions/SyntaxHighlight_GeSHi-REL1_45-15d5b9b.tar.gz";
-        hash = "sha256-ghIS1hn0ZQjwXL8Zb+2sjdNwROzdZZpeSnO7xQtKCXo=";
-      };
-    };
   };
 
   # AI chatbot as a systemd service
