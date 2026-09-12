@@ -2,17 +2,18 @@
   config,
   lib,
   pkgs,
+  nixgl,
   ...
 }:
 let
-  cfg = config.fonts;
+  cfg = config.nixglSupport;
 in
 {
   options = {
     # Option declarations.
     # Declare what settings a user of this module can set.
     # Usually this includes a global "enable" option which defaults to false.
-    fonts.enable = lib.mkEnableOption "Adds nerdfonts.";
+    nixglSupport.enable = lib.mkEnableOption "Enables gpu-based applications for home-manager applictaions installed on non-NixOS distributions.";
   };
 
   config = lib.mkIf cfg.enable {
@@ -21,14 +22,10 @@ in
     # Usually these depend on whether a user of this module chose to "enable" it
     # using the "option" above.
     # Options for modules imported in "imports" can be set here.
-    fonts.fontconfig.enable = true;
-    home.packages = [
-      # Nerdfonts
-      pkgs.nerd-fonts.jetbrains-mono
-      pkgs.nerd-fonts.fira-code
-      pkgs.font-awesome
-      pkgs.dejavu_fonts
-    ];
+    targets.genericLinux.nixGL = {
+      packages = nixgl.packages;
+      #defaultWrapper = "mesa";
+    };
   };
 
   meta = {

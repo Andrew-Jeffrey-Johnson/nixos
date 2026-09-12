@@ -179,22 +179,6 @@
       "discord-unwrapped"
     ];
 
-  # Install docker rootless
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
-  };
-
-  # Install waydroid for running Android apps in containers
-  virtualisation.waydroid.enable = true;
-
-  # Emulation and virtualization
-  programs.virt-manager.enable = true;
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
-  services.qemuGuest.enable = true;
-  services.spice-vdagentd.enable = true; # enable copy and paste between host and guest
-
   # Set environment variables
   environment = {
     shells = [
@@ -210,13 +194,6 @@
     # $ nix search wget
     systemPackages = [ pkgs.neovim ];
   };
-
-  # Get all the nerfonts fonts
-  fonts.packages = [
-    pkgs.dejavu_fonts
-    pkgs.font-awesome
-  ]
-  ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   #services.pcscd.enable = true;
   programs.gnupg.agent = {

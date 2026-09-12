@@ -9,6 +9,7 @@
     ./qualityOfLifeApps.nix
     ./nixvimApp.nix
     ./fonts.nix
+    ./nixglSupport.nix
   ];
 
   gamingApps.enable = true;
@@ -25,6 +26,7 @@
   qualityOfLifeApps.enable = true;
   nixvimApp.enable = true;
   fonts.enable = true;
+  nixglSupport.enable = false;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.

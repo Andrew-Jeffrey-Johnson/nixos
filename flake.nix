@@ -29,6 +29,7 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixgl.url = "github:nix-community/nixGL";
   };
   outputs =
     {
@@ -38,6 +39,7 @@
       nixvim,
       nix-gaming,
       agenix,
+      nixgl,
     }@inputs:
     {
       nixosConfigurations = {
