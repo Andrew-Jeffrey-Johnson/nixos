@@ -24,6 +24,11 @@
       url = "github:fufexan/nix-gaming/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix = {
+      # For Secrets
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -32,48 +37,37 @@
       home-manager,
       nixvim,
       nix-gaming,
-      #libtexprintf,
+      agenix,
     }@inputs:
     {
       nixosConfigurations = {
-        andrew =
-          let
-            args = {
-              inherit inputs;
-              system = "x86_64-linux";
-              andrewEnabled = true;
-              aveEnabled = false;
-              allowUnfree = true;
-              gamesDesired = true;
-              zoom-usDesired = true;
-              rarDesired = true;
-              lutrisDesired = true;
-              steamDesired = true;
-            };
-          in
-          nixpkgs.lib.nixosSystem {
-            specialArgs = args;
-            modules = [
-              #nixvim.homeModules.nixvim
-              ./desktop-configuration.nix
-              ./hardware-configuration.nix
-              home-manager.nixosModules.home-manager
-              {
-                home-manager = {
-                  useUserPackages = true; # Only allow home.packages
-                  useGlobalPkgs = true;
-                  #extraSpecialArgs = [ inputs ];
-                  sharedModules = [
-                    nixvim.homeModules.nixvim
-                  ];
-                  users = {
-                    andrew = ./home-manager/andrew.nix;
-                  };
-                  backupFileExtension = "backup";
-                };
-              }
-            ];
+        andrew = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            system = "x86_64-linux";
           };
+          modules = [
+            #nixvim.nixosModules.nixvim
+            agenix.nixosModules.default
+            ./desktop-configuration.nix
+            ./hardware-configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useUserPackages = true; # Only allow home.packages
+                useGlobalPkgs = true;
+                #extraSpecialArgs = [ inputs ];
+                sharedModules = [
+                  nixvim.homeModules.nixvim
+                  agenix.homeManagerModules.default
+                ];
+                users = {
+                  andrew = ./home-manager/andrew.nix;
+                };
+                backupFileExtension = "backup";
+              };
+            }
+          ];
+        };
         avery =
           let
             system = "x86_64-linux";

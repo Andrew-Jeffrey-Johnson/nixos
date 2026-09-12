@@ -15,7 +15,10 @@
     enable = true;
     allowUnfree = true;
   };
-  officeApps.enable = true;
+  officeApps = {
+    enable = true;
+    allowUnfree = true;
+  };
   mediaCreationApps.enable = true;
   browserApps.enable = true;
   qualityOfLifeApps.enable = true;

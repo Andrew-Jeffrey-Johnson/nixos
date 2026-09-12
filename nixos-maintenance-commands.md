@@ -1,34 +1,34 @@
-* Removes missing store entries and re-installs damanged store entries.
+# Removes missing store entries and re-installs damanged store entries.
   sudo nix-store --repair --verify --check-contents
 
-* Deletes all unreachable or >14-day-old store objects, profiles, and configurations.
+# Deletes all unreachable or >14-day-old store objects, profiles, and configurations.
   sudo nix-collect-garbage --delete-older-than 14d
 
-* Optimize Nix Store:
+# Optimize Nix Store:
   sudo nix store optimise
 
-* List and delete old generations
+# List and delete old generations
   nix-env --list-generations
   nix-env --delete-generations old
 
-* Monitor system health
+# Monitor system health
   journalctl -xe
 
-* Update home-manager
+# Update home-manager
   nix-channel --update
   home-manager switch
 
-* Update boot loader:
+# Update boot loader:
   sudo nixos-rebuild --install-bootloader boot
   sudo nixos-rebuild boot --flake /home/andrew/nixos/#andrew
 
-* Update configuration.nix:
+# Update configuration.nix:
   sudo nixos-rebuild switch --upgrade
 
-* Generate a new hardware configuration
+# Generate a new hardware configuration
   nixos-generate-config --dir /home/andrew/nixos
 
-* Update configuration.nix with Flakes:
+# Update configuration.nix with Flakes:
   sudo nixos-rebuild switch --flake /home/andrew/nixos/#andrew
   sudo nixos-rebuild switch --flake /etc/nixos/#avery
   sudo nixos-rebuild switch --flake /etc/nixos/#server

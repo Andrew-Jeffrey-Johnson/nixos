@@ -4,46 +4,40 @@
 # Apply changes via:
 # sudo nixos-rebuild switch --upgrade
 {
-  inputs,
   pkgs,
   lib,
-  system,
-  andrewEnabled,
-  aveEnabled,
-  allowUnfree,
-  gamesDesired,
-  zoom-usDesired,
-  rarDesired,
-  steamDesired,
   ...
 }:
-let
-  args = {
-    inherit
-      inputs
-      pkgs
-      lib
-      system
-      andrewEnabled
-      aveEnabled
-      allowUnfree
-      gamesDesired
-      zoom-usDesired
-      rarDesired
-      steamDesired
-      ;
-  };
-  andrew = import ./users/andrew.nix { inherit pkgs andrewEnabled; };
-  ave = import ./users/ave.nix { inherit pkgs aveEnabled; };
-  steam = import ./programs/steam.nix args;
-  zoom-us = import ./programs/zoom-us.nix args;
-  software = steam.packages ++ zoom-us.packages ++ [ pkgs.kdePackages.ksystemlog ];
-in
 {
   imports = [
+    ./configuration-modules/bluetooth.nix
   ];
-  users.users = builtins.listToAttrs ([ ] ++ andrew.andrew ++ ave.ave);
-  programs.steam = steam.steam;
+  users.users = {
+    andrew = {
+      enable = true;
+      name = "andrew";
+      isNormalUser = true;
+      description = "Andrew Johnson";
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "input"
+        "docker"
+        "libvirtd"
+        "adbusers"
+        "fuse"
+      ];
+      shell = pkgs.zsh;
+    };
+  };
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+    protontricks.enable = true;
+  };
+
   programs.zsh.enable = true; # Required to change default shell
 
   # Bootloader.
@@ -56,6 +50,8 @@ in
       enable = true;
     };
   };
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.initrd.kernelModules = [ "amdgpu" ]; # Video drivers
 
   fileSystems."/boot" = {
     options = [
@@ -65,22 +61,23 @@ in
       "dmask=0077"
     ];
   };
-  fileSystems."/mnt/sshfs/luminlapid" = {
-    device = "nixos@10.0.0.183:/";
-    fsType = "sshfs";
-    options = [
-      # Filesystem options
-      "allow_other" # for non-root access
-      "_netdev" # this is a network fs
-      "x-systemd.automount" # mount on demand
+  # sshfs is depricated
+  #fileSystems."/mnt/sshfs/luminlapid" = {
+  #  device = "nixos@10.0.0.183:/";
+  #  fsType = "sshfs";
+  #  options = [
+  #    # Filesystem options
+  #    "allow_other" # for non-root access
+  #    "_netdev" # this is a network fs
+  #    "x-systemd.automount" # mount on demand
 
-      # SSH options
-      "reconnect" # handle connection drops
-      "ServerAliveInterval=15" # keep connections alive
-      "IdentityFile=/var/secrets/id_ed25519"
-      "debug"
-    ];
-  };
+  #    # SSH options
+  #    "reconnect" # handle connection drops
+  #    "ServerAliveInterval=15" # keep connections alive
+  #    "IdentityFile=/var/secrets/id_ed25519"
+  #    "debug"
+  #  ];
+  #};
 
   networking = {
     nat = {
@@ -100,7 +97,8 @@ in
     # Enable networking
     networkmanager = {
       enable = true;
-      unmanaged = [ "interface-name:ve-*" ]; # If you are using Network Manager, you need to explicitly prevent it from managing container interfaces
+      # If you are using Network Manager, you need to explicitly prevent it from managing container interfaces
+      unmanaged = [ "interface-name:ve-*" ];
     };
   };
 
@@ -145,20 +143,17 @@ in
     };
   };
 
-  # Bluetooth
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-  services.blueman.enable = false;
-  hardware.bluetooth.settings = {
-    General = {
-      Enable = "Source,Sink,Media,Socket";
-    };
-  };
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.initrd.kernelModules = [ "amdgpu" ]; # Video drivers
-
+  bluetooth.enable = true;
   hardware = {
+    bluetooth = {
+      enable = true; # enables support for Bluetooth
+      powerOnBoot = true; # powers up the default Bluetooth controller on boot
+      settings = {
+        General = {
+          Enable = "Source,Sink,Media,Socket";
+        };
+      };
+    };
     graphics = {
       enable = true;
       enable32Bit = true;
@@ -227,7 +222,7 @@ in
     };
     # List packages installed in system profile. To search, run:
     # $ nix search wget
-    systemPackages = software;
+    systemPackages = [ pkgs.neovim ];
   };
 
   # Get all the nerfonts fonts
@@ -237,7 +232,7 @@ in
   ]
   ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
-  services.pcscd.enable = true;
+  #services.pcscd.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -257,12 +252,12 @@ in
   };
 
   # Remote desktop with RDP (XRDP)
-  services.xrdp = {
-    enable = true;
-    defaultWindowManager = "startplasma-wayland";
-    openFirewall = true;
-    audio.enable = true;
-  };
+  #services.xrdp = {
+  #  enable = true;
+  #  defaultWindowManager = "startplasma-wayland";
+  #  openFirewall = true;
+  #  audio.enable = true;
+  #};
 
   # Sunshine is the remote desktop for Moonshine
   services.sunshine = {

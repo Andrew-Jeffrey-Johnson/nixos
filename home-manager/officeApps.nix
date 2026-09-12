@@ -13,6 +13,7 @@ in
     # Declare what settings a user of this module can set.
     # Usually this includes a global "enable" option which defaults to false.
     officeApps.enable = lib.mkEnableOption "Office applications and support packages";
+    officeApps.allowUnfree = lib.mkEnableOption "Allow unfree office applications";
   };
 
   config = lib.mkIf cfg.enable {
@@ -34,6 +35,8 @@ in
 
       # Dictionary
       pkgs.goldendict-ng # Multi-language dictionary app
+
+      (lib.mkIf cfg.allowUnfree pkgs.zoom-us)
     ];
     programs = {
       thunderbird = {
