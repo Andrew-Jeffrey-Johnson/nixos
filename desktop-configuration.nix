@@ -11,6 +11,7 @@
 {
   imports = [
     ./configuration-modules/bluetooth.nix
+    ./configuration-modules/steam.nix
   ];
   users.users = {
     andrew = {
@@ -30,15 +31,10 @@
       shell = pkgs.zsh;
     };
   };
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-    protontricks.enable = true;
-  };
 
   programs.zsh.enable = true; # Required to change default shell
+  steam.enable = true;
+  bluetooth.enable = true;
 
   # Bootloader.
   boot.loader = {
@@ -143,17 +139,7 @@
     };
   };
 
-  bluetooth.enable = true;
   hardware = {
-    bluetooth = {
-      enable = true; # enables support for Bluetooth
-      powerOnBoot = true; # powers up the default Bluetooth controller on boot
-      settings = {
-        General = {
-          Enable = "Source,Sink,Media,Socket";
-        };
-      };
-    };
     graphics = {
       enable = true;
       enable32Bit = true;
