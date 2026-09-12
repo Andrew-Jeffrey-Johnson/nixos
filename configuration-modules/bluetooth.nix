@@ -21,7 +21,7 @@ in
     # Usually these depend on whether a user of this module chose to "enable" it
     # using the "option" above.
     # Options for modules imported in "imports" can be set here.
-    systemPackages = [ ];
+    environment.systemPackages = [ ];
     hardware.bluetooth = {
       enable = true; # enables support for Bluetooth
       powerOnBoot = true; # powers up the default Bluetooth controller on boot
