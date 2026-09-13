@@ -28,9 +28,19 @@
     owner = "nixos";
     group = "users";
   };
+  #NFS Server
+  services.nfs.server = {
+    enable = true;
+    exports = ''
+      /export 192.168.1.10(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
+    '';
+  };
   networking = {
     firewall = {
-      allowedUDPPorts = [ 51820 ];
+      allowedUDPPorts = [
+        51820 # WireGuard
+        2049 # NFS
+      ];
     };
     # WireGuard VPN
     wireguard.interfaces = {
