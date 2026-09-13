@@ -40,12 +40,13 @@
   # Authentication for NFS server
   services.kerberos_server = {
     enable = true;
+    settings = "LUMINLAPID.COM";
   };
   security.krb5 = {
     enable = true;
     settings = {
       libdefaults = {
-        default_realm = "10.0.0.183";
+        default_realm = "LUMINLAPID.COM";
         ticket_lifetime = "24h";
         renew_lifetime = "7d";
         dns_lookup_realm = false;
