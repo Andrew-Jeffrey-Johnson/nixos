@@ -38,20 +38,62 @@
     '';
   };
   # Authentication for NFS server
-  services.kerberos_server = {
+  sssd = {
     enable = true;
-    settings = "LUMINLAPID.COM";
+    config = ''
+      [sssd]
+      domains = your_domain_lowercase
+      config_file_version = 2
+      services = nss, pam
+
+      [domain/your_domain_lowercase]
+      override_shell = /run/current-system/sw/bin/zsh
+      krb5_store_password_if_offline = True
+      cache_credentials = True
+      krb5_realm = LUMINLAPID.COM
+      realmd_tags = manages-system joined-with-adcli
+      id_provider = ad
+      fallback_homedir = /home/%u
+      ad_domain = luminlapid.com
+      use_fully_qualified_names = False
+      ldap_id_mapping = False
+      access_provider = ad
+      # Red Hat recommendation to reduce server queries
+      entry_cache_timeout = 14400
+      auth_provider = ad
+      chpass_provider = ad
+      ad_gpo_access_control = disabled
+      enumerate = False
+      dyndns_update = False
+      # Red Hat recommendation to reduce terminated by own WATCHDOG
+      timeout = 20
+      # Fast fallback in case of server interruption/unavailability
+      ldap_network_timeout = 3
+      ldap_opt_timeout = 10
+    '';
   };
   security.krb5 = {
     enable = true;
     settings = {
       libdefaults = {
         default_realm = "LUMINLAPID.COM";
-        ticket_lifetime = "24h";
-        renew_lifetime = "7d";
-        dns_lookup_realm = false;
         udp_preference_limit = 0;
       };
+    };
+    # Create a home directory when an AD user logs in
+    pam = {
+      makeHomeDir.umask = "077";
+      services.login.makeHomeDir = true;
+      services.sshd.makeHomeDir = true;
+    };
+    # Grant AD Domain Admin full sudo on Linux machines
+    sudo = {
+      # Use extraConfig because of blank space in 'domain admins'.
+      extraConfig = ''
+        %domain\ admins ALL=(ALL:ALL) NOPASSWD: ALL
+        Defaults:%domain\ admins env_keep+=TERMINFO_DIRS
+        Defaults:%domain\ admins env_keep+=TERMINFO
+      '';
     };
   };
   networking = {
@@ -134,6 +176,9 @@
       pkgs.neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       pkgs.git
       inputs.agenix.packages.${system}.default
+      pkgs.adcli
+      pkgs.realmd
+      pkgs.samba
     ];
   };
 
