@@ -50,6 +50,12 @@ in
         unmanaged = [ "interface-name:ve-*" ];
       };
     };
+    assertions = [
+      {
+        assertion = cfg.hostName != "nixos";
+        message = "You must specify a host name. It cannot be nixos.";
+      }
+    ];
   };
 
   meta = {

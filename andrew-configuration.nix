@@ -32,7 +32,7 @@
   steam.enable = true;
   bluetooth.enable = true;
   virtualization.enable = true;
-  networking = {
+  networkingSettings = {
     enable = true;
     hostName = "Andrews-desktop";
   };
