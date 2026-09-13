@@ -1,8 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -48,10 +47,10 @@
   };
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  #services.xserver.xkb = {
+  #  layout = "us";
+  #  variant = "";
+  #};
 
   nix = {
     settings = {
@@ -81,7 +80,7 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = false;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -261,6 +260,7 @@
     };
   };
   security.acme = {
+    # ACME protocol. Let's Encrypt is used by default.
     acceptTerms = true;
     defaults.email = "andrew.jeffrey.johnson@gmail.com";
   };

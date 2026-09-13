@@ -10,11 +10,7 @@
 }:
 {
   imports = [
-    ./configuration-modules/bluetooth.nix
-    ./configuration-modules/steam.nix
-    ./configuration-modules/virtualization.nix
-    ./configuration-modules/networking.nix
-    ./configuration-modules/localWiki.nix
+    ./configuration-modules
   ];
   users.users = {
     andrew = {
@@ -41,6 +37,13 @@
   virtualization.enable = true;
   networking.enable = true;
   localWiki.enable = true;
+  localPostgreSQL.enable = true;
+  services.printing.enable = true; # Enable CUPS to print documents.
+  sunshine.enable = true;
+  nixStoreSettings.enable = true;
+  internationalization.enable = true;
+  pipewire.enable = true;
+  kdePlasma.enable = true;
 
   # Bootloader.
   boot.loader = {
@@ -53,7 +56,6 @@
     };
   };
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.initrd.kernelModules = [ "amdgpu" ]; # Video drivers
 
   fileSystems."/boot" = {
     options = [
@@ -81,74 +83,8 @@
   #  ];
   #};
 
-  # Set your time zone.
-  time.timeZone = "America/Los_Angeles";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  nix = {
-    # Automatic garbage collection
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 14d";
-    };
-    settings = {
-      trusted-users = [
-        "root"
-        "@wheel"
-      ];
-      download-buffer-size = 500000000; # 500 MB
-      # Automatically optimize store every build
-      auto-optimise-store = true;
-      # Enable nix flakes
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-    };
-  };
-
-  hardware = {
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
-  };
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  programs.xwayland.enable = true; # Support for X11 apps
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   # Allow unfree packages
-  #nixpkgs.config.allowUnfree = true;
+  #nixpkgs.config.allowUnfree = true; # Allow any unfree software
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
@@ -173,8 +109,6 @@
       SYSTEMD_EDITOR = "nvim";
       VISUAL = "nvim";
     };
-    # List packages installed in system profile. To search, run:
-    # $ nix search wget
     systemPackages = [ pkgs.neovim ];
   };
 
@@ -185,8 +119,6 @@
   };
   services.dbus.packages = [ pkgs.gcr ];
 
-  # List services that you want to enable:
-
   security.sudo-rs = {
     enable = true;
   };
@@ -195,22 +127,6 @@
   services.openssh = {
     enable = true;
     allowSFTP = true;
-  };
-
-  # Remote desktop with RDP (XRDP)
-  #services.xrdp = {
-  #  enable = true;
-  #  defaultWindowManager = "startplasma-wayland";
-  #  openFirewall = true;
-  #  audio.enable = true;
-  #};
-
-  # Sunshine is the remote desktop for Moonshine
-  services.sunshine = {
-    enable = true;
-    autoStart = true; # optional: starts Sunshine automatically on login
-    capSysAdmin = true;
-    openFirewall = true;
   };
 
   # AI chatbot as a systemd service
@@ -228,32 +144,6 @@
   #   };
   # };
   #services.open-webui.enable = true;
-
-  #services.udisks2.enable = true;
-
-  # Databases
-  # database with a default user and password
-  services.postgresql = {
-    enable = true;
-    ensureDatabases = [ "mydatabase" ];
-    enableTCPIP = true;
-    # port = 5432;
-    authentication = pkgs.lib.mkOverride 10 ''
-      #type database DBuser origin-address auth-method
-      local all      all     trust
-      # ... other auth rules ...
-
-      # ipv4
-      host  all      all     127.0.0.1/32   trust
-      # ipv6
-      host  all      all     ::1/128        trust
-    '';
-    initialScript = pkgs.writeText "backend-initScript" ''
-      CREATE ROLE nixcloud WITH LOGIN PASSWORD 'nixcloud' CREATEDB;
-      CREATE DATABASE nixcloud;
-      GRANT ALL PRIVILEGES ON DATABASE nixcloud TO nixcloud;
-    '';
-  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
