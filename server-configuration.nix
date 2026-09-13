@@ -42,11 +42,11 @@
     enable = true;
     config = ''
       [sssd]
-      domains = your_domain_lowercase
+      domains = luminlapid.com
       config_file_version = 2
       services = nss, pam
 
-      [domain/your_domain_lowercase]
+      [domain/luminlapid.com]
       override_shell = /run/current-system/sw/bin/zsh
       krb5_store_password_if_offline = True
       cache_credentials = True
