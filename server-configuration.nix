@@ -38,7 +38,7 @@
     '';
   };
   # Authentication for NFS server
-  sssd = {
+  services.sssd = {
     enable = true;
     config = ''
       [sssd]
