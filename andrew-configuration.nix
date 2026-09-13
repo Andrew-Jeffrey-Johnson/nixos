@@ -28,22 +28,25 @@
     };
   };
 
-  programs.zsh.enable = true; # Required to change default shell
-  steam.enable = true;
-  bluetooth.enable = true;
-  virtualization.enable = true;
-  networkingSettings = {
-    enable = true;
-    hostName = "Andrews-desktop";
+  luminlapid = {
+    programs.zsh.enable = true; # Required to change default shell
+    steam.enable = true;
+    bluetooth.enable = true;
+    virtualization.enable = true;
+    networkingSettings = {
+      enable = true;
+      hostName = "Andrews-desktop";
+    };
+    localWiki.enable = true;
+    localPostgreSQL.enable = true;
+    sunshine.enable = true;
+    nixStoreSettings.enable = true;
+    internationalization.enable = true;
+    pipewire.enable = true;
+    kdePlasma.enable = true;
   };
-  localWiki.enable = true;
-  localPostgreSQL.enable = true;
+
   services.printing.enable = true; # Enable CUPS to print documents.
-  sunshine.enable = true;
-  nixStoreSettings.enable = true;
-  internationalization.enable = true;
-  pipewire.enable = true;
-  kdePlasma.enable = true;
 
   # Bootloader.
   boot.loader = {

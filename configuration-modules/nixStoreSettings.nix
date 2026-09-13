@@ -1,14 +1,13 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
-  cfg = config.nixStoreSettings;
+  cfg = config.luminlapid.nixStoreSettings;
 in
 {
-  options = {
+  options.luminlapid = {
     # Option declarations.
     # Declare what settings a user of this module can set.
     # Usually this includes a global "enable" option which defaults to false.

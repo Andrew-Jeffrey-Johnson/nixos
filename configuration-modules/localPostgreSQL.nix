@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.localPostgreSQL;
+  cfg = config.luminlapid.localPostgreSQL;
 in
 {
-  options = {
+  options.luminlapid = {
     # Option declarations.
     # Declare what settings a user of this module can set.
     # Usually this includes a global "enable" option which defaults to false.
