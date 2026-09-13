@@ -40,7 +40,6 @@
   # Authentication for NFS server
   services.kerberos_server = {
     enable = true;
-    settings.realms = [ "10.0.0.183" ];
   };
   security.krb5 = {
     enable = true;
