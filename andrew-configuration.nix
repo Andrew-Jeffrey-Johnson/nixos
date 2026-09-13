@@ -9,9 +9,6 @@
   ...
 }:
 {
-  imports = [
-    ./configuration-modules
-  ];
   users.users = {
     andrew = {
       enable = true;

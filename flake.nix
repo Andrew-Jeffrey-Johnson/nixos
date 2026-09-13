@@ -50,6 +50,8 @@
           modules = [
             #nixvim.nixosModules.nixvim
             agenix.nixosModules.default
+            ./configuration-modules
+            ./home-manager-modules
             ./desktop-configuration.nix
             ./hardware-configuration.nix
             home-manager.nixosModules.home-manager
@@ -63,7 +65,7 @@
                   agenix.homeManagerModules.default
                 ];
                 users = {
-                  andrew = ./home-manager/andrew.nix;
+                  andrew = ./andrew-home-manager.nix;
                 };
                 backupFileExtension = "backup";
               };
