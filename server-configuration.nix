@@ -34,8 +34,12 @@
     # You can add more IP addresses for a single entry like this:
     # /export 10.0.0.183(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
     exports = ''
-      /export 10.0.0.183(rw,fsid=0,no_subtree_check)
+      /export 10.0.0.183(rw,fsid=0,no_subtree_check,sec=krb5p)
     '';
+  };
+  # Authentication for NFS server
+  services.kerberos_server = {
+    enable = true;
   };
   networking = {
     firewall = {
