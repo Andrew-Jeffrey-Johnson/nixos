@@ -4,7 +4,7 @@
   ...
 }:
 let
-  cfg = config.luminlapid.networkingSettings;
+  cfg = config.luminlapid.networking;
 in
 {
   options.luminlapid = {
