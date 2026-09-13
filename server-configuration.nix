@@ -6,15 +6,16 @@
   system,
   inputs,
   pkgs,
-  agenix,
   ...
 }:
 {
-  internationalization.enable = true;
-  nixStoreSettings.enable = true;
-  networking = {
-    enable = true;
-    hostName = "luminlapid-server";
+  luminlapid = {
+    internationalization.enable = true;
+    nixStoreSettings.enable = true;
+    networking = {
+      enable = true;
+      hostName = "luminlapid-server";
+    };
   };
 
   # Bootloader.
