@@ -91,6 +91,7 @@
           nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system; };
             modules = [
+              agenix.nixosModules.default
               ./configuration-modules
               ./server-configuration.nix
               ./server-hardware-configuration.nix
