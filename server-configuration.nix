@@ -40,6 +40,19 @@
   # Authentication for NFS server
   services.kerberos_server = {
     enable = true;
+    settings.realms = [ "10.0.0.183" ];
+  };
+  security.krb5 = {
+    enable = true;
+    settings = {
+      libdefaults = {
+        default_realm = "10.0.0.183";
+        ticket_lifetime = "24h";
+        renew_lifetime = "7d";
+        dns_lookup_realm = false;
+        udp_preference_limit = 0;
+      };
+    };
   };
   networking = {
     firewall = {
