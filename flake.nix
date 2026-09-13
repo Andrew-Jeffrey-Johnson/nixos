@@ -51,8 +51,7 @@
             #nixvim.nixosModules.nixvim
             agenix.nixosModules.default
             ./configuration-modules
-            ./home-manager-modules
-            ./desktop-configuration.nix
+            ./andrew-configuration.nix
             ./hardware-configuration.nix
             home-manager.nixosModules.home-manager
             {
@@ -63,6 +62,7 @@
                 sharedModules = [
                   nixvim.homeModules.nixvim
                   agenix.homeManagerModules.default
+                  ./home-manager-modules
                 ];
                 users = {
                   andrew = ./andrew-home-manager.nix;
@@ -91,8 +91,9 @@
           nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system; };
             modules = [
+              ./configuration-modules
               ./server-configuration.nix
-              ./hardware-configuration.nix
+              ./server-hardware-configuration.nix
             ];
           };
       };
