@@ -29,11 +29,10 @@
   };
 
   luminlapid = {
-    programs.zsh.enable = true; # Required to change default shell
     steam.enable = true;
     bluetooth.enable = true;
     virtualization.enable = true;
-    networkingSettings = {
+    networking = {
       enable = true;
       hostName = "Andrews-desktop";
     };
@@ -46,6 +45,7 @@
     kdePlasma.enable = true;
   };
 
+  programs.zsh.enable = true; # Required to change default shell
   services.printing.enable = true; # Enable CUPS to print documents.
 
   # Bootloader.
