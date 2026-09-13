@@ -242,7 +242,6 @@
                   # select Python packages here
                   pandas
                   numpy
-                  nptyping
                   requests
                   pyngo
                   django
