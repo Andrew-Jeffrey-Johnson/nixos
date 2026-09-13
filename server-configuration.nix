@@ -72,12 +72,14 @@
       ldap_opt_timeout = 10
     '';
   };
-  security.krb5 = {
-    enable = true;
-    settings = {
-      libdefaults = {
-        default_realm = "LUMINLAPID.COM";
-        udp_preference_limit = 0;
+  security = {
+    krb5 = {
+      enable = true;
+      settings = {
+        libdefaults = {
+          default_realm = "LUMINLAPID.COM";
+          udp_preference_limit = 0;
+        };
       };
     };
     # Create a home directory when an AD user logs in
