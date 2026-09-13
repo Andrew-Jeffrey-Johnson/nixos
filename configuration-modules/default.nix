@@ -3,7 +3,7 @@
     ./bluetooth.nix
     ./steam.nix
     ./virtualization.nix
-    ./networking.nix
+    ./networkingSettings.nix
     ./localWiki.nix
     ./localPostgreSQL.nix
     ./sunshine.nix
