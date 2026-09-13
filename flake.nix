@@ -52,7 +52,7 @@
             agenix.nixosModules.default
             ./configuration-modules
             ./andrew-configuration.nix
-            ./hardware-configuration.nix
+            ./andrew-hardware-configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager = {
