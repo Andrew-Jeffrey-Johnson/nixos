@@ -10,10 +10,12 @@
   ...
 }:
 {
-  imports = [
-    # Include the results of the hardware scan.
-    #./hardware-configuration.nix
-  ];
+  internationalization.enable = true;
+  nixStoreSettings.enable = true;
+  networking = {
+    enable = true;
+    hostName = "luminlapid-server";
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -23,35 +25,12 @@
   age.secrets.wireguard-private-key = {
     file = ./secrets/wireguard-private-key.age;
     owner = "nixos";
-    group = "nixos";
+    group = "users";
   };
   networking = {
-    nat = {
-      enable = true;
-      internalInterfaces = [
-        "ve-+"
-        "wg0"
-      ]; # ve-+ is a wildcard that matches all container interfaces, wg0 is for wireguard
-      externalInterface = "ens3";
-      # Lazy IPv6 connectivity for the container
-      enableIPv6 = true;
-    };
     firewall = {
       allowedUDPPorts = [ 51820 ];
     };
-    hostName = "nixos"; # Define your hostname.
-    #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-    # Configure network proxy if necessary
-    # networking.proxy.default = "http://user:password@proxy:port/";
-    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-    # Enable networking
-    networkmanager = {
-      enable = true;
-      unmanaged = [ "interface-name:ve-*" ]; # If you are using Network Manager, you need to explicitly prevent it from managing container interfaces
-    };
-
     # WireGuard VPN
     wireguard.interfaces = {
       wg0 = {
@@ -97,40 +76,6 @@
     };
   };
 
-  # Set your time zone.
-  time.timeZone = "America/Los_Angeles";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  nix = {
-    settings = {
-      # Enable nix flakes
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-    };
-  };
-
   # Define a user account.
   users.users = {
     nixos = {
@@ -140,16 +85,12 @@
         "networkmanager"
         "wheel"
       ];
-      packages = [ ];
     };
     calibre-server = {
       isNormalUser = false; # Don't set group to users or create home
       description = "User that the calibre server runs under";
     };
   };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -161,9 +102,8 @@
     };
     systemPackages = [
       pkgs.neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      pkgs.nano
       pkgs.git
-      inputs.agenix.packages."x86_64-linux".default
+      inputs.agenix.packages.${system}.default
     ];
   };
 
@@ -336,6 +276,8 @@
       };
     };
   };
+
+  # Automated certificate authority for luminlapid.com
   security.acme = {
     acceptTerms = true;
     defaults.email = "andrew.jeffrey.johnson@gmail.com";

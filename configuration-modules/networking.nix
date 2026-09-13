@@ -13,6 +13,12 @@ in
     # Declare what settings a user of this module can set.
     # Usually this includes a global "enable" option which defaults to false.
     networking.enable = lib.mkEnableOption "Basic internet connection.";
+    networking.hostName = lib.mkOption {
+      type = lib.types.str;
+      default = "nixos";
+      example = "Andrews-desktop";
+      description = "What the system is known as by local and remote networks.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -30,7 +36,7 @@ in
         # Lazy IPv6 connectivity for the container
         enableIPv6 = true;
       };
-      hostName = "nixos"; # Define your hostname.
+      hostName = cfg.hostName; # Define your hostname.
       #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
       # Configure network proxy if necessary

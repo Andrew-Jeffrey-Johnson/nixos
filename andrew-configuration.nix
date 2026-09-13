@@ -32,7 +32,10 @@
   steam.enable = true;
   bluetooth.enable = true;
   virtualization.enable = true;
-  networking.enable = true;
+  networking = {
+    enable = true;
+    hostName = "Andrews-desktop";
+  };
   localWiki.enable = true;
   localPostgreSQL.enable = true;
   services.printing.enable = true; # Enable CUPS to print documents.
