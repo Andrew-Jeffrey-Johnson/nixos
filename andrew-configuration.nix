@@ -43,6 +43,7 @@
     internationalization.enable = true;
     pipewire.enable = true;
     kdePlasma.enable = true;
+    nfs.enable = true;
   };
 
   programs.zsh.enable = true; # Required to change default shell

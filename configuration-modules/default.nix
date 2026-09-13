@@ -11,5 +11,6 @@
     ./internationalization.nix
     ./pipewire.nix
     ./kdePlasma.nix
+    ./nfs.nix
   ];
 }
