@@ -14,7 +14,7 @@
     nixStoreSettings.enable = true;
     networking = {
       enable = true;
-      hostName = "luminlapid-server,localhost,andrew";
+      hostName = "luminlapid-server";
     };
   };
 
@@ -33,7 +33,7 @@
   #NFS Server
   fileSystems."/export/andrew" = {
     device = "/mnt/andrew";
-    fsType = "auto";
+    fsType = "none";
     options = [ "bind" ];
   };
   services.nfs.server = {
@@ -42,6 +42,7 @@
     lockdPort = 4001;
     mountdPort = 4002;
     statdPort = 4000;
+    extraNfsdConfig = "";
   };
   # You can add more IP addresses for a single entry like this:
   # /export 10.0.0.183(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
