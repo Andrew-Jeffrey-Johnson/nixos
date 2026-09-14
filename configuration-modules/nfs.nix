@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -30,6 +31,7 @@ in
     };
     # optional, but ensures rpc-statsd is running for on demand mounting
     boot.supportedFilesystems = [ "nfs" ];
+    security.wrappers."mount.nfs".source = "${pkgs.nfs-utils.out}/bin/mount.nfs";
   };
 
   meta = {
