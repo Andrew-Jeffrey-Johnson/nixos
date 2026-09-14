@@ -25,7 +25,7 @@ in
     boot.initrd.kernelModules = [ "nfs" ];
     environment.systemPackages = [ pkgs.nfs-utils ];
     fileSystems."/mnt/luminlapid-server-nfs" = {
-      device = "10.0.0.183:/andrew";
+      device = "nfs.luminlapid.com:/andrew";
       fsType = "nfs";
       options = [
         "users"
