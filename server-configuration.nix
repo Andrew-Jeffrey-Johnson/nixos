@@ -31,7 +31,7 @@
   };
   #NFS Server
   fileSystems."/export/andrew" = {
-    fsType = "auto";
+    fsType = "none";
     device = "/mnt/andrew";
     options = [ "bind" ];
   };
