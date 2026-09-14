@@ -22,7 +22,7 @@ in
     # Options for modules imported in "imports" can be set here.
     environment.systemPackages = [ ];
     fileSystems."/mnt/luminlapid-server-nfs" = {
-      device = "luminlapid:/";
+      device = "192.168.1.183:/";
       fsType = "nfs";
       options = [
         "x-systemd.automount"
