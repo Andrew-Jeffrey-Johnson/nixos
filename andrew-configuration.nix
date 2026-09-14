@@ -113,7 +113,10 @@
       SYSTEMD_EDITOR = "nvim";
       VISUAL = "nvim";
     };
-    systemPackages = [ pkgs.neovim ];
+    systemPackages = [
+      pkgs.neovim
+      pkgs.nfs-utils
+    ];
   };
 
   #services.pcscd.enable = true;
