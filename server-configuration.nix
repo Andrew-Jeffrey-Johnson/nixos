@@ -38,13 +38,18 @@
   };
   services.nfs.server = {
     enable = true;
-    # You can add more IP addresses for a single entry like this:
-    # /export 10.0.0.183(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
-    exports = ''
-      /export 192.168.100.183(insecure,rw,sync,no_subtree_check,crossmnt,fsid=0)
-      /export/andrew 192.168.100.183(rw,nohide,insecure,no_subtree_check)
-    '';
+    # fixed rpc.statd port; for firewall
+    lockdPort = 4001;
+    mountdPort = 4002;
+    statdPort = 4000;
   };
+  # You can add more IP addresses for a single entry like this:
+  # /export 10.0.0.183(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
+  services.nfs.server.exports = ''
+    /export 192.168.100.183/24(insecure,rw,sync,no_subtree_check,crossmnt,fsid=0)
+    /export/andrew 192.168.100.183/24(rw,nohide,insecure,no_subtree_check)
+  '';
+  services.nfs.server.createMountPoints = true;
   # Authentication for NFS server
   # services.sssd = {
   #   enable = true;
@@ -108,9 +113,31 @@
   };
   networking = {
     firewall = {
-      allowedUDPPorts = [
+      enable = true;
+      # for NFSv3; view with rpcinfo -p
+      allowedTCPPorts = [
+        111
         51820 # WireGuard
         2049 # NFS
+        4000
+        4001
+        4002
+        20048
+        80
+        443
+        25565
+      ];
+      allowedUDPPorts = [
+        111
+        51820 # WireGuard
+        2049 # NFS
+        4000
+        4001
+        4002
+        20048
+        80
+        443
+        25565
       ];
     };
     # WireGuard VPN
@@ -323,12 +350,6 @@
   # Enable SFTP
   services.openssh.allowSFTP = true;
 
-  # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-    25565
-  ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
