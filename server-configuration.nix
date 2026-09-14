@@ -35,7 +35,7 @@
     # You can add more IP addresses for a single entry like this:
     # /export 10.0.0.183(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
     exports = ''
-      /export 192.168.1.183(rw,sync,insecure,no_subtree_check,all_sqash)
+      /export 192.168.100.183(rw,sync,insecure,no_subtree_check,all_sqash)
     '';
   };
   # Authentication for NFS server
@@ -105,9 +105,6 @@
         51820 # WireGuard
         2049 # NFS
       ];
-    };
-    hosts = {
-      "10.0.0.183" = [ "luminlapid.com" ];
     };
     # WireGuard VPN
     wireguard.interfaces = {
@@ -354,6 +351,9 @@
         #root = "/home/nginx";
         #extraConfig = "autoindex on";
         tryFiles = "$uri =404";
+      };
+      "/nfs" = {
+        proxyPass = "192.168.100.183";
       };
     };
   };
