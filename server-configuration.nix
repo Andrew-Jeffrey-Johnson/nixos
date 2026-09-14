@@ -21,6 +21,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.supportedFilesystems = [ "nfs" ];
 
   # Secret for WireGuard
   age.secrets.wireguard-private-key = {
@@ -38,65 +39,65 @@
     '';
   };
   # Authentication for NFS server
-  services.sssd = {
-    enable = true;
-    config = ''
-      [sssd]
-      domains = luminlapid.com
-      config_file_version = 2
-      services = nss, pam
+  # services.sssd = {
+  #   enable = true;
+  #   config = ''
+  #     [sssd]
+  #     domains = luminlapid.com
+  #     config_file_version = 2
+  #     services = nss, pam
 
-      [domain/luminlapid.com]
-      override_shell = /run/current-system/sw/bin/zsh
-      krb5_store_password_if_offline = True
-      cache_credentials = True
-      krb5_realm = LUMINLAPID.COM
-      realmd_tags = manages-system joined-with-adcli
-      id_provider = ad
-      fallback_homedir = /home/%u
-      ad_domain = luminlapid.com
-      use_fully_qualified_names = False
-      ldap_id_mapping = False
-      access_provider = ad
-      # Red Hat recommendation to reduce server queries
-      entry_cache_timeout = 14400
-      auth_provider = ad
-      chpass_provider = ad
-      ad_gpo_access_control = disabled
-      enumerate = False
-      dyndns_update = False
-      # Red Hat recommendation to reduce terminated by own WATCHDOG
-      timeout = 20
-      # Fast fallback in case of server interruption/unavailability
-      ldap_network_timeout = 3
-      ldap_opt_timeout = 10
-    '';
-  };
+  #     [domain/luminlapid.com]
+  #     override_shell = /run/current-system/sw/bin/zsh
+  #     krb5_store_password_if_offline = True
+  #     cache_credentials = True
+  #     krb5_realm = LUMINLAPID.COM
+  #     realmd_tags = manages-system joined-with-adcli
+  #     id_provider = ad
+  #     fallback_homedir = /home/%u
+  #     ad_domain = luminlapid.com
+  #     use_fully_qualified_names = False
+  #     ldap_id_mapping = False
+  #     access_provider = ad
+  #     # Red Hat recommendation to reduce server queries
+  #     entry_cache_timeout = 14400
+  #     auth_provider = ad
+  #     chpass_provider = ad
+  #     ad_gpo_access_control = disabled
+  #     enumerate = False
+  #     dyndns_update = False
+  #     # Red Hat recommendation to reduce terminated by own WATCHDOG
+  #     timeout = 20
+  #     # Fast fallback in case of server interruption/unavailability
+  #     ldap_network_timeout = 3
+  #     ldap_opt_timeout = 10
+  #   '';
+  # };
   security = {
-    krb5 = {
-      enable = true;
-      settings = {
-        libdefaults = {
-          default_realm = "LUMINLAPID.COM";
-          udp_preference_limit = 0;
-        };
-      };
-    };
-    # Create a home directory when an AD user logs in
-    pam = {
-      makeHomeDir.umask = "077";
-      services.login.makeHomeDir = true;
-      services.sshd.makeHomeDir = true;
-    };
+    #  krb5 = {
+    #    enable = true;
+    #    settings = {
+    #      libdefaults = {
+    #        default_realm = "LUMINLAPID.COM";
+    #        udp_preference_limit = 0;
+    #      };
+    #    };
+    #  };
+    #  # Create a home directory when an AD user logs in
+    #  pam = {
+    #    makeHomeDir.umask = "077";
+    #    services.login.makeHomeDir = true;
+    #    services.sshd.makeHomeDir = true;
+    #  };
     # Grant AD Domain Admin full sudo on Linux machines
-    sudo = {
-      # Use extraConfig because of blank space in 'domain admins'.
-      extraConfig = ''
-        %domain\ admins ALL=(ALL:ALL) NOPASSWD: ALL
-        Defaults:%domain\ admins env_keep+=TERMINFO_DIRS
-        Defaults:%domain\ admins env_keep+=TERMINFO
-      '';
-    };
+    #sudo = {
+    #  # Use extraConfig because of blank space in 'domain admins'.
+    #  extraConfig = ''
+    #    %domain\ admins ALL=(ALL:ALL) NOPASSWD: ALL
+    #    Defaults:%domain\ admins env_keep+=TERMINFO_DIRS
+    #    Defaults:%domain\ admins env_keep+=TERMINFO
+    #  '';
+    #};
   };
   networking = {
     firewall = {
@@ -104,6 +105,9 @@
         51820 # WireGuard
         2049 # NFS
       ];
+    };
+    hosts = {
+      "10.0.0.183" = [ "luminlapid.com" ];
     };
     # WireGuard VPN
     wireguard.interfaces = {
