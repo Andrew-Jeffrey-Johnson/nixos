@@ -363,8 +363,11 @@
     };
   };
   services.nginx.virtualHosts."nfs.luminlapid.com" = {
-    "/" = {
-      proxyPass = "192.168.100.183:2049";
+    root = "/";
+    locations = {
+      "/" = {
+        proxyPass = "192.168.100.183:2049";
+      };
     };
   };
 
