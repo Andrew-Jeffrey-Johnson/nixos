@@ -30,6 +30,10 @@
     group = "users";
   };
   #NFS Server
+  fileSystems."/export/andrew" = {
+    device = "/mnt/andrew";
+    options = [ "bind" ];
+  };
   services.nfs.server = {
     enable = true;
     # You can add more IP addresses for a single entry like this:
