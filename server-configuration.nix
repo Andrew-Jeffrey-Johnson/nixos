@@ -35,7 +35,7 @@
     # You can add more IP addresses for a single entry like this:
     # /export 10.0.0.183(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
     exports = ''
-      /export 10.0.0.183(rw,fsid=0,no_subtree_check,all_sqash,anonuid=1000,anongid=100)
+      /export 10.0.0.183(rw,sync,insecure,no_subtree_check,all_sqash)
     '';
   };
   # Authentication for NFS server
