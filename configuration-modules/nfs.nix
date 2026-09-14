@@ -22,7 +22,7 @@ in
     # using the "option" above.
     # Options for modules imported in "imports" can be set here.
     boot.initrd.supportedFilesystems = [ "nfs" ];
-    kernelModules = [ "nfs" ];
+    boot.initrd.kernelModules = [ "nfs" ];
     environment.systemPackages = [ pkgs.nfs-utils ];
     fileSystems."/mnt/luminlapid-server-nfs" = {
       device = "10.0.0.183:/andrew";

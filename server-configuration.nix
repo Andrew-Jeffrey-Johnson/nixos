@@ -21,7 +21,8 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = [ "nfs" ];
+  boot.initrd.supportedFilesystems = [ "nfs" ];
+  kernelModules = [ "nfs" ];
 
   # Secret for WireGuard
   age.secrets.wireguard-private-key = {
@@ -188,6 +189,7 @@
       pkgs.adcli
       pkgs.realmd
       pkgs.samba
+      pkgs.nfs-utils
     ];
   };
 
