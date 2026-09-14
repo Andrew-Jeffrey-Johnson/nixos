@@ -31,7 +31,12 @@ in
     };
     # optional, but ensures rpc-statsd is running for on demand mounting
     boot.supportedFilesystems = [ "nfs" ];
-    security.wrappers."mount.nfs".source = "${pkgs.nfs-utils.out}/bin/mount.nfs";
+    security.wrappers."mount.nfs" = {
+      setuid = true;
+      owner = "root";
+      group = "root";
+      source = "${pkgs.nfs-utils.out}/bin/mount.nfs";
+    };
   };
 
   meta = {
