@@ -39,16 +39,9 @@
     enable = true;
     # You can add more IP addresses for a single entry like this:
     # /export 10.0.0.183(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
-    exports = {
-      "/exort" = {
-        pc001 = [
-          "rw"
-          "all_squash"
-          "anonuid=1000"
-          "anongid=100"
-        ];
-      };
-    };
+    exports = ''
+      /export         10.0.0.183(rw,fsid=0,no_subtree_check)
+    '';
   };
   # Authentication for NFS server
   # services.sssd = {
@@ -363,9 +356,6 @@
         #root = "/home/nginx";
         #extraConfig = "autoindex on";
         tryFiles = "$uri =404";
-      };
-      "/nfs" = {
-        proxyPass = "192.168.100.183";
       };
     };
   };
