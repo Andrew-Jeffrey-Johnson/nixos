@@ -22,11 +22,18 @@ in
     # Options for modules imported in "imports" can be set here.
     environment.systemPackages = [ ];
     fileSystems."/mnt/luminlapid-server-nfs" = {
-      device = "10.0.0.183:/";
+      device = "luminlapid:/";
       fsType = "nfs";
+      options = [
+        "x-systemd.automount"
+        "noauto"
+      ];
     };
     # optional, but ensures rpc-statsd is running for on demand mounting
     boot.supportedFilesystems = [ "nfs" ];
+    networking.hosts = {
+      "10.0.0.183" = [ "luminlapid" ];
+    };
   };
 
   meta = {
