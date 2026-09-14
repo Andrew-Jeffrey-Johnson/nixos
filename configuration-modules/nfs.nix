@@ -25,10 +25,12 @@ in
       device = "10.0.0.183:/";
       fsType = "nfs";
       options = [
-        "uid=1000"
-        "gid=100"
-        "dmask=007"
-        "fmask=117"
+        "defaults"
+        "user"
+        "rw"
+        "utf8"
+        "noauto"
+        "umask=000"
       ];
     };
     # optional, but ensures rpc-statsd is running for on demand mounting
