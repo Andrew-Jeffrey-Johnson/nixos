@@ -24,14 +24,6 @@ in
     fileSystems."/mnt/luminlapid-server-nfs" = {
       device = "10.0.0.183:/";
       fsType = "nfs";
-      options = [
-        "defaults"
-        "user"
-        "rw"
-        "utf8"
-        "noauto"
-        "umask=000"
-      ];
     };
     # optional, but ensures rpc-statsd is running for on demand mounting
     boot.supportedFilesystems = [ "nfs" ];
