@@ -33,24 +33,27 @@
   #NFS Server
   fileSystems."/export/andrew" = {
     device = "/mnt/andrew";
-    fsType = "nfs4";
-    options = [ "bind" ];
+    fsType = "auto";
+    #options = [
+    #  "nfsd=vers4.2"
+    #  "x-systemd.automount"
+    #  "noauto"
+    #];
   };
   services.nfs.server = {
     enable = true;
+    createMountPoints = true;
     # fixed rpc.statd port; for firewall
-    #lockdPort = 4001;
-    #mountdPort = 4002;
-    #statdPort = 4000;
-    #extraNfsdConfig = "";
+    lockdPort = 4001;
+    mountdPort = 4002;
+    statdPort = 4000;
+    extraNfsdConfig = "";
+    # You can add more IP addresses for a single entry like this:
+    # /export 10.0.0.183(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
     exports = ''
-      /export 192.0.2.0/24(rw,fsid=0,insecure,no_subtree_check)
-      /export/andrew 192.0.2.0/24(rw,insecure,no_subtree_check)
+      /export/andrew 10.0.0.22/24(rw,fsid=0,no_subtree_check)
     '';
   };
-  # You can add more IP addresses for a single entry like this:
-  # /export 10.0.0.183(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
-  services.nfs.server.createMountPoints = true;
   # Authentication for NFS server
   # services.sssd = {
   #   enable = true;
@@ -114,7 +117,7 @@
   };
   networking = {
     firewall = {
-      enable = true;
+      enable = false;
       # for NFSv3; view with rpcinfo -p
       allowedTCPPorts = [
         111
