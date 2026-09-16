@@ -33,7 +33,7 @@
   #NFS Server
   fileSystems."/export/andrew" = {
     device = "/mnt/andrew";
-    fsType = "none";
+    #fsType = "none";
     options = [ "bind" ];
   };
   services.nfs.server = {
@@ -43,13 +43,13 @@
     mountdPort = 4002;
     statdPort = 4000;
     extraNfsdConfig = "";
+    exports = ''
+      /export 192.168.122.0(rw,fsid=0,no_subtree_check)
+      /export/andrew 192.168.122.0(rw,no_subtree_check)
+    '';
   };
   # You can add more IP addresses for a single entry like this:
   # /export 10.0.0.183(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
-  services.nfs.server.exports = ''
-    /export 192.168.122.0/24(rw,fsid=0,no_subtree_check)
-    /export/andrew 192.168.122.0/24(rw,no_subtree_check)
-  '';
   services.nfs.server.createMountPoints = true;
   # Authentication for NFS server
   # services.sssd = {
