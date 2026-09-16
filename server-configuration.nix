@@ -48,7 +48,7 @@
   # /export 10.0.0.183(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
   services.nfs.server.exports = ''
     /export 192.168.122.0/24(rw,fsid=0,no_subtree_check)
-    /export/andrew 192.168.122.0/24(rw,nohide,insecure,no_subtree_check)
+    /export/andrew 192.168.122.0/24(rw,no_subtree_check)
   '';
   services.nfs.server.createMountPoints = true;
   # Authentication for NFS server
@@ -384,14 +384,14 @@
       };
     };
   };
-  services.nginx.virtualHosts."nfs.luminlapid.com" = {
-    root = "/";
-    locations = {
-      "/" = {
-        proxyPass = "192.168.100.183:2049";
-      };
-    };
-  };
+  #services.nginx.virtualHosts."nfs.luminlapid.com" = {
+  #  root = "/";
+  #  locations = {
+  #    "/" = {
+  #      proxyPass = "192.168.100.183:2049";
+  #    };
+  #  };
+  #};
 
   # Automated certificate authority for luminlapid.com
   security.acme = {
