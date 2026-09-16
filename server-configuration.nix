@@ -33,7 +33,7 @@
   #NFS Server
   fileSystems."/export/andrew" = {
     device = "/mnt/andrew";
-    #fsType = "none";
+    fsType = "nfs4";
     options = [ "bind" ];
   };
   services.nfs.server = {
