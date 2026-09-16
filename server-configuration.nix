@@ -44,8 +44,8 @@
     #statdPort = 4000;
     #extraNfsdConfig = "";
     exports = ''
-      /export 127.0.0.1(rw,fsid=0,no_subtree_check)
-      /export/andrew 127.0.0.1(rw,no_subtree_check)
+      /export 192.0.2.0/24(rw,fsid=0,insecure,no_subtree_check)
+      /export/andrew 192.0.2.0/24(rw,insecure,no_subtree_check)
     '';
   };
   # You can add more IP addresses for a single entry like this:
