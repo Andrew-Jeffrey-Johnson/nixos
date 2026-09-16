@@ -14,7 +14,7 @@
     nixStoreSettings.enable = true;
     networking = {
       enable = true;
-      hostName = "luminlapid-server";
+      hostName = "luminlapid-server,localhost";
     };
   };
 
@@ -23,6 +23,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.supportedFilesystems = [ "nfs" ];
   boot.initrd.kernelModules = [ "nfs" ];
+  boot.supportedFilesystems = [ "nfs" ];
 
   # Secret for WireGuard
   age.secrets.wireguard-private-key = {
