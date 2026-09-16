@@ -39,13 +39,13 @@
   services.nfs.server = {
     enable = true;
     # fixed rpc.statd port; for firewall
-    lockdPort = 4001;
-    mountdPort = 4002;
-    statdPort = 4000;
-    extraNfsdConfig = "";
+    #lockdPort = 4001;
+    #mountdPort = 4002;
+    #statdPort = 4000;
+    #extraNfsdConfig = "";
     exports = ''
-      /export 192.168.122.0(rw,fsid=0,no_subtree_check)
-      /export/andrew 192.168.122.0(rw,no_subtree_check)
+      /export 127.0.0.1(rw,fsid=0,no_subtree_check)
+      /export/andrew 127.0.0.1(rw,no_subtree_check)
     '';
   };
   # You can add more IP addresses for a single entry like this:
