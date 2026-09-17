@@ -27,7 +27,7 @@ in
     boot.supportedFilesystems = [ "nfs" ];
     environment.systemPackages = [ pkgs.nfs-utils ];
     fileSystems."/mnt/luminlapid-server-nfs" = {
-      device = "10.0.0.183:/andrew";
+      device = "10.0.0.183:/";
       fsType = "nfs";
     };
     security.wrappers."mount.nfs" = {
