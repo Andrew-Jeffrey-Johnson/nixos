@@ -116,7 +116,7 @@
   };
   networking = {
     firewall = {
-      enable = false;
+      enable = true;
       # for NFSv3; view with rpcinfo -p
       allowedTCPPorts = [
         111
