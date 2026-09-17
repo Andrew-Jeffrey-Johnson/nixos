@@ -14,7 +14,7 @@
     nixStoreSettings.enable = true;
     networking = {
       enable = true;
-      hostName = "luminlapid-server,localhost";
+      hostName = "luminlapid-server";
     };
   };
 
