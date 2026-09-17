@@ -52,7 +52,7 @@
     # You can add more IP addresses for a single entry like this:
     # /export 10.0.0.183(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
     exports = ''
-      /export/andrew 10.0.0.22/24(rw,fsid=0,no_subtree_check)
+      /export/andrew 10.0.0.183/24(rw,fsid=0,no_subtree_check)
     '';
   };
   # Authentication for NFS server
