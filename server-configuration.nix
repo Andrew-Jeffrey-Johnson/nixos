@@ -34,12 +34,10 @@
   #NFS Server
   fileSystems."/export/andrew" = {
     device = "/mnt/andrew";
-    fsType = "auto";
-    #options = [
-    #  "nfsd=vers4.2"
-    #  "x-systemd.automount"
-    #  "noauto"
-    #];
+    fsType = "none";
+    options = [
+      "bind"
+    ];
   };
   services.nfs.server = {
     enable = true;
@@ -52,7 +50,7 @@
     # You can add more IP addresses for a single entry like this:
     # /export 10.0.0.183(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
     exports = ''
-      /export/andrew 192.0.2.1/24(rw,fsid=0,no_subtree_check)
+      /export/andrew 192.168.2.1/24(rw,fsid=0,no_subtree_check)
     '';
   };
   # Authentication for NFS server
