@@ -21,9 +21,6 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.supportedFilesystems = [ "nfs" ];
-  boot.initrd.kernelModules = [ "nfs" ];
-  boot.supportedFilesystems = [ "nfs" ];
 
   # Secret for WireGuard
   age.secrets.wireguard-private-key = {
@@ -31,113 +28,64 @@
     owner = "nixos";
     group = "users";
   };
-  #NFS Server
-  fileSystems."/export/andrew" = {
-    device = "/mnt/andrew";
-    fsType = "none";
-    options = [
-      "bind"
-    ];
-  };
-  services.nfs.server = {
+  services.samba = {
     enable = true;
-    createMountPoints = true;
-    # fixed rpc.statd port; for firewall
-    lockdPort = 4001;
-    mountdPort = 4002;
-    statdPort = 4000;
-    extraNfsdConfig = "";
-    # You can add more IP addresses for a single entry like this:
-    # /export 10.0.0.183(rw,fsid=0,no_subtree_check) 192.168.1.15(rw,fsid=0,no_subtree_check)
-    exports = ''
-      /export/andrew *(rw,fsid=0,no_subtree_check)
-    '';
+    securityType = "user";
+    openFirewall = true;
+    settings = {
+      global = {
+        "workgroup" = "WORKGROUP";
+        "server string" = "smbnix";
+        "netbios name" = "smbnix";
+        "security" = "user";
+        #"use sendfile" = "yes";
+        #"max protocol" = "smb2";
+        # note: localhost is the ipv6 localhost ::1
+        "hosts allow" = "192.168.0. 127.0.0.1 localhost";
+        "hosts deny" = "0.0.0.0/0";
+        "guest account" = "nobody";
+        "map to guest" = "bad user";
+      };
+      "public" = {
+        "path" = "/mnt/Shares/Public";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "username";
+        "force group" = "groupname";
+      };
+      "private" = {
+        "path" = "/mnt/Shares/Private";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "username";
+        "force group" = "groupname";
+      };
+    };
   };
-  # Authentication for NFS server
-  # services.sssd = {
-  #   enable = true;
-  #   config = ''
-  #     [sssd]
-  #     domains = luminlapid.com
-  #     config_file_version = 2
-  #     services = nss, pam
 
-  #     [domain/luminlapid.com]
-  #     override_shell = /run/current-system/sw/bin/zsh
-  #     krb5_store_password_if_offline = True
-  #     cache_credentials = True
-  #     krb5_realm = LUMINLAPID.COM
-  #     realmd_tags = manages-system joined-with-adcli
-  #     id_provider = ad
-  #     fallback_homedir = /home/%u
-  #     ad_domain = luminlapid.com
-  #     use_fully_qualified_names = False
-  #     ldap_id_mapping = False
-  #     access_provider = ad
-  #     # Red Hat recommendation to reduce server queries
-  #     entry_cache_timeout = 14400
-  #     auth_provider = ad
-  #     chpass_provider = ad
-  #     ad_gpo_access_control = disabled
-  #     enumerate = False
-  #     dyndns_update = False
-  #     # Red Hat recommendation to reduce terminated by own WATCHDOG
-  #     timeout = 20
-  #     # Fast fallback in case of server interruption/unavailability
-  #     ldap_network_timeout = 3
-  #     ldap_opt_timeout = 10
-  #   '';
-  # };
-  security = {
-    #  krb5 = {
-    #    enable = true;
-    #    settings = {
-    #      libdefaults = {
-    #        default_realm = "LUMINLAPID.COM";
-    #        udp_preference_limit = 0;
-    #      };
-    #    };
-    #  };
-    #  # Create a home directory when an AD user logs in
-    #  pam = {
-    #    makeHomeDir.umask = "077";
-    #    services.login.makeHomeDir = true;
-    #    services.sshd.makeHomeDir = true;
-    #  };
-    # Grant AD Domain Admin full sudo on Linux machines
-    #sudo = {
-    #  # Use extraConfig because of blank space in 'domain admins'.
-    #  extraConfig = ''
-    #    %domain\ admins ALL=(ALL:ALL) NOPASSWD: ALL
-    #    Defaults:%domain\ admins env_keep+=TERMINFO_DIRS
-    #    Defaults:%domain\ admins env_keep+=TERMINFO
-    #  '';
-    #};
+  services.samba-wsdd = {
+    enable = true;
+    openFirewall = true;
   };
   networking = {
     firewall = {
       enable = true;
+      allowPing = true;
       # for NFSv3; view with rpcinfo -p
       allowedTCPPorts = [
-        111
         51820 # WireGuard
-        2049 # NFS
-        4000
-        4001
-        4002
-        20048
         80
         443
         25565
       ];
       allowedUDPPorts = [
-        111
         51820 # WireGuard
-        2049 # NFS
-        4000
-        4001
-        4002
-        20048
         80
         443
         25565
