@@ -21,29 +21,32 @@ in
     # using the "option" above.
     # Options for modules imported in "imports" can be set here.
     environment.systemPackages = [ ];
-    services.udev.extraRules = ''
-      SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0001", TAG+="bequiet"
-      SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0002", TAG+="bequiet"
-      SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0003", TAG+="bequiet"
-      SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0005", TAG+="bequiet"
-      SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0007", TAG+="bequiet"
-      SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0018", TAG+="bequiet"
-      SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0027", TAG+="bequiet"
-      SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0028", TAG+="bequiet"
-      SUBSYSTEM=="hid", ATTR{bInterfaceNumber}=="02", TAGS=="bequiet", TAG+="bequiet"
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", TAGS=="bequiet", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0009", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="000a", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0010", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0011", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0016", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0017", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0023", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0024", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0025", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0026", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0029", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
-    '';
+    services.udev = {
+      enable = true;
+      extraRules = ''
+        SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0001", TAG+="bequiet"
+        SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0002", TAG+="bequiet"
+        SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0003", TAG+="bequiet"
+        SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0005", TAG+="bequiet"
+        SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0007", TAG+="bequiet"
+        SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0018", TAG+="bequiet"
+        SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0027", TAG+="bequiet"
+        SUBSYSTEM=="usb", ATTR{bInterfaceNumber}=="02", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0028", TAG+="bequiet"
+        SUBSYSTEM=="hid", ATTR{bInterfaceNumber}=="02", TAGS=="bequiet", TAG+="bequiet"
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", TAGS=="bequiet", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0009", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="000a", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0010", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0011", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0016", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0017", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0023", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0024", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0025", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0026", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
+        KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="373f", ATTRS{idProduct}=="0029", MODE="0660", TAG+="uaccess", TAG+="udev-acl", TAG+="bequiet"
+      '';
+    };
   };
 
   meta = {
