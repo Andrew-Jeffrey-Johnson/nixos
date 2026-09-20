@@ -43,35 +43,39 @@
     }@inputs:
     {
       nixosConfigurations = {
-        andrew = nixpkgs.lib.nixosSystem {
-          specialArgs = {
+        andrew =
+          let
             system = "x86_64-linux";
-          };
-          modules = [
-            #nixvim.nixosModules.nixvim
-            agenix.nixosModules.default
-            ./configuration-modules
-            ./andrew-configuration.nix
-            ./andrew-hardware-configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useUserPackages = true; # Only allow home.packages
-                useGlobalPkgs = true;
-                #extraSpecialArgs = [ inputs ];
-                sharedModules = [
-                  nixvim.homeModules.nixvim
-                  agenix.homeManagerModules.default
-                  ./home-manager-modules
-                ];
-                users = {
-                  andrew = ./andrew-home-manager.nix;
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit system inputs;
+            };
+            modules = [
+              #nixvim.nixosModules.nixvim
+              agenix.nixosModules.default
+              ./configuration-modules
+              ./andrew-configuration.nix
+              ./andrew-hardware-configuration.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useUserPackages = true; # Only allow home.packages
+                  useGlobalPkgs = true;
+                  #extraSpecialArgs = [ inputs ];
+                  sharedModules = [
+                    nixvim.homeModules.nixvim
+                    agenix.homeManagerModules.default
+                    ./home-manager-modules
+                  ];
+                  users = {
+                    andrew = ./andrew-home-manager.nix;
+                  };
+                  backupFileExtension = "backup";
                 };
-                backupFileExtension = "backup";
-              };
-            }
-          ];
-        };
+              }
+            ];
+          };
         avery =
           let
             system = "x86_64-linux";

@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.luminlapid.nfs;
+  cfg = config.luminlapid.samba;
 in
 {
   options.luminlapid = {
@@ -22,16 +22,22 @@ in
     # using the "option" above.
     # Options for modules imported in "imports" can be set here.
     environment.systemPackages = [ pkgs.cifs-utils ];
+    # Secret for nixos login
+    age.secrets.samba-sever-nixos = {
+      file = ../secrets/samba-server-nixos.age;
+      owner = "nixos";
+      group = "users";
+    };
     fileSystems."/mnt/luminlapid-server-smb" = {
       device = "10.0.0.183:/";
       fsType = "cifs";
+      options =
+        let
+          # this line prevents hanging on network split
+          automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+        in
+        [ "${automount_opts},credentials=${config.age.secrets.samba-sever-nixos.path}" ];
     };
-    options =
-      let
-        # this line prevents hanging on network split
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-      in
-      [ "${automount_opts},credentials=/etc/nixos/smb-secrets" ];
   };
 
   meta = {

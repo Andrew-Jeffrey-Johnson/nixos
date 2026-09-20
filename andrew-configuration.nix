@@ -45,7 +45,7 @@
     internationalization.enable = true;
     pipewire.enable = true;
     kdePlasma.enable = true;
-    samba.enable = false;
+    samba.enable = true;
   };
 
   programs.zsh.enable = true; # Required to change default shell
