@@ -15,6 +15,12 @@ in
     # Usually this includes a global "enable" option which defaults to false.
     coreApps.enable = lib.mkEnableOption "Core packages for basic functionality";
     coreApps.allowUnfree = lib.mkEnableOption "Add optional unfree software";
+    coreApps.username = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      example = "andrew";
+      description = "The name of your home folder, which is your username.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -158,6 +164,16 @@ in
             IFS= read -r -d \'\' cwd < "$tmp"
             [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd" || builtin true
             command rm -f -- "$tmp"
+          }
+          function update() {
+            pushd /home/${cfg.username}/nixos
+            echo "Pulling the latest changes from the git repository."
+            if git fetch && git pull ;
+            then
+              echo "We have the latest changes. Run the command to build a new configuration."
+              sudo nixos-rebuild switch --flake /home/${cfg.username}/nixos/#${cfg.username}
+            fi
+            popd
           }
         '';
         enableCompletion = true;

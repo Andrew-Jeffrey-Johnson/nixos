@@ -46,10 +46,11 @@
         andrew =
           let
             system = "x86_64-linux";
+            username = "andrew";
           in
           nixpkgs.lib.nixosSystem {
             specialArgs = {
-              inherit system inputs;
+              inherit system inputs username;
             };
             modules = [
               #nixvim.nixosModules.nixvim
@@ -62,7 +63,9 @@
                 home-manager = {
                   useUserPackages = true; # Only allow home.packages
                   useGlobalPkgs = true;
-                  #extraSpecialArgs = [ inputs ];
+                  extraSpecialArgs = {
+                    inherit system inputs username;
+                  };
                   sharedModules = [
                     nixvim.homeModules.nixvim
                     agenix.homeManagerModules.default
@@ -76,16 +79,40 @@
               }
             ];
           };
-        avery =
+        ave =
           let
             system = "x86_64-linux";
+            username = "ave";
           in
           nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system; };
+            specialArgs = {
+              inherit system username inputs;
+            };
             modules = [
-              ./desktop-configuration.nix
-              ./hardware-configuration.nix
-              ./avery.nix
+              #nixvim.nixosModules.nixvim
+              agenix.nixosModules.default
+              ./configuration-modules
+              ./ave-configuration.nix
+              ./ave-hardware-configuration.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useUserPackages = true; # Only allow home.packages
+                  useGlobalPkgs = true;
+                  extraSpecialArgs = {
+                    inherit system inputs username;
+                  };
+                  sharedModules = [
+                    nixvim.homeModules.nixvim
+                    agenix.homeManagerModules.default
+                    ./home-manager-modules
+                  ];
+                  users = {
+                    ave = ./ave-home-manager.nix;
+                  };
+                  backupFileExtension = "backup";
+                };
+              }
             ];
           };
         server =

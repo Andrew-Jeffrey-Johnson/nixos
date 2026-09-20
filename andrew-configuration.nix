@@ -8,16 +8,14 @@
   lib,
   inputs,
   system,
+  username,
   ...
 }:
-let
-  name = "andrew";
-in
 {
   users.users = {
-    "${name}" = {
+    "${username}" = {
       enable = true;
-      name = name;
+      name = username;
       isNormalUser = true;
       description = "Andrew Johnson";
       extraGroups = [
@@ -50,7 +48,7 @@ in
     kdePlasma.enable = true;
     samba = {
       enable = true;
-      username = name;
+      username = username;
     };
   };
 

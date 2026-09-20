@@ -30,5 +30,5 @@
 
 # Update configuration.nix with Flakes:
   sudo nixos-rebuild switch --flake /home/andrew/nixos/#andrew
-  sudo nixos-rebuild switch --flake /etc/nixos/#avery
+  sudo nixos-rebuild switch --flake /home/ave/nixos/#ave
   sudo nixos-rebuild switch --flake /home/nixos/nixos/#server
