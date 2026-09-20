@@ -111,6 +111,7 @@ in
                 ];
               };
             };
+            shellWrapperName = "y";
           };
         };
       };

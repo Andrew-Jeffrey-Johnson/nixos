@@ -24,7 +24,7 @@ in
     # Options for modules imported in "imports" can be set here.
     home.packages = [
       # Office Programs
-      pkgs.libreoffice-fresh # Office suite
+      pkgs.libreoffice # Office suite
       pkgs.hunspell # Spell-checker for libreoffice
       pkgs.hunspellDicts.en_US-large # English dictionary for hunspell
 

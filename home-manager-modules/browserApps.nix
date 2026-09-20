@@ -77,6 +77,7 @@ in
             "privacy.resistFingerprinting.autoDeclineNoUserInputCanvasPrompts" = true;
           };
         };
+        configPath = "${config.xdg.configHome}/mozilla/firefox";
       };
     };
   };
