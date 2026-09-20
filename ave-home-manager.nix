@@ -1,16 +1,25 @@
 # ~/home-manager/default.nix
-{
-  imports = [
-    ./programs.nix
-    ./kitty.nix
-    ./zsh.nix
-    ./lutris.nix
-  ];
+{ lib, ... }: {
+  gamingApps.enable = true;
+  coreApps = {
+    enable = true;
+    allowUnfree = true;
+  };
+  officeApps = {
+    enable = true;
+    allowUnfree = true;
+  };
+  mediaCreationApps.enable = true;
+  browserApps.enable = true;
+  qualityOfLifeApps.enable = true;
+  nixvimApp.enable = true;
+  fonts.enable = true;
+  nixglSupport.enable = false;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "ave";
-  home.homeDirectory = "/home/ave";
+  home.username = "andrew";
+  home.homeDirectory = "/home/andrew";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

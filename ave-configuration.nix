@@ -11,7 +11,7 @@
   ...
 }:
 let
-  name = "andrew";
+  name = "ave";
 in
 {
   users.users = {
@@ -19,7 +19,7 @@ in
       enable = true;
       name = name;
       isNormalUser = true;
-      description = "Andrew Johnson";
+      description = "Avery Littman";
       extraGroups = [
         "networkmanager"
         "wheel"
@@ -39,10 +39,10 @@ in
     virtualization.enable = true;
     networking = {
       enable = true;
-      hostName = "Andrews-desktop";
+      hostName = "Aves-desktop";
     };
-    localWiki.enable = true;
-    localPostgreSQL.enable = true;
+    localWiki.enable = false;
+    localPostgreSQL.enable = false;
     sunshine.enable = true;
     nixStoreSettings.enable = true;
     internationalization.enable = true;

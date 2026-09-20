@@ -13,6 +13,12 @@ in
     # Declare what settings a user of this module can set.
     # Usually this includes a global "enable" option which defaults to false.
     samba.enable = lib.mkEnableOption "Enables connection to the SAMA server on luminlapid-server.";
+    samba.username = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      example = "andrew";
+      description = "The username of the user who will run the samab client.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -23,21 +29,29 @@ in
     # Options for modules imported in "imports" can be set here.
     environment.systemPackages = [ pkgs.cifs-utils ];
     # Secret for nixos login
-    age.secrets.samba-sever-nixos = {
+    age.secrets.samba-server-nixos = {
       file = ../secrets/samba-server-nixos.age;
-      owner = "nixos";
+      owner = cfg.username;
       group = "users";
     };
     fileSystems."/mnt/luminlapid-server-smb" = {
-      device = "10.0.0.183:/";
+      device = "//10.0.0.183/public";
       fsType = "cifs";
       options =
         let
           # this line prevents hanging on network split
           automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
         in
-        [ "${automount_opts},credentials=${config.age.secrets.samba-sever-nixos.path}" ];
+        [
+          "${automount_opts},credentials=${config.age.secrets.samba-server-nixos.path}"
+        ];
     };
+    assertions = [
+      {
+        assertion = cfg.username != "";
+        message = "When using the samba client, you must specify a username under which to run the client.";
+      }
+    ];
   };
 
   meta = {
