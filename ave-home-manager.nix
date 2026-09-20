@@ -4,6 +4,7 @@
   coreApps = {
     enable = true;
     allowUnfree = true;
+    username = username;
   };
   officeApps = {
     enable = true;
