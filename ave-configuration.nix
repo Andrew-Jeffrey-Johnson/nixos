@@ -28,6 +28,7 @@
         "fuse"
       ];
       shell = pkgs.zsh;
+      uid = 1000;
     };
   };
 
