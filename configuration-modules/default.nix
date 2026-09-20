@@ -12,5 +12,6 @@
     ./pipewire.nix
     ./kdePlasma.nix
     ./samba.nix
+    ./bequiet-udev-rules.nix
   ];
 }
