@@ -167,7 +167,6 @@
       pkgs.adcli
       pkgs.realmd
       pkgs.samba
-      pkgs.nfs-utils
     ];
   };
 

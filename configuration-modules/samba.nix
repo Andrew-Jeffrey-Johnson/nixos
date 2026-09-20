@@ -12,7 +12,7 @@ in
     # Option declarations.
     # Declare what settings a user of this module can set.
     # Usually this includes a global "enable" option which defaults to false.
-    nfs.enable = lib.mkEnableOption "Enables connection to the NFS server on luminlapid-server.";
+    samba.enable = lib.mkEnableOption "Enables connection to the SAMA server on luminlapid-server.";
   };
 
   config = lib.mkIf cfg.enable {
@@ -21,21 +21,17 @@ in
     # Usually these depend on whether a user of this module chose to "enable" it
     # using the "option" above.
     # Options for modules imported in "imports" can be set here.
-    boot.initrd.supportedFilesystems = [ "nfs" ];
-    boot.initrd.kernelModules = [ "nfs" ];
-    # optional, but ensures rpc-statsd is running for on demand mounting
-    boot.supportedFilesystems = [ "nfs" ];
-    environment.systemPackages = [ pkgs.nfs-utils ];
-    fileSystems."/mnt/luminlapid-server-nfs" = {
+    environment.systemPackages = [ pkgs.cifs-utils ];
+    fileSystems."/mnt/luminlapid-server-smb" = {
       device = "10.0.0.183:/";
-      fsType = "nfs";
+      fsType = "cifs";
     };
-    security.wrappers."mount.nfs" = {
-      setuid = true;
-      owner = "root";
-      group = "root";
-      source = "${pkgs.nfs-utils.out}/bin/mount.nfs";
-    };
+    options =
+      let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+      in
+      [ "${automount_opts},credentials=/etc/nixos/smb-secrets" ];
   };
 
   meta = {

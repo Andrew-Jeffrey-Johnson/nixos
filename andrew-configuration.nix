@@ -6,6 +6,8 @@
 {
   pkgs,
   lib,
+  inputs,
+  system,
   ...
 }:
 {
@@ -43,7 +45,7 @@
     internationalization.enable = true;
     pipewire.enable = true;
     kdePlasma.enable = true;
-    nfs.enable = true;
+    samba.enable = false;
   };
 
   programs.zsh.enable = true; # Required to change default shell
@@ -115,7 +117,7 @@
     };
     systemPackages = [
       pkgs.neovim
-      pkgs.nfs-utils
+      inputs.agenix.packages.${system}.default
     ];
   };
 
