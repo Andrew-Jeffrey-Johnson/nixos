@@ -34,8 +34,21 @@ in
       owner = cfg.username;
       group = "users";
     };
-    fileSystems."/mnt/luminlapid-server-smb" = {
+    fileSystems."/mnt/luminlapid-public" = {
       device = "//10.0.0.183/public";
+      fsType = "cifs";
+      options =
+        let
+          automount_opts = "x-systemd.automount,noauto,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,user,users";
+        in
+        [
+          "${automount_opts},credentials=${config.age.secrets.samba-server-nixos.path},uid=${
+            toString config.users.users.${cfg.username}.uid
+          },gid=${toString config.users.groups.users.gid}"
+        ];
+    };
+    fileSystems."/mnt/luminlapid-private" = {
+      device = "//10.0.0.183/private";
       fsType = "cifs";
       options =
         let
