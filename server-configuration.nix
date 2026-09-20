@@ -50,8 +50,8 @@
         "path" = "/mnt/Shares/Public";
         "browseable" = "yes";
         "read only" = "no";
-        "guest ok" = "no";
-        "create mask" = "0755";
+        "guest ok" = "yes";
+        "create mask" = "0655";
         "directory mask" = "0755";
         "force user" = "nixos";
         "force group" = "users";
@@ -61,7 +61,7 @@
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
-        "create mask" = "0755";
+        "create mask" = "0655";
         "directory mask" = "0755";
         "force user" = "nixos";
         "force group" = "users";
