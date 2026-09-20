@@ -40,10 +40,12 @@ in
       options =
         let
           # this line prevents hanging on network split
-          automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+          automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,user,users";
         in
         [
-          "${automount_opts},credentials=${config.age.secrets.samba-server-nixos.path}"
+          "${automount_opts},credentials=${config.age.secrets.samba-server-nixos.path},uid=${
+            toString config.users.users.${cfg.username}.uid
+          },gid=${toString config.users.groups.users.gid}"
         ];
     };
     assertions = [
