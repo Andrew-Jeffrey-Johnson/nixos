@@ -67,8 +67,11 @@
       };
     };
   };
-
   services.samba-wsdd = {
+    enable = true;
+    openFirewall = true;
+  };
+  services.jellyfin = {
     enable = true;
     openFirewall = true;
   };
@@ -166,6 +169,9 @@
       pkgs.adcli
       pkgs.realmd
       pkgs.samba
+      pkgs.jellyfin
+      pkgs.jellyfin-web
+      pkgs.jellyfin-ffmpeg
     ];
   };
 
