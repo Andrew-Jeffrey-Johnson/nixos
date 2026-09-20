@@ -131,7 +131,7 @@
     enable = true;
     enableSSHSupport = true;
   };
-  services.dbus.packages = [ pkgs.gcr ];
+  services.dbus.packages = [ pkgs.gcr_4 ];
 
   security.sudo-rs = {
     enable = true;
