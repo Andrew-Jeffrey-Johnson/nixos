@@ -56,6 +56,7 @@ in
       (lib.mkIf cfg.allowUnfree pkgs.rar)
       pkgs.vlc # Media player
       pkgs.mpv # Media player
+      pkgs.jellyfin-desktop # Media streamer and player
       pkgs.pgadmin4 # Server that hosts a website to view PostgreSQL database
     ];
     programs = {

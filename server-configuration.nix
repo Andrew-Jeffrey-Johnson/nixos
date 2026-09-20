@@ -74,6 +74,7 @@
   services.jellyfin = {
     enable = true;
     openFirewall = true;
+    user = "jellyfin";
   };
   networking = {
     firewall = {
