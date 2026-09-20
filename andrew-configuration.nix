@@ -50,6 +50,7 @@
       enable = true;
       username = username;
     };
+    bequiet-udev-rules.enable = true;
   };
 
   programs.zsh.enable = true; # Required to change default shell
