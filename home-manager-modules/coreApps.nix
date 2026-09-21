@@ -58,61 +58,60 @@ in
       pkgs.mpv # Media player
       pkgs.jellyfin-desktop # Media streamer and player
       pkgs.pgadmin4 # Server that hosts a website to view PostgreSQL database
+      pkgs.signal-desktop
     ];
     programs = {
       yazi = {
         enable = true;
+        shellWrapperName = "y";
         settings = {
-          yazi = {
-            mgr = {
-              show_hidden = true;
-              ratio = [
-                1
-                3
-                4
+          mgr = {
+            show_hidden = true;
+            ratio = [
+              1
+              3
+              4
+            ];
+            opener = {
+              play = [
+                {
+                  run = "mpv %s";
+                  orphan = true;
+                }
               ];
-              opener = {
-                play = [
-                  {
-                    run = "mpv %s";
-                    orphan = true;
-                  }
-                ];
-                edit = [
-                  {
-                    run = "$EDITOR %s";
-                    block = true;
-                  }
-                ];
-                openBook = [
-                  {
-                    run = pkgs.epy + /bin/epy + " \"$@\"";
-                    block = true;
-                  }
-                ];
-              };
-              open = {
-                rules = [
-                  {
-                    mime = "text/*";
-                    use = "edit";
-                  }
-                  {
-                    mime = "video/*";
-                    use = "play";
-                  }
-                  {
-                    name = "*.epub";
-                    use = "openBook";
-                  }
-                  {
-                    url = "*";
-                    use = "librewolf";
-                  }
-                ];
-              };
+              edit = [
+                {
+                  run = "$EDITOR %s";
+                  block = true;
+                }
+              ];
+              openBook = [
+                {
+                  run = pkgs.epy + /bin/epy + " \"$@\"";
+                  block = true;
+                }
+              ];
             };
-            shellWrapperName = "y";
+            open = {
+              rules = [
+                {
+                  mime = "text/*";
+                  use = "edit";
+                }
+                {
+                  mime = "video/*";
+                  use = "play";
+                }
+                {
+                  name = "*.epub";
+                  use = "openBook";
+                }
+                {
+                  url = "*";
+                  use = "librewolf";
+                }
+              ];
+            };
           };
         };
       };
@@ -120,7 +119,11 @@ in
         enable = true;
         shellIntegration.enableZshIntegration = true;
         enableGitIntegration = true;
-        themeFile = "Catppuccin-Latte";
+        autoThemeFiles = {
+          dark = "Catppuccin-Frappe";
+          light = "Catppuccin-Latte";
+          noPreference = "Catppuccin-Frappe";
+        };
         keybindings = {
           "ctrl+shift+t" = "new_tab_with_cwd";
           "ctrl+shift+enter" = "new_window_with_cwd";
