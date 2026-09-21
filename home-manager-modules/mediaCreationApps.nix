@@ -32,6 +32,7 @@ in
       pkgs.gimp # Rastor Image Editor
       pkgs.audacity # Audio Editor
       pkgs.inkscape # Vector Image Editor
+      pkgs.mkvtoolnix # Edits mkv video
     ];
     programs = {
     };

@@ -65,6 +65,16 @@
         "force user" = "nixos";
         "force group" = "users";
       };
+      "jellyfin" = {
+        "path" = "/jellyfin";
+        "browseable" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0655";
+        "directory mask" = "0755";
+        "force user" = "nixos";
+        "force group" = "jellyfin";
+      };
     };
   };
   services.samba-wsdd = {
@@ -147,6 +157,7 @@
       extraGroups = [
         "networkmanager"
         "wheel"
+        "jellyfin"
       ];
     };
     calibre-server = {
