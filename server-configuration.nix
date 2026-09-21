@@ -70,8 +70,8 @@
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";
-        "create mask" = "0655";
-        "directory mask" = "0755";
+        "create mask" = "0665";
+        "directory mask" = "0775";
         "force user" = "nixos";
         "force group" = "jellyfin";
       };

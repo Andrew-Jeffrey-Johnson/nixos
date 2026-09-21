@@ -60,6 +60,19 @@ in
           },gid=${toString config.users.groups.users.gid}"
         ];
     };
+    fileSystems."/mnt/luminlapid-jellyfin" = {
+      device = "//10.0.0.183/jellyfin";
+      fsType = "cifs";
+      options =
+        let
+          automount_opts = "x-systemd.automount,noauto,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,user,users";
+        in
+        [
+          "${automount_opts},credentials=${config.age.secrets.samba-server-nixos.path},uid=${
+            toString config.users.users.${cfg.username}.uid
+          },gid=${toString config.users.groups.users.gid}"
+        ];
+    };
     assertions = [
       {
         assertion = cfg.username != "";
