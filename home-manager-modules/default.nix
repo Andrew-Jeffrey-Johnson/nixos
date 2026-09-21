@@ -9,5 +9,6 @@
     ./nixvimApp.nix
     ./fonts.nix
     ./nixglSupport.nix
+    ./musicApps.nix
   ];
 }

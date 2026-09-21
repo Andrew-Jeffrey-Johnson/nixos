@@ -21,6 +21,7 @@
   nixvimApp.enable = true;
   fonts.enable = true;
   nixglSupport.enable = false;
+  musicApps.enable = true;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
