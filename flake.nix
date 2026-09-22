@@ -74,7 +74,7 @@
                   users = {
                     andrew = ./andrew-home-manager.nix;
                   };
-                  backupFileExtension = "backup";
+                  backupFileExtension = "bkup-home-manager-${toString inputs.self.lastModifiedDate}";
                 };
               }
             ];

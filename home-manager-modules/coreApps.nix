@@ -29,6 +29,7 @@ in
     # Usually these depend on whether a user of this module chose to "enable" it
     # using the "option" above.
     # Options for modules imported in "imports" can be set here.
+    xdg.autostart.enable = true; # Necessary to autostart keepassxc
     home.packages = [
       # For AI
       #pkgs.aider-chat
@@ -50,7 +51,7 @@ in
       pkgs.sqlite # Database as a file
       pkgs.wget # Get web pages
       pkgs.wl-clipboard-rs # Terminal clipboard
-      # Compression programs
+      # Compress/ion programs
       pkgs._7zz
       pkgs.unzip
       (lib.mkIf cfg.allowUnfree pkgs.rar)
@@ -61,6 +62,77 @@ in
       pkgs.signal-desktop
     ];
     programs = {
+      git-credential-keepassxc = {
+        enable = false; # Maybe in the future
+      };
+      keepassxc = {
+        enable = true;
+        # As of 9/22/2026, you cannot get keeshare to work with declarative settings.
+        # This may be possible in the future.
+        # settings = {
+        #   General = {
+        #     BackupBeforeSave = true;
+        #     BackupFilePathPattern = "{DB_FILENAME}.{TIME:yyyy_MM_dd__hh_mm_ss}.kdbx";
+        #     AutoGeneratePasswordForNewEntries = true;
+        #     ConfigVersion = 2;
+        #     MinimizeAfterUnlock = true;
+        #   };
+        #   Browser = {
+        #     AlwaysAllowAccess = true;
+        #     AlwaysAllowUpdate = true;
+        #     Browser_AllowLocalhostWithPasskeys = true;
+        #     CustomProxyLocation = null;
+        #     Enabled = true;
+        #     HttpAuthPermission = true;
+        #   };
+        #   GUI = {
+        #     AdvancedSettings = true;
+        #     ApplicationTheme = "dark";
+        #     CompactMode = true;
+        #     HidePasswords = true;
+        #     ShowTrayIcon = true;
+        #     LockDatabaseIdle = false;
+        #     HideGroupPanel = false;
+        #     HideMenubar = false;
+        #     HidePreviewPanel = false;
+        #     HideToolbar = false;
+        #     MinimizeOnClose = true;
+        #     MinimizeOnStartup = true;
+        #     MinimizeToTray = true;
+        #     MovableToolbar = true;
+        #     TrayIconAppearance = "colorful";
+        #   };
+        #   SSHAgent = {
+        #     Enabled = true;
+        #   };
+        #   FdoSecrets = {
+        #     Enabled = true;
+        #   };
+        #   PasswordGenerator = {
+        #     AdvancedMode = true;
+        #     Braces = true;
+        #     Dashes = true;
+        #     EASCII = false;
+        #     Length = 64;
+        #     Logograms = true;
+        #     LowerCase = true;
+        #     Math = true;
+        #     Numbers = true;
+        #     Punctuation = true;
+        #     Quotes = true;
+        #     SpecialChars = true;
+        #     UpperCase = true;
+        #   };
+        #   Security = {
+        #     IconDownloadFallback = true;
+        #     LockDatabaseIdle = false;
+        #   };
+        #   KeeShare = {
+        #     Active = "<?xml version=\"1.0\"?><KeeShare><Active><Import/><Export/></Active></KeeShare>\\n";
+        #     QuietSuccess = true;
+        #   };
+        # };
+      };
       yazi = {
         enable = true;
         shellWrapperName = "y";
@@ -127,19 +199,6 @@ in
         keybindings = {
           "ctrl+shift+t" = "new_tab_with_cwd";
           "ctrl+shift+enter" = "new_window_with_cwd";
-        };
-      };
-      sftpman = {
-        enable = true;
-        mounts = {
-          luminlapid = {
-            authType = "publickey";
-            host = "10.0.0.183";
-            port = 22;
-            user = "nixos";
-            mountPoint = "/";
-            sshKey = "/home/andrewj/.ssh/id_ed25519";
-          };
         };
       };
       direnv = {
@@ -224,8 +283,16 @@ in
       gh = {
         enable = true;
       };
-      keepassxc = {
-        enable = true;
+    };
+
+    services.syncthing = {
+      enable = true;
+      guiCredentials = {
+        username = "andrew";
+        passwordFile = "/home/andrew/syncthing-password";
+      };
+      settings = {
+        folders."/home/${cfg.username}/syncthing".enable = true; # Default folder for new synced folders
       };
     };
 

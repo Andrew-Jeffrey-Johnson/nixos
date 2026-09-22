@@ -40,7 +40,7 @@
       enable = true;
       hostName = "Andrews-desktop";
     };
-    localWiki.enable = true;
+    localWiki.enable = false;
     localPostgreSQL.enable = true;
     sunshine.enable = true;
     nixStoreSettings.enable = true;
