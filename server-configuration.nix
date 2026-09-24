@@ -108,7 +108,7 @@
     wireguard.interfaces = {
       wg0 = {
         # Determines the IP address and subnet of the server's end of the tunnel interface.
-        ips = [ "10.100.0.1/24" ];
+        #ips = [ "10.100.0.1/24" ];
 
         # The port that WireGuard listens to. Must be accessible by the client.
         listenPort = 51820;
@@ -142,7 +142,7 @@
           {
             # Andrew's Phone
             publicKey = "8Uuwm470YptkTrUOo4eujEaxlfDPhPFwJ5fn98ijBHE=";
-            allowedIPs = [ "10.100.0.3/32" ];
+            allowedIPs = [ "10.0.0.0/32" ];
           }
         ];
       };
