@@ -289,9 +289,14 @@ in
         username = "andrew";
         passwordFile = "/home/andrew/syncthing-password";
       };
-      settings = {
-        folders."/home/${cfg.username}/syncthing".enable = true; # Default folder for new synced folders
-      };
+      # overrideDevices = true; # overrides any devices added or deleted through the WebUI
+      # overrideFolders = true; # overrides any folders added or deleted through the WebUI
+      # settings = {
+      #   folders."/home/${cfg.username}/password-manager/passwords" = {
+      #     enable = true;
+      #     devices = [];
+      #   };
+      # };
     };
 
     #environment.pathsToLink = [ "/share/zsh" ];
