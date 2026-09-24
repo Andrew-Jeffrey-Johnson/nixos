@@ -142,7 +142,7 @@
           {
             # Andrew's Phone
             publicKey = "8Uuwm470YptkTrUOo4eujEaxlfDPhPFwJ5fn98ijBHE=";
-            allowedIPs = [ "10.0.0.0/32" ];
+            allowedIPs = [ "10.0.0.68/32" ];
           }
         ];
       };
