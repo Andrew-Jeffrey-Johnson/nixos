@@ -109,7 +109,7 @@
       wg0 = {
         # I followed this guide: https://thehightechsociety.com/how-to-use-wireguard/
         # Determines the IP address and subnet of the server's end of the tunnel interface.
-        ips = [ "10.0.0.183/24" ];
+        #ips = [ "10.0.0.183/24" ];
 
         # The port that WireGuard listens to. Must be accessible by the client.
         listenPort = 51820;
