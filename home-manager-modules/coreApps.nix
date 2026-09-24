@@ -67,71 +67,69 @@ in
       };
       keepassxc = {
         enable = true;
-        # As of 9/22/2026, you cannot get keeshare to work with declarative settings.
-        # This may be possible in the future.
-        # settings = {
-        #   General = {
-        #     BackupBeforeSave = true;
-        #     BackupFilePathPattern = "{DB_FILENAME}.{TIME:yyyy_MM_dd__hh_mm_ss}.kdbx";
-        #     AutoGeneratePasswordForNewEntries = true;
-        #     ConfigVersion = 2;
-        #     MinimizeAfterUnlock = true;
-        #   };
-        #   Browser = {
-        #     AlwaysAllowAccess = true;
-        #     AlwaysAllowUpdate = true;
-        #     Browser_AllowLocalhostWithPasskeys = true;
-        #     CustomProxyLocation = null;
-        #     Enabled = true;
-        #     HttpAuthPermission = true;
-        #   };
-        #   GUI = {
-        #     AdvancedSettings = true;
-        #     ApplicationTheme = "dark";
-        #     CompactMode = true;
-        #     HidePasswords = true;
-        #     ShowTrayIcon = true;
-        #     LockDatabaseIdle = false;
-        #     HideGroupPanel = false;
-        #     HideMenubar = false;
-        #     HidePreviewPanel = false;
-        #     HideToolbar = false;
-        #     MinimizeOnClose = true;
-        #     MinimizeOnStartup = true;
-        #     MinimizeToTray = true;
-        #     MovableToolbar = true;
-        #     TrayIconAppearance = "colorful";
-        #   };
-        #   SSHAgent = {
-        #     Enabled = true;
-        #   };
-        #   FdoSecrets = {
-        #     Enabled = true;
-        #   };
-        #   PasswordGenerator = {
-        #     AdvancedMode = true;
-        #     Braces = true;
-        #     Dashes = true;
-        #     EASCII = false;
-        #     Length = 64;
-        #     Logograms = true;
-        #     LowerCase = true;
-        #     Math = true;
-        #     Numbers = true;
-        #     Punctuation = true;
-        #     Quotes = true;
-        #     SpecialChars = true;
-        #     UpperCase = true;
-        #   };
-        #   Security = {
-        #     IconDownloadFallback = true;
-        #     LockDatabaseIdle = false;
-        #   };
-        #   KeeShare = {
-        #     Active = "<?xml version=\"1.0\"?><KeeShare><Active><Import/><Export/></Active></KeeShare>\\n";
-        #     QuietSuccess = true;
-        #   };
-        # };
+        settings = {
+          General = {
+            BackupBeforeSave = true;
+            BackupFilePathPattern = "../backups/{DB_FILENAME}.{TIME:yyyy_MM_dd__hh_mm_ss}.kdbx";
+            AutoGeneratePasswordForNewEntries = true;
+            ConfigVersion = 2;
+            MinimizeAfterUnlock = true;
+            URLDoubleClickAction = 2;
+          };
+          Browser = {
+            AlwaysAllowAccess = true;
+            AlwaysAllowUpdate = true;
+            Browser_AllowLocalhostWithPasskeys = true;
+            CustomProxyLocation = null;
+            Enabled = true;
+            HttpAuthPermission = true;
+          };
+          GUI = {
+            AdvancedSettings = true;
+            ApplicationTheme = "dark";
+            ColorPasswords = true;
+            CompactMode = true;
+            HidePasswords = true;
+            ShowTrayIcon = true;
+            LockDatabaseIdle = false;
+            HideGroupPanel = false;
+            HideMenubar = false;
+            HidePreviewPanel = false;
+            HideToolbar = false;
+            MinimizeOnClose = true;
+            MinimizeOnStartup = true;
+            MinimizeToTray = true;
+            MovableToolbar = true;
+            TrayIconAppearance = "colorful";
+          };
+          PasswordGenerator = {
+            AdditionalChars = null;
+            AdvancedMode = true;
+            Braces = true;
+            Dashes = true;
+            EASCII = false;
+            ExcludedChars = null;
+            Length = 64;
+            Logograms = true;
+            LowerCase = true;
+            Math = true;
+            Numbers = true;
+            Punctuation = true;
+            Quotes = true;
+            SpecialChars = true;
+            UpperCase = true;
+          };
+          FdoSecrets = {
+            Enabled = true;
+          };
+          SSHAgent = {
+            Enabled = true;
+          };
+          Security = {
+            IconDownloadFallback = true;
+            LockDatabaseIdle = false;
+          };
+        };
       };
       yazi = {
         enable = true;
