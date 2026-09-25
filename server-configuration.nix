@@ -34,7 +34,7 @@
     settings = {
       global = {
         "workgroup" = "WORKGROUP";
-        "server string" = "smbnix";
+        "server string" = "%h";
         "netbios name" = "smbnix";
         "security" = "user";
         #"use sendfile" = "yes";
@@ -45,6 +45,7 @@
         "guest account" = "nobody";
         "map to guest" = "bad user";
         "vfs objects" = "catia fruit streams_xattr";
+        "server min protocol" = "SMB3";
       };
       "public" = {
         "path" = "/mnt/Shares/Public";
