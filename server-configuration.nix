@@ -54,6 +54,7 @@
         "directory mask" = "0755";
         "force user" = "nixos";
         "force group" = "users";
+        "vfs objects" = "streams_xattr";
       };
       "private" = {
         "path" = "/mnt/Shares/Private";
@@ -64,6 +65,7 @@
         "directory mask" = "0755";
         "force user" = "nixos";
         "force group" = "users";
+        "vfs objects" = "streams_xattr";
       };
       "jellyfin" = {
         "path" = "/jellyfin";
@@ -75,6 +77,7 @@
         "directory mask" = "0775";
         "force user" = "nixos";
         "force group" = "jellyfin";
+        "vfs objects" = "streams_xattr";
       };
     };
   };
