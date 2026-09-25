@@ -44,7 +44,6 @@
         "hosts deny" = "ALL";
         "guest account" = "nobody";
         "map to guest" = "bad user";
-        "vfs objects" = "streams_xattr";
       };
       "public" = {
         "path" = "/mnt/Shares/Public";
