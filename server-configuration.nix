@@ -45,7 +45,7 @@
         "guest account" = "nobody";
         "map to guest" = "bad user";
         "vfs objects" = "streams_xattr";
-        "server min protocol" = "SMB3";
+        "server min protocol" = "SMB3_02";
       };
       "public" = {
         "path" = "/mnt/Shares/Public";
