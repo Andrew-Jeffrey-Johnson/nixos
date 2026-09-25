@@ -44,7 +44,7 @@
         "hosts deny" = "ALL";
         "guest account" = "nobody";
         "map to guest" = "bad user";
-        "vfs objects" = "streams_xattr";
+        "vfs objects" = "catia fruit streams_xattr";
       };
       "public" = {
         "path" = "/mnt/Shares/Public";
