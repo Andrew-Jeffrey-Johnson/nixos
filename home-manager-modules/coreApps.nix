@@ -286,8 +286,8 @@ in
     services.syncthing = {
       enable = true;
       guiCredentials = {
-        username = "andrew";
-        passwordFile = "/home/andrew/syncthing-password";
+        username = cfg.username;
+        passwordFile = "/home/${cfg.username}/syncthing-password";
       };
       # overrideDevices = true; # overrides any devices added or deleted through the WebUI
       # overrideFolders = true; # overrides any folders added or deleted through the WebUI
