@@ -145,6 +145,11 @@
             publicKey = "8Uuwm470YptkTrUOo4eujEaxlfDPhPFwJ5fn98ijBHE=";
             allowedIPs = [ "10.0.0.68/32" ];
           }
+          {
+            # Ave's Phone
+            publicKey = "jWRnrWupWyWUQMJCvvQHeXMQCDgRNl2ZrCIXJnImCUg=";
+            allowedIPs = [ "10.0.0.102/32" ];
+          }
         ];
       };
     };
