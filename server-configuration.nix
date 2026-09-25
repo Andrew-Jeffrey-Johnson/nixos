@@ -34,7 +34,7 @@
     settings = {
       global = {
         "workgroup" = "WORKGROUP";
-        "server string" = "%h";
+        "server string" = "smbnix";
         "netbios name" = "smbnix";
         "security" = "user";
         #"use sendfile" = "yes";
@@ -44,8 +44,7 @@
         "hosts deny" = "ALL";
         "guest account" = "nobody";
         "map to guest" = "bad user";
-        "vfs objects" = "streams_xattr";
-        "server min protocol" = "SMB3";
+        "vfs objects" = "catia fruit streams_xattr";
       };
       "public" = {
         "path" = "/mnt/Shares/Public";
@@ -70,6 +69,7 @@
       "jellyfin" = {
         "path" = "/jellyfin";
         "browseable" = "yes";
+        "available" = "yes";
         "read only" = "no";
         "guest ok" = "no";
         "create mask" = "0665";
