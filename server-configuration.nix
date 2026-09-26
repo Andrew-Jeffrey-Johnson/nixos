@@ -19,7 +19,7 @@
   };
 
   fileSystems."/mnt/samsung1TSSD" = {
-    device = "/dev/disk/by-uuid/22802FEF-F9B0-4F34-81BA-4C0870D158F0";
+    device = "/dev/disk/by-uuid/0xe788fa2d";
     fsType = "ext4";
   };
 
