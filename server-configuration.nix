@@ -84,6 +84,18 @@
         "force group" = "jellyfin";
         "vfs objects" = "streams_xattr";
       };
+      "jellyfin-samsung1TSSD" = {
+        "path" = "/mnt/samsung1TSSD/jellyfin";
+        "browseable" = "yes";
+        "available" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0665";
+        "directory mask" = "0775";
+        "force user" = "nixos";
+        "force group" = "jellyfin";
+        "vfs objects" = "streams_xattr";
+      };
     };
   };
   services.samba-wsdd = {
