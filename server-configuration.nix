@@ -18,6 +18,11 @@
     };
   };
 
+  fileSystems."/mnt/samsung1TSSD" = {
+    device = "/dev/disk/by-uuid/22802FEF-F9B0-4F34-81BA-4C0870D158F0";
+    fsType = "ext4";
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
