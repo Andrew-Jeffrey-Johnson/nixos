@@ -42,11 +42,23 @@ in
       # networking.proxy.default = "http://user:password@proxy:port/";
       # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+      # DNS
+      nameservers = [
+        "9.9.9.9"
+        "149.112.112.112"
+        "2620:fe::fe"
+        "2620:fe::9"
+      ];
+      useDHCP = false;
+      dhcpcd.enable = false;
+
       # Enable networking
       networkmanager = {
         enable = true;
         # If you are using Network Manager, you need to explicitly prevent it from managing container interfaces
         unmanaged = [ "interface-name:ve-*" ];
+        # Disable NetworkManager's internal DNS resolution. We are using Quad9
+        dns = "none";
       };
     };
     assertions = [
