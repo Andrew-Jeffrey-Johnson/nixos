@@ -276,7 +276,7 @@
       };
       owner-write = {
         user = "andrew";
-        collection = "/";
+        collection = "*";
         permissions = "RW";
       };
     };
