@@ -409,11 +409,11 @@
         # The slash on the end ensure url passed to radicale starts
         # with / instead of /calibre-server
         proxyPass = "http://127.0.0.4:5232";
-        extraConfig = ''
-          proxy_set_header  X-Script-Name /radicale;
-          proxy_set_header  Host $http_host;
-          proxy_pass_header Authorization;
-        '';
+        #extraConfig = ''
+        #  proxy_set_header  X-Script-Name /radicale;
+        #  proxy_set_header  Host $http_host;
+        #  proxy_pass_header Authorization;
+        #'';
         #       proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
         #       proxy_set_header  X-Forwarded-Host $host;
         #       proxy_set_header  X-Forwarded-Port $server_port;
