@@ -444,6 +444,34 @@
         # The slash on the end ensure url passed to radicale starts
         # with / instead of /calibre-server
         proxyPass = "http://127.0.0.4:7854/";
+        extraConfig = ''
+          # Write methods (base module)
+          dav_methods PUT DELETE MKCOL COPY MOVE;
+
+          # Read/lock methods (dav-ext module)
+          # NOTE: PROPPATCH is NOT supported — do not add it here
+          dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
+
+          # Enable real LOCK/UNLOCK (requires dav_ext_lock_zone in http{})
+          dav_ext_lock zone=davlock;
+
+          dav_access user:rw group:rw all:r;
+          create_full_put_path on;
+          min_delete_depth 1;
+
+          # Temp path on same filesystem
+          client_body_temp_path /var/www/webdav/.tmp;
+          client_max_body_size 10G;
+          client_body_timeout 300s;
+
+          # Fix macOS Finder MKCOL-without-slash (creates dirs without trailing /)
+          set $x $uri$request_method;
+          if ($x ~ [^/]MKCOL$) { rewrite ^(.*)$ $1/; }
+
+          # Logging
+          access_log /var/log/nginx/webdav_access.log;
+          error_log  /var/log/nginx/webdav_error.log;
+        '';
       };
       "/static/" = {
         #defaultType = "text/plain";
