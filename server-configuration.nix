@@ -277,7 +277,7 @@
       owner-write = {
         user = ".+";
         collection = "/";
-        permission = "rw";
+        permissions = "rw";
       };
     };
   };
