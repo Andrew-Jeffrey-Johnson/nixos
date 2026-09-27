@@ -257,22 +257,22 @@
         htpasswd_filename = "/etc/radicale/radicale-users";
         htpasswd_encryption = "plain";
       };
-      rights = {
-        root = {
-          user = ".+";
-          collection = "";
-          permissions = "R";
-        };
-        principal = {
-          user = ".+";
-          collection = "{user}";
-          permissions = "RW";
-        };
-        calendars = {
-          user = ".+";
-          collection = "{user}/.+";
-          permissions = "rw";
-        };
+    };
+    rights = {
+      root = {
+        user = ".+";
+        collection = "";
+        permissions = "R";
+      };
+      principal = {
+        user = ".+";
+        collection = "{user}";
+        permissions = "RW";
+      };
+      calendars = {
+        user = ".+";
+        collection = "{user}/[^/]+";
+        permissions = "rw";
       };
     };
   };
