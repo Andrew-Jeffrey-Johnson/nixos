@@ -411,6 +411,9 @@
     #forceSSL = false;
     #ibasicAuth = { test = "password"; };
     root = "/";
+    appendHttpConfig = ''
+      dav_ext_lock_zone zone=davlock:10m timeout=300;
+    '';
     locations = {
       "/" = {
         proxyPass = "http://192.168.100.13:8000";
