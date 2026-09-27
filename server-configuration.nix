@@ -253,7 +253,7 @@
         filesystem_folder = "/var/lib/radicale/collections";
       };
       auth = {
-        type = "none";
+        type = "htpasswd";
         htpasswd_filename = "/etc/radicale/radicale-users";
         htpasswd_encryption = "plain";
       };
