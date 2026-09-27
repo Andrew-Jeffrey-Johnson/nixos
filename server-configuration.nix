@@ -453,7 +453,7 @@
 
           # Read/lock methods (dav-ext module)
           # NOTE: PROPPATCH is NOT supported — do not add it here
-          dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
+          #dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
 
           # Enable real LOCK/UNLOCK (requires dav_ext_lock_zone in http{})
           dav_ext_lock zone=davlock;
