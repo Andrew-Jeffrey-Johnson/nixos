@@ -270,7 +270,7 @@
         };
         calendars = {
           user = ".+";
-          collection = "{user}/[^/]+";
+          collection = "{user}/.+";
           permissions = "rw";
         };
       };
