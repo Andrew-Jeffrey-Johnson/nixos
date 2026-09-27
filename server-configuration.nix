@@ -284,7 +284,7 @@
     settings = {
       address = "127.0.0.4";
       port = 7854;
-      directory = "/webdav/joplin-andrew";
+      directory = /webdav/joplin-andrew;
       permissions = "R";
       users = [
         {
@@ -442,17 +442,7 @@
         # Calendar (CalDAV) and Contacts (CalDav) server
         # The slash on the end ensure url passed to radicale starts
         # with / instead of /calibre-server
-        proxyPass = "http://127.0.0.4:7854";
-        extraConfig = ''
-          proxy_set_header  X-Script-Name /radicale;
-          proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_pass_header Authorization;
-        '';
-        #       proxy_set_header  X-Forwarded-Host $host;
-        #       proxy_set_header  X-Forwarded-Port $server_port;
-        #       proxy_set_header  X-Forwarded-Proto $scheme;
-        #       proxy_set_header  Host $http_host;
-        # '';
+        proxyPass = "http://127.0.0.4:7854/";
       };
       "/static/" = {
         #defaultType = "text/plain";
