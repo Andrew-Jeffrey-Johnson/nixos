@@ -253,6 +253,23 @@
           htpasswd_filename = "/home/nixos/radicale-users";
           htpasswd_encryption = "bcrypt";
         };
+        rights = {
+          root = {
+            user = ".+";
+            collection = "";
+            permissions = "R";
+          };
+          principal = {
+            user = ".+";
+            collection = "{user}";
+            permissions = "RW";
+          };
+          calendars = {
+            user = ".+";
+            collection = "{user}/[^/]+";
+            permissions = "rw";
+          };
+        };
         storage = {
           filesystem_folder = "/var/lib/radicale/collections";
         };
