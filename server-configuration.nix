@@ -456,7 +456,7 @@
           #dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
 
           # Enable real LOCK/UNLOCK (requires dav_ext_lock_zone in http{})
-          dav_ext_lock zone=davlock;
+          #dav_ext_lock zone=davlock;
 
           dav_access user:rw group:rw all:r;
           create_full_put_path on;
