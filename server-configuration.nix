@@ -283,7 +283,7 @@
     environmentFile = /webdav/webdav.env;
     settings = {
       address = "127.0.0.4";
-      port = 78540;
+      port = 7854;
       directory = "/webdav/joplin-andrew";
       permissions = "R";
       users = [
