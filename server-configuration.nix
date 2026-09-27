@@ -285,7 +285,7 @@
       address = "127.0.0.4";
       port = 78540;
       directory = "/webdav/joplin-andrew";
-      permissions = "RW";
+      permissions = "R";
       users = [
         {
           username = "{env}ENV_USERNAME";
