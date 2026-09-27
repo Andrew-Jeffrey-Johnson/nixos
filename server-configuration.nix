@@ -272,12 +272,12 @@
       calendars = {
         user = ".+";
         collection = "{user}/[^/]+";
-        permissions = "rw";
+        permissions = "RW";
       };
       owner-write = {
         user = ".+";
         collection = "/";
-        permissions = "rw";
+        permissions = "RW";
       };
     };
   };
