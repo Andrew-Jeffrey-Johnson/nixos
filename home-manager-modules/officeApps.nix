@@ -49,6 +49,16 @@ in
         # "user": Preferences appear as changed.
         # "clear": Value has no effect. Resets to factory defaults on each startup.
       };
+      # Note taking
+      joplin-desktop = {
+        enable = true;
+        #settings = {
+        #  "markdown.plugin.mark" = true;
+        #  newNoteFocus = "title";
+        #  "sync.interval" = 600;
+        #  "sync.target" = 7;
+        #};
+      };
     };
   };
 

@@ -277,6 +277,24 @@
     # };
   };
 
+  # Note taking
+  services.webdav = {
+    enable = true;
+    environmentFile = ./sdf;
+    settings = {
+      address = "127.0.0.4";
+      port = 78540;
+      directory = "/webdav/joplin-andrew";
+      permissions = "RW";
+      users = [
+        {
+          username = "{env}ENV_USERNAME";
+          password = "{env}ENV_PASSWORD";
+        }
+      ];
+    };
+  };
+
   #------------------------------------------------------------------------------
   # Personal blog through luminlapid.com
   containers.blog = {
