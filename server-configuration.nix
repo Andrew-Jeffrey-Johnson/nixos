@@ -281,11 +281,12 @@
   services.webdav = {
     enable = true;
     environmentFile = "/webdav/webdav.env";
+    group = "webdav";
     settings = {
       address = "127.0.0.4";
       port = 7854;
       directory = "/webdav/joplin-andrew";
-      permissions = "R";
+      permissions = "RC";
       users = [
         {
           username = "{env}ENV_USERNAME";
