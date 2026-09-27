@@ -404,11 +404,11 @@
         proxyPass = "http://127.0.0.4:8383/";
         #proxyWebsockets = true;
       };
-      "/radicale/" = {
+      "/radicale" = {
         # Calendar (CalDAV) and Contacts (CalDav) server
         # The slash on the end ensure url passed to radicale starts
         # with / instead of /calibre-server
-        proxyPass = "http://127.0.0.4:5232";
+        proxyPass = "http://127.0.0.4:5232/";
         #extraConfig = ''
         #  proxy_set_header  X-Script-Name /radicale;
         #  proxy_set_header  Host $http_host;
