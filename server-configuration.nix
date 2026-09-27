@@ -423,7 +423,6 @@
               proxy_set_header  Host $http_host;
               proxy_pass_header Authorization;
         '';
-        proxyWebsockets = true;
       };
       "/static/" = {
         #defaultType = "text/plain";
