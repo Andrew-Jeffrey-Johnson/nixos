@@ -274,6 +274,11 @@
         collection = "{user}/[^/]+";
         permissions = "rw";
       };
+      owner-write = {
+        user = ".+";
+        collection = "^%(login)s(/.+)?$";
+        permission = "rw";
+      };
     };
   };
 
