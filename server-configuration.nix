@@ -258,27 +258,20 @@
         htpasswd_encryption = "plain";
       };
     };
-    rights = {
-      root = {
-        user = ".+";
-        collection = ".+";
-        permissions = "R";
-      };
-      principal = {
-        user = ".+";
-        collection = "{user}";
-        permissions = "RW";
-      };
-      calendars = {
-        user = ".+";
-        collection = "{user}/[^/]+";
-        permissions = "RW";
-      };
-      owner-write = {
-        user = "andrew";
-        collection = "/radicale/";
-        permissions = "RW";
-      };
+    root = {
+      user = ".+";
+      collection = "";
+      permissions = "R";
+    };
+    principal = {
+      user = ".+";
+      collection = "{user}";
+      permissions = "RW";
+    };
+    calendars = {
+      user = ".+";
+      collection = "{user}/[^/]+";
+      permissions = "rw";
     };
   };
 
@@ -416,6 +409,7 @@
         proxyPass = "http://127.0.0.4:5232";
         extraConfig = ''
           proxy_set_header  X-Script-Name /radicale;
+          proxy_set_header  Host $http_host;
           proxy_pass_header Authorization;
         '';
         #       proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
