@@ -27,6 +27,14 @@ in
       pkgs.qbittorrent # Torret
     ];
     programs = {
+      yt-dlp = {
+        enable = true;
+        settings = {
+          add-metadata = true;
+          embed-thumbnail = true;
+          convert-thumbnails = "jpg";
+        };
+      };
     };
   };
 

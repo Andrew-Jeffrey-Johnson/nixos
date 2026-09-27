@@ -60,7 +60,8 @@ in
       pkgs.jellyfin-desktop # Media streamer and player
       pkgs.pgadmin4 # Server that hosts a website to view PostgreSQL database
       pkgs.signal-desktop
-      pkgs.protonvpn-gui
+      pkgs.proton-vpn
+      pkgs.kdePackages.filelight
     ];
     programs = {
       git-credential-keepassxc = {

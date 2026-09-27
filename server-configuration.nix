@@ -241,6 +241,25 @@
     ];
   };
 
+  # Calendar and contacts server
+  # https://radicale.org/v3.html#simple-5-minute-setup
+  services.radicale = {
+    enable = true;
+    settings = {
+      server = {
+        hosts = [ "127.0.0.4:5232" ];
+        auth = {
+          type = "htpasswd";
+          htpasswd_filename = "/home/nixos/radicale-users";
+          htpasswd_encryption = "bcrypt";
+        };
+        storage = {
+          filesystem_folder = "/var/lib/radicale/collections";
+        };
+      };
+    };
+  };
+
   #------------------------------------------------------------------------------
   # Personal blog through luminlapid.com
   containers.blog = {
@@ -366,6 +385,13 @@
         # The slash on the end ensure url passed to calibre-server starts
         # with / instead of /calibre-server
         proxyPass = "http://127.0.0.4:8383/";
+        #proxyWebsockets = true;
+      };
+      "/radicale" = {
+        # Calendar (CalDAV) and Contacts (CalDav) server
+        # The slash on the end ensure url passed to radicale starts
+        # with / instead of /calibre-server
+        proxyPass = "http://127.0.0.4:5232/";
         #proxyWebsockets = true;
       };
       "/static/" = {
