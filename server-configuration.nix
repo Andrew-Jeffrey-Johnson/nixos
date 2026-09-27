@@ -254,7 +254,7 @@
       };
       auth = {
         type = "htpasswd";
-        htpasswd_filename = "/home/nixos/radicale-users";
+        htpasswd_filename = "/etc/radicale/radicale-users";
         htpasswd_encryption = "bcrypt";
       };
       #rights = {
