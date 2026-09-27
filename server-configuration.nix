@@ -280,7 +280,7 @@
   # Note taking
   services.webdav = {
     enable = true;
-    environmentFile = ./sdf;
+    environmentFile = /webdav/webdav.env;
     settings = {
       address = "127.0.0.4";
       port = 78540;
