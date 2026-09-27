@@ -406,9 +406,9 @@
 
   # Create a reverse proxy for luminlapid via nginx
   services.nginx.enable = true;
-  #services.nginx.appendHttpConfig = ''
-  #  dav_ext_lock_zone zone=davlock:10m timeout=300;
-  #'';
+  services.nginx.appendHttpConfig = ''
+    dav_ext_lock_zone zone=davlock:10m timeout=300;
+  '';
   services.nginx.virtualHosts."luminlapid.com" = {
     addSSL = true;
     enableACME = true;
@@ -454,10 +454,10 @@
 
           # Read/lock methods (dav-ext module)
           # NOTE: PROPPATCH is NOT supported — do not add it here
-          #dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
+          dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
 
           # Enable real LOCK/UNLOCK (requires dav_ext_lock_zone in http{})
-          #dav_ext_lock zone=davlock;
+          dav_ext_lock zone=davlock;
 
           dav_access user:rw group:rw all:r;
           create_full_put_path on;
