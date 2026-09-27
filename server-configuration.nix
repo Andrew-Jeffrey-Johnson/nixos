@@ -470,10 +470,6 @@
           # Fix macOS Finder MKCOL-without-slash (creates dirs without trailing /)
           set $x $uri$request_method;
           if ($x ~ [^/]MKCOL$) { rewrite ^(.*)$ $1/; }
-
-          # Logging
-          access_log /var/log/nginx/webdav_access.log;
-          error_log  /var/log/nginx/webdav_error.log;
         '';
       };
       "/static/" = {
