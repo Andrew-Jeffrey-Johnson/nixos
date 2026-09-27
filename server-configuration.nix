@@ -405,9 +405,9 @@
 
   # Create a reverse proxy for luminlapid via nginx
   services.nginx.enable = true;
-  services.nginx.appendHttpConfig = ''
-    dav_ext_lock_zone zone=davlock:10m timeout=300;
-  '';
+  #services.nginx.appendHttpConfig = ''
+  #  dav_ext_lock_zone zone=davlock:10m timeout=300;
+  #'';
   services.nginx.virtualHosts."luminlapid.com" = {
     addSSL = true;
     enableACME = true;
@@ -446,17 +446,17 @@
         # Calendar (CalDAV) and Contacts (CalDav) server
         # The slash on the end ensure url passed to radicale starts
         # with / instead of /calibre-server
-        proxyPass = "http://127.0.0.4:7854/";
+        proxyPass = "http://127.0.0.4:7854";
         extraConfig = ''
           # Write methods (base module)
           dav_methods PUT DELETE MKCOL COPY MOVE;
 
           # Read/lock methods (dav-ext module)
           # NOTE: PROPPATCH is NOT supported — do not add it here
-          dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
+          #dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
 
           # Enable real LOCK/UNLOCK (requires dav_ext_lock_zone in http{})
-          dav_ext_lock zone=davlock;
+          #dav_ext_lock zone=davlock;
 
           dav_access user:rw group:rw all:r;
           create_full_put_path on;
