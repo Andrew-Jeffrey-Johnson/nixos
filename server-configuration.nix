@@ -465,8 +465,8 @@
           min_delete_depth 1;
 
           # Fix macOS Finder MKCOL-without-slash (creates dirs without trailing /)
-          set $x $uri$request_method;
-          if ($x ~ [^/]MKCOL$) { rewrite ^(.*)$ $1/; }
+          #set $x $uri$request_method;
+          #if ($x ~ [^/]MKCOL$) { rewrite ^(.*)$ $1/; }
         '';
       };
       "/static/" = {
