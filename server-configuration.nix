@@ -447,7 +447,7 @@
         # Calendar (CalDAV) and Contacts (CalDav) server
         # The slash on the end ensure url passed to radicale starts
         # with / instead of /calibre-server
-        proxyPass = "http://127.0.0.4:7854/";
+        proxyPass = "http://127.0.0.4:7854";
         extraConfig = ''
           # Write methods (base module)
           dav_methods PUT DELETE MKCOL COPY MOVE;
