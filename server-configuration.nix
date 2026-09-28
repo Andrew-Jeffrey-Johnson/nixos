@@ -443,7 +443,7 @@
         #       proxy_set_header  Host $http_host;
         # '';
       };
-      "/webdav/joplin-andrew/" = {
+      "/webdav/joplin-andrew" = {
         # Calendar (CalDAV) and Contacts (CalDav) server
         # The slash on the end ensure url passed to radicale starts
         # with / instead of /calibre-server
