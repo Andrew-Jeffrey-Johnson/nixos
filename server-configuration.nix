@@ -211,7 +211,6 @@
       pkgs.jellyfin
       pkgs.jellyfin-web
       pkgs.jellyfin-ffmpeg
-      pkgs.nginxModules.dav # Needed for webdav
     ];
   };
 
@@ -406,9 +405,12 @@
 
   # Create a reverse proxy for luminlapid via nginx
   services.nginx.enable = true;
-  #services.nginx.appendHttpConfig = ''
-  #  dav_ext_lock_zone zone=davlock:10m timeout=300;
-  #'';
+  services.nginx.additionalModules = [
+    pkgs.nginxModules.dav # Needed for webdav
+  ];
+  services.nginx.appendHttpConfig = ''
+    dav_ext_lock_zone zone=davlock:10m timeout=300;
+  '';
   services.nginx.virtualHosts."luminlapid.com" = {
     addSSL = true;
     enableACME = true;
