@@ -417,6 +417,7 @@
     enableACME = true;
     #forceSSL = false;
     #ibasicAuth = { test = "password"; };
+    root = "/";
     locations = {
       "/" = {
         proxyPass = "http://192.168.100.13:8000";
