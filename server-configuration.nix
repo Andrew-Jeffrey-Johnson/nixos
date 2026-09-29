@@ -117,7 +117,6 @@
         80
         443
         25565
-        #7854 # Webdav
       ];
       allowedUDPPorts = [
         51820 # WireGuard
@@ -447,7 +446,7 @@
         # '';
       };
       # Note taking server
-      "/webdav/joplin-andrew" = {
+      "/joplin-andrew" = {
         root = "/";
         # Calendar (CalDAV) and Contacts (CalDav) server
         # The slash on the end ensure url passed to radicale starts
