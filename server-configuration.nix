@@ -416,7 +416,6 @@
     enableACME = true;
     #forceSSL = false;
     #ibasicAuth = { test = "password"; };
-    root = "/";
     locations = {
       "/" = {
         proxyPass = "http://192.168.100.13:8000";
@@ -446,6 +445,7 @@
         # '';
       };
       "/joplin-andrew" = {
+        root = "/webdav/joplin-andrew";
         # Calendar (CalDAV) and Contacts (CalDav) server
         # The slash on the end ensure url passed to radicale starts
         # with / instead of /calibre-server
