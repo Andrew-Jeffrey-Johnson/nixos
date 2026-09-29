@@ -117,6 +117,7 @@
         80
         443
         25565
+        7854 # Webdav
       ];
       allowedUDPPorts = [
         51820 # WireGuard
