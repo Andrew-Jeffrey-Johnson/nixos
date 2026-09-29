@@ -279,23 +279,23 @@
   };
 
   # Note taking
-  #services.webdav = {
-  #  enable = true;
-  #  environmentFile = "/webdav/webdav.env";
-  #  group = "webdav";
-  #  settings = {
-  #    address = "127.0.0.4";
-  #    port = 7854;
-  #    directory = "/webdav/joplin-andrew";
-  #    permissions = "CRUD";
-  #    users = [
-  #      {
-  #        username = "{env}ENV_USERNAME";
-  #        password = "{env}ENV_PASSWORD";
-  #      }
-  #    ];
-  #  };
-  #};
+  services.webdav = {
+    enable = true;
+    environmentFile = "/webdav/webdav.env";
+    group = "webdav";
+    settings = {
+      address = "127.0.0.4";
+      port = 7854;
+      directory = "/webdav/joplin-andrew";
+      permissions = "CRUD";
+      users = [
+        {
+          username = "{env}ENV_USERNAME";
+          password = "{env}ENV_PASSWORD";
+        }
+      ];
+    };
+  };
 
   #------------------------------------------------------------------------------
   # Personal blog through luminlapid.com
@@ -446,30 +446,30 @@
         # '';
       };
       "/joplin-andrew" = {
-        alias = "/webdav/joplin-andrew";
+        #root = "/webdav/joplin-andrew";
         # Calendar (CalDAV) and Contacts (CalDav) server
         # The slash on the end ensure url passed to radicale starts
         # with / instead of /calibre-server
-        #proxyPass = "http://127.0.0.4:7854";
-        extraConfig = ''
-          # Write methods (base module)
-          dav_methods PUT DELETE MKCOL COPY MOVE;
+        proxyPass = "http://127.0.0.4:7854";
+        #extraConfig = ''
+        #  # Write methods (base module)
+        #  dav_methods PUT DELETE MKCOL COPY MOVE;
 
-          # Read/lock methods (dav-ext module)
-          # NOTE: PROPPATCH is NOT supported — do not add it here
-          dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
+        #  # Read/lock methods (dav-ext module)
+        #  # NOTE: PROPPATCH is NOT supported — do not add it here
+        #  dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
 
-          # Enable real LOCK/UNLOCK (requires dav_ext_lock_zone in http{})
-          dav_ext_lock zone=davlock;
+        #  # Enable real LOCK/UNLOCK (requires dav_ext_lock_zone in http{})
+        #  dav_ext_lock zone=davlock;
 
-          dav_access user:rw group:rw all:r;
-          create_full_put_path on;
-          min_delete_depth 1;
+        #  dav_access user:rw group:rw all:r;
+        #  create_full_put_path on;
+        #  min_delete_depth 1;
 
-          # Fix macOS Finder MKCOL-without-slash (creates dirs without trailing /)
-          set $x $uri$request_method;
-          if ($x ~ [^/]MKCOL$) { rewrite ^(.*)$ $1/; }
-        '';
+        #  # Fix macOS Finder MKCOL-without-slash (creates dirs without trailing /)
+        #  set $x $uri$request_method;
+        #  if ($x ~ [^/]MKCOL$) { rewrite ^(.*)$ $1/; }
+        #'';
       };
       "/static/" = {
         #defaultType = "text/plain";
