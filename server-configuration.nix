@@ -211,6 +211,18 @@
       pkgs.jellyfin
       pkgs.jellyfin-web
       pkgs.jellyfin-ffmpeg
+      (pkgs.writeShellScriptBin "update" ''
+          function update() {
+          pushd /home/nixos/nixos
+          echo "Pulling the latest changes from the git repository."
+          if git fetch && git pull ;
+          then
+            echo "We have the latest changes. Run the command to build a new configuration."
+            sudo nixos-rebuild switch --flake /home/nixos/nixos/#server
+          fi
+          popd
+        }
+      '')
     ];
   };
 
