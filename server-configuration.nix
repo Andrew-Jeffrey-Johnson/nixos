@@ -446,7 +446,7 @@
         # '';
       };
       "/joplin-andrew" = {
-        root = "/webdav/joplin-andrew";
+        alias = "/webdav/joplin-andrew";
         # Calendar (CalDAV) and Contacts (CalDav) server
         # The slash on the end ensure url passed to radicale starts
         # with / instead of /calibre-server
