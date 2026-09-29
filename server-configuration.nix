@@ -278,7 +278,7 @@
     # };
   };
 
-  # Note taking
+  # Generic webdav server
   services.webdav = {
     enable = true;
     environmentFile = "/webdav/webdav.env";
@@ -286,7 +286,7 @@
     settings = {
       address = "127.0.0.4";
       port = 7854;
-      directory = "/webdav/joplin-andrew";
+      directory = "/webdav";
       permissions = "CRUD";
       users = [
         {
@@ -446,12 +446,13 @@
         #       proxy_set_header  Host $http_host;
         # '';
       };
+      # Note taking server
       "/webdav/joplin-andrew" = {
         root = "/";
         # Calendar (CalDAV) and Contacts (CalDav) server
         # The slash on the end ensure url passed to radicale starts
         # with / instead of /calibre-server
-        proxyPass = "http://127.0.0.4:7854/webdav/joplin-andrew";
+        proxyPass = "http://127.0.0.4:7854";
         #extraConfig = ''
         #  # Write methods (base module)
         #  dav_methods PUT DELETE MKCOL COPY MOVE;
