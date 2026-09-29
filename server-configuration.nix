@@ -285,6 +285,9 @@
     settings = {
       address = "127.0.0.4";
       port = 7854;
+      # This directory is considered root.
+      # When a URL gets passed by proxy to this webdav service,
+      # the resulting path will be /webdav/<PASSED URL>.
       directory = "/webdav";
       permissions = "CRUD";
       users = [
@@ -447,11 +450,13 @@
       };
       # Note taking server
       "/joplin-andrew" = {
-        root = "/";
-        # Calendar (CalDAV) and Contacts (CalDav) server
-        # The slash on the end ensure url passed to radicale starts
-        # with / instead of /calibre-server
+        root = "/"; # This is what the URL starts with
+        # Combined with the user-endered URL "/joplin-andrew
+        # we arrive at the final URL "/joplin-andrew"
+        # that gets passed throught the proxy
         proxyPass = "http://127.0.0.4:7854";
+        # Below is the config necessary to get webdav working using only
+        # nginx rather than the webdav service offered by nixos
         #extraConfig = ''
         #  # Write methods (base module)
         #  dav_methods PUT DELETE MKCOL COPY MOVE;
