@@ -191,6 +191,7 @@
       isNormalUser = false; # Don't set group to users or create home
       description = "User that the calibre server runs under";
     };
+    nginx.extraGroups = [ "acme" ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -633,13 +634,13 @@
   security.acme = {
     acceptTerms = true;
     defaults.email = "andrew.jeffrey.johnson@gmail.com";
-    #certs."luminlapid.com" = {
-    #  listenHTTP = ":80";
-    #  extraDomainNames = [
-    #    "nc.luminlapid.com"
-    #    "www.luminlapid.com"
-    #  ];
-    #};
+    certs."luminlapid.com" = {
+      #  listenHTTP = ":80";
+      extraDomainNames = [
+        "nc.luminlapid.com"
+        "www.luminlapid.com"
+      ];
+    };
   };
 
   # This value determines the NixOS release from which the default
