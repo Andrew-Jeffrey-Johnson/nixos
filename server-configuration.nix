@@ -548,6 +548,8 @@
     };
   };
   services.nginx.virtualHosts."localhost" = {
+    forceSSL = true;
+    enableACME = true;
     "^~ /.well-known" = {
       priority = 9000;
       extraConfig = ''
