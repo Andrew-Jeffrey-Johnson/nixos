@@ -34,8 +34,6 @@ in
       pkgs.texliveFull
       pkgs.poppler # PDF viwer used by texstudio
 
-      pkgs.iotas
-
       # Dictionary
       pkgs.goldendict-ng # Multi-language dictionary app
 
@@ -54,7 +52,7 @@ in
       };
       # Note taking
       joplin-desktop = {
-        enable = false;
+        enable = true;
         #settings = {
         #  "markdown.plugin.mark" = true;
         #  newNoteFocus = "title";
