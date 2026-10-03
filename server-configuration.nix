@@ -315,7 +315,7 @@
     enable = true;
     package = pkgs.nextcloud35;
     hostName = "luminlapid.com";
-    #https = true;
+    https = false;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
     extraApps = {
@@ -334,7 +334,7 @@
     extraAppsEnable = true;
     settings =
       let
-        prot = "https"; # or http
+        prot = "http"; # or http
         host = "127.0.0.1";
         dir = "/nextcloud";
       in
@@ -613,9 +613,9 @@
   security.acme = {
     acceptTerms = true;
     defaults.email = "andrew.jeffrey.johnson@gmail.com";
-    certs."luminlapid.com" = {
-      extraDomainNames = [ "nc.luminlapid.com" ];
-    };
+    #certs."luminlapid.com" = {
+    #  extraDomainNames = [ "nc.luminlapid.com" ];
+    #};
   };
 
   # This value determines the NixOS release from which the default
