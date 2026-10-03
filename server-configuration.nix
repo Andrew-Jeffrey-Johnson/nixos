@@ -313,7 +313,7 @@
   environment.etc."nextcloud-admin-pass".text = "PWD";
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud34;
+    package = pkgs.nextcloud35;
     hostName = "nc.luminlapid.com";
     https = true;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
