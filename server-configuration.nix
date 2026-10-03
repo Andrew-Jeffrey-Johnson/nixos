@@ -574,6 +574,7 @@
     addSSL = true;
     #enableACME = true;
     useACMEHost = "lulminlapid.com";
+    acmeRoot = config.security.acme.defaults.webroot;
     #forceSSL = false;
     #ibasicAuth = { test = "password"; };
     root = "/";
@@ -585,7 +586,6 @@
     ];
     locations = {
       "/" = {
-        acmeRoot = config.security.acme.defaults.webroot;
         #proxyPass = "http://192.168.100.13:8000";
         proxyWebsockets = true;
       };
