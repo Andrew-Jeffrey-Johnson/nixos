@@ -314,7 +314,7 @@
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud35;
-    #hostName = "luminlapid.com";
+    hostName = "127.0.0.163";
     https = true;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
@@ -335,7 +335,7 @@
     settings =
       let
         prot = "https"; # or http
-        host = "127.0.0.163";
+        host = "luminlapid.com";
         dir = "/nextcloud";
       in
       {
