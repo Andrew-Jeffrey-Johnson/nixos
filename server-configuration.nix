@@ -314,7 +314,7 @@
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud35;
-    hostName = "luminlapid.com";
+    #hostName = "luminlapid.com";
     https = true;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
@@ -568,7 +568,7 @@
       #  '';
       #};
       "/nextcloud/" = {
-        priority = 9999;
+        #priority = 9999;
         #proxyPass = "http://127.0.0.163/";
         extraConfig = ''
           proxy_set_header X-Real-IP $remote_addr;
