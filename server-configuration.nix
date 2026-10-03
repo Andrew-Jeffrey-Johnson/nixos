@@ -315,7 +315,7 @@
     enable = true;
     package = pkgs.nextcloud35;
     hostName = "nc.luminlapid.com";
-    https = true;
+    #https = true;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
     extraApps = {
