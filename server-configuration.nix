@@ -314,7 +314,7 @@
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud35;
-    hostName = "127.0.0.163:17633";
+    hostName = "127.0.0.163";
     https = false;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
@@ -575,7 +575,7 @@
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header X-NginX-Proxy true;
           proxy_set_header X-Forwarded-Proto http;
-          proxy_pass http://127.0.0.163:17633/; # tailing / is important!
+          proxy_pass http://127.0.0.163/; # tailing / is important!
           proxy_set_header Host $host;
           proxy_cache_bypass $http_upgrade;
           proxy_redirect off;
