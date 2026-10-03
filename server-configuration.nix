@@ -587,7 +587,7 @@
     locations = {
       "/" = {
         #proxyPass = "http://192.168.100.13:8000";
-        proxyWebsockets = true;
+        #proxyWebsockets = true;
       };
       #"/nextcloud/" = {
       #priority = 9999;
