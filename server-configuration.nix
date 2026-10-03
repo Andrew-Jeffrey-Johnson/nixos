@@ -637,7 +637,8 @@
     defaults.email = "andrew.jeffrey.johnson@gmail.com";
     certs."luminlapid.com" = {
       #  listenHTTP = ":80";
-      webroot = "/var/lib/acme/.challenges";
+      group = config.services.nginx.group;
+      webroot = "/var/lib/acme/acme-challenge";
       extraDomainNames = [
         "nc.luminlapid.com"
         "www.luminlapid.com"
