@@ -315,6 +315,7 @@
     enable = true;
     package = pkgs.nextcloud35;
     hostName = "luminlapid.com";
+    dir = "/nextcloud";
     https = true;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
@@ -333,17 +334,17 @@
     };
     extraAppsEnable = true;
     settings =
-      let
-        prot = "https"; # or http
-        host = "127.0.0.1";
-        dir = "/nextcloud";
-      in
+      #let
+      #  prot = "https"; # or http
+      #  host = "127.0.0.1";
+      #  dir = "/nextcloud";
+      #in
       {
-        overwriteprotocol = prot;
-        overwritehost = host;
-        overwritewebroot = dir;
-        overwrite.cli.url = "${prot}://${host}${dir}/";
-        htaccess.RewriteBase = dir;
+        #  overwriteprotocol = prot;
+        #  overwritehost = host;
+        #  overwritewebroot = dir;
+        #  overwrite.cli.url = "${prot}://${host}${dir}/";
+        #  htaccess.RewriteBase = dir;
         enabledPreviewProviders = [
           "OC\\Preview\\BMP"
           "OC\\Preview\\GIF"
