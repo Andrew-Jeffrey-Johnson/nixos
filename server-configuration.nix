@@ -314,7 +314,7 @@
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud35;
-    hostName = "nc.luminlapid.com";
+    hostName = "luminlapid.com";
     #https = true;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
@@ -333,17 +333,17 @@
     };
     extraAppsEnable = true;
     settings =
-      #let
-      #  prot = "https"; # or http
-      #  host = "127.0.0.4";
-      #  dir = "/nextcloud";
-      #in
+      let
+        prot = "https"; # or http
+        host = "127.0.0.1";
+        dir = "/nextcloud";
+      in
       {
-        #  overwriteprotocol = prot;
-        #  overwritehost = host;
-        #  overwritewebroot = dir;
-        #  overwrite.cli.url = "${prot}://${host}${dir}/";
-        #  htaccess.RewriteBase = dir;
+        overwriteprotocol = prot;
+        overwritehost = host;
+        overwritewebroot = dir;
+        overwrite.cli.url = "${prot}://${host}${dir}/";
+        htaccess.RewriteBase = dir;
         enabledPreviewProviders = [
           "OC\\Preview\\BMP"
           "OC\\Preview\\GIF"
@@ -545,55 +545,54 @@
         #extraConfig = "autoindex on";
         tryFiles = "$uri =404";
       };
+      "^~ /.well-known" = {
+        priority = 9000;
+        extraConfig = ''
+          absolute_redirect off;
+          location ~ ^/\\.well-known/(?:carddav|caldav)$ {
+            return 301 /nextcloud/remote.php/dav;
+          }
+          location ~ ^/\\.well-known/host-meta(?:\\.json)?$ {
+            return 301 /nextcloud/public.php?service=host-meta-json;
+          }
+          location ~ ^/\\.well-known/(?!acme-challenge|pki-validation) {
+            return 301 /nextcloud/index.php$request_uri;
+          }
+          try_files $uri $uri/ =404;
+        '';
+      };
+      "/nextcloud/" = {
+        priority = 9999;
+        extraConfig = ''
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-NginX-Proxy true;
+          proxy_set_header X-Forwarded-Proto http;
+          proxy_pass http://127.0.0.1:17833/; # tailing / is important!
+          proxy_set_header Host $host;
+          proxy_cache_bypass $http_upgrade;
+          proxy_redirect off;
+        '';
+      };
     };
   };
-  services.nginx.virtualHosts."nc.luminlapid.com" = {
-    useACMEHost = "luminlapid.com";
-    locations."/" = {
-      proxyPass = "http://127.0.0.4";
-    };
-  };
+  #services.nginx.virtualHosts."nc.luminlapid.com" = {
+  #  useACMEHost = "luminlapid.com";
+  #  locations."/" = {
+  #    proxyPass = "http://127.0.0.4";
+  #  };
+  #};
   #services.nginx.virtualHosts."localhost" = {
   #  forceSSL = true;
   #  enableACME = true;
   #  locations = {
-  #    "/nextcloud/" = {
-  #      priority = 9999;
-  #      extraConfig = ''
-  #        proxy_set_header X-Real-IP $remote_addr;
-  #        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-  #        proxy_set_header X-NginX-Proxy true;
-  #        proxy_set_header X-Forwarded-Proto http;
-  #        proxy_pass http://127.0.0.4:17833/; # tailing / is important!
-  #        proxy_set_header Host $host;
-  #        proxy_cache_bypass $http_upgrade;
-  #        proxy_redirect off;
-  #      '';
-  #    };
-  #    "^~ /.well-known" = {
-  #      priority = 9000;
-  #      extraConfig = ''
-  #        absolute_redirect off;
-  #        location ~ ^/\\.well-known/(?:carddav|caldav)$ {
-  #          return 301 /nextcloud/remote.php/dav;
-  #        }
-  #        location ~ ^/\\.well-known/host-meta(?:\\.json)?$ {
-  #          return 301 /nextcloud/public.php?service=host-meta-json;
-  #        }
-  #        location ~ ^/\\.well-known/(?!acme-challenge|pki-validation) {
-  #          return 301 /nextcloud/index.php$request_uri;
-  #        }
-  #        try_files $uri $uri/ =404;
-  #      '';
-  #    };
-  #  };
   #};
-  #services.nginx.virtualHosts."${config.services.nextcloud.hostName}".listen = [
-  #  {
-  #    addr = "127.0.0.4";
-  #    port = 17833; # NOT an exposed port
-  #  }
-  #];
+  services.nginx.virtualHosts."${config.services.nextcloud.hostName}".listen = [
+    {
+      addr = "127.0.0.1";
+      port = 17833; # NOT an exposed port
+    }
+  ];
   #services.nginx.virtualHosts."nfs.luminlapid.com" = {
   #  root = "/";
   #  locations = {
