@@ -34,6 +34,8 @@ in
       pkgs.texliveFull
       pkgs.poppler # PDF viwer used by texstudio
 
+      pkgs.iotas
+
       # Dictionary
       pkgs.goldendict-ng # Multi-language dictionary app
 
