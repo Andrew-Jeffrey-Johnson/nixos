@@ -481,6 +481,13 @@
     #forceSSL = false;
     #ibasicAuth = { test = "password"; };
     #root = "/";
+    listen = [
+      {
+        addr = "127.0.0.1";
+        port = 17833; # NOT an exposed port
+      }
+    ];
+
     locations = {
       "/" = {
         proxyPass = "http://192.168.100.13:8000";
@@ -587,12 +594,12 @@
   #  enableACME = true;
   #  locations = {
   #};
-  services.nginx.virtualHosts."${config.services.nextcloud.hostName}".listen = [
-    {
-      addr = "127.0.0.1";
-      port = 17833; # NOT an exposed port
-    }
-  ];
+  #services.nginx.virtualHosts."${config.services.nextcloud.hostName}".listen = [
+  #  {
+  #    addr = "127.0.0.1";
+  #    port = 17833; # NOT an exposed port
+  #  }
+  #];
   #services.nginx.virtualHosts."nfs.luminlapid.com" = {
   #  root = "/";
   #  locations = {
