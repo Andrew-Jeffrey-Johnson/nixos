@@ -481,7 +481,12 @@
     #forceSSL = false;
     #ibasicAuth = { test = "password"; };
     #root = "/";
-
+    #listen = [
+    #  {
+    #    addr = "127.0.0.1";
+    #    port = 17833; # NOT an exposed port
+    #  }
+    #];
     locations = {
       "/" = {
         proxyPass = "http://192.168.100.13:8000";
@@ -563,12 +568,6 @@
       #  '';
       #};
       "/nextcloud/" = {
-        listen = [
-          {
-            addr = "127.0.0.1";
-            port = 17833; # NOT an exposed port
-          }
-        ];
         priority = 9999;
         extraConfig = ''
           proxy_set_header X-Real-IP $remote_addr;
