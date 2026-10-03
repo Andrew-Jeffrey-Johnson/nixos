@@ -585,6 +585,8 @@
     ];
     locations = {
       "/" = {
+        root = "/";
+        acmeRoot = config.security.acme.defaults.webroot;
         #proxyPass = "http://192.168.100.13:8000";
         proxyWebsockets = true;
       };
@@ -636,7 +638,6 @@
     defaults.email = "andrew.jeffrey.johnson@gmail.com";
     certs."luminlapid.com" = {
       #  listenHTTP = ":80";
-      webroot = config.security.acme.defaults.webroot;
       extraDomainNames = [
         "nc.luminlapid.com"
         "www.luminlapid.com"
