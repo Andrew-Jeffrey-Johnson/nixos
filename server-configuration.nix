@@ -333,17 +333,17 @@
     };
     extraAppsEnable = true;
     settings =
-      #let
-      #  prot = "https"; # or http
-      #  host = "127.0.0.1";
-      #  dir = "/nextcloud";
-      #in
+      let
+        prot = "https"; # or http
+        host = "127.0.0.1";
+        dir = "/nextcloud";
+      in
       {
-        #  overwriteprotocol = prot;
-        #  overwritehost = host;
-        #  overwritewebroot = dir;
-        #  overwrite.cli.url = "${prot}://${host}${dir}/";
-        #  htaccess.RewriteBase = dir;
+        overwriteprotocol = prot;
+        overwritehost = host;
+        overwritewebroot = dir;
+        overwrite.cli.url = "${prot}://${host}${dir}/";
+        htaccess.RewriteBase = dir;
         enabledPreviewProviders = [
           "OC\\Preview\\BMP"
           "OC\\Preview\\GIF"
@@ -569,6 +569,7 @@
       #};
       "/nextcloud/" = {
         priority = 9999;
+        proxyPass = "http://127.0.0.4:7854";
         extraConfig = ''
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
