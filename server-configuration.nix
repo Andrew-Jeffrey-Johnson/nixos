@@ -314,8 +314,8 @@
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud35;
-    hostName = "127.0.0.163";
-    https = false;
+    hostName = "127.0.0.163:17633";
+    https = true;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
     extraApps = {
@@ -334,9 +334,9 @@
     extraAppsEnable = true;
     settings =
       let
-        prot = "http"; # or http
-        host = "luminlapid.com";
-        dir = "/nextcloud";
+        prot = "https"; # or http
+        host = "nc.luminlapid.com";
+        dir = "/";
       in
       {
         overwriteprotocol = prot;
@@ -571,7 +571,8 @@
   };
   services.nginx.virtualHosts."nc.luminlapid.com" = {
     addSSL = true;
-    enableACME = true;
+    #enableACME = true;
+    useACMEHost = "lulminlapid.com";
     #forceSSL = false;
     #ibasicAuth = { test = "password"; };
     #root = "/";
