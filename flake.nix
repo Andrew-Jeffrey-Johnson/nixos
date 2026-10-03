@@ -2,7 +2,7 @@
 {
   description = "NixOS System Configuration";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     # home-manager, used for managing user configuration
     home-manager = {
       url = "github:nix-community/home-manager/master";
