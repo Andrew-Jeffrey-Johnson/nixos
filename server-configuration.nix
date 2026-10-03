@@ -633,13 +633,13 @@
   security.acme = {
     acceptTerms = true;
     defaults.email = "andrew.jeffrey.johnson@gmail.com";
-    certs."luminlapid.com" = {
-      listenHTTP = ":80";
-      extraDomainNames = [
-        "nc.luminlapid.com"
-        "www.luminlapid.com"
-      ];
-    };
+    #certs."luminlapid.com" = {
+    #  listenHTTP = ":80";
+    #  extraDomainNames = [
+    #    "nc.luminlapid.com"
+    #    "www.luminlapid.com"
+    #  ];
+    #};
   };
 
   # This value determines the NixOS release from which the default
