@@ -607,7 +607,7 @@
   security.acme = {
     acceptTerms = true;
     defaults.email = "andrew.jeffrey.johnson@gmail.com";
-    "luminlapid.com" = {
+    certs."luminlapid.com" = {
       extraDomainNames = [ "nc.luminlapid.com" ];
     };
   };
