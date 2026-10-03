@@ -309,6 +309,44 @@
     };
   };
 
+  # Nextcloud
+  environment.etc."nextcloud-admin-pass".text = "PWD";
+  services.nextcloud = {
+    enable = true;
+    package = pkgs.nextcloud;
+    hostName = "nc.luminlapid.com";
+    https = true;
+    config.adminpassFile = "/etc/nextcloud-admin-pass";
+    config.dbtype = "sqlite";
+    extraApps = {
+      inherit (config.services.nextcloud.package.packages.apps)
+        contacts
+        calendar
+        tasks
+        onlyoffice
+        end_to_end_encryption
+        files_markdown
+        guests
+        polls
+        whiteboard
+        ;
+    };
+    extraAppsEnable = true;
+    settings.enabledPreviewProviders = [
+      "OC\\Preview\\BMP"
+      "OC\\Preview\\GIF"
+      "OC\\Preview\\JPEG"
+      "OC\\Preview\\Krita"
+      "OC\\Preview\\MarkDown"
+      "OC\\Preview\\MP3"
+      "OC\\Preview\\OpenDocument"
+      "OC\\Preview\\PNG"
+      "OC\\Preview\\TXT"
+      "OC\\Preview\\XBitmap"
+      "OC\\Preview\\HEIC"
+    ];
+  };
+
   #------------------------------------------------------------------------------
   # Personal blog through luminlapid.com
   containers.blog = {
@@ -493,6 +531,25 @@
         #root = "/home/nginx";
         #extraConfig = "autoindex on";
         tryFiles = "$uri =404";
+      };
+    };
+  };
+  services.nginx.virtualHosts."nc.luminlapid.com" = {
+    addSSL = true;
+    enableACME = true;
+    listen = [
+      {
+        addr = "127.0.0.4";
+        port = 7765;
+      }
+    ];
+    #forceSSL = false;
+    #ibasicAuth = { test = "password"; };
+    root = "/";
+    locations = {
+      "/" = {
+        #proxyPass = "http://192.168.100.13:8000";
+        #proxyWebsockets = true;
       };
     };
   };

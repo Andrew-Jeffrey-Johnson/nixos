@@ -25,6 +25,9 @@ in
       pkgs.discord
       pkgs.luanti
       pkgs.prismlauncher # Minecraft
+      # Wine
+      pkgs.bottles
+      pkgs.wineWow64Packages.full
     ];
     programs = {
       lutris = {

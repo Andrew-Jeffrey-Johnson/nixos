@@ -27,6 +27,7 @@ in
       pkgs.libreoffice # Office suite
       pkgs.hunspell # Spell-checker for libreoffice
       pkgs.hunspellDicts.en_US-large # English dictionary for hunspell
+      pkgs.hyphenDicts.en-us # For hyphen
 
       # LaTeX Editor
       pkgs.texstudio
@@ -58,6 +59,9 @@ in
         #  "sync.interval" = 600;
         #  "sync.target" = 7;
         #};
+      };
+      onlyoffice = {
+        enable = true;
       };
     };
   };
