@@ -315,7 +315,7 @@
     enable = true;
     package = pkgs.nextcloud35;
     hostName = "luminlapid.com";
-    https = false;
+    https = true;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
     extraApps = {
@@ -334,7 +334,7 @@
     extraAppsEnable = true;
     settings =
       let
-        prot = "http"; # or http
+        prot = "https"; # or http
         host = "127.0.0.1";
         dir = "/nextcloud";
       in
@@ -481,12 +481,6 @@
     #forceSSL = false;
     #ibasicAuth = { test = "password"; };
     #root = "/";
-    listen = [
-      {
-        addr = "127.0.0.1";
-        port = 17833; # NOT an exposed port
-      }
-    ];
 
     locations = {
       "/" = {
@@ -569,6 +563,12 @@
       #  '';
       #};
       "/nextcloud/" = {
+        listen = [
+          {
+            addr = "127.0.0.1";
+            port = 17833; # NOT an exposed port
+          }
+        ];
         priority = 9999;
         extraConfig = ''
           proxy_set_header X-Real-IP $remote_addr;
