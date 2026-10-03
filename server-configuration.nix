@@ -552,22 +552,22 @@
         #extraConfig = "autoindex on";
         tryFiles = "$uri =404";
       };
-      "^~ /.well-known" = {
-        priority = 9000;
-        extraConfig = ''
-          absolute_redirect off;
-          location ~ ^/\\.well-known/(?:carddav|caldav)$ {
-            return 301 /nextcloud/remote.php/dav;
-          }
-          location ~ ^/\\.well-known/host-meta(?:\\.json)?$ {
-            return 301 /nextcloud/public.php?service=host-meta-json;
-          }
-          location ~ ^/\\.well-known/(?!acme-challenge|pki-validation) {
-            return 301 /nextcloud/index.php$request_uri;
-          }
-          try_files $uri $uri/ =404;
-        '';
-      };
+      #"^~ /.well-known" = {
+      #  priority = 9000;
+      #  extraConfig = ''
+      #    absolute_redirect off;
+      #    location ~ ^/\\.well-known/(?:carddav|caldav)$ {
+      #      return 301 /nextcloud/remote.php/dav;
+      #    }
+      #    location ~ ^/\\.well-known/host-meta(?:\\.json)?$ {
+      #      return 301 /nextcloud/public.php?service=host-meta-json;
+      #    }
+      #    location ~ ^/\\.well-known/(?!acme-challenge|pki-validation) {
+      #      return 301 /nextcloud/index.php$request_uri;
+      #    }
+      #    try_files $uri $uri/ =404;
+      #  '';
+      #};
       "/nextcloud/" = {
         priority = 9999;
         extraConfig = ''
