@@ -550,7 +550,7 @@
   services.nginx.virtualHosts."nc.luminlapid.com" = {
     useACMEHost = "luminlapid.com";
     locations."/" = {
-      proxyPass = "http://127.0.0.4:7854";
+      proxyPass = "http://127.0.0.4";
     };
   };
   #services.nginx.virtualHosts."localhost" = {
