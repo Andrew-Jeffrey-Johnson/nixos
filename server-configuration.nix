@@ -335,7 +335,7 @@
     settings =
       let
         prot = "https"; # or http
-        host = "127.0.0.1";
+        host = "127.0.0.163";
         dir = "/nextcloud";
       in
       {
@@ -569,13 +569,13 @@
       #};
       "/nextcloud/" = {
         priority = 9999;
-        proxyPass = "http://127.0.0.4:7854";
+        #proxyPass = "http://127.0.0.163/";
         extraConfig = ''
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header X-NginX-Proxy true;
           proxy_set_header X-Forwarded-Proto http;
-          proxy_pass http://127.0.0.1/; # tailing / is important!
+          proxy_pass http://127.0.0.163/; # tailing / is important!
           proxy_set_header Host $host;
           proxy_cache_bypass $http_upgrade;
           proxy_redirect off;
