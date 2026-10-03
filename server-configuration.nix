@@ -638,7 +638,7 @@
     certs."luminlapid.com" = {
       #  listenHTTP = ":80";
       group = config.services.nginx.group;
-      webroot = "/var/lib/acme/acme-challenge";
+      webroot = "/var/lib/acme/luminlapid.com";
       extraDomainNames = [
         "nc.luminlapid.com"
         "www.luminlapid.com"
