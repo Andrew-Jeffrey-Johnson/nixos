@@ -496,7 +496,7 @@ in
         serverName = "nc.${domain}";
         #useACMEHost = "${domain}";
         #acmeRoot = config.security.acme.defaults.webroot;
-        root = "/var/www/nc.${domain}";
+        #root = "/var/www/nc.${domain}";
         #listen = [
         #  {
         #    addr = "127.0.0.163";
