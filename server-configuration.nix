@@ -474,7 +474,15 @@
     pkgs.nginxModules.dav # Needed for webdav
   ];
   services.nginx.appendHttpConfig = ''
+    # For webdav
     dav_ext_lock_zone zone=davlock:10m timeout=300;
+    # Fix proxy_headers_hash warning
+    proxy_headers_hash_max_size 1024;
+    proxy_headers_hash_bucket_size 128;
+    server_names_hash_max_size 1024;
+    server_names_hash_bucket_size 128;
+    map_hash_max_size 4096;
+    map_hash_bucket_size 128;
   '';
   services.nginx.recommendedProxySettings = true;
   services.nginx.recommendedTlsSettings = true;
@@ -531,7 +539,7 @@
     locations = {
       "/" = {
         proxyPass = "http://192.168.100.13:8000";
-        proxyWebsockets = true;
+        #proxyWebsockets = true;
       };
       "/calibre" = {
         # EPUB content server
