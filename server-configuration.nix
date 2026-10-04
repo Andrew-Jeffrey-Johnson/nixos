@@ -476,6 +476,45 @@
   services.nginx.appendHttpConfig = ''
     dav_ext_lock_zone zone=davlock:10m timeout=300;
   '';
+  services.nginx.recommendedProxySettings = true;
+  services.nginx.recommendedTlsSettings = true;
+  services.nginx.virtualHosts."nc.luminlapid.com" = {
+    addSSL = true;
+    enableACME = true;
+    serverName = "nc.luminlapid.com";
+    #useACMEHost = "lulminlapid.com";
+    #acmeRoot = config.security.acme.defaults.webroot;
+    #forceSSL = false;
+    #ibasicAuth = { test = "password"; };
+    root = "/";
+    #listen = [
+    #  {
+    #    addr = "127.0.0.163";
+    #    port = 17633; # NOT an exposed port
+    #  }
+    #];
+    locations = {
+      "/" = {
+        proxyPass = "http://127.0.0.163:17633/";
+        #proxyPass = "http://192.168.100.13:8000";
+        #proxyWebsockets = true;
+      };
+      #"/nextcloud/" = {
+      #priority = 9999;
+      #proxyPass = "http://127.0.0.163/";
+      #extraConfig = ''
+      #  proxy_set_header X-Real-IP $remote_addr;
+      #  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      #  proxy_set_header X-NginX-Proxy true;
+      #  proxy_set_header X-Forwarded-Proto http;
+      #  proxy_pass http://127.0.0.163/; # tailing / is important!
+      #  proxy_set_header Host $host;
+      #  proxy_cache_bypass $http_upgrade;
+      #  proxy_redirect off;
+      #'';
+      #};
+    };
+  };
   services.nginx.virtualHosts."luminlapid.com" = {
     addSSL = true;
     enableACME = true;
@@ -568,45 +607,6 @@
       #    }
       #    try_files $uri $uri/ =404;
       #  '';
-      #};
-    };
-  };
-  services.nginx.recommendedProxySettings = true;
-  services.nginx.recommendedTlsSettings = true;
-  services.nginx.virtualHosts."nc.luminlapid.com" = {
-    addSSL = true;
-    enableACME = true;
-    serverName = "nc.luminlapid.com";
-    #useACMEHost = "lulminlapid.com";
-    #acmeRoot = config.security.acme.defaults.webroot;
-    #forceSSL = false;
-    #ibasicAuth = { test = "password"; };
-    root = "/";
-    #listen = [
-    #  {
-    #    addr = "127.0.0.163";
-    #    port = 17633; # NOT an exposed port
-    #  }
-    #];
-    locations = {
-      "/" = {
-        proxyPass = "http://127.0.0.163:17633/";
-        #proxyPass = "http://192.168.100.13:8000";
-        #proxyWebsockets = true;
-      };
-      #"/nextcloud/" = {
-      #priority = 9999;
-      #proxyPass = "http://127.0.0.163/";
-      #extraConfig = ''
-      #  proxy_set_header X-Real-IP $remote_addr;
-      #  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      #  proxy_set_header X-NginX-Proxy true;
-      #  proxy_set_header X-Forwarded-Proto http;
-      #  proxy_pass http://127.0.0.163/; # tailing / is important!
-      #  proxy_set_header Host $host;
-      #  proxy_cache_bypass $http_upgrade;
-      #  proxy_redirect off;
-      #'';
       #};
     };
   };
