@@ -490,12 +490,12 @@ in
     recommendedTlsSettings = true;
     virtualHosts = {
       "nc.${domain}" = {
-        addSSL = true;
+        forceSSL = true;
         #forceSSL = true;
         #enableACME = true;
         serverName = "nc.${domain}";
         useACMEHost = "${domain}";
-        #acmeRoot = config.security.acme.defaults.webroot;
+        acmeRoot = config.security.acme.defaults.webroot;
         #ibasicAuth = { test = "password"; };
         root = "/";
         #listen = [
@@ -543,7 +543,7 @@ in
       "${domain}" = {
         forceSSL = true;
         enableACME = true;
-        #useACMEHost = "lulminlapid.com";
+        #useACMEHost = "luminlapid.com";
         serverName = "${domain}";
         serverAliases = [ "www.${domain}" ];
         locations = {
