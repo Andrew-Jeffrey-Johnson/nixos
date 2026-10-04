@@ -306,9 +306,9 @@ in
         calendar
         tasks
         onlyoffice
-        end_to_end_encryption
+        #end_to_end_encryption
         #files_markdown
-        guests
+        #guests
         polls
         whiteboard
         ;
