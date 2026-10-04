@@ -533,9 +533,10 @@
       };
       "luminlapid.com" = {
         forceSSL = true;
-        #enableACME = true;
-        useACMEHost = "lulminlapid.com";
+        enableACME = true;
+        #useACMEHost = "lulminlapid.com";
         serverName = "luminlapid.com";
+        serverAliases = [ "www.luminlapid.com" ];
         locations = {
           "/" = {
             proxyPass = "http://192.168.100.13:8000";
@@ -585,7 +586,6 @@
       webroot = "/var/lib/acme/acme-challenge";
       extraDomainNames = [
         "nc.luminlapid.com"
-        "www.luminlapid.com"
       ];
     };
   };
