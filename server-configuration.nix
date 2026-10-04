@@ -594,7 +594,7 @@ in
             # that gets passed throught the proxy
             proxyPass = "http://127.0.0.4:7854";
           };
-          "/static/" = {
+          "^~/static/" = {
             tryFiles = "$uri =404";
           };
           "/nextcloud" = {
