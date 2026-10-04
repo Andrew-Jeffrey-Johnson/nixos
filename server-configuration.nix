@@ -487,11 +487,11 @@
     recommendedTlsSettings = true;
     virtualHosts = {
       "nc.luminlapid.com" = {
-        addSSL = false;
-        forceSSL = false;
+        addSSL = true;
+        forceSSL = true;
         #enableACME = true;
         serverName = "nc.luminlapid.com";
-        #useACMEHost = "lulminlapid.com";
+        useACMEHost = "lulminlapid.com";
         #acmeRoot = config.security.acme.defaults.webroot;
         #ibasicAuth = { test = "password"; };
         root = "/";
@@ -521,20 +521,20 @@
             #  proxy_redirect off;
             #'';
           };
-          "/nextcloud" = {
-            proxyPass = "http://127.0.0.163/";
-            #proxyPass = "http://192.168.100.13:8000";
-            #proxyWebsockets = true;
-            #extraConfig = ''
-            #  proxy_set_header X-Real-IP $remote_addr;
-            #  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            #  proxy_set_header X-NginX-Proxy true;
-            #  proxy_set_header X-Forwarded-Proto http;
-            #  proxy_set_header Host $host;
-            #  proxy_cache_bypass $http_upgrade;
-            #  proxy_redirect off;
-            #'';
-          };
+          #"/nextcloud" = {
+          #  proxyPass = "http://127.0.0.163/";
+          #proxyPass = "http://192.168.100.13:8000";
+          #proxyWebsockets = true;
+          #extraConfig = ''
+          #  proxy_set_header X-Real-IP $remote_addr;
+          #  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          #  proxy_set_header X-NginX-Proxy true;
+          #  proxy_set_header X-Forwarded-Proto http;
+          #  proxy_set_header Host $host;
+          #  proxy_cache_bypass $http_upgrade;
+          #  proxy_redirect off;
+          #'';
+          #};
         };
       };
       "luminlapid.com" = {
