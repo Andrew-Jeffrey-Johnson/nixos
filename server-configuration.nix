@@ -316,7 +316,7 @@
     enable = true;
     package = pkgs.nextcloud35;
     hostName = "127.0.0.163";
-    https = false;
+    https = true;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
     extraApps = {
@@ -335,7 +335,7 @@
     extraAppsEnable = true;
     settings =
       let
-        prot = "http"; # or http
+        prot = "https"; # or http
         host = "nc.luminlapid.com";
         dir = "/nextcloud";
       in
@@ -501,6 +501,11 @@
     #];
     locations = {
       "/" = {
+        proxyPass = "http://127.0.0.163/";
+        #proxyPass = "http://192.168.100.13:8000";
+        #proxyWebsockets = true;
+      };
+      "/nextcloud" = {
         proxyPass = "http://127.0.0.163/";
         #proxyPass = "http://192.168.100.13:8000";
         #proxyWebsockets = true;
