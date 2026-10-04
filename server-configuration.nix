@@ -502,7 +502,9 @@
         #];
         locations = {
           "/" = {
-            proxyPass = "http://127.0.0.163/";
+            return = "200 \"Hello from nc.luminlapid.com!\"";
+            #proxyPass = "http://127.0.0.163/";
+
             #proxyPass = "http://192.168.100.13:8000";
             #proxyWebsockets = true;
             #extraConfig = ''
@@ -539,12 +541,14 @@
         serverAliases = [ "www.luminlapid.com" ];
         locations = {
           "/" = {
-            proxyPass = "http://192.168.100.13:8000";
-            proxyWebsockets = true;
-            extraConfig = ''
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_set_header Connection "upgrade";
-            '';
+            return = "200 \"Hello from luminlapid.com!\"";
+            #proxyPass = "http://192.168.100.13:8000";
+            #proxyWebsockets = true;
+
+            #extraConfig = ''
+            #  proxy_set_header Upgrade $http_upgrade;
+            #  proxy_set_header Connection "upgrade";
+            #'';
           };
           "/calibre" = {
             # EPUB content server
