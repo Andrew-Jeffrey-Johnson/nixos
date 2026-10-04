@@ -479,6 +479,7 @@
   services.nginx.virtualHosts."luminlapid.com" = {
     forceSSL = true;
     enableACME = true;
+    serverName = "luminlapid.com";
     #forceSSL = false;
     #ibasicAuth = { test = "password"; };
     #root = "/";
@@ -575,6 +576,7 @@
   services.nginx.virtualHosts."nc.luminlapid.com" = {
     forceSSL = true;
     enableACME = true;
+    serverName = "nc.luminlapid.com";
     #useACMEHost = "lulminlapid.com";
     #acmeRoot = config.security.acme.defaults.webroot;
     #forceSSL = false;
@@ -588,7 +590,7 @@
     #];
     locations = {
       "/" = {
-        proxyPass = "127.0.0.163:17633/";
+        proxyPass = "http://127.0.0.163:17633/";
         #proxyPass = "http://192.168.100.13:8000";
         #proxyWebsockets = true;
       };
