@@ -477,7 +477,7 @@
     dav_ext_lock_zone zone=davlock:10m timeout=300;
   '';
   services.nginx.virtualHosts."luminlapid.com" = {
-    forceSSL = true;
+    addSSL = true;
     enableACME = true;
     serverName = "luminlapid.com";
     #forceSSL = false;
@@ -574,7 +574,7 @@
   services.nginx.recommendedProxySettings = true;
   services.nginx.recommendedTlsSettings = true;
   services.nginx.virtualHosts."nc.luminlapid.com" = {
-    forceSSL = true;
+    addSSL = true;
     enableACME = true;
     serverName = "nc.luminlapid.com";
     #useACMEHost = "lulminlapid.com";
