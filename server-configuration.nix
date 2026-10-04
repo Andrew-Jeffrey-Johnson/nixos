@@ -315,7 +315,7 @@
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud35;
-    hostName = "127.0.0.163:17633";
+    hostName = "127.0.0.163";
     https = false;
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
