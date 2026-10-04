@@ -491,7 +491,7 @@
         #forceSSL = true;
         #enableACME = true;
         serverName = "nc.luminlapid.com";
-        useACMEHost = "lulminlapid.com";
+        useACMEHost = "luminlapid.com";
         #acmeRoot = config.security.acme.defaults.webroot;
         #ibasicAuth = { test = "password"; };
         root = "/";
