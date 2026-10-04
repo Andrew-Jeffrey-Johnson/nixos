@@ -22,7 +22,6 @@ in
     # using the "option" above.
     # Options for modules imported in "imports" can be set here.
     home.packages = [
-      pkgs.tor-browser
       pkgs.chromium # Open-source portion of chrome
     ];
     programs = {
