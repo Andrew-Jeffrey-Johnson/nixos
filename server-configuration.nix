@@ -504,11 +504,31 @@
         proxyPass = "http://127.0.0.163/";
         #proxyPass = "http://192.168.100.13:8000";
         #proxyWebsockets = true;
+        extraConfig = ''
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-NginX-Proxy true;
+          proxy_set_header X-Forwarded-Proto http;
+          proxy_pass http://127.0.0.163/; # tailing / is important!
+          proxy_set_header Host $host;
+          proxy_cache_bypass $http_upgrade;
+          proxy_redirect off;
+        '';
       };
       "/nextcloud" = {
         proxyPass = "http://127.0.0.163/";
         #proxyPass = "http://192.168.100.13:8000";
         #proxyWebsockets = true;
+        extraConfig = ''
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-NginX-Proxy true;
+          proxy_set_header X-Forwarded-Proto http;
+          proxy_pass http://127.0.0.163/; # tailing / is important!
+          proxy_set_header Host $host;
+          proxy_cache_bypass $http_upgrade;
+          proxy_redirect off;
+        '';
       };
       #"/nextcloud/" = {
       #priority = 9999;
