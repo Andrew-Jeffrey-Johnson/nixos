@@ -502,7 +502,17 @@
         #];
         locations = {
           "/" = {
-            return = "200 \"<h1>Hello from nc.luminlapid.com!</h1>\"";
+            return = ''
+              200
+                          \"<!DOCTYPE html>
+                          <html lang=\"en\">
+                          <head>
+                            <title>Hello from nc.luminlapid.com</title>
+                         </head>
+                          <body>
+                             <h1>Hello from nc.luminlapid.com!</h1>
+                          </body></html>\"
+            '';
             #proxyPass = "http://127.0.0.163/";
 
             #proxyPass = "http://192.168.100.13:8000";
@@ -541,7 +551,17 @@
         serverAliases = [ "www.luminlapid.com" ];
         locations = {
           "/" = {
-            return = "200 \"<h1>Hello from luminlapid.com!</h1>\"";
+            return = ''
+              200
+                          \"<!DOCTYPE html>
+                          <html lang=\"en\">
+                          <head>
+                            <title>Hello from luminlapid.com</title>
+                         </head>
+                          <body>
+                             <h1>Hello from luminlapid.com!</h1>
+                          </body></html>\"
+            '';
             #proxyPass = "http://192.168.100.13:8000";
             #proxyWebsockets = true;
 
