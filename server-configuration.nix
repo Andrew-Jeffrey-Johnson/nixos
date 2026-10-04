@@ -337,7 +337,7 @@
       let
         prot = "https"; # or http
         host = "nc.luminlapid.com";
-        dir = "/";
+        dir = "/nextcloud";
       in
       {
         overwriteprotocol = prot;
