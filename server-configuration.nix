@@ -495,7 +495,7 @@
     #];
     locations = {
       "/" = {
-        proxyPass = "http://127.0.0.163:17633/";
+        proxyPass = "http://127.0.0.163/";
         #proxyPass = "http://192.168.100.13:8000";
         #proxyWebsockets = true;
       };
