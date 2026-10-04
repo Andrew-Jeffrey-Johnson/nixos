@@ -598,7 +598,7 @@ in
   security.acme = {
     acceptTerms = true;
     defaults.email = "andrew.jeffrey.johnson@gmail.com";
-    defaults.webroot = "/var/lib/acme/acme-challenge";
+    defaults.webroot = "/var/lib/acme/luminlapid.com";
     certs."${domain}" = {
       #  listenHTTP = ":80";
       #group = config.services.nginx.group;
