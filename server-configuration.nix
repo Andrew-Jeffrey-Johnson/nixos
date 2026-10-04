@@ -583,8 +583,8 @@
     defaults.webroot = "/var/lib/acme/acme-challenge";
     certs."luminlapid.com" = {
       #  listenHTTP = ":80";
-      group = config.services.nginx.group;
-      webroot = "/var/lib/acme/acme-challenge";
+      #group = config.services.nginx.group;
+      #webroot = "/var/lib/acme/acme-challenge";
       extraDomainNames = [
         "nc.luminlapid.com"
       ];
