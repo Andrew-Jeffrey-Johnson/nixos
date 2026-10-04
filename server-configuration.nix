@@ -553,6 +553,7 @@ in
         #useACMEHost = "luminlapid.com";
         serverName = "${domain}";
         serverAliases = [ "www.${domain}" ];
+        root = "/";
         locations = {
           "/" = {
             #recommendedProxySettings = true;
