@@ -487,65 +487,65 @@ in
   '';
   services.nginx = {
     virtualHosts = {
-      default = {
-        serverName = "_";
-        default = true;
-        rejectSSL = true;
-        locations."/".return = "444";
-      };
-      "nc.${domain}" = {
-        forceSSL = true;
-        #enableACME = true;
-        serverName = "nc.${domain}";
-        useACMEHost = "${domain}";
-        acmeRoot = "/var/lib/acme/${domain}";
-        root = "/var/www/nc.${domain}";
-        #listen = [
-        #  {
-        #    addr = "127.0.0.163";
-        #    port = 17633; # NOT an exposed port
-        #  }
-        #];
-        locations = {
-          "/.well-known/" = {
-            root = "/var/www/${domain}/html";
-          };
-          "/" = {
-            recommendedProxySettings = true;
-            extraConfig = ''
-              add_header Content-Type text/html;
-            '';
-            return = "200 \"<!DOCTYPE html><head><title>Hello from nc.luminlapid.com</title></head><body><h1>Hello from nc.luminlapid.com!</h1></body></html>\"";
-            #proxyPass = "http://127.0.0.163/";
+      #default = {
+      #  serverName = "_";
+      #  default = true;
+      #  rejectSSL = true;
+      #  locations."/".return = "444";
+      #};
+      #"nc.${domain}" = {
+      #  forceSSL = true;
+      #  #enableACME = true;
+      #  serverName = "nc.${domain}";
+      #  useACMEHost = "${domain}";
+      #  acmeRoot = "/var/lib/acme/${domain}";
+      #  root = "/var/www/nc.${domain}";
+      #  #listen = [
+      #  #  {
+      #  #    addr = "127.0.0.163";
+      #  #    port = 17633; # NOT an exposed port
+      #  #  }
+      #  #];
+      #  locations = {
+      #    "/.well-known/" = {
+      #      root = "/var/www/${domain}/html";
+      #    };
+      #    "/" = {
+      #      recommendedProxySettings = true;
+      #      extraConfig = ''
+      #        add_header Content-Type text/html;
+      #      '';
+      #      return = "200 \"<!DOCTYPE html><head><title>Hello from nc.luminlapid.com</title></head><body><h1>Hello from nc.luminlapid.com!</h1></body></html>\"";
+      #      #proxyPass = "http://127.0.0.163/";
 
-            #proxyPass = "http://192.168.100.13:8000";
-            #proxyWebsockets = true;
-            #extraConfig = ''
-            #  proxy_set_header X-Real-IP $remote_addr;
-            #  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            #  proxy_set_header X-NginX-Proxy true;
-            #  proxy_set_header X-Forwarded-Proto http;
-            #  proxy_set_header Host $host;
-            #  proxy_cache_bypass $http_upgrade;
-            #  proxy_redirect off;
-            #'';
-          };
-          #"/nextcloud" = {
-          #  proxyPass = "http://127.0.0.163/";
-          #proxyPass = "http://192.168.100.13:8000";
-          #proxyWebsockets = true;
-          #extraConfig = ''
-          #  proxy_set_header X-Real-IP $remote_addr;
-          #  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          #  proxy_set_header X-NginX-Proxy true;
-          #  proxy_set_header X-Forwarded-Proto http;
-          #  proxy_set_header Host $host;
-          #  proxy_cache_bypass $http_upgrade;
-          #  proxy_redirect off;
-          #'';
-          #};
-        };
-      };
+      #      #proxyPass = "http://192.168.100.13:8000";
+      #      #proxyWebsockets = true;
+      #      #extraConfig = ''
+      #      #  proxy_set_header X-Real-IP $remote_addr;
+      #      #  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      #      #  proxy_set_header X-NginX-Proxy true;
+      #      #  proxy_set_header X-Forwarded-Proto http;
+      #      #  proxy_set_header Host $host;
+      #      #  proxy_cache_bypass $http_upgrade;
+      #      #  proxy_redirect off;
+      #      #'';
+      #    };
+      #    #"/nextcloud" = {
+      #    #  proxyPass = "http://127.0.0.163/";
+      #    #proxyPass = "http://192.168.100.13:8000";
+      #    #proxyWebsockets = true;
+      #    #extraConfig = ''
+      #    #  proxy_set_header X-Real-IP $remote_addr;
+      #    #  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      #    #  proxy_set_header X-NginX-Proxy true;
+      #    #  proxy_set_header X-Forwarded-Proto http;
+      #    #  proxy_set_header Host $host;
+      #    #  proxy_cache_bypass $http_upgrade;
+      #    #  proxy_redirect off;
+      #    #'';
+      #    #};
+      #  };
+      #};
       "${domain}" = {
         forceSSL = true;
         enableACME = true;
@@ -555,13 +555,13 @@ in
         serverAliases = [ "www.${domain}" ];
         locations = {
           "/" = {
-            recommendedProxySettings = true;
+            #recommendedProxySettings = true;
             #extraConfig = ''
             #  add_header Content-Type text/html;
             #'';
             #return = "200 \"<!DOCTYPE html><head><title>Hello from luminlapid.com</title></head><body><h1>Hello from luminlapid.com!</h1></body></html>\"";
             proxyPass = "http://192.168.100.13:8000";
-            #proxyWebsockets = true;
+            proxyWebsockets = true;
 
             #extraConfig = ''
             #  proxy_set_header Upgrade $http_upgrade;
@@ -596,6 +596,9 @@ in
           };
           "/static/" = {
             tryFiles = "$uri =404";
+          };
+          "/nextcloud" = {
+            proxyPass = "http://127.0.0.163/";
           };
         };
       };
