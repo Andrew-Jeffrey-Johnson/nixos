@@ -553,7 +553,7 @@ in
         #useACMEHost = "luminlapid.com";
         serverName = "${domain}";
         serverAliases = [ "www.${domain}" ];
-        root = "/";
+        #root = "/";
         locations = {
           "/" = {
             #recommendedProxySettings = true;
@@ -596,6 +596,7 @@ in
             proxyPass = "http://127.0.0.4:7854";
           };
           "^~/static/" = {
+            root = "/";
             tryFiles = "$uri =404";
           };
           "/nextcloud" = {
