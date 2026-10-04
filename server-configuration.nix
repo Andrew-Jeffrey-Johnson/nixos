@@ -486,16 +486,14 @@ in
     server_names_hash_bucket_size 128;
   '';
   services.nginx = {
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
+    #recommendedTlsSettings = true;
     virtualHosts = {
       "nc.${domain}" = {
         forceSSL = true;
-        #forceSSL = true;
-        enableACME = true;
+        #enableACME = true;
         serverName = "nc.${domain}";
-        #useACMEHost = "${domain}";
-        #acmeRoot = config.security.acme.defaults.webroot;
+        useACMEHost = "${domain}";
+        acmeRoot = "/var/lib/acme/${domain}";
         #root = "/var/www/nc.${domain}";
         #listen = [
         #  {
@@ -505,6 +503,7 @@ in
         #];
         locations = {
           "/" = {
+            recommendedProxySettings = true;
             extraConfig = ''
               add_header Content-Type text/html;
             '';
@@ -542,11 +541,13 @@ in
       "${domain}" = {
         forceSSL = true;
         enableACME = true;
+        acmeRoot = "/var/lib/acme/${domain}";
         #useACMEHost = "luminlapid.com";
         serverName = "${domain}";
         serverAliases = [ "www.${domain}" ];
         locations = {
           "/" = {
+            recommendedProxySettings = true;
             extraConfig = ''
               add_header Content-Type text/html;
             '';
@@ -597,15 +598,13 @@ in
   security.acme = {
     acceptTerms = true;
     defaults.email = "andrew.jeffrey.johnson@gmail.com";
-    #defaults.webroot = "/var/lib/acme/luminlapid.com";
-    #certs."${domain}" = {
-    #  #  listenHTTP = ":80";
-    #  #group = config.services.nginx.group;
-    #  #webroot = "/var/lib/acme/acme-challenge";
-    #  extraDomainNames = [
-    #    "nc.${domain}"
-    #  ];
-    #};
+    certs."${domain}" = {
+      group = config.services.nginx.group;
+      webroot = "/var/lib/acme/luminlapid.com";
+      extraDomainNames = [
+        "nc.${domain}"
+      ];
+    };
   };
 
   # This value determines the NixOS release from which the default
