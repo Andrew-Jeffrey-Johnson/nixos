@@ -320,6 +320,7 @@ in
     package = pkgs.nextcloud35;
     hostName = "127.0.0.163";
     https = true;
+    services.nextcloud.home = "/var/lib/nextcloud";
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
     extraApps = {
@@ -600,7 +601,6 @@ in
             tryFiles = "$uri =404";
           };
           "/nextcloud" = {
-            root = "/var/lib/nextcloud";
             proxyPass = "http://127.0.0.163/";
           };
         };
