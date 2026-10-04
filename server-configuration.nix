@@ -541,6 +541,11 @@
           "/" = {
             proxyPass = "http://192.168.100.13:8000";
             proxyWebsockets = true;
+            extraConfig = ''
+              proxy_http_version 1.1;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection "upgrade";
+            '';
           };
           "/calibre" = {
             # EPUB content server
