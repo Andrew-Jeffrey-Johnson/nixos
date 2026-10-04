@@ -492,11 +492,10 @@ in
       "nc.${domain}" = {
         forceSSL = true;
         #forceSSL = true;
-        #enableACME = true;
+        enableACME = true;
         serverName = "nc.${domain}";
-        useACMEHost = "${domain}";
-        acmeRoot = config.security.acme.defaults.webroot;
-        #ibasicAuth = { test = "password"; };
+        #useACMEHost = "${domain}";
+        #acmeRoot = config.security.acme.defaults.webroot;
         root = "/var/www/nc.${domain}";
         #listen = [
         #  {
@@ -598,15 +597,15 @@ in
   security.acme = {
     acceptTerms = true;
     defaults.email = "andrew.jeffrey.johnson@gmail.com";
-    defaults.webroot = "/var/lib/acme/luminlapid.com";
-    certs."${domain}" = {
-      #  listenHTTP = ":80";
-      #group = config.services.nginx.group;
-      #webroot = "/var/lib/acme/acme-challenge";
-      extraDomainNames = [
-        "nc.${domain}"
-      ];
-    };
+    #defaults.webroot = "/var/lib/acme/luminlapid.com";
+    #certs."${domain}" = {
+    #  #  listenHTTP = ":80";
+    #  #group = config.services.nginx.group;
+    #  #webroot = "/var/lib/acme/acme-challenge";
+    #  extraDomainNames = [
+    #    "nc.${domain}"
+    #  ];
+    #};
   };
 
   # This value determines the NixOS release from which the default
