@@ -497,7 +497,7 @@ in
         useACMEHost = "${domain}";
         acmeRoot = config.security.acme.defaults.webroot;
         #ibasicAuth = { test = "password"; };
-        #root = "/";
+        root = "/var/www/nc.${domain}";
         #listen = [
         #  {
         #    addr = "127.0.0.163";
