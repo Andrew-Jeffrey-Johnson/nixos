@@ -320,7 +320,7 @@ in
     package = pkgs.nextcloud35;
     hostName = "127.0.0.163";
     https = true;
-    services.nextcloud.home = "/var/lib/nextcloud";
+    home = "/var/lib/nextcloud";
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
     extraApps = {
