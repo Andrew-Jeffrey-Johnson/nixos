@@ -8,6 +8,9 @@
   pkgs,
   ...
 }:
+let
+  domain = "luminlapid.com";
+in
 {
   luminlapid = {
     internationalization.enable = true;
@@ -336,7 +339,7 @@
     settings =
       let
         prot = "https"; # or http
-        host = "nc.luminlapid.com";
+        host = "nc.${domain}";
         dir = "/nextcloud";
       in
       {
@@ -486,12 +489,12 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
     virtualHosts = {
-      "nc.luminlapid.com" = {
+      "nc.${domain}" = {
         addSSL = true;
         #forceSSL = true;
         #enableACME = true;
-        serverName = "nc.luminlapid.com";
-        useACMEHost = "luminlapid.com";
+        serverName = "nc.${domain}";
+        useACMEHost = "${domain}";
         #acmeRoot = config.security.acme.defaults.webroot;
         #ibasicAuth = { test = "password"; };
         root = "/";
@@ -537,12 +540,12 @@
           #};
         };
       };
-      "luminlapid.com" = {
+      "${domain}" = {
         forceSSL = true;
         enableACME = true;
         #useACMEHost = "lulminlapid.com";
-        serverName = "luminlapid.com";
-        serverAliases = [ "www.luminlapid.com" ];
+        serverName = "${domain}";
+        serverAliases = [ "www.${domain}" ];
         locations = {
           "/" = {
             extraConfig = ''
@@ -596,12 +599,12 @@
     acceptTerms = true;
     defaults.email = "andrew.jeffrey.johnson@gmail.com";
     defaults.webroot = "/var/lib/acme/acme-challenge";
-    certs."luminlapid.com" = {
+    certs."${domain}" = {
       #  listenHTTP = ":80";
       #group = config.services.nginx.group;
       #webroot = "/var/lib/acme/acme-challenge";
       extraDomainNames = [
-        "nc.luminlapid.com"
+        "nc.${domain}"
       ];
     };
   };
