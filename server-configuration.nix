@@ -488,6 +488,7 @@
     virtualHosts = {
       "nc.luminlapid.com" = {
         addSSL = true;
+        forceSSL = false;
         #enableACME = true;
         serverName = "nc.luminlapid.com";
         useACMEHost = "lulminlapid.com";
