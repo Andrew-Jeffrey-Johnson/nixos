@@ -53,17 +53,6 @@ in
         "guest account" = "nobody";
         "map to guest" = "bad user";
       };
-      "public" = {
-        "path" = "/mnt/Shares/Public";
-        "browseable" = "yes";
-        "read only" = "no";
-        "guest ok" = "yes";
-        "create mask" = "0655";
-        "directory mask" = "0755";
-        "force user" = "nixos";
-        "force group" = "users";
-        "vfs objects" = "streams_xattr";
-      };
       "private" = {
         "path" = "/mnt/Shares/Private";
         "browseable" = "yes";
@@ -73,18 +62,6 @@ in
         "directory mask" = "0755";
         "force user" = "nixos";
         "force group" = "users";
-        "vfs objects" = "streams_xattr";
-      };
-      "jellyfin" = {
-        "path" = "/jellyfin";
-        "browseable" = "yes";
-        "available" = "yes";
-        "read only" = "no";
-        "guest ok" = "no";
-        "create mask" = "0665";
-        "directory mask" = "0775";
-        "force user" = "nixos";
-        "force group" = "jellyfin";
         "vfs objects" = "streams_xattr";
       };
       "jellyfin-samsung1TSSD" = {
