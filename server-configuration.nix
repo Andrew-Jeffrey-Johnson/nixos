@@ -507,6 +507,9 @@ in
         #  }
         #];
         locations = {
+          "/.well-known/" = {
+            root = "/var/www/${domain}/html";
+          };
           "/" = {
             recommendedProxySettings = true;
             extraConfig = ''
@@ -553,11 +556,11 @@ in
         locations = {
           "/" = {
             recommendedProxySettings = true;
-            extraConfig = ''
-              add_header Content-Type text/html;
-            '';
-            return = "200 \"<!DOCTYPE html><head><title>Hello from luminlapid.com</title></head><body><h1>Hello from luminlapid.com!</h1></body></html>\"";
-            #proxyPass = "http://192.168.100.13:8000";
+            #extraConfig = ''
+            #  add_header Content-Type text/html;
+            #'';
+            #return = "200 \"<!DOCTYPE html><head><title>Hello from luminlapid.com</title></head><body><h1>Hello from luminlapid.com!</h1></body></html>\"";
+            proxyPass = "http://192.168.100.13:8000";
             #proxyWebsockets = true;
 
             #extraConfig = ''
