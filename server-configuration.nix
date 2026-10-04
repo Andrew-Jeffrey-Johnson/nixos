@@ -482,202 +482,112 @@
     server_names_hash_max_size 1024;
     server_names_hash_bucket_size 128;
   '';
-  services.nginx.recommendedProxySettings = true;
-  services.nginx.recommendedTlsSettings = true;
-  services.nginx.virtualHosts."nc.luminlapid.com" = {
-    addSSL = true;
-    enableACME = true;
-    serverName = "nc.luminlapid.com";
-    #useACMEHost = "lulminlapid.com";
-    #acmeRoot = config.security.acme.defaults.webroot;
-    #forceSSL = false;
-    #ibasicAuth = { test = "password"; };
-    root = "/";
-    #listen = [
-    #  {
-    #    addr = "127.0.0.163";
-    #    port = 17633; # NOT an exposed port
-    #  }
-    #];
-    locations = {
-      "/" = {
-        proxyPass = "http://127.0.0.163/";
-        #proxyPass = "http://192.168.100.13:8000";
-        #proxyWebsockets = true;
-        extraConfig = ''
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header X-NginX-Proxy true;
-          proxy_set_header X-Forwarded-Proto http;
-          proxy_set_header Host $host;
-          proxy_cache_bypass $http_upgrade;
-          proxy_redirect off;
-        '';
+  services.nginx = {
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    virtualHosts = {
+      "nc.luminlapid.com" = {
+        addSSL = true;
+        #enableACME = true;
+        serverName = "nc.luminlapid.com";
+        useACMEHost = "lulminlapid.com";
+        #acmeRoot = config.security.acme.defaults.webroot;
+        #ibasicAuth = { test = "password"; };
+        root = "/";
+        #listen = [
+        #  {
+        #    addr = "127.0.0.163";
+        #    port = 17633; # NOT an exposed port
+        #  }
+        #];
+        locations = {
+          "/" = {
+            proxyPass = "http://127.0.0.163/";
+            #proxyPass = "http://192.168.100.13:8000";
+            #proxyWebsockets = true;
+            #extraConfig = ''
+            #  proxy_set_header X-Real-IP $remote_addr;
+            #  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            #  proxy_set_header X-NginX-Proxy true;
+            #  proxy_set_header X-Forwarded-Proto http;
+            #  proxy_set_header Host $host;
+            #  proxy_cache_bypass $http_upgrade;
+            #  proxy_redirect off;
+            #'';
+          };
+          "/nextcloud" = {
+            proxyPass = "http://127.0.0.163/";
+            #proxyPass = "http://192.168.100.13:8000";
+            #proxyWebsockets = true;
+            #extraConfig = ''
+            #  proxy_set_header X-Real-IP $remote_addr;
+            #  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            #  proxy_set_header X-NginX-Proxy true;
+            #  proxy_set_header X-Forwarded-Proto http;
+            #  proxy_set_header Host $host;
+            #  proxy_cache_bypass $http_upgrade;
+            #  proxy_redirect off;
+            #'';
+          };
+        };
       };
-      "/nextcloud" = {
-        proxyPass = "http://127.0.0.163/";
-        #proxyPass = "http://192.168.100.13:8000";
-        #proxyWebsockets = true;
-        extraConfig = ''
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header X-NginX-Proxy true;
-          proxy_set_header X-Forwarded-Proto http;
-          proxy_set_header Host $host;
-          proxy_cache_bypass $http_upgrade;
-          proxy_redirect off;
-        '';
+      "luminlapid.com" = {
+        forceSSL = true;
+        #enableACME = true;
+        useACMEHost = "lulminlapid.com";
+        serverName = "luminlapid.com";
+        locations = {
+          "/" = {
+            proxyPass = "http://192.168.100.13:8000";
+            #proxyWebsockets = true;
+          };
+          "/calibre" = {
+            # EPUB content server
+            # The slash on the end ensure url passed to calibre-server starts
+            # with / instead of /calibre-server
+            proxyPass = "http://127.0.0.4:8383/";
+            #proxyWebsockets = true;
+          };
+          "/radicale/" = {
+            # Calendar (CalDAV) and Contacts (CalDav) server
+            # The slash on the end ensure url passed to radicale starts
+            # with / instead of /calibre-server
+            proxyPass = "http://127.0.0.4:5232";
+            extraConfig = ''
+              proxy_set_header  X-Script-Name /radicale;
+              proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_pass_header Authorization;
+            '';
+          };
+          # Note taking server
+          "/joplin-andrew" = {
+            root = "/"; # This is what the URL starts with
+            # Combined with the user-endered URL "/joplin-andrew
+            # we arrive at the final URL "/joplin-andrew"
+            # that gets passed throught the proxy
+            proxyPass = "http://127.0.0.4:7854";
+          };
+          "/static/" = {
+            tryFiles = "$uri =404";
+          };
+        };
       };
-      #"/nextcloud/" = {
-      #priority = 9999;
-      #proxyPass = "http://127.0.0.163/";
-      #extraConfig = ''
-      #  proxy_set_header X-Real-IP $remote_addr;
-      #  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      #  proxy_set_header X-NginX-Proxy true;
-      #  proxy_set_header X-Forwarded-Proto http;
-      #  proxy_pass http://127.0.0.163/; # tailing / is important!
-      #  proxy_set_header Host $host;
-      #  proxy_cache_bypass $http_upgrade;
-      #  proxy_redirect off;
-      #'';
-      #};
     };
   };
-  services.nginx.virtualHosts."luminlapid.com" = {
-    addSSL = true;
-    enableACME = true;
-    serverName = "luminlapid.com";
-    #forceSSL = false;
-    #ibasicAuth = { test = "password"; };
-    #root = "/";
-    #listen = [
-    #  {
-    #    addr = "127.0.0.1";
-    #    port = 17633; # NOT an exposed port
-    #  }
-    #];
-    locations = {
-      "/" = {
-        proxyPass = "http://192.168.100.13:8000";
-        #proxyWebsockets = true;
-      };
-      "/calibre" = {
-        # EPUB content server
-        # The slash on the end ensure url passed to calibre-server starts
-        # with / instead of /calibre-server
-        proxyPass = "http://127.0.0.4:8383/";
-        #proxyWebsockets = true;
-      };
-      "/radicale/" = {
-        # Calendar (CalDAV) and Contacts (CalDav) server
-        # The slash on the end ensure url passed to radicale starts
-        # with / instead of /calibre-server
-        proxyPass = "http://127.0.0.4:5232";
-        extraConfig = ''
-          proxy_set_header  X-Script-Name /radicale;
-          proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_pass_header Authorization;
-        '';
-        #       proxy_set_header  X-Forwarded-Host $host;
-        #       proxy_set_header  X-Forwarded-Port $server_port;
-        #       proxy_set_header  X-Forwarded-Proto $scheme;
-        #       proxy_set_header  Host $http_host;
-        # '';
-      };
-      # Note taking server
-      "/joplin-andrew" = {
-        root = "/"; # This is what the URL starts with
-        # Combined with the user-endered URL "/joplin-andrew
-        # we arrive at the final URL "/joplin-andrew"
-        # that gets passed throught the proxy
-        proxyPass = "http://127.0.0.4:7854";
-        # Below is the config necessary to get webdav working using only
-        # nginx rather than the webdav service offered by nixos
-        #extraConfig = ''
-        #  # Write methods (base module)
-        #  dav_methods PUT DELETE MKCOL COPY MOVE;
-
-        #  # Read/lock methods (dav-ext module)
-        #  # NOTE: PROPPATCH is NOT supported — do not add it here
-        #  dav_ext_methods PROPFIND OPTIONS LOCK UNLOCK;
-
-        #  # Enable real LOCK/UNLOCK (requires dav_ext_lock_zone in http{})
-        #  dav_ext_lock zone=davlock;
-
-        #  dav_access user:rw group:rw all:r;
-        #  create_full_put_path on;
-        #  min_delete_depth 1;
-
-        #  # Fix macOS Finder MKCOL-without-slash (creates dirs without trailing /)
-        #  set $x $uri$request_method;
-        #  if ($x ~ [^/]MKCOL$) { rewrite ^(.*)$ $1/; }
-        #'';
-      };
-      "/static/" = {
-        #defaultType = "text/plain";
-        #return =  "200 $request_uri";
-        #root = "/home/nginx";
-        #extraConfig = "autoindex on";
-        tryFiles = "$uri =404";
-      };
-      #"^~ /.well-known" = {
-      #  priority = 9000;
-      #  extraConfig = ''
-      #    absolute_redirect off;
-      #    location ~ ^/\\.well-known/(?:carddav|caldav)$ {
-      #      return 301 /nextcloud/remote.php/dav;
-      #    }
-      #    location ~ ^/\\.well-known/host-meta(?:\\.json)?$ {
-      #      return 301 /nextcloud/public.php?service=host-meta-json;
-      #    }
-      #    location ~ ^/\\.well-known/(?!acme-challenge|pki-validation) {
-      #      return 301 /nextcloud/index.php$request_uri;
-      #    }
-      #    try_files $uri $uri/ =404;
-      #  '';
-      #};
-    };
-  };
-  #services.nginx.virtualHosts."nc.luminlapid.com" = {
-  #  useACMEHost = "luminlapid.com";
-  #  locations."/" = {
-  #    proxyPass = "http://127.0.0.4";
-  #  };
-  #};
-  #services.nginx.virtualHosts."localhost" = {
-  #  forceSSL = true;
-  #  #enableACME = true;
-  #  locations = {
-  #};
-  #services.nginx.virtualHosts."${config.services.nextcloud.hostName}".listen = [
-  #  {
-  #    addr = "127.0.0.1";
-  #    port = 17833; # NOT an exposed port
-  #  }
-  #];
-  #services.nginx.virtualHosts."nfs.luminlapid.com" = {
-  #  root = "/";
-  #  locations = {
-  #    "/" = {
-  #      proxyPass = "192.168.100.183:2049";
-  #    };
-  #  };
-  #};
 
   # Automated certificate authority for luminlapid.com
   security.acme = {
     acceptTerms = true;
     defaults.email = "andrew.jeffrey.johnson@gmail.com";
-    #certs."luminlapid.com" = {
-    #  #  listenHTTP = ":80";
-    #  group = config.services.nginx.group;
-    #  webroot = "/var/lib/acme/luminlapid.com";
-    #  extraDomainNames = [
-    #    "nc.luminlapid.com"
-    #    "www.luminlapid.com"
-    #  ];
-    #};
+    certs."luminlapid.com" = {
+      #  listenHTTP = ":80";
+      group = config.services.nginx.group;
+      webroot = "/var/lib/acme/acme-challenge";
+      extraDomainNames = [
+        "nc.luminlapid.com"
+        "www.luminlapid.com"
+      ];
+    };
   };
 
   # This value determines the NixOS release from which the default
