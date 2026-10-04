@@ -486,8 +486,13 @@ in
     server_names_hash_bucket_size 128;
   '';
   services.nginx = {
-    #recommendedTlsSettings = true;
     virtualHosts = {
+      default = {
+        serverName = "_";
+        default = true;
+        rejectSSL = true;
+        locations."/".return = "444";
+      };
       "nc.${domain}" = {
         forceSSL = true;
         #enableACME = true;
