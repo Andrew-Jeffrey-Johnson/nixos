@@ -580,12 +580,12 @@
     #forceSSL = false;
     #ibasicAuth = { test = "password"; };
     root = "/";
-    listen = [
-      {
-        addr = "127.0.0.163";
-        port = 17633; # NOT an exposed port
-      }
-    ];
+    #listen = [
+    #  {
+    #    addr = "127.0.0.163";
+    #    port = 17633; # NOT an exposed port
+    #  }
+    #];
     locations = {
       "/" = {
         proxyPass = "127.0.0.163:17633/";
