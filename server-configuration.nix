@@ -339,7 +339,7 @@ in
     settings =
       let
         prot = "https"; # or http
-        host = "nc.${domain}";
+        host = "${domain}";
         dir = "/nextcloud";
       in
       {
