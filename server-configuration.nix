@@ -580,10 +580,11 @@
   security.acme = {
     acceptTerms = true;
     defaults.email = "andrew.jeffrey.johnson@gmail.com";
+    defaults.webroot = "/var/lib/acme/acme-challenge";
     certs."luminlapid.com" = {
       #  listenHTTP = ":80";
       group = config.services.nginx.group;
-      webroot = "/var/lib/acme";
+      webroot = "/var/lib/acme/luminlapid.com";
       extraDomainNames = [
         "nc.luminlapid.com"
       ];
