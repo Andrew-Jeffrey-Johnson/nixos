@@ -499,7 +499,7 @@ in
         serverName = "nc.${domain}";
         useACMEHost = "${domain}";
         acmeRoot = "/var/lib/acme/${domain}";
-        #root = "/var/www/nc.${domain}";
+        root = "/var/www/nc.${domain}";
         #listen = [
         #  {
         #    addr = "127.0.0.163";
