@@ -600,6 +600,7 @@ in
             tryFiles = "$uri =404";
           };
           "/nextcloud" = {
+            root = "/var/lib";
             proxyPass = "http://127.0.0.163/";
           };
         };
