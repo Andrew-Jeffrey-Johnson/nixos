@@ -487,11 +487,11 @@
     recommendedTlsSettings = true;
     virtualHosts = {
       "nc.luminlapid.com" = {
-        addSSL = true;
+        addSSL = false;
         forceSSL = false;
         #enableACME = true;
         serverName = "nc.luminlapid.com";
-        useACMEHost = "lulminlapid.com";
+        #useACMEHost = "lulminlapid.com";
         #acmeRoot = config.security.acme.defaults.webroot;
         #ibasicAuth = { test = "password"; };
         root = "/";
