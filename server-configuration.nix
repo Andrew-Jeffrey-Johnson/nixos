@@ -549,6 +549,7 @@ in
         #root = "/";
         locations = {
           "/" = {
+            root = "/";
             #recommendedProxySettings = true;
             #extraConfig = ''
             #  add_header Content-Type text/html;
