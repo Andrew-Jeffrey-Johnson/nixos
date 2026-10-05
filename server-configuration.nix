@@ -592,7 +592,7 @@ in
           "/nextcloud/" = {
             proxyPass = "http://127.0.0.163/";
           };
-          "/onlyoffice/" = {
+          "/onlyoffice" = {
             proxyPass = "http://127.0.2.1:17633/";
           };
         };
