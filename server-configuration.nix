@@ -557,14 +557,14 @@ in
             #'';
             #return = "200 \"<!DOCTYPE html><head><title>Hello from luminlapid.com</title></head><body><h1>Hello from luminlapid.com!</h1></body></html>\"";
             proxyPass = "http://192.168.100.13:8000";
-            proxyWebsockets = true;
+            #proxyWebsockets = true;
 
             #extraConfig = ''
             #  proxy_set_header Upgrade $http_upgrade;
             #  proxy_set_header Connection "upgrade";
             #'';
           };
-          "calibre" = {
+          "/calibre" = {
             # EPUB content server
             # The slash on the end ensure url passed to calibre-server starts
             # with / instead of /calibre-server
@@ -591,7 +591,7 @@ in
             proxyPass = "http://127.0.0.4:7854";
           };
           "/onlyoffice" = {
-            proxyPass = "http://127.0.0.164:7633";
+            proxyPass = "http://127.0.0.164:7633/";
           };
           "^~/static/" = {
             root = "/";
