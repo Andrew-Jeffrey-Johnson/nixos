@@ -580,7 +580,7 @@ in
             root = "/";
             tryFiles = "$uri =404";
           };
-          "/nextcloud" = {
+          "/nextcloud/" = {
             proxyPass = "http://127.0.0.163/";
           };
         };
