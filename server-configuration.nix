@@ -89,6 +89,7 @@ in
   };
   networking = {
     hosts = {
+      "127.0.0.163" = [ "nextcloud" ];
       "127.0.0.164" = [ "onlyoffice" ];
     };
     firewall = {
@@ -298,7 +299,7 @@ in
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud35;
-    hostName = "127.0.0.163";
+    hostName = "nextcloud";
     https = true;
     home = "/var/lib/nextcloud";
     configureRedis = true;
@@ -601,6 +602,12 @@ in
           };
         };
       };
+      "nextcloud".listen = [
+        {
+          addr = "127.0.0.164";
+          port = 7633;
+        }
+      ];
       "onlyoffice".listen = [
         {
           addr = "127.0.0.164";
