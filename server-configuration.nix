@@ -548,7 +548,7 @@ in
         serverAliases = [ "www.${domain}" ];
         #root = "/";
         locations = {
-          "=/" = {
+          "/" = {
             #recommendedProxySettings = true;
             #extraConfig = ''
             #  add_header Content-Type text/html;
@@ -592,12 +592,12 @@ in
             root = "/";
             proxyPass = "http://127.0.0.1:7633/";
           };
+          "/nextcloud/" = {
+            proxyPass = "http://127.0.0.163/";
+          };
           "^~/static/" = {
             root = "/";
             tryFiles = "$uri =404";
-          };
-          "^~/nextcloud/" = {
-            proxyPass = "http://127.0.0.163/";
           };
         };
       };
