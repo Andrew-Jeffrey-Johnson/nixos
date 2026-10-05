@@ -593,17 +593,9 @@ in
             proxyPass = "http://127.0.0.163/";
           };
           "/onlyoffice/" = {
-            proxyPass = "http://127.0.2.1:17633";
+            proxyPass = "http://127.0.2.1:17633/";
           };
         };
-      };
-      "onlyoffice" = {
-        listen = [
-          {
-            addr = "127.0.2.1";
-            port = 17633;
-          }
-        ];
       };
     };
   };
