@@ -328,7 +328,7 @@ in
         overwritehost = host;
         overwritewebroot = dir;
         overwrite.cli.url = "${prot}://${host}${dir}/";
-        htaccess.RewriteBase = dir;
+        #htaccess.RewriteBase = dir;
         #enabledPreviewProviders = [
         #  "OC\\Preview\\BMP"
         #  "OC\\Preview\\GIF"
