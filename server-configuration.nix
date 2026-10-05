@@ -478,7 +478,7 @@ in
         locations = {
           "/" = {
             #proxyPass = "http://192.168.100.13:8000";
-            proxyPass = "http://127.0.0.162:7631";
+            proxyPass = "http://127.0.0.162:8000";
             proxyWebsockets = true;
           };
           "/calibre" = {
@@ -522,7 +522,7 @@ in
       "blog".listen = [
         {
           addr = "127.0.0.162";
-          port = 7631;
+          port = 8000;
         }
       ];
       "nextcloud".listen = [
