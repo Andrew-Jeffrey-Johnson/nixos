@@ -353,7 +353,7 @@ in
     port = 8000;
     # TODO Remove secret
     securityNonceFile = "/etc/nixos-test-onlyoffice-nonce.conf";
-    #allowLocalConnections = true;
+    allowLocalConnections = true;
   };
 
   #------------------------------------------------------------------------------
@@ -597,6 +597,7 @@ in
             tryFiles = "$uri =404";
           };
           "/nextcloud/" = {
+            root = "/";
             proxyPass = "http://127.0.0.163/";
           };
         };
