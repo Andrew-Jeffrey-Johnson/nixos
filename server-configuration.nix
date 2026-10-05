@@ -556,7 +556,7 @@ in
             #'';
             #return = "200 \"<!DOCTYPE html><head><title>Hello from luminlapid.com</title></head><body><h1>Hello from luminlapid.com!</h1></body></html>\"";
             proxyPass = "http://192.168.100.13:8000/";
-            proxyWebsockets = true;
+            #proxyWebsockets = true;
 
             #extraConfig = ''
             #  proxy_set_header Upgrade $http_upgrade;
