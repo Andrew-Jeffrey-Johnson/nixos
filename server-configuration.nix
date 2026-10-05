@@ -348,9 +348,9 @@ in
       };
   };
   services.onlyoffice = {
-    enable = false;
-    hostname = "onlyoffice";
-    port = 17633;
+    enable = true;
+    hostname = "127.0.0.164";
+    port = 7633;
     # TODO Remove secret
     securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
       set $secure_link_secret "nixostest";
@@ -588,10 +588,10 @@ in
             # that gets passed throught the proxy
             proxyPass = "http://127.0.0.4:7854";
           };
-          #"/onlyoffice" = {
-          #  root = "/";
-          #  proxyPass = "http://127.0.0.6:17633";
-          #};
+          "/onlyoffice" = {
+            root = "/";
+            proxyPass = "http://127.0.0.164:7633";
+          };
           "^~/static/" = {
             root = "/";
             tryFiles = "$uri =404";
@@ -601,12 +601,6 @@ in
           };
         };
       };
-      "onlyoffice".listen = [
-        {
-          addr = "127.0.0.164";
-          port = 17633;
-        }
-      ];
     };
   };
 
