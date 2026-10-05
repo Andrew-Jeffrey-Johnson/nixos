@@ -348,9 +348,9 @@ in
   containers.blog = {
     autoStart = true;
     privateNetwork = true;
-    hostAddress = "192.168.100.10";
+    hostAddress = "192.168.100.10:8000";
     #localAddress = "192.168.100.13"; # Go to http://192.168.100.13 to view the website
-    localAddress = "127.0.0.162";
+    localAddress = "127.0.0.162:7631";
     #hostAddress = "127.0.0.1:8000";
     #localAddress = "127.0.0.1:8000";
     #hostAddress6 = "fc00::1";
@@ -478,7 +478,7 @@ in
         locations = {
           "/" = {
             #proxyPass = "http://192.168.100.13:8000";
-            proxyPass = "http://127.0.0.162:8000";
+            proxyPass = "http://127.0.0.162:7631";
             proxyWebsockets = true;
           };
           "/calibre" = {
@@ -522,7 +522,7 @@ in
       "blog".listen = [
         {
           addr = "127.0.0.162";
-          port = 8000;
+          port = 7631;
         }
       ];
       "nextcloud".listen = [
