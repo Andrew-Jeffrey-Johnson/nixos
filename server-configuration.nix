@@ -475,7 +475,7 @@ in
         serverAliases = [ "www.${domain}" ];
         #root = "/";
         locations = {
-          "/" = {
+          "^~/" = {
             proxyPass = "http://192.168.100.13:8000";
             #proxyPass = "http://127.0.0.162:7631";
             proxyWebsockets = true;
