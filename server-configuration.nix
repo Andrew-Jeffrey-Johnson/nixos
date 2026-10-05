@@ -299,7 +299,7 @@ in
     https = true;
     home = "/var/lib/nextcloud";
     configureRedis = true;
-    datadir = "/var/lib/nextcloud";
+    datadir = "/nextcloud";
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
     extraApps = {
