@@ -350,7 +350,7 @@ in
   services.onlyoffice = {
     enable = true;
     hostname = "localhost";
-    port = 8000;
+    port = 7633;
     # TODO Remove secret
     securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
       set $secure_link_secret "nixostest";
@@ -590,7 +590,7 @@ in
             proxyPass = "http://127.0.0.4:7854";
           };
           "/onlyoffice" = {
-            proxyPass = "http://127.0.0.1:8000/";
+            proxyPass = "http://127.0.0.1:7633/";
           };
           "^~/static/" = {
             root = "/";
