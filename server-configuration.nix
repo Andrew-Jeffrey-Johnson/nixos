@@ -89,6 +89,7 @@ in
   };
   networking = {
     hosts = {
+      "127.0.0.162" = [ "blog" ];
       "127.0.0.163" = [ "nextcloud" ];
       "127.0.0.164" = [ "onlyoffice" ];
     };
@@ -348,7 +349,8 @@ in
     autoStart = true;
     privateNetwork = true;
     hostAddress = "192.168.100.10";
-    localAddress = "192.168.100.13"; # Go to http://192.168.100.13 to view the website
+    #localAddress = "192.168.100.13"; # Go to http://192.168.100.13 to view the website
+    localAddress = "127.0.0.162";
     #hostAddress = "127.0.0.1:8000";
     #localAddress = "127.0.0.1:8000";
     #hostAddress6 = "fc00::1";
@@ -475,7 +477,8 @@ in
         #root = "/";
         locations = {
           "/" = {
-            proxyPass = "http://192.168.100.13:8000";
+            #proxyPass = "http://192.168.100.13:8000";
+            proxyPass = "http://127.0.0.162:7631";
             proxyWebsockets = true;
           };
           "/calibre" = {
@@ -516,6 +519,12 @@ in
           };
         };
       };
+      "blog".listen = [
+        {
+          addr = "127.0.0.162";
+          port = 7631;
+        }
+      ];
       "nextcloud".listen = [
         {
           addr = "127.0.0.163";
