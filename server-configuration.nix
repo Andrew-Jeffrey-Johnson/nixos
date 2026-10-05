@@ -592,11 +592,12 @@ in
             proxyPass = "http://127.0.0.163/";
           };
           "/onlyoffice/" = {
-            proxyPass = "onlyoffice";
+            proxyPass = "http://127.0.2.1/";
           };
         };
       };
       "onlyoffice" = {
+        serverName = "onlyoffice";
         listen = [
           {
             addr = "127.0.2.1";
