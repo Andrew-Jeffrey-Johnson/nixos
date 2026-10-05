@@ -334,12 +334,12 @@ in
   services.onlyoffice = {
     enable = true;
     hostname = "onlyoffice";
-    port = 7633;
+    #port = 7633;
     # TODO Remove secret
     securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
       set $secure_link_secret "nixostest";
     ''}";
-    allowLocalConnections = true;
+    #allowLocalConnections = true;
   };
 
   #------------------------------------------------------------------------------
@@ -506,15 +506,15 @@ in
             # that gets passed throught the proxy
             proxyPass = "http://127.0.0.4:7854";
           };
-          "/onlyoffice" = {
-            proxyPass = "http://127.0.0.164:7633/";
-          };
           "^~/static/" = {
             root = "/";
             tryFiles = "$uri =404";
           };
           "/nextcloud/" = {
             proxyPass = "http://127.0.0.163:7632/";
+          };
+          "/onlyoffice/" = {
+            proxyPass = "http://127.0.0.164:7633/";
           };
         };
       };
