@@ -549,7 +549,7 @@ in
         serverAliases = [ "www.${domain}" ];
         #root = "/";
         locations = {
-          "/*" = {
+          "/haha" = {
             #recommendedProxySettings = true;
             #extraConfig = ''
             #  add_header Content-Type text/html;
