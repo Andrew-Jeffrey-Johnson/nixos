@@ -550,21 +550,21 @@ in
         serverAliases = [ "www.${domain}" ];
         #root = "/";
         locations = {
-          # "/" = {
-          #   #recommendedProxySettings = true;
-          #   #extraConfig = ''
-          #   #  add_header Content-Type text/html;
-          #   #'';
-          #   #return = "200 \"<!DOCTYPE html><head><title>Hello from luminlapid.com</title></head><body><h1>Hello from luminlapid.com!</h1></body></html>\"";
-          #   proxyPass = "http://192.168.100.13:8000/";
-          #   #proxyWebsockets = true;
+          "/" = {
+            #recommendedProxySettings = true;
+            #extraConfig = ''
+            #  add_header Content-Type text/html;
+            #'';
+            #return = "200 \"<!DOCTYPE html><head><title>Hello from luminlapid.com</title></head><body><h1>Hello from luminlapid.com!</h1></body></html>\"";
+            proxyPass = "http://192.168.100.13:8000/";
+            #proxyWebsockets = true;
 
-          #   #extraConfig = ''
-          #   #  proxy_set_header Upgrade $http_upgrade;
-          #   #  proxy_set_header Connection "upgrade";
-          #   #'';
-          # };
-          "/calibre" = {
+            #extraConfig = ''
+            #  proxy_set_header Upgrade $http_upgrade;
+            #  proxy_set_header Connection "upgrade";
+            #'';
+          };
+          "calibre" = {
             # EPUB content server
             # The slash on the end ensure url passed to calibre-server starts
             # with / instead of /calibre-server
