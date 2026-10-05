@@ -548,7 +548,6 @@ in
         #root = "/";
         locations = {
           "/" = {
-            root = "/";
             #recommendedProxySettings = true;
             #extraConfig = ''
             #  add_header Content-Type text/html;
@@ -589,7 +588,6 @@ in
             proxyPass = "http://127.0.0.4:7854";
           };
           "/onlyoffice" = {
-            root = "/";
             proxyPass = "http://127.0.0.1:8000/";
           };
           "^~/static/" = {
@@ -597,7 +595,6 @@ in
             tryFiles = "$uri =404";
           };
           "/nextcloud/" = {
-            root = "/";
             proxyPass = "http://127.0.0.163/";
           };
         };
