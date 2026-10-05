@@ -88,12 +88,12 @@ in
     user = "jellyfin";
   };
   networking = {
+    hosts = {
+      "127.0.0.164" = [ "onlyoffice" ];
+    };
     firewall = {
       enable = true;
       allowPing = true;
-      hosts = {
-        "127.0.0.164" = [ "onlyoffice" ];
-      };
       # for NFSv3; view with rpcinfo -p
       allowedTCPPorts = [
         51820 # WireGuard
