@@ -314,7 +314,6 @@ in
         guests
         polls
         whiteboard
-        richdocuments
         ;
     };
     extraAppsEnable = true;
@@ -344,6 +343,14 @@ in
           "OC\\Preview\\HEIC"
         ];
       };
+  };
+  services.onlyoffice = {
+    enable = true;
+    hostname = "127.0.0.164";
+    # TODO: Change this to be secret
+    securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
+      set $secure_link_secret "nixostest";
+    ''}";
   };
 
   #------------------------------------------------------------------------------
@@ -583,6 +590,9 @@ in
           };
           "/nextcloud/" = {
             proxyPass = "http://127.0.0.163/";
+          };
+          "/onlyoffice/" = {
+            proxyPass = "http://127.0.0.164/";
           };
         };
       };
