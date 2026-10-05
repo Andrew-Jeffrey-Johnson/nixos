@@ -317,32 +317,32 @@ in
     #    ;
     #};
     #extraAppsEnable = true;
-    settings =
-      let
-        prot = "https"; # or http
-        host = "${domain}";
-        dir = "/nextcloud";
-      in
-      {
-        overwriteprotocol = prot;
-        overwritehost = host;
-        #overwritewebroot = dir;
-        overwrite.cli.url = "${prot}://${host}${dir}/";
-        #htaccess.RewriteBase = dir;
-        #enabledPreviewProviders = [
-        #  "OC\\Preview\\BMP"
-        #  "OC\\Preview\\GIF"
-        #  "OC\\Preview\\JPEG"
-        #  "OC\\Preview\\Krita"
-        #  "OC\\Preview\\MarkDown"
-        #  "OC\\Preview\\MP3"
-        #  "OC\\Preview\\OpenDocument"
-        #  "OC\\Preview\\PNG"
-        #  "OC\\Preview\\TXT"
-        #  "OC\\Preview\\XBitmap"
-        #  "OC\\Preview\\HEIC"
-        #];
-      };
+    #settings =
+    #  let
+    #    prot = "https"; # or http
+    #    host = "${domain}";
+    #    dir = "/nextcloud";
+    #  in
+    #  {
+    #    overwriteprotocol = prot;
+    #    overwritehost = host;
+    #    #overwritewebroot = dir;
+    #    overwrite.cli.url = "${prot}://${host}${dir}/";
+    #    #htaccess.RewriteBase = dir;
+    #    #enabledPreviewProviders = [
+    #    #  "OC\\Preview\\BMP"
+    #    #  "OC\\Preview\\GIF"
+    #    #  "OC\\Preview\\JPEG"
+    #    #  "OC\\Preview\\Krita"
+    #    #  "OC\\Preview\\MarkDown"
+    #    #  "OC\\Preview\\MP3"
+    #    #  "OC\\Preview\\OpenDocument"
+    #    #  "OC\\Preview\\PNG"
+    #    #  "OC\\Preview\\TXT"
+    #    #  "OC\\Preview\\XBitmap"
+    #    #  "OC\\Preview\\HEIC"
+    #    #];
+    #  };
   };
 
   #------------------------------------------------------------------------------
