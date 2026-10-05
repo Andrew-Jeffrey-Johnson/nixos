@@ -303,20 +303,20 @@ in
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
     phpOptions."opcache.interned_strings_buffer" = "32";
-    #extraApps = {
-    #  inherit (config.services.nextcloud.package.packages.apps)
-    #    contacts
-    #    calendar
-    #    tasks
-    #    onlyoffice
-    #    #end_to_end_encryption
-    #    #files_markdown
-    #    #guests
-    #    polls
-    #    whiteboard
-    #    ;
-    #};
-    #extraAppsEnable = true;
+    extraApps = {
+      inherit (config.services.nextcloud.package.packages.apps)
+        contacts
+        calendar
+        tasks
+        onlyoffice
+        end_to_end_encryption
+        #files_markdown
+        guests
+        polls
+        whiteboard
+        ;
+    };
+    extraAppsEnable = true;
     #settings =
     #  let
     #    prot = "https"; # or http
