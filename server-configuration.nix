@@ -91,6 +91,9 @@ in
     firewall = {
       enable = true;
       allowPing = true;
+      hosts = {
+        "127.0.0.164" = [ "onlyoffice" ];
+      };
       # for NFSv3; view with rpcinfo -p
       allowedTCPPorts = [
         51820 # WireGuard
@@ -346,7 +349,7 @@ in
   };
   services.onlyoffice = {
     enable = true;
-    hostname = "localhost";
+    hostname = "onlyoffice";
     # TODO Remove secret
     securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
       set $secure_link_secret "nixostest";
@@ -597,7 +600,7 @@ in
           };
         };
       };
-      "localhost".listen = [
+      "onlyoffice".listen = [
         {
           addr = "127.0.0.1";
           port = 8080;
