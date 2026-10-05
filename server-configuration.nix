@@ -585,17 +585,17 @@ in
             # that gets passed throught the proxy
             proxyPass = "http://127.0.0.4:7854";
           };
-          "/onlyoffice" = {
-            root = "/";
-            proxyPass = "http://127.0.0.6:17633";
-          };
+          #"/onlyoffice" = {
+          #  root = "/";
+          #  proxyPass = "http://127.0.0.6:17633";
+          #};
           "^~/static/" = {
             root = "/";
             tryFiles = "$uri =404";
           };
-          #"/nextcloud/" = {
-          #  proxyPass = "http://127.0.0.163/";
-          #};
+          "/nextcloud/" = {
+            proxyPass = "http://127.0.0.163/";
+          };
         };
       };
     };
