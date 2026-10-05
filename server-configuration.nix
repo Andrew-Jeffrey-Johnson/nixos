@@ -514,8 +514,7 @@ in
             proxyPass = "http://127.0.0.163:7632/";
           };
           "/onlyoffice" = {
-            root = "/";
-            proxyPass = "http://127.0.0.164:7633/";
+            proxyPass = "http://127.0.0.164:7633";
           };
         };
       };
