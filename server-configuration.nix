@@ -90,7 +90,7 @@ in
   networking = {
     hosts = {
       "127.0.0.163" = [ "nextcloud" ];
-      "127.0.0.164" = [ "onlyoffice" ];
+      #"127.0.0.164" = [ "onlyoffice" ];
     };
     firewall = {
       enable = true;
@@ -333,7 +333,8 @@ in
   };
   services.onlyoffice = {
     enable = true;
-    hostname = "onlyoffice";
+    hostname = "127.0.0.164";
+    port = 7633;
     # TODO Remove secret
     securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
       set $secure_link_secret "nixostest";
@@ -513,7 +514,7 @@ in
             proxyPass = "http://127.0.0.163:7632/";
           };
           "/onlyoffice/" = {
-            proxyPass = "http://127.0.0.164:8000/";
+            proxyPass = "http://127.0.0.164:7633/";
           };
         };
       };
@@ -521,12 +522,6 @@ in
         {
           addr = "127.0.0.163";
           port = 7632;
-        }
-      ];
-      "onlyoffice".listen = [
-        {
-          addr = "127.0.0.164";
-          port = 7633;
         }
       ];
     };
