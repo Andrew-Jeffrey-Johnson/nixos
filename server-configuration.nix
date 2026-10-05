@@ -326,7 +326,7 @@ in
       {
         overwriteprotocol = prot;
         overwritehost = host;
-        overwritewebroot = dir;
+        #overwritewebroot = dir;
         overwrite.cli.url = "${prot}://${host}${dir}/";
         #htaccess.RewriteBase = dir;
         #enabledPreviewProviders = [
