@@ -292,7 +292,6 @@ in
 
   # Nextcloud
   environment.etc."nextcloud-admin-pass".text = "PWD";
-  environment.etc."nextcloud-user-pass".text = "ahh";
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud35;
@@ -303,16 +302,7 @@ in
     datadir = "/nextcloud";
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
-    ensureUsers = {
-      user1 = {
-        email = "user1@localhost";
-        passwordFile = "/etc/nextcloud-user-pass";
-      };
-      user2 = {
-        email = "user2@localhost";
-        passwordFile = "/etc/nextcloud-user-pass";
-      };
-    };
+    phpOptions."opcache.interned_strings_buffer" = "32";
     extraApps = {
       inherit (config.services.nextcloud.package.packages.apps)
         contacts
