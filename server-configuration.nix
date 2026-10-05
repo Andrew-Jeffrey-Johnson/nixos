@@ -588,8 +588,7 @@ in
             # that gets passed throught the proxy
             proxyPass = "http://127.0.0.4:7854";
           };
-          "/onlyoffice/" = {
-            root = "/";
+          "/onlyoffice" = {
             proxyPass = "http://127.0.0.1:7633/";
           };
           "/nextcloud/" = {
