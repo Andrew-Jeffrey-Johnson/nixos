@@ -346,7 +346,7 @@ in
   };
   services.onlyoffice = {
     enable = true;
-    hostname = "192.168.1.111";
+    hostname = "localhost";
     # TODO Remove secret
     securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
       set $secure_link_secret "nixostest";
@@ -597,6 +597,12 @@ in
           };
         };
       };
+      "localhost".listen = [
+        {
+          addr = "127.0.0.1";
+          port = 8080;
+        }
+      ];
     };
   };
 
