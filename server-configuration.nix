@@ -598,14 +598,14 @@ in
             tryFiles = "$uri =404";
           };
           "/nextcloud/" = {
-            proxyPass = "http://127.0.0.163/";
+            proxyPass = "http://127.0.0.163:7632/";
           };
         };
       };
       "nextcloud".listen = [
         {
           addr = "127.0.0.164";
-          port = 7633;
+          port = 7632;
         }
       ];
       "onlyoffice".listen = [
