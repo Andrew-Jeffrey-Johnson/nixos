@@ -344,14 +344,14 @@ in
         ];
       };
   };
-  #services.onlyoffice = {
-  #  enable = true;
-  #  hostname = "localhost";
-  #  # TODO Remove secret
-  #  securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
-  #    set $secure_link_secret "nixostest";
-  #  ''}";
-  #};
+  services.onlyoffice = {
+    enable = true;
+    hostname = "192.168.1.111";
+    # TODO Remove secret
+    securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
+      set $secure_link_secret "nixostest";
+    ''}";
+  };
 
   #------------------------------------------------------------------------------
   # Personal blog through luminlapid.com
