@@ -352,7 +352,7 @@ in
     hostname = "localhost";
     port = 8000;
     # TODO Remove secret
-    securityNonceFile = "/etc/nixos-test-onlyoffice-nonce.conf";
+    #securityNonceFile = "/etc/nixos-test-onlyoffice-nonce.conf";
     allowLocalConnections = true;
   };
 
