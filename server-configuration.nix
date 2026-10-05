@@ -548,7 +548,7 @@ in
         serverAliases = [ "www.${domain}" ];
         #root = "/";
         locations = {
-          "/" = {
+          "=/" = {
             #recommendedProxySettings = true;
             #extraConfig = ''
             #  add_header Content-Type text/html;
