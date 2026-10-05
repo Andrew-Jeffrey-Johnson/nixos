@@ -346,12 +346,8 @@ in
   };
   services.onlyoffice = {
     enable = true;
-    hostname = "127.0.2.1";
+    hostname = "onlyoffice";
     port = 17633;
-    # TODO: Change this to be secret
-    securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
-      set $secure_link_secret "nixostest";
-    ''}";
   };
 
   #------------------------------------------------------------------------------
@@ -593,10 +589,16 @@ in
             proxyPass = "http://127.0.0.163/";
           };
           "/onlyoffice" = {
-            proxyPass = "http://127.0.2.1:17633/";
+            proxyPass = "http://onlyoffice/";
           };
         };
       };
+      "onlyoffice".listen = [
+        {
+          addr = "127.0.0.1";
+          port = 17633;
+        }
+      ];
     };
   };
 
