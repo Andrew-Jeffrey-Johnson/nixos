@@ -347,15 +347,15 @@ in
         ];
       };
   };
-  services.onlyoffice = {
-    enable = true;
-    hostname = "127.0.0.1";
-    port = 7633;
-    # TODO Remove secret
-    securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
-      set $secure_link_secret "nixostest";
-    ''}";
-  };
+  #services.onlyoffice = {
+  #  enable = true;
+  #  hostname = "127.0.0.1";
+  #  port = 7633;
+  #  # TODO Remove secret
+  #  securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
+  #    set $secure_link_secret "nixostest";
+  #  ''}";
+  #};
 
   #------------------------------------------------------------------------------
   # Personal blog through luminlapid.com
