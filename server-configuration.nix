@@ -298,7 +298,8 @@ in
     hostName = "127.0.0.163";
     https = true;
     home = "/var/lib/nextcloud";
-    #datadir = "/var/lib/nextcloud";
+    configureRedis = true;
+    datadir = "/var/lib/nextcloud";
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
     extraApps = {
@@ -319,7 +320,7 @@ in
       let
         prot = "https"; # or http
         host = "${domain}";
-        dir = "/var/lib/nextcloud";
+        dir = "/nextcloud";
       in
       {
         overwriteprotocol = prot;
