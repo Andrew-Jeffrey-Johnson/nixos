@@ -253,23 +253,6 @@ in
         htpasswd_encryption = "plain";
       };
     };
-    # rights = {
-    #   root = {
-    #     user = ".+";
-    #     collection = "";
-    #     permissions = "R";
-    #   };
-    #   principal = {
-    #     user = ".+";
-    #     collection = "{user}";
-    #     permissions = "RW";
-    #   };
-    #   calendars = {
-    #     user = ".+";
-    #     collection = "{user}/[^/]+";
-    #     permissions = "rw";
-    #   };
-    # };
   };
 
   # Generic webdav server
@@ -491,9 +474,9 @@ in
         serverAliases = [ "www.${domain}" ];
         #root = "/";
         locations = {
-          "=/" = {
+          "/" = {
             proxyPass = "http://192.168.100.13:8000";
-            #proxyWebsockets = true;
+            proxyWebsockets = true;
           };
           "/calibre" = {
             # EPUB content server
