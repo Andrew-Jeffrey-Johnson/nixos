@@ -348,7 +348,7 @@ in
       };
   };
   services.onlyoffice = {
-    enable = true;
+    enable = false;
     hostname = "onlyoffice";
     port = 17633;
     # TODO Remove secret
