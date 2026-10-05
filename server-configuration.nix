@@ -593,9 +593,9 @@ in
             root = "/";
             tryFiles = "$uri =404";
           };
-          "/nextcloud/" = {
-            proxyPass = "http://127.0.0.163/";
-          };
+          #"/nextcloud/" = {
+          #  proxyPass = "http://127.0.0.163/";
+          #};
         };
       };
     };
