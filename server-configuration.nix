@@ -347,15 +347,16 @@ in
         ];
       };
   };
-  #services.onlyoffice = {
-  #  enable = true;
-  #  hostname = "127.0.0.1";
-  #  port = 7633;
-  #  # TODO Remove secret
-  #  securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
-  #    set $secure_link_secret "nixostest";
-  #  ''}";
-  #};
+  services.onlyoffice = {
+    enable = true;
+    hostname = "localhost";
+    port = 8000;
+    # TODO Remove secret
+    securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
+      set $secure_link_secret "nixostest";
+    ''}";
+    allowLocalConnections = true;
+  };
 
   #------------------------------------------------------------------------------
   # Personal blog through luminlapid.com
@@ -591,7 +592,7 @@ in
           };
           "/onlyoffice" = {
             root = "/";
-            proxyPass = "http://127.0.0.1:7633/";
+            proxyPass = "http://127.0.0.1:8000/";
           };
           "^~/static/" = {
             root = "/";
@@ -601,9 +602,6 @@ in
             root = "/";
             proxyPass = "http://127.0.0.163/";
           };
-          # "/nextcloud" = {
-          #   tryFiles = "$uri $uri/ nextcloud/index.php$request_uri";
-          # };
         };
       };
     };
