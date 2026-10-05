@@ -597,10 +597,10 @@ in
             root = "/";
             tryFiles = "$uri =404";
           };
-          "/nextcloud/" = {
-            root = "/";
-            proxyPass = "http://127.0.0.163/";
-          };
+          #"/nextcloud/" = {
+          #  root = "/";
+          #  proxyPass = "http://127.0.0.163/";
+          #};
           # "/nextcloud" = {
           #   tryFiles = "$uri $uri/ nextcloud/index.php$request_uri";
           # };
