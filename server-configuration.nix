@@ -282,7 +282,7 @@ in
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud35;
-    #hostName = "nc.nextcloud.com";
+    hostName = "nc.nextcloud.com";
     https = true;
     home = "/var/lib/nextcloud";
     configureRedis = true;
