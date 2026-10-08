@@ -679,40 +679,40 @@ in
                  #
                  # This is required for entry-points such as `remote.php` and `public.php`,
                  # which route requests based on PATH_INFO.
-                 fastcgi_split_path_info ^(.+?\.php)(/.*)$;
-                 set $path_info $fastcgi_path_info;    # Save before try_files resets it
+              #   fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+              #   set $path_info $fastcgi_path_info;    # Save before try_files resets it
 
-                 # Return 404 for nonexistent PHP scripts (avoids passing arbitrary
-                 # paths to PHP-FPM, which is a known security risk).
-                 try_files $fastcgi_script_name =404;
+              #   # Return 404 for nonexistent PHP scripts (avoids passing arbitrary
+              #   # paths to PHP-FPM, which is a known security risk).
+              #   try_files $fastcgi_script_name =404;
 
-                 include fastcgi_params;
-                 fastcgi_pass php-handler;
+              #   #include fastcgi_params;
+              #   fastcgi_pass php-handler;
 
-                 fastcgi_param SCRIPT_FILENAME            $document_root$fastcgi_script_name;
-                 fastcgi_param PATH_INFO                  $path_info;
-                 fastcgi_param HTTPS                      on;       # Assumes TLS terminates here
-                 fastcgi_param modHeadersAvailable        true;     # Avoid duplicate security headers
-                 fastcgi_param front_controller_active    true;     # Enable pretty URLs
+              #   fastcgi_param SCRIPT_FILENAME            $document_root$fastcgi_script_name;
+              #   fastcgi_param PATH_INFO                  $path_info;
+              #   fastcgi_param HTTPS                      on;       # Assumes TLS terminates here
+              #   fastcgi_param modHeadersAvailable        true;     # Avoid duplicate security headers
+              #   fastcgi_param front_controller_active    true;     # Enable pretty URLs
 
-                 # Let nginx handle HTTP error responses from PHP-FPM (e.g. custom
-                 # error pages). Disable for debugging if PHP errors are being hidden.
-                 fastcgi_intercept_errors on;
+              #   # Let nginx handle HTTP error responses from PHP-FPM (e.g. custom
+              #   # error pages). Disable for debugging if PHP errors are being hidden.
+              #   fastcgi_intercept_errors on;
 
-                 # Required for uploads: PHP-FPM does not support chunked
-                 # transfer encoding and needs a Content-Length header.
-                 fastcgi_request_buffering on;
+              #   # Required for uploads: PHP-FPM does not support chunked
+              #   # transfer encoding and needs a Content-Length header.
+              #   fastcgi_request_buffering on;
 
-                 # Optional PHP-FPM timeout tuning (e.g. for 504 response timeouts).
-                 # Increase these only if uploads or long-running PHP requests are
-                 # timing out in your environment.
-                 #fastcgi_read_timeout 60s;
-                 #fastcgi_send_timeout 60s;
-                 #fastcgi_connect_timeout 60s;
+              #   # Optional PHP-FPM timeout tuning (e.g. for 504 response timeouts).
+              #   # Increase these only if uploads or long-running PHP requests are
+              #   # timing out in your environment.
+              #   #fastcgi_read_timeout 60s;
+              #   #fastcgi_send_timeout 60s;
+              #   #fastcgi_connect_timeout 60s;
 
-                 # Disable on-disk buffering of FastCGI responses (reduces disk I/O at
-                 # the cost of holding responses in memory).
-                 fastcgi_max_temp_file_size 0;
+              #   # Disable on-disk buffering of FastCGI responses (reduces disk I/O at
+              #   # the cost of holding responses in memory).
+              #   fastcgi_max_temp_file_size 0;
              }
 
              # Serve static files
