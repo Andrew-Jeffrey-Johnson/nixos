@@ -591,11 +591,11 @@ in
              # Either include it in the default mime.types list
              # and include that list explicitly or add the file extension
              # only for Nextcloud like below:
-             include mime.types;
-             types {
-                 text/javascript mjs;
-          application/wasm wasm;
-             }
+             #include mime.types;
+             #types {
+             #    text/javascript mjs;
+          #application/wasm wasm;
+             #}
 
              # Specify how to handle directories -- specifying `/index.php$request_uri`
              # here as the fallback means that Nginx always exhibits the desired behaviour
