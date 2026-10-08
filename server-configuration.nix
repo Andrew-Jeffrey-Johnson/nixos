@@ -461,7 +461,7 @@ in
         #useACMEHost = "luminlapid.com";
         #serverName = "${domain}";
         serverAliases = [ "www.${domain}" ];
-        root = "/";
+        root = "/var/www/luminlapid.com";
         locations = {
           "/" = {
             proxyPass = "http://192.168.100.13:8000";
@@ -518,6 +518,7 @@ in
         #  proxyPass = "http://127.0.0.1/";
         #};
         #};
+        root = "/var/www/nc.luminlapid.com";
         extraConfig = ''
             # Path to the root of your installation
             #root /var/lib/nextcloud;
