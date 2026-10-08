@@ -461,9 +461,8 @@ in
         #useACMEHost = "luminlapid.com";
         #serverName = "${domain}";
         serverAliases = [ "www.${domain}" ];
-        root = "/var/www/luminlapid.com";
         locations = {
-          "/haha" = {
+          "/" = {
             proxyPass = "http://192.168.100.13:8000";
             #proxyPass = "http://127.0.0.162:7631";
             proxyWebsockets = true;
