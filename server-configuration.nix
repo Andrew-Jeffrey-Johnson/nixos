@@ -526,33 +526,12 @@ in
             # Prevent nginx HTTP Server Detection
             server_tokens off;
 
-            # set max upload size and increase upload timeout:
-            client_max_body_size 512M;
-            client_body_timeout 300s;
-            fastcgi_buffers 64 4K;
-
-            # Enable gzip but do not remove ETag headers
-            gzip on;
-            gzip_vary on;
-            gzip_comp_level 4;
-            gzip_min_length 256;
-            gzip_proxied expired no-cache no-store private no_last_modified no_etag auth;
-            gzip_types application/atom+xml text/javascript application/javascript application/json application/ld+json application/manifest+json application/rss+xml application/vnd.geo+json application/vnd.ms-fontobject application/wasm application/x-font-ttf application/x-web-app-manifest+json application/xhtml+xml application/xml font/opentype image/bmp image/svg+xml image/x-icon text/cache-manifest text/css text/plain text/vcard text/vnd.rim.location.xloc text/vtt text/x-component text/x-cross-domain-policy;
-
-            # The settings allows you to optimize the HTTP2 bandwidth.
-            # See https://blog.cloudflare.com/delivering-http-2-upload-speed-improvements/
-            # for tuning hints
-            client_body_buffer_size 512k;
-
             # HTTP response headers borrowed from Nextcloud `.htaccess`
             add_header Referrer-Policy                   "no-referrer"       always;
             add_header X-Content-Type-Options            "nosniff"           always;
             add_header X-Frame-Options                   "SAMEORIGIN"        always;
             add_header X-Permitted-Cross-Domain-Policies "none"              always;
             add_header X-Robots-Tag                      "noindex, nofollow" always;
-
-            # Remove X-Powered-By, which is an information leak
-            fastcgi_hide_header X-Powered-By;
 
             # Specify how to handle directories -- specifying `/index.php$request_uri`
             # here as the fallback means that Nginx always exhibits the desired behaviour
