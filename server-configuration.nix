@@ -545,19 +545,6 @@ in
             # always provides the desired behaviour.
             index index.php index.html /index.php$request_uri;
 
-            # Rule borrowed from `.htaccess` to handle Microsoft DAV clients
-            location = / {
-                if ( $http_user_agent ~ ^DavClnt ) {
-                    return 302 /remote.php/webdav/$is_args$args;
-                }
-            }
-
-            location = /robots.txt {
-                allow all;
-                log_not_found off;
-                access_log off;
-            }
-
             # Make a regex exception for `/.well-known` so that clients can still
             # access it despite the existence of the regex rule
             # `location ~ /(\.|autotest|...)` which would otherwise handle requests
