@@ -460,7 +460,7 @@ in
         #useACMEHost = "luminlapid.com";
         serverName = "${domain}";
         serverAliases = [ "www.${domain}" ];
-        root = "/";
+        #root = "/";
         locations = {
           "/" = {
             proxyPass = "http://192.168.100.13:8000";
@@ -512,7 +512,7 @@ in
         acmeRoot = "/var/lib/acme/nc.${domain}";
         #useACMEHost = "luminlapid.com";
         serverName = "nc.${domain}";
-        root = "/";
+        #root = "/";
         locations = {
           "/" = {
             proxyPass = "http://localhost/";
