@@ -461,7 +461,7 @@ in
         #useACMEHost = "luminlapid.com";
         #serverName = "${domain}";
         serverAliases = [ "www.${domain}" ];
-        #root = "/";
+        root = "/";
         locations = {
           "/" = {
             proxyPass = "http://192.168.100.13:8000";
@@ -520,12 +520,12 @@ in
         #};
         #};
         extraConfig = ''
-                   listen 443 ssl http2;
-             listen [::]:443 ssl http2;
+             #      listen 443 ssl http2;
+             #listen [::]:443 ssl http2;
              # With NGinx >= 1.25.1 you should use this instead:
-             # listen 443      ssl;
-             # listen [::]:443 ssl;
-             # http2 on;
+             listen 443      ssl;
+             listen [::]:443 ssl;
+             http2 on;
              server_name nc.${domain};
 
              # Path to the root of your installation
