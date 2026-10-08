@@ -511,7 +511,7 @@ in
         enableACME = true;
         #acmeRoot = "/var/lib/acme/nc.${domain}";
         #useACMEHost = "luminlapid.com";
-        serverName = "nc.${domain}";
+        #serverName = "nc.${domain}";
         #root = "/var/www/nc.luminlapid.com";
       };
     };
