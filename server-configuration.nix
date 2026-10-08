@@ -511,7 +511,7 @@ in
         enableACME = true;
         acmeRoot = "/var/lib/acme/nc.${domain}";
         #useACMEHost = "luminlapid.com";
-        serverName = "${domain}";
+        serverName = "nc.${domain}";
         root = "/";
         locations = {
           "/" = {
