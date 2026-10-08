@@ -345,6 +345,7 @@ in
 
   services.nextcloud-whiteboard-server = {
     enable = true;
+    secrets = [ "${pkgs.writeText "nextcloud-whiteboard-server-secret" "haha"}" ];
   };
 
   #------------------------------------------------------------------------------
