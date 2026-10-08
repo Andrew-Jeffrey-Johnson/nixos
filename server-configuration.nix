@@ -523,9 +523,9 @@ in
              #      listen 443 ssl http2;
              #listen [::]:443 ssl http2;
              # With NGinx >= 1.25.1 you should use this instead:
-             listen 443      ssl;
-             listen [::]:443 ssl;
-             http2 on;
+             #listen 443      ssl;
+             #listen [::]:443 ssl;
+             #http2 on;
              server_name nc.${domain};
 
              # Path to the root of your installation
