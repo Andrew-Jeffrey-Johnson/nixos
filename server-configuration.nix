@@ -335,6 +335,7 @@ in
     enable = true;
     hostname = "127.0.0.164";
     port = 7633;
+    wopi = true;
     # TODO Remove secret
     securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
       set $secure_link_secret "nixostest";
