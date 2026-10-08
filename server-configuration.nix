@@ -454,11 +454,12 @@ in
   services.nginx = {
     virtualHosts = {
       "${domain}" = {
+        default = true;
         forceSSL = true;
         enableACME = true;
-        acmeRoot = "/var/lib/acme/${domain}";
+        #acmeRoot = "/var/lib/acme/${domain}";
         #useACMEHost = "luminlapid.com";
-        serverName = "${domain}";
+        #serverName = "${domain}";
         serverAliases = [ "www.${domain}" ];
         #root = "/";
         locations = {
@@ -509,9 +510,9 @@ in
       "nc.${domain}" = {
         forceSSL = true;
         enableACME = true;
-        acmeRoot = "/var/lib/acme/nc.${domain}";
+        #acmeRoot = "/var/lib/acme/nc.${domain}";
         #useACMEHost = "luminlapid.com";
-        serverName = "nc.${domain}";
+        #serverName = "nc.${domain}";
         #root = "/";
         locations = {
           "/" = {
