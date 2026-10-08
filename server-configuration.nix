@@ -343,6 +343,10 @@ in
     allowLocalConnections = true;
   };
 
+  services.nextcloud-whiteboard-server = {
+    enable = true;
+  };
+
   #------------------------------------------------------------------------------
   # Personal blog through luminlapid.com
   containers.blog = {
