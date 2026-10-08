@@ -533,8 +533,8 @@ in
 
              # Use Mozilla's guidelines for SSL/TLS settings
              # https://mozilla.github.io/server-side-tls/ssl-config-generator/
-             ssl_certificate     /etc/ssl/nginx/cloud.example.com.crt;
-             ssl_certificate_key /etc/ssl/nginx/cloud.example.com.key;
+             #ssl_certificate     /etc/ssl/nginx/cloud.example.com.crt;
+             #ssl_certificate_key /etc/ssl/nginx/cloud.example.com.key;
 
              # Prevent nginx HTTP Server Detection
              server_tokens off;
