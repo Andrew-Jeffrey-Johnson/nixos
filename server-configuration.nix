@@ -728,7 +728,7 @@ in
           	#add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
                  # HTTP response headers borrowed from Nextcloud `.htaccess`
-                 add_header Cache-Control                     "public, max-age=15778463$asset_immutable";
+                 #add_header Cache-Control                     "public, max-age=15778463$asset_immutable";
                  add_header Referrer-Policy                   "no-referrer"       always;
                  add_header X-Content-Type-Options            "nosniff"           always;
                  add_header X-Frame-Options                   "SAMEORIGIN"        always;
