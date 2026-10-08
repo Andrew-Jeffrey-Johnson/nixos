@@ -313,7 +313,7 @@ in
     extraAppsEnable = true;
   };
   services.onlyoffice = {
-    enable = true;
+    enable = false;
     hostname = "127.0.0.164";
     port = 7633;
     wopi = true;
