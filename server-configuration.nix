@@ -454,7 +454,6 @@ in
   services.nginx = {
     virtualHosts = {
       "${domain}" = {
-        default = true;
         forceSSL = true;
         enableACME = true;
         #acmeRoot = "/var/lib/acme/${domain}";
@@ -507,17 +506,13 @@ in
         };
       };
       "nc.${domain}" = {
+        default = true;
         forceSSL = true;
         enableACME = true;
         #acmeRoot = "/var/lib/acme/nc.${domain}";
         #useACMEHost = "luminlapid.com";
         serverName = "nc.${domain}";
         #root = "/var/www/nc.luminlapid.com";
-        locations = {
-          "/" = {
-            tryFiles = "$uri $uri/ index.php$request_uri";
-          };
-        };
       };
     };
   };
