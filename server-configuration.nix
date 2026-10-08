@@ -282,7 +282,7 @@ in
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud35;
-    hostName = "nc.nextcloud.com";
+    hostName = "localhost";
     https = true;
     home = "/var/lib/nextcloud";
     configureRedis = true;
@@ -500,7 +500,7 @@ in
           #"/nextcloud/" = {
           #proxyPass = "http://127.0.0.163/";
           #};
-          "/editors/" = {
+          "/onlyoffice/" = {
             # onlyoffice
             proxyPass = "http://127.0.0.164:7633/";
           };
@@ -515,7 +515,7 @@ in
         root = "/";
         locations = {
           "/" = {
-            proxyPass = "http://127.0.0.163/";
+            proxyPass = "http://localhost/";
           };
         };
       };
@@ -526,13 +526,13 @@ in
   security.acme = {
     acceptTerms = true;
     defaults.email = "andrew.jeffrey.johnson@gmail.com";
-    certs."${domain}" = {
-      group = config.services.nginx.group;
-      webroot = "/var/lib/acme/luminlapid.com";
-      extraDomainNames = [
-        "nc.${domain}"
-      ];
-    };
+    #certs."${domain}" = {
+    #  group = config.services.nginx.group;
+    #  webroot = "/var/lib/acme/luminlapid.com";
+    #  extraDomainNames = [
+    #    "nc.${domain}"
+    #  ];
+    #};
   };
 
   # This value determines the NixOS release from which the default
