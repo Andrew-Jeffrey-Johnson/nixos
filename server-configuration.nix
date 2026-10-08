@@ -513,6 +513,11 @@ in
         #useACMEHost = "luminlapid.com";
         serverName = "nc.${domain}";
         #root = "/var/www/nc.luminlapid.com";
+        locations = {
+          "/" = {
+            tryFiles = "$uri $uri/ index.php$request_uri";
+          };
+        };
       };
     };
   };
