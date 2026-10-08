@@ -311,32 +311,6 @@ in
         ;
     };
     extraAppsEnable = true;
-    # settings =
-    #   #let
-    #   #  prot = "https"; # or http
-    #   #  host = "${domain}";
-    #   #  dir = "/nextcloud";
-    #   #in
-    #   {
-    #     #overwriteprotocol = prot;
-    #     #overwritehost = host;
-    #     #overwritewebroot = dir;
-    #     #overwrite.cli.url = "${prot}://${host}${dir}/";
-    #     #htaccess.RewriteBase = dir;
-    #     enabledPreviewProviders = [
-    #       "OC\\Preview\\BMP"
-    #       "OC\\Preview\\GIF"
-    #       "OC\\Preview\\JPEG"
-    #       "OC\\Preview\\Krita"
-    #       "OC\\Preview\\MarkDown"
-    #       "OC\\Preview\\MP3"
-    #       "OC\\Preview\\OpenDocument"
-    #       "OC\\Preview\\PNG"
-    #       "OC\\Preview\\TXT"
-    #       "OC\\Preview\\XBitmap"
-    #       "OC\\Preview\\HEIC"
-    #     ];
-    #   };
   };
   services.onlyoffice = {
     enable = true;
@@ -488,7 +462,7 @@ in
         serverAliases = [ "www.${domain}" ];
         root = "/";
         locations = {
-          "^~/" = {
+          "/" = {
             proxyPass = "http://192.168.100.13:8000";
             #proxyPass = "http://127.0.0.162:7631";
             proxyWebsockets = true;
@@ -524,35 +498,14 @@ in
             tryFiles = "$uri =404";
           };
           "/nextcloud/" = {
-            proxyPass = "http://127.0.0.163:7632/";
+            proxyPass = "http://127.0.0.163/";
           };
           "/editors/" = {
             # onlyoffice
             proxyPass = "http://127.0.0.164:7633/";
           };
-          "^~ /.well-known" = {
-            extraConfig = ''
-              absolute_redirect off;
-              location ~ ^/\\.well-known/(?:carddav|caldav)$ {
-                return 301 /nextcloud/remote.php/dav;
-              }
-              location ~ ^/\\.well-known/host-meta(?:\\.json)?$ {
-                return 301 /nextcloud/public.php?service=host-meta-json;
-              }
-              location ~ ^/\\.well-known/(?!acme-challenge|pki-validation) {
-                return 301 /nextcloud/index.php$request_uri;
-              }
-              try_files $uri $uri/ =404;
-            '';
-          };
         };
       };
-      "nextcloud".listen = [
-        {
-          addr = "127.0.0.163";
-          port = 7632;
-        }
-      ];
     };
   };
 
