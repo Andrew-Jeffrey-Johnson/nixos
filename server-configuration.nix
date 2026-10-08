@@ -521,7 +521,7 @@ in
         #};
         extraConfig = ''
             # Path to the root of your installation
-            root /var/lib/nextcloud;
+            #root /var/lib/nextcloud;
 
             # Prevent nginx HTTP Server Detection
             server_tokens off;
