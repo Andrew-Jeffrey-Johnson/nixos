@@ -290,6 +290,13 @@ in
     config.adminpassFile = "/etc/nextcloud-admin-pass";
     config.dbtype = "sqlite";
     phpOptions."opcache.interned_strings_buffer" = "32";
+    settings = {
+      # Some sane defaults required to satisfy Nextcloud configuration check
+      maintenance_window_start = 1;
+      default_phone_region = "US";
+      log_type = "systemd";
+      serverid = 0;
+    };
     extraApps = {
       inherit (config.services.nextcloud.package.packages.apps)
         contacts
@@ -522,6 +529,21 @@ in
           "/editors/" = {
             # onlyoffice
             proxyPass = "http://127.0.0.164:7633/";
+          };
+          "^~ /.well-known" = {
+            extraConfig = ''
+              absolute_redirect off;
+              location ~ ^/\\.well-known/(?:carddav|caldav)$ {
+                return 301 /nextcloud/remote.php/dav;
+              }
+              location ~ ^/\\.well-known/host-meta(?:\\.json)?$ {
+                return 301 /nextcloud/public.php?service=host-meta-json;
+              }
+              location ~ ^/\\.well-known/(?!acme-challenge|pki-validation) {
+                return 301 /nextcloud/index.php$request_uri;
+              }
+              try_files $uri $uri/ =404;
+            '';
           };
         };
       };
