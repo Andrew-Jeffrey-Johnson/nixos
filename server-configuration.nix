@@ -514,11 +514,11 @@ in
         #useACMEHost = "luminlapid.com";
         #serverName = "nc.${domain}";
         #root = "/";
-        locations = {
-          "/" = {
-            proxyPass = "http://localhost/";
-          };
-        };
+        #locations = {
+        #"/" = {
+        #  proxyPass = "http://127.0.0.1/";
+        #};
+        #};
       };
     };
   };
