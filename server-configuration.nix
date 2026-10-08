@@ -282,7 +282,7 @@ in
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud35;
-    hostName = "nc.luminlapid.com";
+    hostName = "localhost";
     https = true;
     home = "/var/lib/nextcloud";
     configureRedis = true;
