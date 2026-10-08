@@ -518,7 +518,7 @@ in
         #  proxyPass = "http://127.0.0.1/";
         #};
         #};
-        root = "/var/www/nc.luminlapid.com";
+        #root = "/var/www/nc.luminlapid.com";
         extraConfig = ''
             # Path to the root of your installation
             #root /var/lib/nextcloud;
