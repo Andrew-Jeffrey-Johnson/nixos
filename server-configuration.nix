@@ -89,7 +89,7 @@ in
   };
   networking = {
     hosts = {
-      "127.0.0.163" = [ "nextcloud" ];
+      #"127.0.0.163" = [ "nextcloud" ];
       #"127.0.0.164" = [ "onlyoffice" ];
     };
     firewall = {
@@ -282,7 +282,7 @@ in
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud35;
-    hostName = "nextcloud";
+    #hostName = "nc.nextcloud.com";
     https = true;
     home = "/var/lib/nextcloud";
     configureRedis = true;
@@ -497,12 +497,25 @@ in
             root = "/";
             tryFiles = "$uri =404";
           };
-          "/nextcloud/" = {
-            proxyPass = "http://127.0.0.163/";
-          };
+          #"/nextcloud/" = {
+          #proxyPass = "http://127.0.0.163/";
+          #};
           "/editors/" = {
             # onlyoffice
             proxyPass = "http://127.0.0.164:7633/";
+          };
+        };
+      };
+      "nc.${domain}" = {
+        forceSSL = true;
+        enableACME = true;
+        acmeRoot = "/var/lib/acme/nc.${domain}";
+        #useACMEHost = "luminlapid.com";
+        serverName = "${domain}";
+        root = "/";
+        locations = {
+          "/" = {
+            proxyPass = "http://127.0.0.163/";
           };
         };
       };
