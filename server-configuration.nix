@@ -453,6 +453,15 @@ in
   '';
   services.nginx = {
     virtualHosts = {
+      "nc.${domain}" = {
+        default = true;
+        forceSSL = true;
+        enableACME = true;
+        #acmeRoot = "/var/lib/acme/nc.${domain}";
+        #useACMEHost = "luminlapid.com";
+        #serverName = "nc.${domain}";
+        #root = "/var/www/nc.luminlapid.com";
+      };
       "${domain}" = {
         forceSSL = true;
         enableACME = true;
@@ -504,15 +513,6 @@ in
             proxyPass = "http://127.0.0.164:7633/";
           };
         };
-      };
-      "nc.${domain}" = {
-        default = true;
-        forceSSL = true;
-        enableACME = true;
-        #acmeRoot = "/var/lib/acme/nc.${domain}";
-        #useACMEHost = "luminlapid.com";
-        #serverName = "nc.${domain}";
-        #root = "/var/www/nc.luminlapid.com";
       };
     };
   };
