@@ -513,102 +513,12 @@ in
         #acmeRoot = "/var/lib/acme/nc.${domain}";
         #useACMEHost = "luminlapid.com";
         serverName = "nc.${domain}";
-        #locations = {
-        #"/" = {
-        #  proxyPass = "http://127.0.0.1/";
-        #};
-        #};
+        locations = {
+          "/" = {
+            tryFiles = "$uri $uri/ /index.php$request_uri";
+          };
+        };
         #root = "/var/www/nc.luminlapid.com";
-        extraConfig = ''
-            # Path to the root of your installation
-            #root /var/lib/nextcloud;
-
-            # Prevent nginx HTTP Server Detection
-            server_tokens off;
-
-            # HTTP response headers borrowed from Nextcloud `.htaccess`
-            add_header Referrer-Policy                   "no-referrer"       always;
-            add_header X-Content-Type-Options            "nosniff"           always;
-            add_header X-Frame-Options                   "SAMEORIGIN"        always;
-            add_header X-Permitted-Cross-Domain-Policies "none"              always;
-            add_header X-Robots-Tag                      "noindex, nofollow" always;
-
-            # Specify how to handle directories -- specifying `/index.php$request_uri`
-            # here as the fallback means that Nginx always exhibits the desired behaviour
-            # when a client requests a path that corresponds to a directory that exists
-            # on the server. In particular, if that directory contains an index.php file,
-            # that file is correctly served; if it doesn't, then the request is passed to
-            # the front-end controller. This consistent behaviour means that we don't need
-            # to specify custom rules for certain paths (e.g. images and other assets,
-            # `/updater`, `/ocs-provider`), and thus
-            # `try_files $uri $uri/ /index.php$request_uri`
-            # always provides the desired behaviour.
-            index index.php index.html /index.php$request_uri;
-
-            # Make a regex exception for `/.well-known` so that clients can still
-            # access it despite the existence of the regex rule
-            # `location ~ /(\.|autotest|...)` which would otherwise handle requests
-            # for `/.well-known`.
-            location ^~ /.well-known {
-                # The rules in this block are an adaptation of the rules
-                # in `.htaccess` that concern `/.well-known`.
-
-                location = /.well-known/carddav { return 301 /remote.php/dav/; }
-                location = /.well-known/caldav  { return 301 /remote.php/dav/; }
-
-                location /.well-known/acme-challenge    { try_files $uri $uri/ =404; }
-                location /.well-known/pki-validation    { try_files $uri $uri/ =404; }
-
-                # Let Nextcloud's API for `/.well-known` URIs handle all other
-                # requests by passing them to the front-end controller.
-                return 301 /index.php$request_uri;
-            }
-
-            # Rules borrowed from `.htaccess` to hide certain paths from clients
-            location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)(?:$|/)  { return 404; }
-            location ~ ^/(?:\.|autotest|occ|issue|indie|db_|console)                { return 404; }
-
-            # Hide metadata files which would otherwise be served as plain files and
-            # leak dependency information (composer.json, package.json, core/shipped.json).
-            location ~ ^/(?:composer\.(?:json|lock)|package(?:-lock)?\.json|core/shipped\.json)$ { return 404; }
-
-            # Serve static files
-            location ~ \.(?:css|js|mjs|svg|gif|ico|jpg|png|webp|wasm|tflite|map|ogg|flac|mp4|webm)$ {
-                try_files $uri /index.php$request_uri;
-
-          # HSTS settings
-          # WARNING: Only add the preload option once you read about
-          # the consequences in https://hstspreload.org/. This option
-          # will add the domain to a hardcoded list that is shipped
-          # in all major browsers and getting removed from this list
-          # could take several months.
-          #add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
-
-                # HTTP response headers borrowed from Nextcloud `.htaccess`
-                #add_header Cache-Control                     "public, max-age=15778463$asset_immutable";
-                add_header Referrer-Policy                   "no-referrer"       always;
-                add_header X-Content-Type-Options            "nosniff"           always;
-                add_header X-Frame-Options                   "SAMEORIGIN"        always;
-                add_header X-Permitted-Cross-Domain-Policies "none"              always;
-                add_header X-Robots-Tag                      "noindex, nofollow" always;
-                access_log off;     # Optional: Don't log access to assets
-            }
-
-            location ~ \.(otf|woff2?)$ {
-                try_files $uri /index.php$request_uri;
-                expires 7d;         # Cache-Control policy borrowed from `.htaccess`
-                access_log off;     # Optional: Don't log access to assets
-            }
-
-            # Rule borrowed from `.htaccess`
-            location /remote {
-                return 301 /remote.php$request_uri;
-            }
-
-            location / {
-                try_files $uri $uri/ /index.php$request_uri;
-            }
-        '';
       };
     };
   };
