@@ -220,7 +220,7 @@ in
   # List services that you want to enable:
   services.calibre-server = {
     enable = true;
-    port = 8383;
+    #port = 8383;
     host = "192.168.100.20";
     user = "calibre-server";
     libraries = [
@@ -479,7 +479,8 @@ in
             # EPUB content server
             # The slash on the end ensure url passed to calibre-server starts
             # with / instead of /calibre-server
-            proxyPass = "http://192.168.100.20:8383/";
+            proxyPass = "http://192.168.100.20/";
+            #proxyPass = "http://192.168.100.20:8383/";
             #proxyWebsockets = true;
           };
           "/radicale/" = {
