@@ -328,7 +328,7 @@ in
   # Nextcloud
   environment.etc."nextcloud-admin-pass".text = "PWD";
   services.nextcloud = {
-    enable = true;
+    enable = false;
     package = pkgs.nextcloud35;
     hostName = "nc.luminlapid.com";
     https = true;
