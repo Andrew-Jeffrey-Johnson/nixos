@@ -87,10 +87,19 @@ in
     openFirewall = true;
     user = "jellyfin";
   };
+
   networking = {
     hosts = {
       #"127.0.0.163" = [ "nextcloud" ];
       #"127.0.0.164" = [ "onlyoffice" ];
+    };
+    nat = {
+      enable = true;
+      # Use "ve-*" when using nftables instead of iptables
+      internalInterfaces = [ "ve-+" ];
+      externalInterface = "ens3";
+      # Lazy IPv6 connectivity for the container
+      enableIPv6 = true;
     };
     firewall = {
       enable = true;
@@ -375,12 +384,6 @@ in
     privateNetwork = true;
     hostAddress = "192.168.100.10";
     localAddress = "192.168.100.13"; # Go to http://192.168.100.13 to view the website
-    #localAddress = "127.0.0.162:7631";
-    #hostAddress = "127.0.0.1:8000";
-    #localAddress = "127.0.0.1:8000";
-    #hostAddress6 = "fc00::1";
-    #localAddress6 = "fc00::4";
-
     bindMounts = {
       "/home/blogger/blog" = {
         #/path/in/container
@@ -429,11 +432,6 @@ in
             ];
           };
         };
-
-        #services.httpd = {
-        #  enable = true;
-        #  adminAddr = "blogger@luminlapid.com";
-        #};
 
         systemd.services.django = {
           #services.django = {
