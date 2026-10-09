@@ -258,7 +258,7 @@ in
 
         services.calibre-server = {
           enable = true;
-          #port = 8383;
+          port = 8383;
           host = "192.168.100.20";
           user = "calibre-server";
           libraries = [
@@ -275,7 +275,7 @@ in
         };
 
         networking = {
-          firewall.allowedTCPPorts = [ 80 ];
+          firewall.allowedTCPPorts = [ 8383 ];
           useHostResolvConf = lib.mkForce false;
         };
         services.resolved.enable = true;
@@ -328,7 +328,7 @@ in
   # Nextcloud
   environment.etc."nextcloud-admin-pass".text = "PWD";
   services.nextcloud = {
-    enable = false;
+    enable = true;
     package = pkgs.nextcloud35;
     hostName = "nc.luminlapid.com";
     https = true;
@@ -516,7 +516,7 @@ in
             # EPUB content server
             # The slash on the end ensure url passed to calibre-server starts
             # with / instead of /calibre-server
-            proxyPass = "http://192.168.100.15/";
+            proxyPass = "http://192.168.100.15:8383/";
             #proxyPass = "http://192.168.100.20:8383/";
             #proxyWebsockets = true;
           };
