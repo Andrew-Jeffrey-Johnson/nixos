@@ -460,7 +460,7 @@ in
         #acmeRoot = "/var/lib/acme/nc.${domain}";
         #useACMEHost = "luminlapid.com";
         #serverName = "nc.${domain}";
-        #root = "/var/www/nc.luminlapid.com";
+        root = "/var/lib/nextcloud";
       };
       "${domain}" = {
         forceSSL = true;
