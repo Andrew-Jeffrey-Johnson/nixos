@@ -171,10 +171,6 @@ in
         "jellyfin"
       ];
     };
-    calibre-server = {
-      isNormalUser = false; # Don't set group to users or create home
-      description = "User that the calibre server runs under";
-    };
     nginx.extraGroups = [ "acme" ];
   };
 
@@ -217,24 +213,67 @@ in
     enableSSHSupport = true;
   };
 
-  # List services that you want to enable:
-  services.calibre-server = {
-    enable = true;
-    #port = 8383;
-    host = "192.168.100.20";
-    user = "calibre-server";
-    libraries = [
-      "/var/lib/calibre-server/calibrelibrary"
-    ];
-    auth = {
-      enable = true;
-      mode = "basic";
-    };
-    extraFlags = [
-      "--userdb"
-      "/var/lib/calibre-server/users.sqlite"
-    ];
+  #------------------------------------------------------------------------------
+  # calibre through luminlapid.com
+  containers.calibre = {
+    autoStart = true;
+    privateNetwork = true;
+    hostAddress = "192.168.100.14";
+    localAddress = "192.168.100.15"; # Go to http://192.168.100.15 to view the website
+
+    #bindMounts = {
+    #"/home/blogger/blog" = {
+    #/path/in/container
+    #hostPath = "/home/nixos/luminlapid"; # /path/on/host
+    #isReadOnly = false;
+    #};
+    # You can add more bindMounts here
+    #};
+
+    config =
+      {
+        config,
+        lib,
+        ...
+      }:
+      {
+        environment.systemPackages = [
+          # Only add packages here if they cannot be added to user.blogger.packages
+          # due to policy of least permissions
+        ];
+
+        users.users.calibre-server = {
+          isNormalUser = false; # Don't set group to users or create home
+          description = "User that the calibre server runs under";
+        };
+
+        services.calibre-server = {
+          enable = true;
+          port = 8383;
+          host = "192.168.100.20";
+          user = "calibre-server";
+          libraries = [
+            "/var/lib/calibre-server/calibrelibrary"
+          ];
+          auth = {
+            enable = true;
+            mode = "basic";
+          };
+          extraFlags = [
+            "--userdb"
+            "/var/lib/calibre-server/users.sqlite"
+          ];
+        };
+
+        networking = {
+          firewall.allowedTCPPorts = [ 8383 ];
+          useHostResolvConf = lib.mkForce false;
+        };
+        services.resolved.enable = true;
+        system.stateVersion = "25.05";
+      };
   };
+  #------------------------------------------------------------------------------
 
   # Calendar and contacts server
   # https://radicale.org/v3.html#simple-5-minute-setup
@@ -479,7 +518,7 @@ in
             # EPUB content server
             # The slash on the end ensure url passed to calibre-server starts
             # with / instead of /calibre-server
-            proxyPass = "http://192.168.100.20/";
+            proxyPass = "http://192.168.100.15:8383/";
             #proxyPass = "http://192.168.100.20:8383/";
             #proxyWebsockets = true;
           };
