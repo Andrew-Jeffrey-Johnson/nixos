@@ -221,7 +221,7 @@ in
   services.calibre-server = {
     enable = true;
     port = 8383;
-    host = "127.0.0.4";
+    host = "192.168.100.20";
     user = "calibre-server";
     libraries = [
       "/var/lib/calibre-server/calibrelibrary"
@@ -460,7 +460,7 @@ in
         #acmeRoot = "/var/lib/acme/nc.${domain}";
         #useACMEHost = "luminlapid.com";
         #serverName = "nc.${domain}";
-        root = "/var/lib/nextcloud";
+        #root = "/var/lib/nextcloud";
       };
       "${domain}" = {
         forceSSL = true;
@@ -479,7 +479,7 @@ in
             # EPUB content server
             # The slash on the end ensure url passed to calibre-server starts
             # with / instead of /calibre-server
-            proxyPass = "http://127.0.0.4:8383/";
+            proxyPass = "http://192.168.100.20:8383/";
             #proxyWebsockets = true;
           };
           "/radicale/" = {
