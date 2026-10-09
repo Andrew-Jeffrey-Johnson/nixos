@@ -259,7 +259,7 @@ in
         services.calibre-server = {
           enable = true;
           port = 8383;
-          host = "0.0.0.0";
+          host = "192.168.100.14";
           user = "calibre-server";
           libraries = [
             "/var/lib/calibre-server/calibrelibrary"
