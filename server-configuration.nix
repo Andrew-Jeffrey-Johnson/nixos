@@ -231,8 +231,8 @@ in
     localAddress = "192.168.100.15"; # Go to http://192.168.100.15 to view the website
 
     bindMounts = {
+      #/path/in/container
       "/var/lib/calibre-server/calibrelibrary" = {
-        #/path/in/container
         hostPath = "/var/lib/calibre-server/calibrelibrary"; # /path/on/host
         isReadOnly = false;
       };
@@ -259,7 +259,7 @@ in
         services.calibre-server = {
           enable = true;
           port = 8383;
-          host = "192.168.100.14";
+          host = "192.168.100.15";
           user = "calibre-server";
           libraries = [
             "/var/lib/calibre-server/calibrelibrary"
