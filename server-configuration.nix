@@ -510,16 +510,13 @@ in
             #proxyPass = "http://127.0.0.162:7631";
             proxyWebsockets = true;
           };
-          "/calibre/" = {
+          "/calibre" = {
             # EPUB content server
             # The slash on the end ensure url passed to calibre-server starts
             # with / instead of /calibre-server
-            proxyPass = "http://192.168.100.15:8383$request_uri";
+            proxyPass = "http://192.168.100.15:8383/";
             #proxyPass = "http://192.168.100.20:8383/";
             #proxyWebsockets = true;
-          };
-          "/calibre" = {
-            return = "301 /calibre/";
           };
           "/radicale/" = {
             # Calendar (CalDAV) and Contacts (CalDav) server
