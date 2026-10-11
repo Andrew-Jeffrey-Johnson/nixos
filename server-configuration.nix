@@ -227,7 +227,7 @@ in
   containers.calibre = {
     autoStart = true;
     privateNetwork = true;
-    hostAddress = "192.168.100.14";
+    hostAddress = "192.168.100.15";
     localAddress = "192.168.100.15"; # Go to http://192.168.100.15 to view the website
 
     bindMounts = {
@@ -267,11 +267,8 @@ in
           auth = {
             enable = true;
             mode = "basic";
+            userDb = "/var/lib/calibre-server/users.sqlite";
           };
-          extraFlags = [
-            "--userdb"
-            "/var/lib/calibre-server/users.sqlite"
-          ];
         };
 
         networking = {
