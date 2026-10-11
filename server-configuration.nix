@@ -226,8 +226,8 @@ in
   # calibre through luminlapid.com
   containers.calibre = {
     autoStart = true;
-    privateNetwork = true;
-    hostAddress = "192.168.100.15";
+    #privateNetwork = true;
+    hostAddress = "192.168.100.14";
     localAddress = "192.168.100.15"; # Go to http://192.168.100.15 to view the website
 
     bindMounts = {
@@ -269,13 +269,14 @@ in
             mode = "basic";
             userDb = "/var/lib/calibre-server/users.sqlite";
           };
+          openFirewall = true;
         };
 
-        networking = {
-          firewall.allowedTCPPorts = [ 8383 ];
-          useHostResolvConf = lib.mkForce false;
-        };
-        services.resolved.enable = true;
+        #networking = {
+        #  firewall.allowedTCPPorts = [ 8383 ];
+        #  useHostResolvConf = lib.mkForce false;
+        #};
+        #services.resolved.enable = true;
         system.stateVersion = "25.05";
       };
   };
