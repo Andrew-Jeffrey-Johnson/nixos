@@ -230,14 +230,14 @@ in
     hostAddress = "192.168.100.14";
     localAddress = "192.168.100.15"; # Go to http://192.168.100.15 to view the website
 
-    #bindMounts = {
-    #"/home/blogger/blog" = {
-    #/path/in/container
-    #hostPath = "/home/nixos/luminlapid"; # /path/on/host
-    #isReadOnly = false;
-    #};
-    # You can add more bindMounts here
-    #};
+    bindMounts = {
+      "/var/lib/calibre-server/calibrelibrary" = {
+        #/path/in/container
+        hostPath = "/var/lib/calibre-server/calibrelibrary"; # /path/on/host
+        isReadOnly = false;
+      };
+      #You can add more bindMounts here
+    };
 
     config =
       {
