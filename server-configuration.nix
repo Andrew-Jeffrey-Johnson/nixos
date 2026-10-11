@@ -228,7 +228,7 @@ in
     autoStart = true;
     privateNetwork = true;
     hostAddress = "192.168.100.14";
-    localAddress = "localhost"; # Go to http://192.168.100.15 to view the website
+    localAddress = "192.168.100.15"; # Go to http://192.168.100.15 to view the website
 
     bindMounts = {
       #/path/in/container
@@ -259,7 +259,7 @@ in
         services.calibre-server = {
           enable = true;
           port = 8383;
-          host = "localhost";
+          host = "0.0.0.0";
           user = "calibre-server";
           libraries = [
             "/var/lib/calibre-server/calibrelibrary"
