@@ -358,17 +358,49 @@ in
     };
     extraAppsEnable = true;
   };
-  services.onlyoffice = {
-    enable = false;
-    hostname = "127.0.0.164";
-    port = 7633;
-    wopi = true;
-    # TODO Remove secret
-    securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
-      set $secure_link_secret "nixostest";
-    ''}";
-    allowLocalConnections = true;
+  #------------------------------------------------------------------------------
+  # onlyoffice through luminlapid.com
+  containers.onlyoffice = {
+    autoStart = true;
+    privateNetwork = true;
+    hostAddress = "192.168.100.16";
+    localAddress = "192.168.100.17"; # Go to http://192.168.100.15 to view the website
+
+    bindMounts = {
+      #/path/in/container
+      "/var/lib/onlyoffice" = {
+        hostPath = "/var/lib/onlyoffice"; # /path/on/host
+        isReadOnly = false;
+      };
+      #You can add more bindMounts here
+    };
+
+    config =
+      {
+        config,
+        lib,
+        ...
+      }:
+      {
+        environment.systemPackages = [
+          # Only add packages here if they cannot be added to user.blogger.packages
+          # due to policy of least permissions
+        ];
+
+        services.onlyoffice = {
+          enable = false;
+          hostname = "192.168.100.17";
+          port = 7633;
+          wopi = true;
+          # TODO Remove secret
+          securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
+            set $secure_link_secret "nixostest";
+          ''}";
+          allowLocalConnections = true;
+        };
+      };
   };
+  #------------------------------------------------------------------------------
 
   services.nextcloud-whiteboard-server = {
     enable = true;
@@ -546,7 +578,7 @@ in
           #};
           "/onlyoffice/" = {
             # onlyoffice
-            proxyPass = "http://127.0.0.164:7633/";
+            proxyPass = "http://192.168.100.17:7633/";
           };
         };
       };
