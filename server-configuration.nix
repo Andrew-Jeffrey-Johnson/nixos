@@ -516,7 +516,7 @@ in
             # with / instead of /calibre-server
             proxyPass = "http://192.168.100.15:8383/";
             #proxyPass = "http://192.168.100.20:8383/";
-            #proxyWebsockets = true;
+            proxyWebsockets = true;
           };
           "/radicale/" = {
             # Calendar (CalDAV) and Contacts (CalDav) server
