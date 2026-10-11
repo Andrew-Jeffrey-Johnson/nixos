@@ -388,7 +388,7 @@ in
         ];
 
         services.onlyoffice = {
-          enable = false;
+          enable = true;
           hostname = "192.168.100.17";
           port = 7633;
           wopi = true;
