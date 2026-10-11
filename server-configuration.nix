@@ -226,7 +226,7 @@ in
   # calibre through luminlapid.com
   containers.calibre = {
     autoStart = true;
-    #privateNetwork = true;
+    privateNetwork = true;
     hostAddress = "192.168.100.14";
     localAddress = "192.168.100.15"; # Go to http://192.168.100.15 to view the website
 
