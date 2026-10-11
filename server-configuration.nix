@@ -232,8 +232,8 @@ in
 
     bindMounts = {
       #/path/in/container
-      "/var/lib/calibre-server/calibrelibrary" = {
-        hostPath = "/var/lib/calibre-server/calibrelibrary"; # /path/on/host
+      "/var/lib/calibre-server" = {
+        hostPath = "/var/lib/calibre-server"; # /path/on/host
         isReadOnly = false;
       };
       #You can add more bindMounts here
