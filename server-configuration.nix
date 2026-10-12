@@ -368,8 +368,8 @@ in
 
     bindMounts = {
       #/path/in/container
-      "/var/lib/onlyoffice" = {
-        hostPath = "/var/lib/onlyoffice"; # /path/on/host
+      "/var/lib" = {
+        hostPath = "/var/lib"; # /path/on/host
         isReadOnly = false;
       };
       #You can add more bindMounts here
@@ -389,7 +389,7 @@ in
 
         services.onlyoffice = {
           enable = true;
-          hostname = "192.168.100.17";
+          hostname = "0.0.0.0";
           port = 7633;
           wopi = true;
           # TODO Remove secret
