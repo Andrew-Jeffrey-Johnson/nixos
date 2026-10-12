@@ -364,7 +364,7 @@ in
     autoStart = true;
     privateNetwork = true;
     hostAddress = "192.168.100.16";
-    localAddress = "192.168.100.17"; # Go to http://192.168.100.15 to view the website
+    localAddress = "192.168.100.17"; # Go to http://192.168.100.17 to view the website
 
     bindMounts = {
       #/path/in/container
@@ -391,7 +391,6 @@ in
           enable = true;
           hostname = "0.0.0.0";
           port = 7633;
-          wopi = true;
           # TODO Remove secret
           securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
             set $secure_link_secret "nixostest";
