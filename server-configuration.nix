@@ -211,6 +211,7 @@ in
         fi
         popd
       '')
+      pkgs.kitty
     ];
   };
 
