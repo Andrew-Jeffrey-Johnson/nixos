@@ -397,6 +397,9 @@ in
           ''}";
           allowLocalConnections = true;
         };
+        networking = {
+          firewall.allowedTCPPorts = [ 7633 ];
+        };
         system.stateVersion = "26.05";
       };
   };
