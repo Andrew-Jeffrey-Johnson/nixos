@@ -323,41 +323,85 @@ in
     };
   };
 
-  # Nextcloud
-  environment.etc."nextcloud-admin-pass".text = "PWD";
-  services.nextcloud = {
-    enable = false;
-    package = pkgs.nextcloud35;
-    hostName = "nc.luminlapid.com";
-    https = true;
-    home = "/var/lib/nextcloud";
-    configureRedis = true;
-    datadir = "/nextcloud";
-    config.adminpassFile = "/etc/nextcloud-admin-pass";
-    config.dbtype = "sqlite";
-    phpOptions."opcache.interned_strings_buffer" = "32";
-    settings = {
-      # Some sane defaults required to satisfy Nextcloud configuration check
-      maintenance_window_start = 1;
-      default_phone_region = "US";
-      log_type = "systemd";
-      serverid = 0;
+  #------------------------------------------------------------------------------
+  # onlyoffice through luminlapid.com
+  containers.nextcloud = {
+    autoStart = true;
+    privateNetwork = true;
+    hostAddress = "192.168.100.18";
+    localAddress = "192.168.100.19"; # Go to http://192.168.100.19 to view the website
+
+    bindMounts = {
+      #/path/in/container
+      "/var/lib" = {
+        hostPath = "/var/lib"; # /path/on/host
+        isReadOnly = false;
+      };
+      "/nextcloud" = {
+        hostPath = "/nextcloud";
+        isReadOnly = false;
+      };
+      "/etc" = {
+        hostPath = "/etc";
+        isReadOnly = false;
+      };
+      #You can add more bindMounts here
     };
-    extraApps = {
-      inherit (config.services.nextcloud.package.packages.apps)
-        contacts
-        calendar
-        tasks
-        onlyoffice
-        end_to_end_encryption
-        #files_markdown
-        guests
-        polls
-        whiteboard
-        ;
-    };
-    extraAppsEnable = true;
+
+    config =
+      {
+        config,
+        lib,
+        ...
+      }:
+      {
+        environment.systemPackages = [
+          # Only add packages here if they cannot be added to user.blogger.packages
+          # due to policy of least permissions
+        ];
+
+        # Nextcloud
+        environment.etc."nextcloud-admin-pass".text = "PWD";
+        services.nextcloud = {
+          enable = false;
+          package = pkgs.nextcloud35;
+          hostName = "0.0.0.0";
+          https = true;
+          home = "/var/lib/nextcloud";
+          configureRedis = true;
+          datadir = "/nextcloud";
+          config.adminpassFile = "/etc/nextcloud-admin-pass";
+          config.dbtype = "sqlite";
+          phpOptions."opcache.interned_strings_buffer" = "32";
+          settings = {
+            # Some sane defaults required to satisfy Nextcloud configuration check
+            maintenance_window_start = 1;
+            default_phone_region = "US";
+            log_type = "systemd";
+            serverid = 0;
+          };
+          extraApps = {
+            inherit (config.services.nextcloud.package.packages.apps)
+              contacts
+              calendar
+              tasks
+              onlyoffice
+              end_to_end_encryption
+              #files_markdown
+              guests
+              polls
+              whiteboard
+              ;
+          };
+          extraAppsEnable = true;
+        };
+        networking = {
+          firewall.allowedTCPPorts = [ 80 ];
+        };
+        system.stateVersion = "26.05";
+      };
   };
+  #------------------------------------------------------------------------------
   #------------------------------------------------------------------------------
   # onlyoffice through luminlapid.com
   containers.onlyoffice = {
@@ -527,6 +571,11 @@ in
         default = true;
         forceSSL = true;
         enableACME = true;
+        locations = {
+          "/" = {
+            proxyPass = "http://192.168.100.19/";
+          };
+        };
         #acmeRoot = "/var/lib/acme/nc.${domain}";
         #useACMEHost = "luminlapid.com";
         #serverName = "nc.${domain}";
