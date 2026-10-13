@@ -397,7 +397,8 @@ in
           extraAppsEnable = true;
         };
         networking = {
-          firewall.allowedTCPPorts = [ 80 ];
+          #firewall.allowedTCPPorts = [ 80 ];
+          firewall.enable = false;
         };
         system.stateVersion = "26.05";
       };
