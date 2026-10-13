@@ -569,7 +569,6 @@ in
   services.nginx = {
     virtualHosts = {
       "nc.${domain}" = {
-        default = true;
         forceSSL = true;
         enableACME = true;
         locations = {
@@ -584,6 +583,7 @@ in
         #root = "/var/lib/nextcloud";
       };
       "${domain}" = {
+        default = true;
         forceSSL = true;
         enableACME = true;
         #acmeRoot = "/var/lib/acme/${domain}";
