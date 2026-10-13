@@ -575,6 +575,7 @@ in
         locations = {
           "/" = {
             proxyPass = "http://192.168.100.19/";
+            proxyWebsockets = true;
           };
         };
         #acmeRoot = "/var/lib/acme/nc.${domain}";
