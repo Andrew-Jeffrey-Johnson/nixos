@@ -334,18 +334,18 @@ in
 
     bindMounts = {
       #/path/in/container
-      "/var/lib" = {
-        hostPath = "/var/lib"; # /path/on/host
-        isReadOnly = false;
-      };
+      #"/var/lib" = {
+      #  hostPath = "/var/lib"; # /path/on/host
+      #  isReadOnly = false;
+      #};
       "/nextcloud" = {
         hostPath = "/nextcloud";
         isReadOnly = false;
       };
-      "/etc" = {
-        hostPath = "/etc";
-        isReadOnly = false;
-      };
+      #"/etc" = {
+      #  hostPath = "/etc";
+      #  isReadOnly = false;
+      #};
       #You can add more bindMounts here
     };
 
@@ -397,8 +397,8 @@ in
           extraAppsEnable = true;
         };
         networking = {
-          #firewall.allowedTCPPorts = [ 80 ];
-          firewall.enable = false;
+          firewall.allowedTCPPorts = [ 80 ];
+          #firewall.enable = false;
         };
         system.stateVersion = "26.05";
       };
@@ -414,10 +414,10 @@ in
 
     bindMounts = {
       #/path/in/container
-      "/var/lib" = {
-        hostPath = "/var/lib"; # /path/on/host
-        isReadOnly = false;
-      };
+      #"/var/lib" = {
+      #  hostPath = "/var/lib"; # /path/on/host
+      #  isReadOnly = false;
+      #};
       #You can add more bindMounts here
     };
 
