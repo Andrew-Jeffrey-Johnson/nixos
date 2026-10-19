@@ -190,6 +190,9 @@ in
         "jellyfin"
       ];
     };
+    nextcloud = {
+      isNormalUser = false;
+    };
     nginx.extraGroups = [ "acme" ];
   };
 
