@@ -583,7 +583,7 @@ in
   '';
   services.nginx = {
     virtualHosts = {
-      "nc.${domain}" = {
+      "cloud.${domain}" = {
         forceSSL = true;
         enableACME = true;
         locations = {
