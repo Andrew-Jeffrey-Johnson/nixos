@@ -192,6 +192,7 @@ in
     };
     nextcloud = {
       isNormalUser = false;
+      isSystemUser = true;
     };
     nginx.extraGroups = [ "acme" ];
   };
