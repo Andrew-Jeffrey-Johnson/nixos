@@ -193,6 +193,7 @@ in
     nextcloud = {
       isNormalUser = false;
       isSystemUser = true;
+      group = "nextcloud";
     };
     nginx.extraGroups = [ "acme" ];
   };
