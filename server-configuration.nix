@@ -197,6 +197,9 @@ in
     };
     nginx.extraGroups = [ "acme" ];
   };
+  users.groups = {
+    nextcloud = { };
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
