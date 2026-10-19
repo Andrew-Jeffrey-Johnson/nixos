@@ -164,6 +164,16 @@ in
             publicKey = "jWRnrWupWyWUQMJCvvQHeXMQCDgRNl2ZrCIXJnImCUg=";
             allowedIPs = [ "10.0.0.102/32" ];
           }
+          #{
+          #  # Mom's Phone
+          #  publicKey = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=";
+          #  allowedIPs = [ "10.0.0.103/32" ];
+          #}
+          #{
+          #  # Mom's Desktop
+          #  publicKey = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=";
+          #  allowedIPs = [ "10.0.0.104/32" ];
+          #}
         ];
       };
     };
@@ -364,7 +374,7 @@ in
         # Nextcloud
         environment.etc."nextcloud-admin-pass".text = "PWD";
         services.nextcloud = {
-          enable = false;
+          enable = true;
           package = pkgs.nextcloud35;
           hostName = "0.0.0.0";
           https = false;
