@@ -401,7 +401,7 @@ in
             default_phone_region = "US";
             log_type = "systemd";
             serverid = 0;
-            #trusted_domains = [ "cloud.${domain}" ];
+            trusted_domains = [ "cloud.${domain}" ];
           };
           extraApps = {
             inherit (config.services.nextcloud.package.packages.apps)
