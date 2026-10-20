@@ -401,6 +401,7 @@ in
             default_phone_region = "US";
             log_type = "systemd";
             serverid = 0;
+            trusted_domains = [ "cloud.luminlapid.com" ];
           };
           extraApps = {
             inherit (config.services.nextcloud.package.packages.apps)
