@@ -403,6 +403,7 @@ in
             serverid = 0;
             trusted_domains = [
               "cloud.${domain}"
+              "*.${domain}"
               "192.168.100.18"
             ];
             trusted_proxies = [
