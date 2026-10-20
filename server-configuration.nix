@@ -605,6 +605,13 @@ in
           "/" = {
             proxyPass = "http://192.168.100.19/";
             proxyWebsockets = true;
+            extraConfig = ''
+              proxy_set_header  Host $host;
+              proxy_set_header  X-Real-IP $remote_addr;
+              proxy_set_header  X-Forwarded-Proto https;
+              proxy_set_header  X-Forwarded-Host $remote_addr;
+              proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+            '';
           };
         };
         #acmeRoot = "/var/lib/acme/nc.${domain}";
