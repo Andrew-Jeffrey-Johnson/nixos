@@ -377,17 +377,6 @@ in
         ...
       }:
       {
-        users.users.nextcloud = {
-          uid = 991;
-          isNormalUser = false;
-          isSystemUser = true;
-          group = "nextcloud";
-        };
-        users.groups = {
-          nextcloud = {
-            gid = 989;
-          };
-        };
         environment.systemPackages = [
           # Only add packages here if they cannot be added to user.blogger.packages
           # due to policy of least permissions
