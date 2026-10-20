@@ -480,9 +480,10 @@ in
   };
   #------------------------------------------------------------------------------
 
+  environment.etc."nextcloud-whiteboard-admin-pass".text = "haha";
   services.nextcloud-whiteboard-server = {
     enable = true;
-    secrets = [ "${pkgs.writeText "nextcloud-whiteboard-server-secret" "haha"}" ];
+    secrets = [ "/etc/nextcloud-whiteboard-admin-pass" ];
   };
 
   #------------------------------------------------------------------------------
