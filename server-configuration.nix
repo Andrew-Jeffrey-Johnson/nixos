@@ -479,7 +479,10 @@ in
   };
   #------------------------------------------------------------------------------
 
-  environment.etc."nextcloud-whiteboard-admin-pass".text = "haha";
+  environment.etc."nextcloud-whiteboard-admin-pass".text = ''
+    [Service]
+    Environment="JWT_SECRET_KEY=haha"
+  '';
   services.nextcloud-whiteboard-server = {
     enable = true;
     secrets = [ "/etc/nextcloud-whiteboard-admin-pass" ];
