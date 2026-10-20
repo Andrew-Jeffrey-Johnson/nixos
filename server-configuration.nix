@@ -399,7 +399,7 @@ in
           enable = true;
           package = pkgs.nextcloud35;
           hostName = "0.0.0.0";
-          https = false;
+          https = true;
           home = "/var/lib/nextcloud";
           configureRedis = true;
           datadir = "/nextcloud";
