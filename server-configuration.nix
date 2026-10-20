@@ -405,6 +405,9 @@ in
               "cloud.${domain}"
               "192.168.100.18"
             ];
+            trusted_proxies = [
+              "192.168.100.18"
+            ];
           };
           extraApps = {
             inherit (config.services.nextcloud.package.packages.apps)
