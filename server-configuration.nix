@@ -403,8 +403,6 @@ in
             serverid = 0;
             trusted_domains = [
               "cloud.${domain}"
-              "*.${domain}"
-              "192.168.100.18"
             ];
             trusted_proxies = [
               "192.168.100.18"
@@ -611,6 +609,13 @@ in
               proxy_set_header X-Forwarded-Host $host;
             '';
           };
+          "/onlyoffice/" = {
+            # onlyoffice
+            proxyPass = "http://192.168.100.17:7633/";
+          };
+          "/whiteboard/" = {
+            proxyPass = "http://localhost:3002/";
+          };
         };
         #acmeRoot = "/var/lib/acme/nc.${domain}";
         #useACMEHost = "luminlapid.com";
@@ -665,13 +670,6 @@ in
           #"/nextcloud/" = {
           #proxyPass = "http://127.0.0.163/";
           #};
-          "/onlyoffice/" = {
-            # onlyoffice
-            proxyPass = "http://192.168.100.17:7633/";
-          };
-          "/whiteboard/" = {
-            proxyPass = "http://localhost:3002/";
-          };
         };
       };
     };
