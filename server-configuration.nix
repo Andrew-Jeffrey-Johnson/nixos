@@ -377,7 +377,7 @@ in
         ...
       }:
       {
-        nextcloud = {
+        users.users.nextcloud = {
           uid = 991;
           isNormalUser = false;
           isSystemUser = true;
