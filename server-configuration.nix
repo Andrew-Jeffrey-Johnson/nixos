@@ -164,11 +164,11 @@ in
             publicKey = "jWRnrWupWyWUQMJCvvQHeXMQCDgRNl2ZrCIXJnImCUg=";
             allowedIPs = [ "10.0.0.102/32" ];
           }
-          #{
-          #  # Mom's Phone
-          #  publicKey = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=";
-          #  allowedIPs = [ "10.0.0.103/32" ];
-          #}
+          {
+            # Mom's Phone
+            publicKey = "FKfa8mhnQF/ar50jC4tliFyPWM1zb7FW6V7ia6mSQDk=";
+            allowedIPs = [ "10.0.0.103/32" ];
+          }
           #{
           #  # Mom's Desktop
           #  publicKey = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=";
@@ -191,6 +191,7 @@ in
       ];
     };
     nextcloud = {
+      uid = 991;
       isNormalUser = false;
       isSystemUser = true;
       group = "nextcloud";
@@ -198,7 +199,9 @@ in
     nginx.extraGroups = [ "acme" ];
   };
   users.groups = {
-    nextcloud = { };
+    nextcloud = {
+      gid = 989;
+    };
   };
 
   # List packages installed in system profile. To search, run:
@@ -374,6 +377,17 @@ in
         ...
       }:
       {
+        nextcloud = {
+          uid = 991;
+          isNormalUser = false;
+          isSystemUser = true;
+          group = "nextcloud";
+        };
+        users.groups = {
+          nextcloud = {
+            gid = 989;
+          };
+        };
         environment.systemPackages = [
           # Only add packages here if they cannot be added to user.blogger.packages
           # due to policy of least permissions
