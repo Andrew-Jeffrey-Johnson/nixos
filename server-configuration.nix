@@ -485,6 +485,9 @@ in
   services.nextcloud-whiteboard-server = {
     enable = true;
     secrets = [ "/etc/nextcloud-whiteboard-admin-pass" ];
+    settings = {
+      NEXTCLOUD_URL = "https://cloud.luminlapid.com";
+    };
   };
 
   #------------------------------------------------------------------------------
