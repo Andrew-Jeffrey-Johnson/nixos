@@ -401,13 +401,13 @@ in
             default_phone_region = "US";
             log_type = "systemd";
             serverid = 0;
-            #trusted_domains = [
-            #  "cloud.${domain}"
-            #  "192.168.100.18"
-            #];
-            #trusted_proxies = [
-            #  "192.168.100.18"
-            #];
+            trusted_domains = [
+              "cloud.${domain}"
+              "192.168.100.18"
+            ];
+            trusted_proxies = [
+              "192.168.100.18"
+            ];
           };
           extraApps = {
             inherit (config.services.nextcloud.package.packages.apps)
@@ -469,7 +469,7 @@ in
           securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
             set $secure_link_secret "nixostest";
           ''}";
-          allowLocalConnections = true;
+          #allowLocalConnections = true;
         };
         networking = {
           firewall.allowedTCPPorts = [ 7633 ];
@@ -666,6 +666,9 @@ in
           "/onlyoffice/" = {
             # onlyoffice
             proxyPass = "http://192.168.100.17:7633/";
+          };
+          "whiteboard/" = {
+            proxyPass = "http://localhost:3002/";
           };
         };
       };
