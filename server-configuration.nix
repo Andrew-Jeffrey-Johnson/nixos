@@ -612,9 +612,11 @@ in
           "/onlyoffice/" = {
             # onlyoffice
             proxyPass = "http://192.168.100.17:7633/";
+            proxyWebsockets = true;
           };
           "/whiteboard/" = {
             proxyPass = "http://localhost:3002/";
+            proxyWebsockets = true;
           };
         };
         #acmeRoot = "/var/lib/acme/nc.${domain}";
