@@ -389,9 +389,9 @@ in
           package = pkgs.nextcloud35;
           hostName = "cloud.${domain}";
           https = true;
-          home = "/var/lib/nextcloud";
+          home = "/nextcloud";
+          datadir = "/var/lib/nextcloud";
           configureRedis = true;
-          datadir = "/nextcloud";
           config.adminpassFile = "/etc/nextcloud-admin-pass";
           config.dbtype = "sqlite";
           phpOptions."opcache.interned_strings_buffer" = "32";
@@ -472,7 +472,7 @@ in
         };
         networking = {
           firewall.allowedTCPPorts = [ 7633 ];
-          #useHostResolvConf = lib.mkForce false;
+          useHostResolvConf = lib.mkForce false;
         };
         system.stateVersion = "26.05";
       };
