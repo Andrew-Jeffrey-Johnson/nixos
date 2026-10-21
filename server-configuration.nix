@@ -388,7 +388,7 @@ in
           enable = true;
           package = pkgs.nextcloud35;
           hostName = "192.168.100.18"; # "cloud.${domain}";
-          https = true;
+          https = false;
           home = "/var/lib/nextcloud";
           configureRedis = true;
           datadir = "/nextcloud";
