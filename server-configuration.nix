@@ -472,7 +472,7 @@ in
         };
         networking = {
           firewall.allowedTCPPorts = [ 7633 ];
-          useHostResolvConf = lib.mkForce false;
+          #useHostResolvConf = lib.mkForce false;
         };
         system.stateVersion = "26.05";
       };
