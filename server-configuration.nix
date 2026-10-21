@@ -462,7 +462,7 @@ in
 
         services.onlyoffice = {
           enable = true;
-          hostname = "0.0.0.0";
+          hostname = "localhost";
           port = 7633;
           # TODO Remove secret
           securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
