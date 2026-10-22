@@ -25,6 +25,10 @@ in
     device = "/dev/disk/by-uuid/e4e31c74-8443-4890-8f13-e69286da5762";
     fsType = "ext4";
   };
+  fileSystems."/mnt/seagate5THDD" = {
+    device = "/dev/disk/by-uuid/d08d5f40-1844-47be-a287-a40e19724c95";
+    fsType = "ext4";
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -66,6 +70,18 @@ in
       };
       "jellyfin-samsung1TSSD" = {
         "path" = "/mnt/samsung1TSSD/jellyfin";
+        "browseable" = "yes";
+        "available" = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0665";
+        "directory mask" = "0775";
+        "force user" = "nixos";
+        "force group" = "jellyfin";
+        "vfs objects" = "streams_xattr";
+      };
+      "jellyfin-seagate5THDD" = {
+        "path" = "/mnt/seagate5THDD/jellyfin";
         "browseable" = "yes";
         "available" = "yes";
         "read only" = "no";
