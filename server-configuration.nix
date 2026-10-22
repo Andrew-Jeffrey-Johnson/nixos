@@ -28,6 +28,9 @@ in
   fileSystems."/mnt/seagate5THDD" = {
     device = "/dev/disk/by-uuid/d08d5f40-1844-47be-a287-a40e19724c95";
     fsType = "ext4";
+    options = [
+      "nofail"
+    ];
   };
 
   # Bootloader.
