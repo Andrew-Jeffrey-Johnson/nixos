@@ -63,6 +63,9 @@ in
       onlyoffice = {
         enable = true;
       };
+      nextcloud-client = {
+        enable = true;
+      };
     };
   };
 
