@@ -39,6 +39,11 @@ in
 
       (lib.mkIf cfg.allowUnfree pkgs.zoom-us)
     ];
+    services = {
+      nextcloud-client = {
+        enable = true;
+      };
+    };
     programs = {
       thunderbird = {
         enable = true;
@@ -61,9 +66,6 @@ in
         #};
       };
       onlyoffice = {
-        enable = true;
-      };
-      nextcloud-client = {
         enable = true;
       };
     };
