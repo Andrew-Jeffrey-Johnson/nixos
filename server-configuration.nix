@@ -418,12 +418,15 @@ in
             # Some sane defaults required to satisfy Nextcloud configuration check
             maintenance_window_start = 1;
             default_phone_region = "US";
-            log_type = "systemd";
+            log_type = "file";
+            loglevel = 1; # User logins, file activites, warnings, errors, fatal errors.
             serverid = 0;
             trusted_domains = [
               "cloud.${domain}"
+              "192.168.100.18"
             ];
             trusted_proxies = [
+              "cloud.${domain}"
               "192.168.100.18"
             ];
           };
