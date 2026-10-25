@@ -110,7 +110,7 @@ in
 
   networking = {
     hosts = {
-      #"127.0.0.163" = [ "nextcloud" ];
+      "127.0.0.163" = [ "nextcloud" ];
       #"127.0.0.164" = [ "onlyoffice" ];
     };
     nat = {
@@ -420,7 +420,7 @@ in
         services.nextcloud = {
           enable = true;
           package = pkgs.nextcloud35;
-          hostName = "cloud.${domain}";
+          hostName = "nextcloud";
           https = true;
           home = "/nextcloud";
           datadir = "/var/lib/nextcloud";
@@ -650,8 +650,8 @@ in
         enableACME = true;
         locations = {
           "/" = {
-            proxyPass = "http://192.168.100.19/";
-            #proxyPass = "http://127.0.0.163/";
+            #proxyPass = "http://192.168.100.19/";
+            proxyPass = "http://nextcloud:7766/";
             proxyWebsockets = true;
             extraConfig = ''
               proxy_set_header X-Forwarded-Host $host;
@@ -667,6 +667,12 @@ in
             proxyWebsockets = true;
           };
         };
+        "${config.services.nextcloud.hostName}".listen = [
+          {
+            addr = "nextcloud";
+            port = 7766;
+          }
+        ];
         #acmeRoot = "/var/lib/acme/nc.${domain}";
         #useACMEHost = "luminlapid.com";
         #serverName = "nc.${domain}";
