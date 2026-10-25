@@ -110,7 +110,7 @@ in
 
   networking = {
     hosts = {
-      "127.0.0.163" = [ "nextcloud" ];
+      "192.168.100.19" = [ "nextcloud" ];
       #"127.0.0.164" = [ "onlyoffice" ];
     };
     nat = {
@@ -387,9 +387,9 @@ in
   containers.nextcloud = {
     autoStart = true;
     privateNetwork = false;
-    #hostAddress = "192.168.100.18";
+    hostAddress = "192.168.100.18";
     #hostBridge = "br0";
-    #localAddress = "192.168.100.19"; # Go to http://192.168.100.19 to view the website
+    localAddress = "192.168.100.19"; # Go to http://192.168.100.19 to view the website
     #forwardPorts = {
     #containerPort = 80;
     #hostPort = 7766;
@@ -420,7 +420,7 @@ in
         services.nextcloud = {
           enable = true;
           package = pkgs.nextcloud35;
-          hostName = "nextcloud";
+          hostName = "cloud.${domain}";
           https = true;
           home = "/nextcloud";
           datadir = "/var/lib/nextcloud";
@@ -652,8 +652,8 @@ in
         enableACME = true;
         locations = {
           "/" = {
-            #proxyPass = "http://192.168.100.19/";
-            proxyPass = "http://nextcloud:7766/";
+            proxyPass = "http://192.168.100.19/";
+            #proxyPass = "http://nextcloud:7766/";
             proxyWebsockets = true;
             extraConfig = ''
               proxy_set_header X-Forwarded-Host $host;
@@ -676,7 +676,7 @@ in
       };
       "nextcloud".listen = [
         {
-          addr = "127.0.0.163";
+          addr = "192.168.100.19";
           port = 7766;
         }
       ];
