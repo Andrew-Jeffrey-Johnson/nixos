@@ -384,7 +384,7 @@ in
   containers.nextcloud = {
     autoStart = true;
     privateNetwork = false;
-    #hostAddress = "192.168.100.18";
+    hostAddress = "192.168.100.18";
     #hostBridge = "br0";
     localAddress = "192.168.100.19/24"; # Go to http://192.168.100.19 to view the website
 
