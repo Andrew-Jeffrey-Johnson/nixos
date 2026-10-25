@@ -512,7 +512,7 @@ in
 
         services.onlyoffice = {
           enable = true;
-          hostname = "localhost";
+          hostname = "192.168.100.17";
           port = 7633;
           # TODO Remove secret
           securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
@@ -521,6 +521,7 @@ in
           allowLocalConnections = true;
         };
         networking = {
+          firewall.enable = false;
           firewall.allowedTCPPorts = [ 7633 ];
           useHostResolvConf = lib.mkForce false;
         };
