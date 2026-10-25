@@ -472,7 +472,7 @@ in
           useHostResolvConf = true;
           #useHostResolvConf = lib.mkForce false;
           defaultGateway = {
-            address = "192.168.100.1";
+            address = "192.168.100.19";
           };
         };
         system.stateVersion = "26.05";
