@@ -461,7 +461,7 @@ in
         };
         #services.resolved.enable = true;
         networking = {
-          #firewall.allowedTCPPorts = [ 80 ];
+          firewall.allowedTCPPorts = [ 80 ];
           firewall.enable = false;
           useHostResolvConf = true;
           #useHostResolvConf = lib.mkForce false;
