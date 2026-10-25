@@ -529,6 +529,7 @@ in
             set $secure_link_secret "nixostest";
           ''}";
           allowLocalConnections = true;
+          jwtSecretFile = "${pkgs.writeText "secret_key" "haha"}";
         };
         networking = {
           firewall.enable = false;
