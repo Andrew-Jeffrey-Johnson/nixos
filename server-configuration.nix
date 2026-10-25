@@ -651,7 +651,7 @@ in
         locations = {
           "/" = {
             #proxyPass = "http://192.168.100.19/";
-            proxyPass = "http://nextcloud/";
+            proxyPass = "http://127.0.0.163/";
             proxyWebsockets = true;
             extraConfig = ''
               proxy_set_header X-Forwarded-Host $host;
@@ -674,7 +674,7 @@ in
       };
       "nextcloud".listen = [
         {
-          addr = "nextcloud";
+          addr = "127.0.0.163";
           port = 7766;
         }
       ];
