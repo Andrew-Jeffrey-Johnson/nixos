@@ -481,53 +481,63 @@ in
       };
   };
   #------------------------------------------------------------------------------
+  services.onlyoffice = {
+    enable = true;
+    hostname = "localhost";
+    port = 7633;
+    # TODO Remove secret
+    securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
+      set $secure_link_secret "nixostest";
+    ''}";
+    allowLocalConnections = true;
+  };
   #------------------------------------------------------------------------------
   # onlyoffice through luminlapid.com
-  containers.onlyoffice = {
-    autoStart = true;
-    privateNetwork = true;
-    hostAddress = "192.168.100.16";
-    localAddress = "192.168.100.17"; # Go to http://192.168.100.17 to view the website
+  #containers.onlyoffice = {
+  #  autoStart = true;
+  #  privateNetwork = true;
+  #  hostAddress = "192.168.100.16";
+  #  localAddress = "192.168.100.17"; # Go to http://192.168.100.17 to view the website
 
-    bindMounts = {
-      #/path/in/container
-      #"/var/lib" = {
-      #  hostPath = "/var/lib"; # /path/on/host
-      #  isReadOnly = false;
-      #};
-      #You can add more bindMounts here
-    };
+  #  bindMounts = {
+  #    #/path/in/container
+  #    #"/var/lib" = {
+  #    #  hostPath = "/var/lib"; # /path/on/host
+  #    #  isReadOnly = false;
+  #    #};
+  #    #You can add more bindMounts here
+  #  };
 
-    config =
-      {
-        config,
-        lib,
-        ...
-      }:
-      {
-        environment.systemPackages = [
-          # Only add packages here if they cannot be added to user.blogger.packages
-          # due to policy of least permissions
-        ];
+  #  config =
+  #    {
+  #      config,
+  #      lib,
+  #      ...
+  #    }:
+  #    {
+  #      environment.systemPackages = [
+  #        # Only add packages here if they cannot be added to user.blogger.packages
+  #        # due to policy of least permissions
+  #      ];
 
-        services.onlyoffice = {
-          enable = true;
-          hostname = "192.168.100.17";
-          port = 7633;
-          # TODO Remove secret
-          securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
-            set $secure_link_secret "nixostest";
-          ''}";
-          allowLocalConnections = true;
-        };
-        networking = {
-          firewall.enable = false;
-          firewall.allowedTCPPorts = [ 7633 ];
-          useHostResolvConf = lib.mkForce false;
-        };
-        system.stateVersion = "26.05";
-      };
-  };
+  #      services.onlyoffice = {
+  #        enable = true;
+  #        hostname = "192.168.100.17";
+  #        port = 7633;
+  #        # TODO Remove secret
+  #        securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
+  #          set $secure_link_secret "nixostest";
+  #        ''}";
+  #        allowLocalConnections = true;
+  #      };
+  #      networking = {
+  #        firewall.enable = false;
+  #        firewall.allowedTCPPorts = [ 7633 ];
+  #        useHostResolvConf = lib.mkForce false;
+  #      };
+  #      system.stateVersion = "26.05";
+  #    };
+  #};
   #------------------------------------------------------------------------------
 
   environment.etc."nextcloud-whiteboard-admin-pass".text = ''
@@ -669,7 +679,8 @@ in
           };
           "/onlyoffice/" = {
             # onlyoffice
-            proxyPass = "http://192.168.100.17:7633/";
+            #proxyPass = "http://192.168.100.17:7633/";
+            proxyPass = "http://localhost:7633/";
             proxyWebsockets = true;
           };
           "/whiteboard/" = {
