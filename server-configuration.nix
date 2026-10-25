@@ -16,10 +16,6 @@ in
   luminlapid = {
     internationalization.enable = true;
     nixStoreSettings.enable = true;
-    networking = {
-      enable = false;
-      hostName = "luminlapid-server";
-    };
   };
 
   fileSystems."/mnt/samsung1TSSD" = {
@@ -209,14 +205,14 @@ in
     ## Set bridge-ip static
     interfaces."br0".ipv4.addresses = [
       {
-        address = "192.168.100.18";
-        prefixLength = 24;
+        address = "10.0.0.183";
+        prefixLength = 16;
       }
     ];
-    defaultGateway = "192.168.100.1";
+    defaultGateway = "10.0.0.1";
     nameservers = [
-      "8.8.8.8"
-      "192.168.100.1"
+      "9.9.9.9"
+      "10.0.0.1"
     ];
     #networkmanager.unmanaged = [ "interface-name:ve-*" ];
   };
