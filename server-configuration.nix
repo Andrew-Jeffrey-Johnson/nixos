@@ -667,17 +667,17 @@ in
             proxyWebsockets = true;
           };
         };
-        "nextcloud".listen = [
-          {
-            addr = "nextcloud";
-            port = 7766;
-          }
-        ];
         #acmeRoot = "/var/lib/acme/nc.${domain}";
         #useACMEHost = "luminlapid.com";
         #serverName = "nc.${domain}";
         #root = "/var/lib/nextcloud";
       };
+      "nextcloud".listen = [
+        {
+          addr = "nextcloud";
+          port = 7766;
+        }
+      ];
       "${domain}" = {
         default = true;
         forceSSL = true;
