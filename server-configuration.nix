@@ -435,7 +435,7 @@ in
             maintenance_window_start = 1;
             default_phone_region = "US";
             log_type = "file";
-            loglevel = 1; # User logins, file activites, warnings, errors, fatal errors.
+            loglevel = 2; # User logins, file activites, warnings, errors, fatal errors.
             serverid = 0;
             trusted_domains = [
               "cloud.${domain}"
