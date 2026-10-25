@@ -17,7 +17,7 @@ in
     internationalization.enable = true;
     nixStoreSettings.enable = true;
     networking = {
-      enable = true;
+      enable = false;
       hostName = "luminlapid-server";
     };
   };
@@ -118,7 +118,7 @@ in
       # Use "ve-*" when using nftables instead of iptables
       internalInterfaces = [ "ve-+" ];
       #externalInterface = "ens3";
-      externalInterface = "br0";
+      externalInterface = "eno3";
       # Lazy IPv6 connectivity for the container
       enableIPv6 = true;
     };

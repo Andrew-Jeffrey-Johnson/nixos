@@ -31,7 +31,7 @@ in
       nat = {
         enable = true;
         internalInterfaces = [ "ve-+" ]; # ve-+ is a wildcard that matches all container interfaces
-        externalInterface = "eno3";
+        externalInterface = "ens3";
         # Lazy IPv6 connectivity for the container
         enableIPv6 = true;
       };
