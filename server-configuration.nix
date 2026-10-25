@@ -198,11 +198,12 @@ in
       };
     };
     bridges.br0.interfaces = [
+      "eno3"
     ]; # Adjust interface accordingly
 
     ## Get bridge-ip with DHCP
     useDHCP = false;
-    interfaces."br0".useDHCP = true;
+    #interfaces."br0".useDHCP = true;
 
     ## Set bridge-ip static
     interfaces."br0".ipv4.addresses = [
@@ -211,8 +212,11 @@ in
         prefixLength = 24;
       }
     ];
-    #defaultGateway = "192.168.100.1";
-    #nameservers = [ "192.168.100.1" ];
+    defaultGateway = "192.168.100.1";
+    nameservers = [
+      "8.8.8.8"
+      "192.168.100.1"
+    ];
     #networkmanager.unmanaged = [ "interface-name:ve-*" ];
   };
 
@@ -270,6 +274,7 @@ in
         popd
       '')
       pkgs.kitty
+      pkgs.inetutils
     ];
   };
 
