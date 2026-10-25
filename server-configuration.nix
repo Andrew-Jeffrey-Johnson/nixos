@@ -706,7 +706,7 @@ in
         forceSSL = true;
         enableACME = true;
         locations = {
-          "/" = {
+          "~^(/*/ | /)" = {
             # onlyoffice
             proxyPass = "http://10.0.0.178:7633/";
             proxyWebsockets = true;
