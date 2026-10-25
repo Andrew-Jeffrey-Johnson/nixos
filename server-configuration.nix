@@ -110,7 +110,7 @@ in
 
   networking = {
     hosts = {
-      "192.168.100.19" = [ "nextcloud" ];
+      #"192.168.100.19" = [ "nextcloud" ];
       #"127.0.0.164" = [ "onlyoffice" ];
     };
     nat = {
@@ -629,7 +629,7 @@ in
 
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  # networking.firewall.enable = false;ontainers.<name>.localAddress
 
   # Create a reverse proxy for luminlapid via nginx
   services.nginx.enable = true;
@@ -674,12 +674,12 @@ in
         #serverName = "nc.${domain}";
         #root = "/var/lib/nextcloud";
       };
-      "nextcloud".listen = [
-        {
-          #addr = "192.168.100.19";
-          port = 7766;
-        }
-      ];
+      #"nextcloud".listen = [
+      #  {
+      #    #addr = "192.168.100.19";
+      #    port = 7766;
+      #  }
+      #];
       "${domain}" = {
         default = true;
         forceSSL = true;
