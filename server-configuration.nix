@@ -420,7 +420,7 @@ in
         services.nextcloud = {
           enable = true;
           package = pkgs.nextcloud35;
-          hostName = "nextcloud";
+          hostName = "cloud.${domain}";
           https = true;
           home = "/nextcloud";
           datadir = "/var/lib/nextcloud";
