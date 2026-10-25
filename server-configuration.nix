@@ -683,15 +683,15 @@ in
               proxy_set_header X-Forwarded-Host $host;
             '';
           };
-          "/onlyoffice/" = {
-            # onlyoffice
-            proxyPass = "http://10.0.0.178/";
-            #proxyPass = "http://localhost:7633/";
-            proxyWebsockets = true;
-            extraConfig = ''
-              proxy_set_header X-Forwarded-Host $host;
-            '';
-          };
+          #"/onlyoffice/" = {
+          #  # onlyoffice
+          #  proxyPass = "http://10.0.0.178/";
+          #  #proxyPass = "http://localhost:7633/";
+          #  proxyWebsockets = true;
+          #  extraConfig = ''
+          #    proxy_set_header X-Forwarded-Host $host;
+          #  '';
+          #};
           "/whiteboard/" = {
             proxyPass = "http://localhost:3002/";
             proxyWebsockets = true;
@@ -701,6 +701,20 @@ in
         #useACMEHost = "luminlapid.com";
         #serverName = "nc.${domain}";
         #root = "/var/lib/nextcloud";
+      };
+      "editors.${domain}" = {
+        forceSSL = true;
+        enableACME = true;
+        locations = {
+          "/" = {
+            # onlyoffice
+            proxyPass = "http://10.0.0.178/";
+            proxyWebsockets = true;
+            extraConfig = ''
+              proxy_set_header X-Forwarded-Host $host;
+            '';
+          };
+        };
       };
       #"nextcloud".listen = [
       #  {
