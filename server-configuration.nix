@@ -114,7 +114,7 @@ in
       # Use "ve-*" when using nftables instead of iptables
       internalInterfaces = [ "ve-+" ];
       #externalInterface = "ens3";
-      externalInterface = "eno3";
+      externalInterface = "br0";
       # Lazy IPv6 connectivity for the container
       enableIPv6 = true;
     };
@@ -206,7 +206,7 @@ in
     interfaces."br0".ipv4.addresses = [
       {
         address = "10.0.0.183";
-        prefixLength = 16;
+        prefixLength = 24;
       }
     ];
     defaultGateway = "10.0.0.1";
