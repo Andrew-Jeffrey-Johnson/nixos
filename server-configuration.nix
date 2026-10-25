@@ -457,14 +457,14 @@ in
           };
           extraAppsEnable = true;
         };
-        #services.resolved.enable = true;
+        services.resolved.enable = true;
         networking = {
           #firewall.allowedTCPPorts = [ 80 ];
           firewall.enable = false;
-          #useHostResolvConf = lib.mkForce false;
-          #defaultGateway = {
-          #  address = "192.168.100.1";
-          #};
+          useHostResolvConf = lib.mkForce false;
+          defaultGateway = {
+            address = "192.168.100.1";
+          };
         };
         system.stateVersion = "26.05";
       };
