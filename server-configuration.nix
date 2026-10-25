@@ -196,7 +196,7 @@ in
         ];
       };
     };
-    bridges.br0.interfaces = [ "eth0" ]; # Adjust interface accordingly
+    #bridges.br0.interfaces = [ "eth0" ]; # Adjust interface accordingly
 
     # Get bridge-ip with DHCP
     #useDHCP = false;
