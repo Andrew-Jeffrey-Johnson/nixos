@@ -420,7 +420,7 @@ in
         services.nextcloud = {
           enable = true;
           package = pkgs.nextcloud35;
-          hostName = "cloud.${domain}";
+          hostName = "nextcloud";
           https = true;
           home = "/nextcloud";
           datadir = "/var/lib/nextcloud";
@@ -438,10 +438,12 @@ in
             trusted_domains = [
               "cloud.${domain}"
               "192.168.100.18"
+              "nextcloud"
             ];
             trusted_proxies = [
               "cloud.${domain}"
               "192.168.100.18"
+              "nextcloud"
             ];
           };
           extraApps = {
@@ -672,12 +674,12 @@ in
         #serverName = "nc.${domain}";
         #root = "/var/lib/nextcloud";
       };
-      #"nextcloud".listen = [
-      #  {
-      #    addr = "127.0.0.163";
-      #    port = 7766;
-      #  }
-      #];
+      "nextcloud".listen = [
+        {
+          addr = "127.0.0.163";
+          port = 7766;
+        }
+      ];
       "${domain}" = {
         default = true;
         forceSSL = true;
