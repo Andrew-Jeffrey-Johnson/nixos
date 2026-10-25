@@ -492,59 +492,85 @@ in
   #  ''}";
   #  allowLocalConnections = true;
   #};
+  services.collabora-online = {
+    enable = true;
+    port = 9980; # default
+    settings = {
+      # Rely on reverse proxy for SSL
+      ssl = {
+        enable = false;
+        termination = true;
+      };
+
+      # Listen on loopback interface only, and accept requests from ::1
+      net = {
+        listen = "loopback";
+        post_allow.host = [ "::1" ];
+      };
+
+      # Restrict loading documents from WOPI Host nextcloud.example.com
+      storage.wopi = {
+        "@allow" = true;
+        host = [ "cloud.luminlapid.com" ];
+      };
+
+      # Set FQDN of server
+      server_name = "editors.luminlapid.com";
+    };
+  };
   #------------------------------------------------------------------------------
   # onlyoffice through luminlapid.com
-  containers.onlyoffice = {
-    autoStart = true;
-    privateNetwork = true;
-    #hostAddress = "192.168.100.16";
-    #localAddress = "192.168.100.17"; # Go to http://192.168.100.17 to view the website
-    hostBridge = "br0";
-    localAddress = "10.0.0.178/24"; # Go to http://192.168.100.19 to view the website
+  #containers.onlyoffice = {
+  #  autoStart = true;
+  #  privateNetwork = true;
+  #  #hostAddress = "192.168.100.16";
+  #  #localAddress = "192.168.100.17"; # Go to http://192.168.100.17 to view the website
+  #  hostBridge = "br0";
+  #  localAddress = "10.0.0.178/24"; # Go to http://192.168.100.19 to view the website
 
-    bindMounts = {
-      #/path/in/container
-      #"/var/lib" = {
-      #  hostPath = "/var/lib"; # /path/on/host
-      #  isReadOnly = false;
-      #};
-      #You can add more bindMounts here
-    };
+  #  bindMounts = {
+  #    #/path/in/container
+  #    #"/var/lib" = {
+  #    #  hostPath = "/var/lib"; # /path/on/host
+  #    #  isReadOnly = false;
+  #    #};
+  #    #You can add more bindMounts here
+  #  };
 
-    config =
-      {
-        config,
-        lib,
-        ...
-      }:
-      {
-        environment.systemPackages = [
-          # Only add packages here if they cannot be added to user.blogger.packages
-          # due to policy of least permissions
-        ];
+  #  config =
+  #    {
+  #      config,
+  #      lib,
+  #      ...
+  #    }:
+  #    {
+  #      environment.systemPackages = [
+  #        # Only add packages here if they cannot be added to user.blogger.packages
+  #        # due to policy of least permissions
+  #      ];
 
-        services.onlyoffice = {
-          enable = true;
-          hostname = "editors.${domain}";
-          port = 7633;
-          # TODO Remove secret
-          securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
-            set $secure_link_secret "nixostest";
-          ''}";
-          allowLocalConnections = true;
-          jwtSecretFile = "${pkgs.writeText "secret_key" "haha"}";
-        };
-        networking = {
-          firewall.enable = false;
-          #firewall.allowedTCPPorts = [ 7633 ];
-          useHostResolvConf = true;
-          defaultGateway = {
-            address = "10.0.0.1";
-          };
-        };
-        system.stateVersion = "26.05";
-      };
-  };
+  #      services.onlyoffice = {
+  #        enable = true;
+  #        hostname = "editors.${domain}";
+  #        port = 7633;
+  #        # TODO Remove secret
+  #        securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
+  #          set $secure_link_secret "nixostest";
+  #        ''}";
+  #        allowLocalConnections = true;
+  #        jwtSecretFile = "${pkgs.writeText "secret_key" "haha"}";
+  #      };
+  #      networking = {
+  #        firewall.enable = false;
+  #        #firewall.allowedTCPPorts = [ 7633 ];
+  #        useHostResolvConf = true;
+  #        defaultGateway = {
+  #          address = "10.0.0.1";
+  #        };
+  #      };
+  #      system.stateVersion = "26.05";
+  #    };
+  #};
   #------------------------------------------------------------------------------
 
   environment.etc."nextcloud-whiteboard-admin-pass".text = ''
@@ -704,26 +730,11 @@ in
         #root = "/var/lib/nextcloud";
       };
       "editors.${domain}" = {
-        forceSSL = true;
         enableACME = true;
-        locations = {
-          "/" = {
-            # onlyoffice
-            proxyPass = "http://10.0.0.178:7633/";
-            proxyWebsockets = true;
-            extraConfig = ''
-              proxy_set_header X-Forwarded-Host $host;
-            '';
-          };
-          "/*/" = {
-            alias = "/";
-            # onlyoffice
-            proxyPass = "http://10.0.0.178:7633/";
-            proxyWebsockets = true;
-            extraConfig = ''
-              proxy_set_header X-Forwarded-Host $host;
-            '';
-          };
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://[::1]:${toString config.services.collabora-online.port}";
+          proxyWebsockets = true; # collabora uses websockets
         };
       };
       #"nextcloud".listen = [
