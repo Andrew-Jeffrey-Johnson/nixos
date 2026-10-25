@@ -458,7 +458,7 @@ in
               calendar
               tasks
               #onlyoffice
-              richtexteditors
+              richdocuments
               end_to_end_encryption
               #files_markdown
               guests
