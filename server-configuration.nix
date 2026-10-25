@@ -463,12 +463,12 @@ in
           };
           extraAppsEnable = true;
         };
-        #services.resolved.enable = true;
+        services.resolved.enable = true;
         networking = {
           firewall.allowedTCPPorts = [ 80 ];
           firewall.enable = false;
           #useHostResolvConf = false;
-          #useHostResolvConf = lib.mkForce false;
+          useHostResolvConf = lib.mkForce false;
           #defaultGateway = {
           #  address = "192.168.100.1";
           #};
