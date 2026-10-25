@@ -524,7 +524,7 @@ in
 
         services.onlyoffice = {
           enable = true;
-          hostname = "cloud.${domain}";
+          hostname = "editors.${domain}";
           #port = 7633;
           # TODO Remove secret
           securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
