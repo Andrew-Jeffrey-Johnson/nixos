@@ -706,7 +706,16 @@ in
         forceSSL = true;
         enableACME = true;
         locations = {
-          "~ (/*/ | /)" = {
+          "/" = {
+            # onlyoffice
+            proxyPass = "http://10.0.0.178:7633/";
+            proxyWebsockets = true;
+            extraConfig = ''
+              proxy_set_header X-Forwarded-Host $host;
+            '';
+          };
+          "/9.3.1-fknk6y115rm49hsrb924w7zxnq8zwy2s/" = {
+            alias = "/";
             # onlyoffice
             proxyPass = "http://10.0.0.178:7633/";
             proxyWebsockets = true;
