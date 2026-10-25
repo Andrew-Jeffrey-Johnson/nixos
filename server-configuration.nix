@@ -651,7 +651,7 @@ in
         locations = {
           "/" = {
             #proxyPass = "http://192.168.100.19/";
-            proxyPass = "http://nextcloud:7766/";
+            proxyPass = "http://nextcloud/";
             proxyWebsockets = true;
             extraConfig = ''
               proxy_set_header X-Forwarded-Host $host;
