@@ -368,7 +368,7 @@ in
   # onlyoffice through luminlapid.com
   containers.nextcloud = {
     autoStart = true;
-    privateNetwork = false;
+    privateNetwork = true;
     hostAddress = "192.168.100.18";
     localAddress = "192.168.100.19"; # Go to http://192.168.100.19 to view the website
 
@@ -449,7 +449,7 @@ in
         networking = {
           #firewall.allowedTCPPorts = [ 80 ];
           firewall.enable = false;
-          useHostResolvConf = false;
+          useHostResolvConf = true;
         };
         system.stateVersion = "26.05";
       };
