@@ -463,7 +463,7 @@ in
         networking = {
           firewall.allowedTCPPorts = [ 80 ];
           firewall.enable = false;
-          useHostResolvConf = true;
+          #useHostResolvConf = false;
           #useHostResolvConf = lib.mkForce false;
           #defaultGateway = {
           #  address = "192.168.100.1";
