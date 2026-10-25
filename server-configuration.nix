@@ -386,10 +386,14 @@ in
   # onlyoffice through luminlapid.com
   containers.nextcloud = {
     autoStart = true;
-    privateNetwork = false;
+    privateNetwork = true;
     hostAddress = "192.168.100.18";
     #hostBridge = "br0";
     localAddress = "192.168.100.19"; # Go to http://192.168.100.19 to view the website
+    #forwardPorts = {
+    #containerPort = 80;
+    #hostPort = 7766;
+    #};
 
     bindMounts = {
       "/nextcloud" = {
@@ -455,11 +459,12 @@ in
           };
           extraAppsEnable = true;
         };
-        services.resolved.enable = true;
+        #services.resolved.enable = true;
         networking = {
           #firewall.allowedTCPPorts = [ 80 ];
           firewall.enable = false;
-          useHostResolvConf = lib.mkForce false;
+          useHostResolvConf = true;
+          #useHostResolvConf = lib.mkForce false;
           #defaultGateway = {
           #  address = "192.168.100.1";
           #};
@@ -646,6 +651,7 @@ in
         locations = {
           "/" = {
             proxyPass = "http://192.168.100.19/";
+            #proxyPass = "http://127.0.0.163/";
             proxyWebsockets = true;
             extraConfig = ''
               proxy_set_header X-Forwarded-Host $host;
