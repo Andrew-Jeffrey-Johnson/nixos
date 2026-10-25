@@ -652,8 +652,8 @@ in
         enableACME = true;
         locations = {
           "/" = {
-            proxyPass = "http://192.168.100.19/";
-            #proxyPass = "http://127.0.0.163:7766/";
+            #proxyPass = "http://192.168.100.19/";
+            proxyPass = "http://nextcloud:7766/";
             proxyWebsockets = true;
             extraConfig = ''
               proxy_set_header X-Forwarded-Host $host;
