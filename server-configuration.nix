@@ -457,7 +457,8 @@ in
               contacts
               calendar
               tasks
-              onlyoffice
+              #onlyoffice
+              richtexteditors
               end_to_end_encryption
               #files_markdown
               guests
@@ -714,7 +715,7 @@ in
               proxy_set_header X-Forwarded-Host $host;
             '';
           };
-          "/9.3.1-fknk6y115rm49hsrb924w7zxnq8zwy2s/" = {
+          "/*/" = {
             alias = "/";
             # onlyoffice
             proxyPass = "http://10.0.0.178:7633/";
