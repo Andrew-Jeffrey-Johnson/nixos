@@ -211,9 +211,9 @@ in
         prefixLength = 24;
       }
     ];
-    defaultGateway = "192.168.100.1";
-    nameservers = [ "192.168.100.1" ];
-    networkmanager.unmanaged = [ "interface-name:ve-*" ];
+    #defaultGateway = "192.168.100.1";
+    #nameservers = [ "192.168.100.1" ];
+    #networkmanager.unmanaged = [ "interface-name:ve-*" ];
   };
 
   # Define a user account.
