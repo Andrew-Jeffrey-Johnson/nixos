@@ -200,7 +200,7 @@ in
 
     ## Get bridge-ip with DHCP
     useDHCP = false;
-    #interfaces."br0".useDHCP = true;
+    interfaces."br0".useDHCP = true;
 
     ## Set bridge-ip static
     interfaces."br0".ipv4.addresses = [
