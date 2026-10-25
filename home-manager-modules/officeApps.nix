@@ -37,6 +37,9 @@ in
       # Dictionary
       pkgs.goldendict-ng # Multi-language dictionary app
 
+      # Online editor
+      pkgs.collabora-desktop
+
       (lib.mkIf cfg.allowUnfree pkgs.zoom-us)
     ];
     services = {
@@ -65,9 +68,6 @@ in
         #  "sync.interval" = 600;
         #  "sync.target" = 7;
         #};
-      };
-      onlyoffice = {
-        enable = true;
       };
     };
   };
