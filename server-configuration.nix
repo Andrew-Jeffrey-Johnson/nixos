@@ -368,7 +368,7 @@ in
   # onlyoffice through luminlapid.com
   containers.nextcloud = {
     autoStart = true;
-    privateNetwork = true;
+    privateNetwork = false;
     hostAddress = "192.168.100.18";
     localAddress = "192.168.100.19"; # Go to http://192.168.100.19 to view the website
 
