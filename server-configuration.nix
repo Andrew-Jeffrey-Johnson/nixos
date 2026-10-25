@@ -391,7 +391,7 @@ in
     privateNetwork = true;
     #hostAddress = "192.168.100.18";
     hostBridge = "br0";
-    localAddress = "192.168.100.19/24"; # Go to http://192.168.100.19 to view the website
+    localAddress = "10.0.0.179/24"; # Go to http://192.168.100.19 to view the website
     #forwardPorts = {
     #containerPort = 80;
     #hostPort = 7766;
@@ -439,15 +439,15 @@ in
             serverid = 0;
             trusted_domains = [
               "cloud.${domain}"
-              "192.168.100.18"
-              "192.168.100.19"
-              "nextcloud"
+              #"192.168.100.18"
+              #"192.168.100.19"
+              #"nextcloud"
             ];
             trusted_proxies = [
               "cloud.${domain}"
-              "192.168.100.18"
-              "192.168.100.19"
-              "nextcloud"
+              #"192.168.100.18"
+              #"192.168.100.19"
+              #"nextcloud"
             ];
           };
           extraApps = {
@@ -472,7 +472,7 @@ in
           useHostResolvConf = true;
           #useHostResolvConf = lib.mkForce false;
           defaultGateway = {
-            address = "192.168.100.19";
+            address = "10.0.0.1";
           };
         };
         system.stateVersion = "26.05";
@@ -656,7 +656,8 @@ in
         enableACME = true;
         locations = {
           "/" = {
-            proxyPass = "http://192.168.100.19/";
+            #proxyPass = "http://192.168.100.19/";
+            proxyPass = "http://10.0.0.179/";
             #proxyPass = "http://nextcloud:7766/";
             proxyWebsockets = true;
             extraConfig = ''
