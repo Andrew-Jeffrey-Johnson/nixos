@@ -207,12 +207,12 @@ in
     interfaces."br0".useDHCP = true;
 
     # Set bridge-ip static
-    #interfaces."br0".ipv4.addresses = [
-    #  {
-    #    address = "192.168.100.18";
-    #    prefixLength = 24;
-    #  }
-    #];
+    interfaces."br0".ipv4.addresses = [
+      {
+        address = "192.168.100.18";
+        prefixLength = 24;
+      }
+    ];
     defaultGateway = "192.168.100.1";
     nameservers = [ "192.168.100.1" ];
     networkmanager.unmanaged = [ "interface-name:ve-*" ];
@@ -389,8 +389,8 @@ in
   containers.nextcloud = {
     autoStart = true;
     privateNetwork = true;
-    #hostAddress = "192.168.100.18";
-    hostBridge = "br0";
+    hostAddress = "192.168.100.18";
+    #hostBridge = "br0";
     localAddress = "192.168.100.19"; # Go to http://192.168.100.19 to view the website
 
     bindMounts = {
