@@ -196,7 +196,7 @@ in
         ];
       };
     };
-    #bridges.br0.interfaces = [ "eth0s31f6" ]; # Adjust interface accordingly
+    bridges.br0.interfaces = [ "eth0s31f6" ]; # Adjust interface accordingly
 
     # Get bridge-ip with DHCP
     useDHCP = false;
@@ -209,8 +209,8 @@ in
         prefixLength = 24;
       }
     ];
-    #defaultGateway = "192.168.100.1";
-    #nameservers = [ "192.168.100.1" ];
+    defaultGateway = "192.168.100.1";
+    nameservers = [ "192.168.100.1" ];
   };
 
   # Define a user account.
@@ -385,23 +385,14 @@ in
     autoStart = true;
     privateNetwork = true;
     #hostAddress = "192.168.100.18";
-    hostAddress = "br0";
+    hostBridge = "br0";
     localAddress = "192.168.100.19/24"; # Go to http://192.168.100.19 to view the website
 
     bindMounts = {
-      #/path/in/container
-      #"/var/lib" = {
-      #  hostPath = "/var/lib"; # /path/on/host
-      #  isReadOnly = false;
-      #};
       "/nextcloud" = {
         hostPath = "/nextcloud";
         isReadOnly = false;
       };
-      #"/etc" = {
-      #  hostPath = "/etc";
-      #  isReadOnly = false;
-      #};
       #You can add more bindMounts here
     };
 
