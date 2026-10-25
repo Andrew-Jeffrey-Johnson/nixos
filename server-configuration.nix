@@ -196,7 +196,7 @@ in
         ];
       };
     };
-    bridges.br0.interfaces = [ "eno3" ]; # Adjust interface accordingly
+    bridges.br0.interfaces = [ "ve-nextcloud@if2" ]; # Adjust interface accordingly
 
     # Get bridge-ip with DHCP
     useDHCP = false;
