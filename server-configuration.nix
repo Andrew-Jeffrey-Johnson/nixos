@@ -471,9 +471,9 @@ in
           firewall.enable = false;
           useHostResolvConf = true;
           #useHostResolvConf = lib.mkForce false;
-          #defaultGateway = {
-          #  address = "192.168.100.1";
-          #};
+          defaultGateway = {
+            address = "192.168.100.0";
+          };
         };
         system.stateVersion = "26.05";
       };
