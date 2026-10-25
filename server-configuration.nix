@@ -485,7 +485,7 @@ in
   # onlyoffice through luminlapid.com
   containers.onlyoffice = {
     autoStart = true;
-    privateNetwork = false;
+    privateNetwork = true;
     hostAddress = "192.168.100.16";
     localAddress = "192.168.100.17"; # Go to http://192.168.100.17 to view the website
 
