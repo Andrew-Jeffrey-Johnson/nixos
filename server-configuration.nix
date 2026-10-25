@@ -196,7 +196,7 @@ in
         ];
       };
     };
-    bridges.br0.interfaces = [ "eth0s31f6" ]; # Adjust interface accordingly
+    #bridges.br0.interfaces = [ "eth0s31f6" ]; # Adjust interface accordingly
 
     # Get bridge-ip with DHCP
     useDHCP = false;
@@ -205,7 +205,7 @@ in
     # Set bridge-ip static
     interfaces."br0".ipv4.addresses = [
       {
-        address = "192.168.100.3";
+        address = "192.168.100.18";
         prefixLength = 24;
       }
     ];
