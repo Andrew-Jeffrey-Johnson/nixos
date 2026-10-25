@@ -440,11 +440,13 @@ in
             trusted_domains = [
               "cloud.${domain}"
               "192.168.100.18"
+              "192.168.100.19"
               "nextcloud"
             ];
             trusted_proxies = [
               "cloud.${domain}"
               "192.168.100.18"
+              "192.168.100.19"
               "nextcloud"
             ];
           };
