@@ -196,10 +196,10 @@ in
         ];
       };
     };
-    bridges.br0.interfaces = [ "ve-nextcloud@if2" ]; # Adjust interface accordingly
+    #bridges.br0.interfaces = [ "ve-nextcloud@if2" ]; # Adjust interface accordingly
 
     # Get bridge-ip with DHCP
-    useDHCP = false;
+    #useDHCP = false;
     interfaces."br0".useDHCP = true;
 
     # Set bridge-ip static
