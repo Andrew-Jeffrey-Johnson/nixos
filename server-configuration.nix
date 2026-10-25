@@ -203,18 +203,18 @@ in
     #]; # Adjust interface accordingly
 
     # Get bridge-ip with DHCP
-    #useDHCP = false;
-    #interfaces."br0".useDHCP = true;
+    useDHCP = false;
+    interfaces."br0".useDHCP = true;
 
     ## Set bridge-ip static
-    #interfaces."br0".ipv4.addresses = [
-    #  {
-    #    address = "192.168.100.18";
-    #    prefixLength = 24;
-    #  }
-    #];
-    #defaultGateway = "192.168.100.1";
-    #nameservers = [ "192.168.100.1" ];
+    interfaces."br0".ipv4.addresses = [
+      {
+        address = "192.168.100.18";
+        prefixLength = 24;
+      }
+    ];
+    defaultGateway = "192.168.100.1";
+    nameservers = [ "192.168.100.1" ];
     networkmanager.unmanaged = [ "interface-name:ve-*" ];
   };
 
