@@ -708,7 +708,7 @@ in
         locations = {
           "/" = {
             # onlyoffice
-            proxyPass = "http://10.0.0.178/";
+            proxyPass = "http://10.0.0.178:7633/";
             proxyWebsockets = true;
             extraConfig = ''
               proxy_set_header X-Forwarded-Host $host;
