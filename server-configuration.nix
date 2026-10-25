@@ -496,8 +496,10 @@ in
   containers.onlyoffice = {
     autoStart = true;
     privateNetwork = true;
-    hostAddress = "192.168.100.16";
-    localAddress = "192.168.100.17"; # Go to http://192.168.100.17 to view the website
+    #hostAddress = "192.168.100.16";
+    #localAddress = "192.168.100.17"; # Go to http://192.168.100.17 to view the website
+    hostBridge = "br0";
+    localAddress = "10.0.0.178/24"; # Go to http://192.168.100.19 to view the website
 
     bindMounts = {
       #/path/in/container
@@ -523,18 +525,21 @@ in
         services.onlyoffice = {
           enable = true;
           hostname = "cloud.${domain}";
-          port = 7633;
+          #port = 7633;
           # TODO Remove secret
           securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
             set $secure_link_secret "nixostest";
           ''}";
           allowLocalConnections = true;
-          jwtSecretFile = "${pkgs.writeText "secret_key" "haha"}";
+          #jwtSecretFile = "${pkgs.writeText "secret_key" "haha"}";
         };
         networking = {
           firewall.enable = false;
-          firewall.allowedTCPPorts = [ 7633 ];
-          useHostResolvConf = lib.mkForce false;
+          #firewall.allowedTCPPorts = [ 7633 ];
+          useHostResolvConf = true;
+          defaultGateway = {
+            address = "10.0.0.1";
+          };
         };
         system.stateVersion = "26.05";
       };
@@ -680,9 +685,12 @@ in
           };
           "/onlyoffice/" = {
             # onlyoffice
-            proxyPass = "http://192.168.100.17/";
+            proxyPass = "http://10.0.0.178/";
             #proxyPass = "http://localhost:7633/";
             proxyWebsockets = true;
+            extraConfig = ''
+              proxy_set_header X-Forwarded-Host $host;
+            '';
           };
           "/whiteboard/" = {
             proxyPass = "http://localhost:3002/";
