@@ -389,7 +389,7 @@ in
     privateNetwork = false;
     #hostAddress = "192.168.100.18";
     #hostBridge = "br0";
-    #localAddress = "192.168.100.19"; # Go to http://192.168.100.19 to view the website
+    localAddress = "192.168.100.19"; # Go to http://192.168.100.19 to view the website
     #forwardPorts = {
     #containerPort = 80;
     #hostPort = 7766;
@@ -650,8 +650,8 @@ in
         enableACME = true;
         locations = {
           "/" = {
-            #proxyPass = "http://192.168.100.19/";
-            proxyPass = "http://127.0.0.163:7766/";
+            proxyPass = "http://192.168.100.19/";
+            #proxyPass = "http://127.0.0.163:7766/";
             proxyWebsockets = true;
             extraConfig = ''
               proxy_set_header X-Forwarded-Host $host;
@@ -672,12 +672,12 @@ in
         #serverName = "nc.${domain}";
         #root = "/var/lib/nextcloud";
       };
-      "nextcloud".listen = [
-        {
-          addr = "127.0.0.163";
-          port = 7766;
-        }
-      ];
+      #"nextcloud".listen = [
+      #  {
+      #    addr = "127.0.0.163";
+      #    port = 7766;
+      #  }
+      #];
       "${domain}" = {
         default = true;
         forceSSL = true;
