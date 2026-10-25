@@ -198,7 +198,6 @@ in
       };
     };
     bridges.br0.interfaces = [
-      "eno3"
     ]; # Adjust interface accordingly
 
     # Get bridge-ip with DHCP
@@ -388,8 +387,8 @@ in
   containers.nextcloud = {
     autoStart = true;
     privateNetwork = true;
-    #hostAddress = "192.168.100.18";
-    hostBridge = "br0";
+    hostAddress = "192.168.100.18";
+    #hostBridge = "br0";
     localAddress = "192.168.100.19"; # Go to http://192.168.100.19 to view the website
 
     bindMounts = {
