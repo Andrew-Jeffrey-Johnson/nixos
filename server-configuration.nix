@@ -439,13 +439,13 @@ in
             serverid = 0;
             trusted_domains = [
               "cloud.${domain}"
-              "10.0.0.179"
+              #"10.0.0.179"
               #"192.168.100.18"
               #"192.168.100.19"
               #"nextcloud"
             ];
             trusted_proxies = [
-              "cloud.${domain}"
+              #"cloud.${domain}"
               "10.0.0.179"
               #"192.168.100.18"
               #"192.168.100.19"
