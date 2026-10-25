@@ -209,8 +209,8 @@ in
         prefixLength = 24;
       }
     ];
-    defaultGateway = "192.168.100.1";
-    nameservers = [ "192.168.100.1" ];
+    #defaultGateway = "192.168.100.1";
+    #nameservers = [ "192.168.100.1" ];
   };
 
   # Define a user account.
