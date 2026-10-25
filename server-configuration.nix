@@ -462,9 +462,9 @@ in
           #firewall.allowedTCPPorts = [ 80 ];
           firewall.enable = false;
           #useHostResolvConf = lib.mkForce false;
-          defaultGateway = {
-            address = "192.168.100.1";
-          };
+          #defaultGateway = {
+          #  address = "192.168.100.1";
+          #};
         };
         system.stateVersion = "26.05";
       };
