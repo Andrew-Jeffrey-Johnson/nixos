@@ -680,7 +680,7 @@ in
           };
           "/onlyoffice/" = {
             # onlyoffice
-            proxyPass = "http://192.168.100.17:7633/";
+            proxyPass = "http://192.168.100.17/";
             #proxyPass = "http://localhost:7633/";
             proxyWebsockets = true;
           };
