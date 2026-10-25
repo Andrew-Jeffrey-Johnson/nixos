@@ -196,7 +196,7 @@ in
         ];
       };
     };
-    #bridges.br0.interfaces = [ "eth0s31f6" ]; # Adjust interface accordingly
+    bridges.br0.interfaces = [ "eth0" ]; # Adjust interface accordingly
 
     # Get bridge-ip with DHCP
     #useDHCP = false;
@@ -209,7 +209,7 @@ in
         prefixLength = 24;
       }
     ];
-    #defaultGateway = "192.168.100.1";
+    defaultGateway = "192.168.100.1";
     #nameservers = [ "192.168.100.1" ];
   };
 
