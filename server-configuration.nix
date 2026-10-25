@@ -667,7 +667,7 @@ in
             proxyWebsockets = true;
           };
         };
-        "${config.services.nextcloud.hostName}".listen = [
+        "nextcloud".listen = [
           {
             addr = "nextcloud";
             port = 7766;
