@@ -429,7 +429,9 @@ in
           configureRedis = true;
           config.adminpassFile = "/etc/nextcloud-admin-pass";
           config.dbtype = "sqlite";
-          phpOptions."opcache.interned_strings_buffer" = "32";
+          phpOptions = {
+            "opcache.interned_strings_buffer" = "32";
+          };
           maxUploadSize = "999G";
           settings = {
             # Some sane defaults required to satisfy Nextcloud configuration check
@@ -695,6 +697,7 @@ in
     proxy_headers_hash_bucket_size 128;
     server_names_hash_max_size 1024;
     server_names_hash_bucket_size 128;
+    client_max_body_size 0;
   '';
   services.nginx = {
     virtualHosts = {
