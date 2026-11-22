@@ -39,13 +39,14 @@ in
 
       # Online editor
       pkgs.collabora-desktop
+      pkgs.euro-office-desktopeditors
 
       (lib.mkIf cfg.allowUnfree pkgs.zoom-us)
     ];
     services = {
       nextcloud-client = {
         enable = true;
-        startInBackground = true;
+        startInBackground = false;
       };
     };
     programs = {
