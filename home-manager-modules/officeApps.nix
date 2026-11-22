@@ -41,12 +41,13 @@ in
       pkgs.collabora-desktop
       pkgs.onlyoffice-desktopeditors
       #pkgs.euro-office-desktopeditors # Not in version 26.05
+      pkgs.nextcloud-client
 
       (lib.mkIf cfg.allowUnfree pkgs.zoom-us)
     ];
     services = {
       nextcloud-client = {
-        enable = true;
+        enable = false;
         startInBackground = false;
       };
     };
