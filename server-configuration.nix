@@ -430,7 +430,7 @@ in
           config.adminpassFile = "/etc/nextcloud-admin-pass";
           config.dbtype = "sqlite";
           phpOptions."opcache.interned_strings_buffer" = "32";
-          maxUploadSize = "999GB";
+          maxUploadSize = "999G";
           settings = {
             # Some sane defaults required to satisfy Nextcloud configuration check
             maintenance_window_start = 1;
