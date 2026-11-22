@@ -39,7 +39,8 @@ in
 
       # Online editor
       pkgs.collabora-desktop
-      pkgs.euro-office-desktopeditors
+      pkgs.onlyoffice-desktopeditors
+      #pkgs.euro-office-desktopeditors # Not in version 26.05
 
       (lib.mkIf cfg.allowUnfree pkgs.zoom-us)
     ];
