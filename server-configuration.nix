@@ -460,6 +460,7 @@ in
               contacts
               calendar
               tasks
+              notes
               #onlyoffice
               richdocuments
               end_to_end_encryption
@@ -491,7 +492,7 @@ in
   #  port = 7633;
   #  # TODO Remove secret
   #  securityNonceFile = "${pkgs.writeText "nixos-test-onlyoffice-nonce.conf" ''
-  #    set $secure_link_secret "nixostest";
+  #    set $secure_link_secret "nixostest"; # Make this longer and more complex
   #  ''}";
   #  allowLocalConnections = true;
   #};
