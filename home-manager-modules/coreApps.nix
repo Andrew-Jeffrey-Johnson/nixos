@@ -199,10 +199,10 @@ in
         keybindings = {
           "ctrl+shift+t" = "new_tab_with_cwd";
           "ctrl+shift+enter" = "new_window_with_cwd";
-          "f7" = "goto_session .";
+          "f7" = "goto_session ~/nixos";
         };
         extraConfig = ''
-          confirm_os_window_close 2
+          confirm_os_window_close 0
         '';
       };
       direnv = {
