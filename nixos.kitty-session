@@ -1,0 +1,10 @@
+# Set the layout for the current tab
+layout f
+# Set the working directory for windows in the current tab
+cd ~/nixos
+
+launch --title "Editor" nvim .
+
+launch --title "Local Terminal"
+
+launch --title "Server Terminal" kitten ssh nixos@10.0.0.183
