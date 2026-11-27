@@ -698,6 +698,7 @@ in
     proxy_headers_hash_bucket_size 128;
     server_names_hash_max_size 1024;
     server_names_hash_bucket_size 128;
+    client_max_body_size 999999M;
   '';
   services.nginx = {
     virtualHosts = {

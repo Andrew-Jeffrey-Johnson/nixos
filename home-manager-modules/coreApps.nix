@@ -283,6 +283,9 @@ in
       gh = {
         enable = true;
       };
+      vscodium = {
+        enable = true;
+      };
     };
 
     services.syncthing = {

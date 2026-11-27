@@ -64,7 +64,7 @@ in
       };
       # Note taking
       joplin-desktop = {
-        enable = true;
+        enable = false;
         #settings = {
         #  "markdown.plugin.mark" = true;
         #  newNoteFocus = "title";
