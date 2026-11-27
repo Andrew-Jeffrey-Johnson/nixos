@@ -200,10 +200,10 @@ in
           "ctrl+shift+t" = "new_tab_with_cwd";
           "ctrl+shift+enter" = "new_window_with_cwd";
           "f7" = "goto_session .";
-        }
+        };
         extraConfig = ''
           confirm_os_window_close 2
-            '';
+        '';
       };
       direnv = {
         enable = true;
