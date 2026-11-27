@@ -199,6 +199,8 @@ in
         keybindings = {
           "ctrl+shift+t" = "new_tab_with_cwd";
           "ctrl+shift+enter" = "new_window_with_cwd";
+          "f5" = "save_as_session ./session.kitty-session";
+          "f7>c" = "goto_session ./session.kitty-session";
         };
       };
       direnv = {

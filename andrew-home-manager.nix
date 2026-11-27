@@ -1,10 +1,5 @@
 # ~/home-manager/default.nix
-{
-  lib,
-  username,
-  ...
-}:
-{
+{ username, ... }: {
   gamingApps.enable = true;
   coreApps = {
     enable = true;
