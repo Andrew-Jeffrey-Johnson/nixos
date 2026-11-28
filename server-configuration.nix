@@ -785,47 +785,69 @@ in
         #useACMEHost = "luminlapid.com";
         #serverName = "${domain}";
         serverAliases = [ "www.${domain}" ];
-        locations = {
-          "/" = {
-            proxyPass = "http://192.168.100.13:8000";
-            #proxyPass = "http://127.0.0.162:7631";
-            proxyWebsockets = true;
-          };
-          "/calibre" = {
-            # EPUB content server
-            # The slash on the end ensure url passed to calibre-server starts
-            # with / instead of /calibre-server
-            proxyPass = "http://192.168.100.15:8383/";
-            #proxyPass = "http://192.168.100.20:8383/";
-            #proxyWebsockets = true;
-          };
-          "/radicale/" = {
-            # Calendar (CalDAV) and Contacts (CalDav) server
-            # The slash on the end ensure url passed to radicale starts
-            # with / instead of /calibre-server
-            proxyPass = "http://127.0.0.4:5232";
-            extraConfig = ''
-              proxy_set_header  X-Script-Name /radicale;
-              proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_pass_header Authorization;
+        locations =
+          let
+            fqdn = "matrix.${domain}";
+            baseUrl = "https://${fqdn}";
+            clientConfig."m.homeserver".base_url = baseUrl;
+            serverConfig."m.server" = "${fqdn}:443";
+            mkWellKnown = data: ''
+              default_type application/json;
+              add_header Access-Control-Allow-Origin *;
+              return 200 '${builtins.toJSON data}';
             '';
+          in
+          {
+            "/" = {
+              proxyPass = "http://192.168.100.13:8000";
+              #proxyPass = "http://127.0.0.162:7631";
+              proxyWebsockets = true;
+            };
+            "/calibre" = {
+              # EPUB content server
+              # The slash on the end ensure url passed to calibre-server starts
+              # with / instead of /calibre-server
+              proxyPass = "http://192.168.100.15:8383/";
+              #proxyPass = "http://192.168.100.20:8383/";
+              #proxyWebsockets = true;
+            };
+            "/radicale/" = {
+              # Calendar (CalDAV) and Contacts (CalDav) server
+              # The slash on the end ensure url passed to radicale starts
+              # with / instead of /calibre-server
+              proxyPass = "http://127.0.0.4:5232";
+              extraConfig = ''
+                proxy_set_header  X-Script-Name /radicale;
+                proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_pass_header Authorization;
+              '';
+            };
+            # Note taking server
+            "/joplin-andrew" = {
+              root = "/"; # This is what the URL starts with
+              # Combined with the user-endered URL "/joplin-andrew
+              # we arrive at the final URL "/joplin-andrew"
+              # that gets passed throught the proxy
+              proxyPass = "http://127.0.0.4:7854";
+            };
+            "^~/static/" = {
+              root = "/";
+              tryFiles = "$uri =404";
+            };
+            # This section is not needed if the server_name of matrix-synapse is equal to
+            # the domain (i.e. example.org from @foo:example.org) and the federation port
+            # is 8448.
+            # Further reference can be found in the docs about delegation under
+            # https://element-hq.github.io/synapse/latest/delegate.html
+            locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
+            # This is usually needed for homeserver discovery (from e.g. other Matrix clients).
+            # Further reference can be found in the upstream docs at
+            # https://spec.matrix.org/latest/client-server-api/#getwell-knownmatrixclient
+            locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
+            #"/nextcloud/" = {
+            #proxyPass = "http://127.0.0.163/";
+            #};
           };
-          # Note taking server
-          "/joplin-andrew" = {
-            root = "/"; # This is what the URL starts with
-            # Combined with the user-endered URL "/joplin-andrew
-            # we arrive at the final URL "/joplin-andrew"
-            # that gets passed throught the proxy
-            proxyPass = "http://127.0.0.4:7854";
-          };
-          "^~/static/" = {
-            root = "/";
-            tryFiles = "$uri =404";
-          };
-          #"/nextcloud/" = {
-          #proxyPass = "http://127.0.0.163/";
-          #};
-        };
       };
       "matrix.${domain}" = {
         enableACME = true;
