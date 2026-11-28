@@ -590,6 +590,7 @@ in
 
   #------------------------------------------------------------------------------
   # Matrix Synapse Chat Server
+  services.postgresql.enable = true; # Needed
   services.matrix-synapse = {
     enable = true;
     settings.server_name = domain;
