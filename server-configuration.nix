@@ -590,7 +590,14 @@ in
 
   #------------------------------------------------------------------------------
   # Matrix Synapse Chat Server
-  services.postgresql.enable = true; # Needed
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [ "mydatabase" ];
+    authentication = pkgs.lib.mkOverride 10 ''
+      #type database  DBuser  auth-method
+      local all       all     trust
+    '';
+  };
   services.matrix-synapse = {
     enable = true;
     settings.server_name = domain;
