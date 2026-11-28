@@ -858,24 +858,26 @@ in
           # It's also possible to do a redirect here or something else, this vhost is not
           # needed for Matrix. It's recommended though to *not put* element
           # here, see also the section about Element.
-          locations."/".extraConfig = ''
-            return 200;
-          '';
-          # This section is not needed if the server_name of matrix-synapse is equal to
-          # the domain (i.e. example.org from @foo:example.org) and the federation port
-          # is 8448.
-          # Further reference can be found in the docs about delegation under
-          # https://element-hq.github.io/synapse/latest/delegate.html
-          "= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
-          # This is usually needed for homeserver discovery (from e.g. other Matrix clients).
-          # Further reference can be found in the upstream docs at
-          # https://spec.matrix.org/latest/client-server-api/#getwell-knownmatrixclient
-          "= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
-          # Forward all Matrix API calls to the synapse Matrix homeserver. A trailing slash
-          # *must not* be used here.
-          locations."/_matrix".proxyPass = "http://[::1]:8008";
-          # Forward requests for e.g. SSO and password-resets.
-          locations."/_synapse/client".proxyPass = "http://[::1]:8008";
+          locations = {
+            "/".extraConfig = ''
+              return 200;
+            '';
+            # This section is not needed if the server_name of matrix-synapse is equal to
+            # the domain (i.e. example.org from @foo:example.org) and the federation port
+            # is 8448.
+            # Further reference can be found in the docs about delegation under
+            # https://element-hq.github.io/synapse/latest/delegate.html
+            "= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
+            # This is usually needed for homeserver discovery (from e.g. other Matrix clients).
+            # Further reference can be found in the upstream docs at
+            # https://spec.matrix.org/latest/client-server-api/#getwell-knownmatrixclient
+            "= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
+            # Forward all Matrix API calls to the synapse Matrix homeserver. A trailing slash
+            # *must not* be used here.
+            "/_matrix".proxyPass = "http://[::1]:8008";
+            # Forward requests for e.g. SSO and password-resets.
+            "/_synapse/client".proxyPass = "http://[::1]:8008";
+          };
         };
     };
   };
