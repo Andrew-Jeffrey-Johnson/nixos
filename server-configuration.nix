@@ -839,11 +839,11 @@ in
             # is 8448.
             # Further reference can be found in the docs about delegation under
             # https://element-hq.github.io/synapse/latest/delegate.html
-            locations."= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
+            "= /.well-known/matrix/server".extraConfig = mkWellKnown serverConfig;
             # This is usually needed for homeserver discovery (from e.g. other Matrix clients).
             # Further reference can be found in the upstream docs at
             # https://spec.matrix.org/latest/client-server-api/#getwell-knownmatrixclient
-            locations."= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
+            "= /.well-known/matrix/client".extraConfig = mkWellKnown clientConfig;
             #"/nextcloud/" = {
             #proxyPass = "http://127.0.0.163/";
             #};
