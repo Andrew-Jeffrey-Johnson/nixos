@@ -869,7 +869,7 @@ in
         # needed for Matrix. It's recommended though to *not put* element
         # here, see also the section about Element.
         locations."/".extraConfig = ''
-          return 404;
+          return "Hello world!";
         '';
         # Forward all Matrix API calls to the synapse Matrix homeserver. A trailing slash
         # *must not* be used here.
