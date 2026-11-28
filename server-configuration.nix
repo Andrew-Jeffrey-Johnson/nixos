@@ -589,6 +589,35 @@ in
   };
 
   #------------------------------------------------------------------------------
+  # Matrix Synapse Chat Server
+  services.matrix-synapse = {
+    enable = true;
+    settings.server_name = domain;
+    # The public base URL value must match the `base_url` value set in `clientConfig` above.
+    # The default value here is based on `server_name`, so if your `server_name` is different
+    # from the value of `fqdn` above, you will likely run into some mismatched domain names
+    # in client applications.
+    settings.public_baseurl = "https://matrix.${domain}";
+    settings.listeners = [
+      {
+        port = 8008;
+        bind_addresses = [ "::1" ];
+        type = "http";
+        tls = false;
+        x_forwarded = true;
+        resources = [
+          {
+            names = [
+              "client"
+              "federation"
+            ];
+            compress = true;
+          }
+        ];
+      }
+    ];
+  };
+  #------------------------------------------------------------------------------
   # Personal blog through luminlapid.com
   containers.blog = {
     autoStart = true;
@@ -797,6 +826,21 @@ in
           #proxyPass = "http://127.0.0.163/";
           #};
         };
+      };
+      "matrix.${domain}" = {
+        enableACME = true;
+        forceSSL = true;
+        # It's also possible to do a redirect here or something else, this vhost is not
+        # needed for Matrix. It's recommended though to *not put* element
+        # here, see also the section about Element.
+        locations."/".extraConfig = ''
+          return 404;
+        '';
+        # Forward all Matrix API calls to the synapse Matrix homeserver. A trailing slash
+        # *must not* be used here.
+        locations."/_matrix".proxyPass = "http://[::1]:8008";
+        # Forward requests for e.g. SSO and password-resets.
+        locations."/_synapse/client".proxyPass = "http://[::1]:8008";
       };
     };
   };
